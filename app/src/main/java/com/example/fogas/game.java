@@ -1,16 +1,29 @@
 package com.example.fogas;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
 public class game extends AppCompatActivity {
     int i=0;
     String [] betuk = new String[10];
+    private Context mContext;
+    private Activity mActivity;
+
+    private ConstraintLayout mConstraintLayout;
+    private Button mButton;
+
+    private PopupWindow mPopupWindow;
 
 
     public static final String EXTRA_TEXT = "com.example.application.example.EXTRA_TEXT";
@@ -21,6 +34,16 @@ public class game extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         getSupportActionBar().hide();
+
+        // Get the application context
+        mContext = getApplicationContext();
+
+        // Get the activity
+        mActivity = game.this;
+
+        // Get the widgets reference from XML layout
+        mConstraintLayout = (ConstraintLayout) findViewById(R.id.cl);
+        mButton = (Button) findViewById(R.id.helpBtn);
 
 
 
