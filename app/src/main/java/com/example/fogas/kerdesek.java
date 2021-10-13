@@ -12,64 +12,48 @@ import java.util.Random;
 
 
 public class kerdesek extends AppCompatActivity {
-int [] elhasznalt_index=new int[20];
-int index = 0;
-int pontok = 0;
+    int []kieset_szam = new int[10];
+    int []kieset_betu = new int[10];
+    int kieset_szamok_szama=0;
+    int kieset_betuk_szama=0;
 
     public String kerdes(int szam){
         String vege="";
-        if(szam==0 || szam==2 || szam==3 || szam==5 ||szam==6 || szam==8){
+        if(szam==0){
             vege = "-hoz";
         }
-        if(szam==1 || szam==4 ||szam==7 ||szam==9){
+        if(szam==1){
             vege = "-hez";
         }
-        return vege;
-    }
-
-    public String kerdes2(int szam){
-        String vege="";
-        if(szam==0 || szam==2 ||szam==3||szam==4||szam==6 ||szam==7||szam==8||szam==9){
-            vege = "a";
-        }
-        if(szam==1 ||szam==5){
-            vege = "az";
-        }
-        return vege;
-    }
-    public String kerdes3(String betu){
-        String vege="";
-        if(betu.equals("A") || betu.equals("E") || betu.equals("F") ||betu.equals("I")||
-                betu.equals("L")||betu.equals("M")|| betu.equals("N") ||betu.equals("O")||
-                betu.equals("R") ||betu.equals("S") ||betu.equals("U")||betu.equals("X") ||
-                betu.equals("Y")){
-            vege = "az";
-        }
-        if(betu.equals("B") ||betu.equals("C") ||betu.equals("D")||betu.equals("G")||
-                betu.equals("H") ||betu.equals("J")||betu.equals("K")||betu.equals("P")||
-                betu.equals("Q")||betu.equals("T")||betu.equals("V")||betu.equals("W")||
-                betu.equals("Z")){
-            vege = "a";
-        }
-        return vege;
-    }
-
-    public String kerdes4(String betu){
-        String vege="";
-        if(betu.equals("A")||betu.equals("H")||betu.equals("K")||betu.equals("O")||
-                betu.equals("Q")||betu.equals("U")||betu.equals("Y")){
+        if(szam==2){
             vege = "-hoz";
         }
-        if(betu.equals("B")||betu.equals("C")||betu.equals("D")||betu.equals("E")||
-                betu.equals("F")||betu.equals("G")||betu.equals("I")||betu.equals("J")||
-                betu.equals("L")||betu.equals("M")||betu.equals("N")||betu.equals("P")||
-                betu.equals("R")||betu.equals("S")||betu.equals("T")||betu.equals("V")||
-                betu.equals("W")||betu.equals("X")||betu.equals("Z")){
+        if(szam==3){
+            vege = "-hoz";
+        }
+        if(szam==4){
             vege = "-hez";
         }
+        if(szam==5){
+            vege = "-hoz";
+        }
+        if(szam==6){
+            vege = "-hoz";
+        }
+        if(szam==7){
+            vege = "-hez";
+        }
+        if(szam==8){
+            vege = "-hoz";
+        }
+        if(szam==9){
+            vege = "-hez";
+        }
+
+
+
         return vege;
     }
-
 
 
     @Override
@@ -82,74 +66,85 @@ int pontok = 0;
 
 
 
+        int betu_szamolo=0;
+        int szam_szamolo=0;
+
+
+
+        for(int i =0;i<20;i++){
+            int vagy = (int)Math.floor(Math.random()*(1-0+1)+0);
+            int hanyadik;
+            if(vagy==0 && szam_szamolo!=10){
+                //ha 0 akkor betu
+                hanyadik = (int)Math.floor(Math.random()*(9-0+1)+0);
+
+
+
+                betu_szamolo = betu_szamolo+1;
+
+
+
+            }
+            else{
+                //ha 1 akkor szam
+                szam_szamolo = szam_szamolo+1;
+
+
+
+
+            }
+
+
+        }
 
     }
 
     public void kezdes(View view) {
-        if(index<20) {
 
-            TextView text1 = (TextView) findViewById(R.id.textView);
-            text1.setVisibility(View.INVISIBLE);
-            TextView text2 = (TextView) findViewById(R.id.textView2);
-            text2.setVisibility(View.INVISIBLE);
-            TextView gomb = (TextView) findViewById(R.id.mehet);
-            gomb.setText("Valasz");
-            TextView bevitel = (TextView) findViewById(R.id.bevitel);
-            bevitel.setVisibility(View.VISIBLE);
-            Intent intent = getIntent();
-            String[] betuk = intent.getStringArrayExtra("chars");
-            TextView kerdes = (TextView) findViewById(R.id.kerdes);
-
+        TextView text1 = (TextView) findViewById(R.id.textView);
+        text1.setVisibility(View.INVISIBLE);
+        TextView text2 = (TextView) findViewById(R.id.textView2);
+        text2.setVisibility(View.INVISIBLE);
+        TextView gomb = (TextView) findViewById(R.id.mehet);
+        gomb.setText("Valasz");
+        TextView bevitel = (TextView) findViewById(R.id.bevitel);
+        bevitel.setVisibility(View.VISIBLE);
+        Intent intent  = getIntent();
+        String [] betuk = intent.getStringArrayExtra("chars");
+        TextView kerdes = (TextView) findViewById(R.id.kerdes);
 
 
+        Random rand = new Random();
+        int betu_vagy_szam =(int)Math.floor(Math.random()*(1-0+1)+0);
+        //ha betu 1 ha szam 0
+        int nullatol_kilencig =(int)Math.floor(Math.random()*(9-0+1)+0);
 
-            String[] kerdesek = new String[20];
+        if(betu_vagy_szam==1){
+            kerdes.setText("Melyik betu tartozik a "+ nullatol_kilencig+kerdes(nullatol_kilencig)+"?");
+            kieset_betu[kieset_szamok_szama] = nullatol_kilencig;
 
-            for (int i = 0; i < 10; i++) {
-                kerdesek[i] = "Melyik betu tartozik " + kerdes2(i) + " " + i + kerdes(i) + "?";
-            }
 
-            for (int i = 10; i < 20; i++) {
-                kerdesek[i] =
-                        "Melyik szam tatozik " + kerdes3(betuk[i - 10].toUpperCase()) + " "
-                                + betuk[i - 10].toUpperCase() + kerdes4(betuk[i - 10].toUpperCase()) + "?";
-            }
-            String []helyes_valasz = new String[20];
-            for(int i =0;i<10;i++){
-                helyes_valasz[i]=betuk[i];
+            kieset_betuk_szama= kieset_szamok_szama+1;
+            if(betuk[nullatol_kilencig].equals(bevitel.getText().toString())){
 
             }
-            for(int i =10;i<20;i++){
-                helyes_valasz[i]=""+(i-10);
-            }
-
-              //int random_szam  = (int)Math.floor(Math.random()*(19-0+1)+0);
-
-            kerdes.setText(kerdesek[index]);
-            String valasz = bevitel.getText().toString();
-
-            if(valasz.toString().equals(helyes_valasz[index].toString())){
-                pontok = pontok +1;
-            }
-            TextView teszt=(TextView) findViewById(R.id.textView3);
-            //teszt.setText( valasz +" = " + helyes_valasz[index] + " pontok: "+ pontok);
-
-            teszt.setText("!"+valasz + "!=!" + helyes_valasz[index].toString()+"!");
 
 
-
-            index = index+1;
-                    bevitel.setText("");
         }
-        else{
-            TextView kerdes = (TextView) findViewById(R.id.kerdes);
-            TextView bevitel = (TextView) findViewById(R.id.bevitel);
-            bevitel.setVisibility(View.INVISIBLE);
-            TextView gomb = (TextView) findViewById(R.id.mehet);
-            gomb.setVisibility(View.INVISIBLE);
+        else if(betu_vagy_szam==0){
+            kerdes.setText("masik ag");
+            kieset_szam[kieset_szamok_szama] = nullatol_kilencig;
 
-            kerdes.setText("Enyi helyes valasza volt: " + pontok);
-            //kerdes.setText("Vege!");
+
+            kieset_szamok_szama= kieset_szamok_szama+1;
         }
+
+
+
+
+
+
+
+
     }
 }
