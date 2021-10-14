@@ -11,6 +11,8 @@ import java.util.Random;
 
 
 
+
+
 public class kerdesek extends AppCompatActivity {
 int [] elhasznalt_index=new int[20];
 int index = 0;
@@ -139,4 +141,6 @@ int pontok = 0;
             //kerdes.setText("Vege!");
         }
     }
+
+
 }
