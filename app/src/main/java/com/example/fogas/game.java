@@ -17,18 +17,29 @@ import android.widget.ImageButton;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.fogas.Models.PegDataModel;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 
 public class game extends AppCompatActivity {
-    int i=0;
+
+
+    private int i=0;
     String [] betuk = new String[10];
+    private Realm letterRealm;
     private Context mContext;
     private Activity mActivity;
-
     private ConstraintLayout mConstraintLayout;
     private Button helpButton;
-
     private PopupWindow mPopupWindow;
+    private TextView szam;
+    private TextView part;
+    private TextView hiba;
+    private TextView fejlec;
 
 
     public static final String EXTRA_TEXT = "com.example.application.example.EXTRA_TEXT";
@@ -49,6 +60,11 @@ public class game extends AppCompatActivity {
         // Get the widgets reference from XML layout
         mConstraintLayout = (ConstraintLayout) findViewById(R.id.cl);
         helpButton = (Button) findViewById(R.id.helpBtn);
+        szam = (TextView) findViewById(R.id.betu);
+        part = (TextView) findViewById(R.id.part_jelzo);
+        hiba = (TextView) findViewById(R.id.hiba);
+        fejlec = (TextView) findViewById(R.id.szam_fejlec);
+        letterRealm = Realm.getDefaultInstance();
 
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,17 +171,11 @@ public class game extends AppCompatActivity {
     public void katthozzad(View view) {
 
 
-        TextView szam = (TextView) findViewById(R.id.betu);
-        TextView part = (TextView) findViewById(R.id.part_jelzo);
-        TextView hiba = (TextView) findViewById(R.id.hiba);
-        TextView fejlec = (TextView) findViewById(R.id.szam_fejlec);
-
-
         String betu= szam.getText().toString();
         if(i<9) {
             if (betu.length() == 1 && betu.matches("[a-zA-Z]+")) {
                 betuk[i] = betu;
-
+                saveData();
                 i = i + 1;
                 part.setText(i + "/9");
                kijelzo();
@@ -180,6 +190,7 @@ public class game extends AppCompatActivity {
         else{
             if (betu.length() == 1 && betu.matches("[a-zA-Z]+")) {
             betuk[i] = betu;
+            saveData();
 
             i = i + 1;
             //part.setText(i+1 + "/9");
@@ -207,4 +218,33 @@ public class game extends AppCompatActivity {
 
 
     }
+
+    private  void saveData (){
+
+        letterRealm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                PegDataModel peg= realm.createObject(PegDataModel.class,i);
+                peg.setPegLetter(szam.getText().toString());
+                peg.setPegWord("");
+            }
+
+        }, new Realm.Transaction.OnSuccess(){
+            @Override
+            public void onSuccess(){
+                //Transaction successfull
+                Toast.makeText(game.this,"Success",Toast.LENGTH_LONG).show();
+            }
+        }, new Realm.Transaction.OnError(){
+            @Override
+            public  void onError(Throwable error){
+                //Transaction failed and automatically canceled
+                String errors = error.toString();
+                Toast.makeText(game.this,errors,Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
+
 }
