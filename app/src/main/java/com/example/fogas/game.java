@@ -139,31 +139,31 @@ public class game extends AppCompatActivity {
     public void kijelzo(){
         TextView fejlec = (TextView) findViewById(R.id.szam_fejlec);
         if (i == 1) {
-            fejlec.setText("Adja meg az egyhez tartozo betut");
+            fejlec.setText("Adja meg az egyeshez tartozó betűt!");
         }
         if(i==2){
-            fejlec.setText("Adja meg a keteshez tartozo betut");
+            fejlec.setText("Adja meg a ketteshez tartozó betűt!");
         }
         if(i==3){
-            fejlec.setText("Adja meg a harmashoz tartozo betut");
+            fejlec.setText("Adja meg a harmashoz tartozó betűt!");
         }
         if(i==4){
-            fejlec.setText("Adja meg a negyeshez tartozo betut");
+            fejlec.setText("Adja meg a négyeshez tartozó betűt!");
         }
         if(i==5){
-            fejlec.setText("Adja meg az otoshoz tartozo betut");
+            fejlec.setText("Adja meg az ötöshoz tartozó betűt");
         }
         if(i==6){
-            fejlec.setText("Adja meg a hatoshoz tartozo betut");
+            fejlec.setText("Adja meg a hatoshoz tartozó betűt");
         }
         if(i==7){
-            fejlec.setText("Adja meg a heteshez tartozo betut");
+            fejlec.setText("Adja meg a heteshez tartozó betűt");
         }
         if(i==8){
-            fejlec.setText("Adja meg a nyolcashoz tartozo betut");
+            fejlec.setText("Adja meg a nyolcashoz tartozó betűt");
         }
         if(i==9){
-            fejlec.setText("Adja meg a kilenchez tartozo betut");
+            fejlec.setText("Adja meg a kilenceshez tartozó betűt");
         }
 
     }
