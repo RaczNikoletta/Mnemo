@@ -175,7 +175,7 @@ public class game extends AppCompatActivity {
         if(i<9) {
             if (betu.length() == 1 && betu.matches("[a-zA-Z]+")) {
                 betuk[i] = betu;
-                saveData();
+                saveData(betu);
                 i = i + 1;
                 part.setText(i + "/9");
                kijelzo();
@@ -190,7 +190,7 @@ public class game extends AppCompatActivity {
         else{
             if (betu.length() == 1 && betu.matches("[a-zA-Z]+")) {
             betuk[i] = betu;
-            saveData();
+            saveData(betu);
 
             i = i + 1;
             //part.setText(i+1 + "/9");
@@ -219,21 +219,23 @@ public class game extends AppCompatActivity {
 
     }
 
-    private  void saveData (){
+    private  void saveData (String b){
 
         letterRealm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                PegDataModel peg= realm.createObject(PegDataModel.class,i);
-                peg.setPegLetter(szam.getText().toString());
+                PegDataModel peg = new PegDataModel();
+                peg.setPegNum(i-1);
+                peg.setPegLetter(b);
                 peg.setPegWord("");
+                realm.insertOrUpdate(peg);
             }
 
         }, new Realm.Transaction.OnSuccess(){
             @Override
             public void onSuccess(){
                 //Transaction successfull
-                Toast.makeText(game.this,"Success",Toast.LENGTH_LONG).show();
+                Toast.makeText(game.this,"Success " ,Toast.LENGTH_LONG).show();
             }
         }, new Realm.Transaction.OnError(){
             @Override
