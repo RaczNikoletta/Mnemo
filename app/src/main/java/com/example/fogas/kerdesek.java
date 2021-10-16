@@ -4,19 +4,28 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.fogas.Models.PegDataModel;
 
 import java.util.Random;
 
-
-
+import io.realm.Realm;
+import io.realm.RealmQuery;
 
 
 public class kerdesek extends AppCompatActivity {
-int [] elhasznalt_index=new int[20];
-int index = 0;
-int pontok = 0;
+    private int [] elhasznalt_index=new int[20];
+    private int index = 0;
+    private int pontok = 0;
+    private Realm questionRealm;
+    private TextView kerdes;
+    private TextView bevitel;
+    private Button gomb;
+
 
     public String kerdes(int szam){
         String vege="";
@@ -80,6 +89,8 @@ int pontok = 0;
         setContentView(R.layout.activity_kerdesek);
         getSupportActionBar().hide();
 
+        questionRealm = Realm.getDefaultInstance();
+
 
 
 
@@ -121,9 +132,10 @@ int pontok = 0;
 
                     kerdes.setText(kerdesek[index]);
                     String valasz= bevitel.getText().toString();
-                if(valasz.equals(betuk[0])){
-                    pontok++;
-                }
+               // if(valasz.equals(betuk[0])){
+                    RealmQuery task = questionRealm.where(PegDataModel.class).equalTo("pegNum", index);
+                    Log.v("databaseconnectioncheck", "Fetched object by primary key: " + task.findFirst().toString());
+
 
 
 
@@ -132,10 +144,10 @@ int pontok = 0;
                     bevitel.setText("");
         }
         else{
-            TextView kerdes = (TextView) findViewById(R.id.kerdes);
-            TextView bevitel = (TextView) findViewById(R.id.bevitel);
+            kerdes = (TextView) findViewById(R.id.kerdes);
+            bevitel = (TextView) findViewById(R.id.bevitel);
             bevitel.setVisibility(View.INVISIBLE);
-            TextView gomb = (TextView) findViewById(R.id.mehet);
+            gomb = (Button) findViewById(R.id.mehet);
             gomb.setVisibility(View.INVISIBLE);
             kerdes.setText("Ennyi helyes valasza volt: " + pontok);
             //kerdes.setText("Vege!");
