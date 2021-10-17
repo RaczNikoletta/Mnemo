@@ -4,27 +4,30 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.fogas.Models.PegDataModel;
-
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
 
-import io.realm.Realm;
-import io.realm.RealmQuery;
 
 
 public class kerdesek extends AppCompatActivity {
-    private int [] elhasznalt_index=new int[20];
-    private int index = 0;
-    private int pontok = 0;
-    private Realm questionRealm;
-    private TextView kerdes;
-    private TextView bevitel;
-    private Button gomb;
+    int [] sorrend=new int[21];
+    int index = 0;
+    ArrayList<Integer> mylist = new ArrayList<Integer>();
+    String hello;
+    int futas = 0;
+
+
+    String [] valaszok = new String[20];
+
+    String []helyes_valaszok  = new String[20];
+
+
+
 
 
     public String kerdes(int szam){
@@ -88,8 +91,21 @@ public class kerdesek extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kerdesek);
         getSupportActionBar().hide();
+        TextView teszt = (TextView) findViewById(R.id.textView3);
+        teszt.setVisibility(View.INVISIBLE);
 
-        questionRealm = Realm.getDefaultInstance();
+        for(int i =0;i<20;i++){
+            mylist.add(i);
+
+        }
+        Collections.shuffle(mylist);
+        for(int i = 0;i<20;i++){
+            sorrend[i]= mylist.get(i);
+        }
+        TextView gomb1 = (TextView) findViewById(R.id.mehet);
+        gomb1.setVisibility(View.INVISIBLE);
+        TextView gomb2 = (TextView) findViewById(R.id.mehet2);
+
 
 
 
@@ -98,23 +114,26 @@ public class kerdesek extends AppCompatActivity {
 
     }
 
+
     public void kezdes(View view) {
         if(index<20) {
-
-            TextView text1 = (TextView) findViewById(R.id.textView);
-            text1.setVisibility(View.INVISIBLE);
-            TextView text2 = (TextView) findViewById(R.id.textView2);
-            text2.setVisibility(View.INVISIBLE);
-            TextView gomb = (TextView) findViewById(R.id.mehet);
-            gomb.setText("Valasz");
-            TextView bevitel = (TextView) findViewById(R.id.bevitel);
-            bevitel.setVisibility(View.VISIBLE);
             Intent intent = getIntent();
             String[] betuk = intent.getStringArrayExtra("chars");
+            for(int i =0;i<10;i++){
+                helyes_valaszok[i] = betuk[i];
+            }
+
+
+            for(int i=10;i<20;i++){
+                helyes_valaszok[i]= String.valueOf(i-10);
+            }
+
+
+            //TextView gomb = (TextView) findViewById(R.id.mehet);
+            TextView bevitel = (TextView) findViewById(R.id.bevitel);
+            bevitel.setVisibility(View.VISIBLE);
+
             TextView kerdes = (TextView) findViewById(R.id.kerdes);
-
-
-
 
             String[] kerdesek = new String[20];
 
@@ -128,31 +147,119 @@ public class kerdesek extends AppCompatActivity {
                                 + betuk[i - 10].toUpperCase() + kerdes4(betuk[i - 10].toUpperCase()) + "?";
             }
 
-              //int random_szam  = (int)Math.floor(Math.random()*(19-0+1)+0);
-
-                    kerdes.setText(kerdesek[index]);
-                    String valasz= bevitel.getText().toString();
-               // if(valasz.equals(betuk[0])){
-                    RealmQuery task = questionRealm.where(PegDataModel.class).equalTo("pegNum", index);
-                    Log.v("databaseconnectioncheck", "Fetched object by primary key: " + task.findFirst().toString());
 
 
 
 
 
-            index = index+1;
+            kerdes.setText(kerdesek[sorrend[index+1]]);
+            String valasz = bevitel.getText().toString();
+
+            valaszok[sorrend[index]]= bevitel.getText().toString();
+
+            TextView teszt = (TextView) findViewById(R.id.textView3);
+
+            teszt.setVisibility(View.INVISIBLE);
+            /*
+           String teszteles = "";
+            for(int i =0;i<20;i++){
+                teszteles = teszteles+ i+". "+helyes_valaszok[i]+"="+valaszok[i]+"\n";
+            }
+            teszt.setText(teszteles);
+
+            */
+
+
+            index = index +1;
+
+
+
+
+
+
+
                     bevitel.setText("");
         }
         else{
-            kerdes = (TextView) findViewById(R.id.kerdes);
-            bevitel = (TextView) findViewById(R.id.bevitel);
+
+            TextView kerdes = (TextView) findViewById(R.id.kerdes);
+            TextView bevitel = (TextView) findViewById(R.id.bevitel);
             bevitel.setVisibility(View.INVISIBLE);
-            gomb = (Button) findViewById(R.id.mehet);
+            TextView gomb = (TextView) findViewById(R.id.mehet);
             gomb.setVisibility(View.INVISIBLE);
+            int pontok = 0;
+            for(int i = 0;i<20;i++){
+                if(helyes_valaszok[i].equalsIgnoreCase(valaszok[i])){
+                    pontok= pontok +1;
+                }
+            }
+
             kerdes.setText("Ennyi helyes valasza volt: " + pontok);
-            //kerdes.setText("Vege!");
+
         }
     }
 
+    public void megjelenites(View view) {
+            if(futas==0){
+                TextView gomb2 = (TextView) findViewById(R.id.mehet2);
+                gomb2.setText("Kerdes generalasa");
 
+
+                TextView text1 = (TextView) findViewById(R.id.textView);
+                text1.setVisibility(View.INVISIBLE);
+                TextView text2 = (TextView) findViewById(R.id.textView2);
+                text2.setVisibility(View.INVISIBLE);
+
+
+
+            futas = futas +1;
+            }
+            else{
+                TextView gomb2 = (TextView) findViewById(R.id.mehet2);
+                gomb2.setVisibility(View.INVISIBLE);
+                TextView bevitel = (TextView) findViewById(R.id.bevitel);
+                bevitel.setVisibility(View.VISIBLE);
+                TextView gomb = (TextView) findViewById(R.id.mehet);
+                gomb.setVisibility(View.VISIBLE);
+                Intent intent = getIntent();
+                String[] betuk = intent.getStringArrayExtra("chars");
+                TextView kerdes = (TextView) findViewById(R.id.kerdes);
+
+
+
+                String[] kerdesek = new String[20];
+
+                for (int i = 0; i < 10; i++) {
+                    kerdesek[i] = "Melyik betu tartozik " + kerdes2(i) + " " + i + kerdes(i) + "?";
+                }
+
+                for (int i = 10; i < 20; i++) {
+                    kerdesek[i] =
+                            "Melyik szam tatozik " + kerdes3(betuk[i - 10].toUpperCase()) + " "
+                                    + betuk[i - 10].toUpperCase() + kerdes4(betuk[i - 10].toUpperCase()) + "?";
+                }
+
+                kerdes.setText(kerdesek[sorrend[index]]);
+                //valaszok[sorrend[index]]= bevitel.getText().toString();
+
+
+
+                TextView teszt = (TextView) findViewById(R.id.textView3);
+                teszt.setVisibility(View.INVISIBLE);
+                /*
+                String teszteles = "";
+                for(int i =0;i<20;i++){
+                    teszteles = teszteles+ i+". "+helyes_valaszok[i]+"="+valaszok[i]+"\n";
+                }
+                teszt.setText(teszteles);
+                */
+
+
+            }
+
+
+
+
+
+    }
 }
