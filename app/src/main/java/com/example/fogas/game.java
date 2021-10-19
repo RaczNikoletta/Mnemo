@@ -42,7 +42,7 @@ public class game extends AppCompatActivity {
 
     public static final String EXTRA_TEXT = "com.example.application.example.EXTRA_TEXT";
    
-
+ //hello
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
