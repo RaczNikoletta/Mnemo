@@ -1,8 +1,5 @@
 package com.example.fogas;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -15,14 +12,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.fogas.Models.PegDataModel;
 
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
 
 
 public class game extends AppCompatActivity {
@@ -225,7 +223,13 @@ public class game extends AppCompatActivity {
             @Override
             public void execute(Realm realm) {
                 PegDataModel peg = new PegDataModel();
-                peg.setPegNum(i-1);
+                if(i==0){
+                    peg.setPegNum(i);
+                }
+                else{
+                    peg.setPegNum(i-1);
+                }
+
                 peg.setPegLetter(b);
                 peg.setPegWord("");
                 realm.insertOrUpdate(peg);

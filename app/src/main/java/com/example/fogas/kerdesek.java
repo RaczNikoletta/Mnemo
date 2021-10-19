@@ -116,50 +116,54 @@ public class kerdesek extends AppCompatActivity {
 
 
     public void kezdes(View view) {
-        if(index<20) {
-            Intent intent = getIntent();
-            String[] betuk = intent.getStringArrayExtra("chars");
-            for(int i =0;i<10;i++){
-                helyes_valaszok[i] = betuk[i];
-            }
+        TextView bevitel = (TextView) findViewById(R.id.bevitel);
+        if (bevitel.length() == 1 && bevitel.toString().matches("[a-zA-Z]+")){
 
 
-            for(int i=10;i<20;i++){
-                helyes_valaszok[i]= String.valueOf(i-10);
-            }
+            if(index<20) {
+                Intent intent = getIntent();
+                String[] betuk = intent.getStringArrayExtra("chars");
+                for(int i =0;i<10;i++){
+                    helyes_valaszok[i] = betuk[i];
+                }
 
 
-            //TextView gomb = (TextView) findViewById(R.id.mehet);
-            TextView bevitel = (TextView) findViewById(R.id.bevitel);
-            bevitel.setVisibility(View.VISIBLE);
-
-            TextView kerdes = (TextView) findViewById(R.id.kerdes);
-
-            String[] kerdesek = new String[20];
-
-            for (int i = 0; i < 10; i++) {
-                kerdesek[i] = "Melyik betu tartozik " + kerdes2(i) + " " + i + kerdes(i) + "?";
-            }
-
-            for (int i = 10; i < 20; i++) {
-                kerdesek[i] =
-                        "Melyik szam tatozik " + kerdes3(betuk[i - 10].toUpperCase()) + " "
-                                + betuk[i - 10].toUpperCase() + kerdes4(betuk[i - 10].toUpperCase()) + "?";
-            }
+                for(int i=10;i<20;i++){
+                    helyes_valaszok[i]= String.valueOf(i-10);
+                }
 
 
+                //TextView gomb = (TextView) findViewById(R.id.mehet);
+
+                bevitel.setVisibility(View.VISIBLE);
+
+                TextView kerdes = (TextView) findViewById(R.id.kerdes);
+
+                String[] kerdesek = new String[20];
+
+                for (int i = 0; i < 10; i++) {
+                    kerdesek[i] = "Melyik betu tartozik " + kerdes2(i) + " " + i + kerdes(i) + "?";
+                }
+
+                for (int i = 10; i < 20; i++) {
+                    kerdesek[i] =
+                            "Melyik szam tatozik " + kerdes3(betuk[i - 10].toUpperCase()) + " "
+                                    + betuk[i - 10].toUpperCase() + kerdes4(betuk[i - 10].toUpperCase()) + "?";
+                }
 
 
 
 
-            kerdes.setText(kerdesek[sorrend[index+1]]);
-            String valasz = bevitel.getText().toString();
 
-            valaszok[sorrend[index]]= bevitel.getText().toString();
 
-            TextView teszt = (TextView) findViewById(R.id.textView3);
+                kerdes.setText(kerdesek[sorrend[index+1]]);
+                String valasz = bevitel.getText().toString();
 
-            teszt.setVisibility(View.INVISIBLE);
+                valaszok[sorrend[index]]= bevitel.getText().toString();
+
+                TextView teszt = (TextView) findViewById(R.id.textView3);
+
+                teszt.setVisibility(View.INVISIBLE);
             /*
            String teszteles = "";
             for(int i =0;i<20;i++){
@@ -170,7 +174,7 @@ public class kerdesek extends AppCompatActivity {
             */
 
 
-            index = index +1;
+                index = index +1;
 
 
 
@@ -178,25 +182,29 @@ public class kerdesek extends AppCompatActivity {
 
 
 
-                    bevitel.setText("");
-        }
-        else{
+                bevitel.setText("");
+            }
+            else{
 
-            TextView kerdes = (TextView) findViewById(R.id.kerdes);
-            TextView bevitel = (TextView) findViewById(R.id.bevitel);
-            bevitel.setVisibility(View.INVISIBLE);
-            TextView gomb = (TextView) findViewById(R.id.mehet);
-            gomb.setVisibility(View.INVISIBLE);
-            int pontok = 0;
-            for(int i = 0;i<20;i++){
-                if(helyes_valaszok[i].equalsIgnoreCase(valaszok[i])){
-                    pontok= pontok +1;
+                TextView kerdes = (TextView) findViewById(R.id.kerdes);
+                bevitel.setVisibility(View.INVISIBLE);
+                TextView gomb = (TextView) findViewById(R.id.mehet);
+                gomb.setVisibility(View.INVISIBLE);
+                int pontok = 0;
+                for(int i = 0;i<20;i++){
+                    if(helyes_valaszok[i].equalsIgnoreCase(valaszok[i])){
+                        pontok= pontok +1;
+                    }
                 }
+
+                kerdes.setText("Ennyi helyes valasza volt: " + pontok);
+
             }
 
-            kerdes.setText("Ennyi helyes valasza volt: " + pontok);
 
         }
+
+
     }
 
     public void megjelenites(View view) {
