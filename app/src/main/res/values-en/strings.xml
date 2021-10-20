@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">fogas</string>
+    <string name="memoria_fogas">Peg memory</string>
+    <string name="start">Start</string>
+    <string name="nullas">Please enter the letter for number zero!</string>
+    <string name="egyes">Please enter the letter for number one!</string>
+    <string name="kettes">Please enter the letter for number two!</string>
+    <string name="hozzaadGomb">Add</string>
+    <string name="segitsegGomb">Help</string>
+    <string name="jatekrolGomb">About Game</string>
+    <string name="segitsegSzoveg1">Based on the letters you enter here, you can enter words in the next step.</string>
+</resources>

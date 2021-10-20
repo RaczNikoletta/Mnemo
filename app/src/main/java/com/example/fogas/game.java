@@ -137,10 +137,10 @@ public class game extends AppCompatActivity {
     public void kijelzo(){
         TextView fejlec = (TextView) findViewById(R.id.szam_fejlec);
         if (i == 1) {
-            fejlec.setText("Adja meg az egyeshez tartozó betűt!");
+            fejlec.setText(getString(R.string.egyes));
         }
         if(i==2){
-            fejlec.setText("Adja meg a ketteshez tartozó betűt!");
+            fejlec.setText(getString(R.string.kettes));
         }
         if(i==3){
             fejlec.setText("Adja meg a harmashoz tartozó betűt!");
