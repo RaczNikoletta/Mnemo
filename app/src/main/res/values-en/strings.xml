@@ -6,13 +6,6 @@
     <string name="nullas">Please enter the letter for number zero!</string>
     <string name="egyes">Please enter the letter for number one!</string>
     <string name="kettes">Please enter the letter for number two!</string>
-    <string name="harmas">Please enter the letter for number three!</string>
-    <string name="negyes">Please enter the letter for number four!</string>
-    <string name="otos">Please enter the letter for number five!</string>
-    <string name="hatos">Please enter the letter for number six!</string>
-    <string name="hetes">Please enter the letter for number seven!</string>
-    <string name="nyolcas">Please enter the letter for number eight!</string>
-    <string name="kilences">Please enter the letter for number nine!</string>
     <string name="hozzaadGomb">Add</string>
     <string name="segitsegGomb">Help</string>
     <string name="jatekrolGomb">About Game</string>

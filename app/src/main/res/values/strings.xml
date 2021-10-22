@@ -7,13 +7,6 @@
     <string name="nullas">Kérem adja meg a nullához tartozó betűt!</string>
     <string name="egyes">Kérem adja meg az egyeshez tartozó betűt!</string>
     <string name="kettes">Kérem adja meg a ketteshez tartozó betűt</string>
-    <string name="harmas">Kérem adja meg a hármashoz tartozó betűt</string>
-    <string name="negyes">Kérem adja meg a négyeshez tartozó betűt</string>
-    <string name="otos">Kérem adja meg az ötöshöz tartozó betűt</string>
-    <string name="hatos">Kérem adja meg a hatoshoz tartozó betűt</string>
-    <string name="hetes">Kérem adja meg a heteshez tartozó betűt</string>
-    <string name="nyolcas">Kérem adja meg a nyolcashoz tartozó betűt</string>
-    <string name="kilences">Kérem adja meg a kilenceshez tartozó betűt</string>
     <string name="jatekrolGomb">Játékról</string>
     <string name="segitsegSzoveg1">Az itt megadott betűk alapján tudsz a következő lépésben szavakat megadni.</string>
 </resources>
