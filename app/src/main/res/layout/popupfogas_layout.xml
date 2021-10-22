@@ -23,6 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:padding="25sp"
-        android:text="@string/segitsegSzoveg1"
+        android:text="Az itt megadott betűk alapján tudsz a következő lépésben szavakat megadni."
         android:textColor="@color/white" />
 </RelativeLayout>
