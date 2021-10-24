@@ -120,7 +120,7 @@ public class kerdesek extends AppCompatActivity {
         TextView hibaTv = (TextView) findViewById(R.id.hibaTv);
         String bev = bevitel.toString();
         //TODO: kitalálni hogy hogy nézzük meg hogy a kérdés számra vagy betűre vonatkozik
-        //check if bev is an integer
+        //check if bev is an integer to prevent parseint exception  43w
         if(isInteger(bev))
         {
           bevIfInt = Integer.parseInt(bev);
@@ -254,12 +254,14 @@ public class kerdesek extends AppCompatActivity {
                 for (int i = 0; i < 10; i++) {
                     //melyik betu tartozik + a/az + "" + szam + hoz/hez
                     kerdesek[i] = "Melyik betu tartozik " + kerdes2(i) + " " + i + kerdes(i) + "?";
+                    kerdesek[i] = (getString(R.string.kerdesgeneralasBetu)) + i;
                 }
 
                 for (int i = 10; i < 20; i++) {
                     kerdesek[i] =
                             "Melyik szam tatozik " + kerdes3(betuk[i - 10].toUpperCase()) + " "
                                     + betuk[i - 10].toUpperCase() + kerdes4(betuk[i - 10].toUpperCase()) + "?";
+
                 }
 
                 kerdes.setText(kerdesek[sorrend[index]]);

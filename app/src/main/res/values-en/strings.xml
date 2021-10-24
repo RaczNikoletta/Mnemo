@@ -19,4 +19,5 @@
     <string name="segitsegSzoveg1">Based on the letters you enter here, you can enter words in the next step.</string>
     <string name="betuKerdesekHiba">Ivalid format.</string>
     <string name = "betuKerdesekPontok">Number of right answers: </string>
+    <string name = "kerdesgeneralasBetu">Please enter the letter for the number: </string>
 </resources>

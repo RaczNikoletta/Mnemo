@@ -19,4 +19,5 @@
     <string name="segitsegSzoveg1">Az itt megadott betűk alapján tudsz a következő lépésben szavakat megadni.</string>
     <string name="betuKerdesekHiba">Nem megfelelő formátum.</string>
     <string name = "betuKerdesekPontok">Megfelelő válaszok száma: </string>
+    <string name = "kerdesgeneralasBetu">Kerem adja meg a következő számhoz tartozó betűt: </string>
 </resources>
