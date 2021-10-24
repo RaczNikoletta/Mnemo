@@ -2,17 +2,11 @@
     <string name="app_name">fogas</string>
     <string name="memoria_fogas">Memoria fogas</string>
     <string name="start">Start</string>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of 480572d (Revert "Bilingual part 1")
     <string name="hozzaadGomb">Hozzáad</string>
     <string name="segitsegGomb">Segítség</string>
     <string name="nullas">Kérem adja meg a nullához tartozó betűt!</string>
     <string name="egyes">Kérem adja meg az egyeshez tartozó betűt!</string>
     <string name="kettes">Kérem adja meg a ketteshez tartozó betűt</string>
-<<<<<<< HEAD
     <string name="harmas">Kérem adja meg a hármashoz tartozó betűt</string>
     <string name="negyes">Kérem adja meg a négyeshez tartozó betűt</string>
     <string name="otos">Kérem adja meg az ötöshöz tartozó betűt</string>
@@ -22,9 +16,4 @@
     <string name="kilences">Kérem adja meg a kilenceshez tartozó betűt</string>
     <string name="jatekrolGomb">Játékról</string>
     <string name="segitsegSzoveg1">Az itt megadott betűk alapján tudsz a következő lépésben szavakat megadni.</string>
->>>>>>> parent of 9c57166 (Revert "bilingual part 2")
-=======
-    <string name="jatekrolGomb">Játékról</string>
-    <string name="segitsegSzoveg1">Az itt megadott betűk alapján tudsz a következő lépésben szavakat megadni.</string>
->>>>>>> parent of 480572d (Revert "Bilingual part 1")
 </resources>
