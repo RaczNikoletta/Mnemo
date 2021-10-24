@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">fogas</string>
     <string name="memoria_fogas">Memoria fogas</string>
@@ -16,4 +17,6 @@
     <string name="kilences">Kérem adja meg a kilenceshez tartozó betűt</string>
     <string name="jatekrolGomb">Játékról</string>
     <string name="segitsegSzoveg1">Az itt megadott betűk alapján tudsz a következő lépésben szavakat megadni.</string>
+    <string name="betuKerdesekHiba">Nem megfelelő formátum.</string>
+    <string name = "betuKerdesekPontok">Megfelelő válaszok száma: </string>
 </resources>

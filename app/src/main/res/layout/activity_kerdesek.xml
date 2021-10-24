@@ -84,15 +84,14 @@
         app:layout_constraintVertical_bias="0.067" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/hibaTv"
         android:layout_width="385dp"
-        android:layout_height="377dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="20dp"
+        android:textAlignment="center"
+        android:textColor="#BF2424"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.384"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mehet"
-        app:layout_constraintVertical_bias="0.6" />
+        app:layout_constraintTop_toBottomOf="@+id/mehet" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

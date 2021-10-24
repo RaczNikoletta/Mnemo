@@ -143,26 +143,27 @@ public class game extends AppCompatActivity {
             fejlec.setText(getString(R.string.kettes));
         }
         if(i==3){
-            fejlec.setText("Adja meg a harmashoz tartozó betűt!");
+            fejlec.setText(getString(R.string.harmas));
         }
         if(i==4){
-            fejlec.setText("Adja meg a négyeshez tartozó betűt!");
+            fejlec.setText(getString(R.string.negyes));
         }
         if(i==5){
-            fejlec.setText("Adja meg az ötöshoz tartozó betűt");
+            fejlec.setText(getString(R.string.otos));
         }
         if(i==6){
-            fejlec.setText("Adja meg a hatoshoz tartozó betűt");
+            fejlec.setText(getString(R.string.hatos));
         }
         if(i==7){
-            fejlec.setText("Adja meg a heteshez tartozó betűt");
+            fejlec.setText(getString(R.string.hetes));
         }
         if(i==8){
-            fejlec.setText("Adja meg a nyolcashoz tartozó betűt");
+            fejlec.setText(getString(R.string.nyolcas));
         }
         if(i==9){
-            fejlec.setText("Adja meg a kilenceshez tartozó betűt");
+            fejlec.setText(getString(R.string.kilences));
         }
+
 
     }
 

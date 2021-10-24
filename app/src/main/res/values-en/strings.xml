@@ -17,4 +17,6 @@
     <string name="segitsegGomb">Help</string>
     <string name="jatekrolGomb">About Game</string>
     <string name="segitsegSzoveg1">Based on the letters you enter here, you can enter words in the next step.</string>
+    <string name="betuKerdesekHiba">Ivalid format.</string>
+    <string name = "betuKerdesekPontok">Number of right answers: </string>
 </resources>

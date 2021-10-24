@@ -8,10 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Random;
-
 
 
 public class kerdesek extends AppCompatActivity {
@@ -20,6 +17,9 @@ public class kerdesek extends AppCompatActivity {
     ArrayList<Integer> mylist = new ArrayList<Integer>();
     String hello;
     int futas = 0;
+    private TextView hibaTv;
+    private int bevIfInt;
+    private String tempPontokString;
 
 
     String [] valaszok = new String[20];
@@ -53,16 +53,16 @@ public class kerdesek extends AppCompatActivity {
     }
     public String kerdes3(String betu){
         String vege="";
-        if(betu.equals("A") || betu.equals("E") || betu.equals("F") ||betu.equals("I")||
-                betu.equals("L")||betu.equals("M")|| betu.equals("N") ||betu.equals("O")||
-                betu.equals("R") ||betu.equals("S") ||betu.equals("U")||betu.equals("X") ||
-                betu.equals("Y")){
+        if(betu.equalsIgnoreCase("A") || betu.equalsIgnoreCase("E") || betu.equalsIgnoreCase("F") ||betu.equalsIgnoreCase("I")||
+                betu.equalsIgnoreCase("L")||betu.equalsIgnoreCase("M")|| betu.equalsIgnoreCase("N") ||betu.equalsIgnoreCase("O")||
+                betu.equalsIgnoreCase("R") ||betu.equalsIgnoreCase("S") ||betu.equalsIgnoreCase("U")||betu.equalsIgnoreCase("X") ||
+                betu.equalsIgnoreCase("Y")){
             vege = "az";
         }
-        if(betu.equals("B") ||betu.equals("C") ||betu.equals("D")||betu.equals("G")||
-                betu.equals("H") ||betu.equals("J")||betu.equals("K")||betu.equals("P")||
-                betu.equals("Q")||betu.equals("T")||betu.equals("V")||betu.equals("W")||
-                betu.equals("Z")){
+        if(betu.equalsIgnoreCase("B") ||betu.equalsIgnoreCase("C") ||betu.equalsIgnoreCase("D")||betu.equalsIgnoreCase("G")||
+                betu.equalsIgnoreCase("H") ||betu.equalsIgnoreCase("J")||betu.equalsIgnoreCase("K")||betu.equalsIgnoreCase("P")||
+                betu.equalsIgnoreCase("Q")||betu.equalsIgnoreCase("T")||betu.equalsIgnoreCase("V")||betu.equalsIgnoreCase("W")||
+                betu.equalsIgnoreCase("Z")){
             vege = "a";
         }
         return vege;
@@ -70,15 +70,15 @@ public class kerdesek extends AppCompatActivity {
 
     public String kerdes4(String betu){
         String vege="";
-        if(betu.equals("A")||betu.equals("H")||betu.equals("K")||betu.equals("O")||
-                betu.equals("Q")||betu.equals("U")||betu.equals("Y")){
+        if(betu.equalsIgnoreCase("A")||betu.equalsIgnoreCase("H")||betu.equalsIgnoreCase("K")||betu.equalsIgnoreCase("O")||
+                betu.equalsIgnoreCase("Q")||betu.equalsIgnoreCase("U")||betu.equalsIgnoreCase("Y")){
             vege = "-hoz";
         }
-        if(betu.equals("B")||betu.equals("C")||betu.equals("D")||betu.equals("E")||
-                betu.equals("F")||betu.equals("G")||betu.equals("I")||betu.equals("J")||
-                betu.equals("L")||betu.equals("M")||betu.equals("N")||betu.equals("P")||
-                betu.equals("R")||betu.equals("S")||betu.equals("T")||betu.equals("V")||
-                betu.equals("W")||betu.equals("X")||betu.equals("Z")){
+        if(betu.equalsIgnoreCase("B")||betu.equalsIgnoreCase("C")||betu.equalsIgnoreCase("D")||betu.equalsIgnoreCase("E")||
+                betu.equalsIgnoreCase("F")||betu.equalsIgnoreCase("G")||betu.equalsIgnoreCase("I")||betu.equalsIgnoreCase("J")||
+                betu.equalsIgnoreCase("L")||betu.equalsIgnoreCase("M")||betu.equalsIgnoreCase("N")||betu.equalsIgnoreCase("P")||
+                betu.equalsIgnoreCase("R")||betu.equalsIgnoreCase("S")||betu.equalsIgnoreCase("T")||betu.equalsIgnoreCase("V")||
+                betu.equalsIgnoreCase("W")||betu.equalsIgnoreCase("X")||betu.equalsIgnoreCase("Z")){
             vege = "-hez";
         }
         return vege;
@@ -91,7 +91,7 @@ public class kerdesek extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kerdesek);
         getSupportActionBar().hide();
-        TextView teszt = (TextView) findViewById(R.id.textView3);
+        TextView teszt = (TextView) findViewById(R.id.hibaTv);
         teszt.setVisibility(View.INVISIBLE);
 
         for(int i =0;i<20;i++){
@@ -117,7 +117,17 @@ public class kerdesek extends AppCompatActivity {
 
     public void kezdes(View view) {
         TextView bevitel = (TextView) findViewById(R.id.bevitel);
-        if (bevitel.length() == 1 && bevitel.toString().matches("[a-zA-Z]+")){
+        TextView hibaTv = (TextView) findViewById(R.id.hibaTv);
+        String bev = bevitel.toString();
+        //TODO: kitalálni hogy hogy nézzük meg hogy a kérdés számra vagy betűre vonatkozik
+        //check if bev is an integer
+        if(isInteger(bev))
+        {
+          bevIfInt = Integer.parseInt(bev);
+        }
+        //int bevIfInt = Integer.parseInt(bev);
+
+        if (bevitel.length() == 1 && ((bev.matches("[a-zA-Z]+")) || (bevIfInt <= 9 && bevIfInt >=0))){
 
 
             if(index<20) {
@@ -147,8 +157,8 @@ public class kerdesek extends AppCompatActivity {
 
                 for (int i = 10; i < 20; i++) {
                     kerdesek[i] =
-                            "Melyik szam tatozik " + kerdes3(betuk[i - 10].toUpperCase()) + " "
-                                    + betuk[i - 10].toUpperCase() + kerdes4(betuk[i - 10].toUpperCase()) + "?";
+                            "Melyik szam tatozik " + kerdes3(betuk[i - 10]) + " "
+                                    + betuk[i - 10] + kerdes4(betuk[i - 10]) + "?";
                 }
 
 
@@ -161,7 +171,7 @@ public class kerdesek extends AppCompatActivity {
 
                 valaszok[sorrend[index]]= bevitel.getText().toString();
 
-                TextView teszt = (TextView) findViewById(R.id.textView3);
+                TextView teszt = (TextView) findViewById(R.id.hibaTv);
 
                 teszt.setVisibility(View.INVISIBLE);
             /*
@@ -197,11 +207,15 @@ public class kerdesek extends AppCompatActivity {
                     }
                 }
 
-                kerdes.setText("Ennyi helyes valasza volt: " + pontok);
+                tempPontokString= getText(R.string.betuKerdesekPontok).toString();
+                kerdes.setText(tempPontokString + pontok);
 
             }
 
 
+        }else
+            {
+            hibaTv.setText((getString(R.string.betuKerdesekHiba)));
         }
 
 
@@ -234,10 +248,11 @@ public class kerdesek extends AppCompatActivity {
                 TextView kerdes = (TextView) findViewById(R.id.kerdes);
 
 
-
+                //TODO keredesek generálására egy külön függvény?
                 String[] kerdesek = new String[20];
 
                 for (int i = 0; i < 10; i++) {
+                    //melyik betu tartozik + a/az + "" + szam + hoz/hez
                     kerdesek[i] = "Melyik betu tartozik " + kerdes2(i) + " " + i + kerdes(i) + "?";
                 }
 
@@ -252,8 +267,8 @@ public class kerdesek extends AppCompatActivity {
 
 
 
-                TextView teszt = (TextView) findViewById(R.id.textView3);
-                teszt.setVisibility(View.INVISIBLE);
+                TextView teszt = (TextView) findViewById(R.id.hibaTv);
+                teszt.setVisibility(View.VISIBLE);
                 /*
                 String teszteles = "";
                 for(int i =0;i<20;i++){
@@ -269,5 +284,22 @@ public class kerdesek extends AppCompatActivity {
 
 
 
+    }
+
+    //check if bevitel is integer
+    public static boolean isInteger(String s) {
+        return isInteger(s,10);
+    }
+
+    public static boolean isInteger(String s, int radix) {
+        if(s.isEmpty()) return false;
+        for(int i = 0; i < s.length(); i++) {
+            if(i == 0 && s.charAt(i) == '-') {
+                if(s.length() == 1) return false;
+                else continue;
+            }
+            if(Character.digit(s.charAt(i),radix) < 0) return false;
+        }
+        return true;
     }
 }
