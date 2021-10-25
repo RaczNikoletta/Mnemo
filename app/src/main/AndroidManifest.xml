@@ -11,9 +11,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fogas">
         <activity
+            android:name=".MainMenu"
+            android:exported="false"
+            android:theme ="@style/AppTheme.NoActionBar"/>
+        <activity
             android:name=".kerdesek"
-            android:parentActivityName="game"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".game" />
         <activity
             android:name=".game"
             android:exported="true" />
@@ -26,6 +30,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

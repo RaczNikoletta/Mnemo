@@ -20,4 +20,11 @@
     <string name="betuKerdesekHiba">Ivalid format.</string>
     <string name = "betuKerdesekPontok">Number of right answers: </string>
     <string name = "kerdesgeneralasBetu">Please enter the letter for the number: </string>
+    <array name="menuOptions">
+        <item>Updating pegs</item>
+        <item>Practice mode</item>
+        <item>New sequence</item>
+        <item>Check statistics</item>
+        <item>About</item>
+    </array>
 </resources>

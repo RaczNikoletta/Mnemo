@@ -9,6 +9,8 @@ public class PegDataModel extends RealmObject {
     String pegLetter;
     String pegWord;
 
+    public PegDataModel(){}
+
     public int getPegNum() {
         return pegNum;
     }

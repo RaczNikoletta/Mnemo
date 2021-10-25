@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">fogas</string>
-    <string name="memoria_fogas">Memoria fogas</string>
+    <string name="memoria_fogas">Memória fogas</string>
     <string name="start">Start</string>
     <string name="hozzaadGomb">Hozzáad</string>
     <string name="segitsegGomb">Segítség</string>
@@ -18,6 +18,14 @@
     <string name="jatekrolGomb">Játékról</string>
     <string name="segitsegSzoveg1">Az itt megadott betűk alapján tudsz a következő lépésben szavakat megadni.</string>
     <string name="betuKerdesekHiba">Nem megfelelő formátum.</string>
-    <string name = "betuKerdesekPontok">Megfelelő válaszok száma: </string>
-    <string name = "kerdesgeneralasBetu">Kerem adja meg a következő számhoz tartozó betűt: </string>
+    <string name="betuKerdesekPontok">Megfelelő válaszok száma: </string>
+    <string name="kerdesgeneralasBetu">Kerem adja meg a következő számhoz tartozó betűt: </string>
+
+    <array name="menuOptions">
+        <item>Fogasok szerkeszétése</item>
+        <item>Gyakorlás</item>
+        <item>Új számsor megadása</item>
+        <item>Statisztika megtekintése</item>
+        <item>Tudnivalók</item>
+    </array>
 </resources>

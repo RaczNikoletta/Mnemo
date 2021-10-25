@@ -7,9 +7,13 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/font"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/candal"
         android:text="@string/memoria_fogas"
+        android:textColor="#C33535"
+        android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintLeft_toLeftOf="parent"
