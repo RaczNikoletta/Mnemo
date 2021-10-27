@@ -167,6 +167,7 @@ public class kerdesek extends AppCompatActivity {
 
 
                 kerdes.setText(kerdesek[sorrend[index+1]]);
+                kerdes.setTextSize(18);
                 String valasz = bevitel.getText().toString();
 
                 valaszok[sorrend[index]]= bevitel.getText().toString();

@@ -3,6 +3,7 @@
     <string name="app_name">fogas</string>
     <string name="memoria_fogas">Peg memory</string>
     <string name="start">Start</string>
+    <!-- Pegs -->
     <string name="nullas">Please enter the letter for number zero!</string>
     <string name="egyes">Please enter the letter for number one!</string>
     <string name="kettes">Please enter the letter for number two!</string>
@@ -20,6 +21,11 @@
     <string name="betuKerdesekHiba">Ivalid format.</string>
     <string name = "betuKerdesekPontok">Number of right answers: </string>
     <string name = "kerdesgeneralasBetu">Please enter the letter for the number: </string>
+    <string name="kerdesLeiras">Choose the right pair for each number/letter.</string>
+    <string name="feladat">Exercise</string>
+    <string name="betuHiba">Invalid format (a letter needed)</string>
+    <!-- Pegs -->
+    <!-- Menu -->
     <array name="menuOptions">
         <item>Updating pegs</item>
         <item>Practice mode</item>
@@ -27,4 +33,5 @@
         <item>Check statistics</item>
         <item>About</item>
     </array>
+    <!-- Menu -->
 </resources>

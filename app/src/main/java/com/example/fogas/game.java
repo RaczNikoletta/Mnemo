@@ -183,7 +183,7 @@ public class game extends AppCompatActivity {
 
 
             } else {
-                hiba.setText("Nem egy betut adott meg!");
+                hiba.setText(R.string.betuHiba);
             }
         }
         else{
@@ -204,7 +204,7 @@ public class game extends AppCompatActivity {
                 finish();
 
         } else {
-            hiba.setText("Nem egy betut adott meg!");
+            hiba.setText(R.string.betuHiba);
         }
 
 
@@ -223,15 +223,14 @@ public class game extends AppCompatActivity {
         letterRealm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                PegDataModel peg = new PegDataModel();
+                int num;
                 if(i==0){
-                    peg.setPegNum(i);
+                    num = i;
                 }
-                else{
-                    peg.setPegNum(i-1);
+                else {
+                    num = (i - 1);
                 }
-
-                peg.setPegLetter(b);
+                PegDataModel peg = new PegDataModel(num,b);
                 peg.setPegWord("");
                 realm.insertOrUpdate(peg);
             }
