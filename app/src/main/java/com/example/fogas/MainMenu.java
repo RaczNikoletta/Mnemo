@@ -5,6 +5,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.text.Layout;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -110,11 +114,15 @@ public class MainMenu extends AppCompatActivity implements DuoMenuView.OnMenuCli
         private DuoDrawerLayout mDuoDrawerLayout;
         private DuoMenuView mDuoMenuView;
         private Toolbar mToolbar;
+        private DuoMenuView duo;
 
         ViewHolder() {
             mDuoDrawerLayout = (DuoDrawerLayout) findViewById(R.id.drawer);
             mDuoMenuView = (DuoMenuView) mDuoDrawerLayout.getMenuView();
             mToolbar = (Toolbar) findViewById(R.id.toolbar);
+            //duo = (DuoMenuView) findViewById(R.id.Duo);
+
         }
     }
+
 }

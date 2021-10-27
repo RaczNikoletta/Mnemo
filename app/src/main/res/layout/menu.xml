@@ -6,4 +6,4 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:footer="@layout/duo_view_footer"
-    app:header="@layout/duo_view_header"/>
+    app:header="@layout/userheader"/>
