@@ -5,12 +5,22 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 public class PegDataModel extends RealmObject {
+
+    UserDataModel user;
     @PrimaryKey
     int pegNum;
     String pegLetter;
     String pegWord;
 
     public PegDataModel(){}
+
+    public UserDataModel getUser() {
+        return user;
+    }
+
+    public void setUser(UserDataModel user) {
+        this.user = user;
+    }
 
     public PegDataModel(int pegNum, String pegLetter){
         this.pegNum = pegNum;

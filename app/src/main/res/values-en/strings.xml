@@ -27,10 +27,11 @@
     <!-- Pegs -->
     <!-- Menu -->
     <array name="menuOptions">
-        <item>Updating pegs</item>
         <item>Practice mode</item>
+        <item>Updating pegs, hints</item>
         <item>New sequence</item>
         <item>Check statistics</item>
+        <item>Settings</item>
         <item>About</item>
     </array>
     <!-- Menu -->

@@ -4,6 +4,7 @@ import java.sql.Time;
 import java.util.Date;
 
 import io.realm.RealmDictionary;
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -11,18 +12,39 @@ public class UserDataModel extends RealmObject {
     @PrimaryKey
     String userName;
     String password;
+
+    PegDataModel pegs;
+    //TODO: Kellhet progress tábla?
     RealmDictionary<String> progress;
+    RealmList<SequenceDataModel> sequences;
+    RealmList<HintDataModel> hints;
     Date registryDate;
     double GameTimeInMin;
-    int age;
 
-    public int getAge() {
-        return age;
+    public PegDataModel getPegs() {
+        return pegs;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setPegs(PegDataModel pegs) {
+        this.pegs = pegs;
     }
+
+    public RealmList<SequenceDataModel> getSequences() {
+        return sequences;
+    }
+
+    public void setSequences(RealmList<SequenceDataModel> sequences) {
+        this.sequences = sequences;
+    }
+
+    public RealmList<HintDataModel> getHints() {
+        return hints;
+    }
+
+    public void setHints(RealmList<HintDataModel> hints) {
+        this.hints = hints;
+    }
+
 
     public RealmDictionary<String> getProgress() {
         return progress;

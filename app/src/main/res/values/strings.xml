@@ -28,10 +28,11 @@
             <!-- Fogasok -->
     <!-- Menü -->
     <array name="menuOptions">
-        <item>Fogasok szerkeszétése</item>
         <item>Gyakorlás</item>
+        <item>Fogasok szerkeszétése</item>
         <item>Új számsor megadása</item>
         <item>Statisztika megtekintése</item>
+        <item>Beállítások</item>
         <item>Tudnivalók</item>
     </array>
     <!-- Menü -->
