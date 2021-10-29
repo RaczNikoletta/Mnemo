@@ -3,6 +3,7 @@ package com.example.fogas.Models;
 import java.sql.Time;
 import java.util.Date;
 
+import io.realm.Realm;
 import io.realm.RealmDictionary;
 import io.realm.RealmList;
 import io.realm.RealmObject;
@@ -12,14 +13,29 @@ public class UserDataModel extends RealmObject {
     @PrimaryKey
     String userName;
     String password;
-
+    boolean loggedIn;
     PegDataModel pegs;
-
     Progress progress;
     RealmList<SequenceDataModel> sequences;
     RealmList<HintDataModel> hints;
     Date registryDate;
     double GameTimeInMin;
+
+
+    public UserDataModel(){}
+
+    public UserDataModel(String userName,String password){
+        this.userName = userName;
+        this.password = password;
+        registryDate = new Date();
+        pegs = new PegDataModel();
+        progress = new Progress();
+        sequences = new RealmList<SequenceDataModel>();
+        hints = new RealmList<HintDataModel>();
+        GameTimeInMin = 0;
+        loggedIn = false;
+
+    }
 
     public PegDataModel getPegs() {
         return pegs;
@@ -70,17 +86,6 @@ public class UserDataModel extends RealmObject {
         GameTimeInMin = gameTimeInMin;
     }
 
-
-    public UserDataModel(){}
-
-    public UserDataModel(String userName,String password){
-        this.userName = userName;
-        this.password = password;
-        registryDate = new Date();
-    }
-
-
-
     public String getUserName() {
         return userName;
     }
@@ -96,6 +101,15 @@ public class UserDataModel extends RealmObject {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
+    }
+
 
 
 }

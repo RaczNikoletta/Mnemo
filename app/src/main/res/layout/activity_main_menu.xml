@@ -15,7 +15,6 @@
         android:tag="@string/tag_menu"
         app:footer="@layout/userfooter"
         app:header="@layout/userheader"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

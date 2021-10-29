@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/userheader_footer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -50,6 +51,7 @@
             android:background="@drawable/duo_shape_rectangled_rounded_color_accent"
             android:gravity="center"
             android:minWidth="@android:dimen/thumbnail_width"
+            android:onClick="openActivity"
             android:padding="8dp"
             android:text="@string/LoginTitle"
             android:textAllCaps="true"

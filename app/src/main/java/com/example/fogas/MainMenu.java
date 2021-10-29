@@ -1,5 +1,7 @@
 package com.example.fogas;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -7,9 +9,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.text.Layout;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,18 +26,29 @@ import java.util.Arrays;
 import nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout;
 import nl.psdcompany.duonavigationdrawer.views.DuoMenuView;
 import nl.psdcompany.duonavigationdrawer.widgets.DuoDrawerToggle;
+import okhttp3.internal.http2.Header;
 
 public class MainMenu extends AppCompatActivity implements DuoMenuView.OnMenuClickListener {
     private MenuAdapter mMenuAdapter;
     private ViewHolder mViewHolder;
+    private View header;
+    private Button but;
+    private Context cont;
+
 
     private ArrayList<String> mTitles = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main_menu);
         mTitles = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.menuOptions)));
+        cont = this;
+
+
+
+
 
         // Initialize the views
         mViewHolder = new ViewHolder();
@@ -46,6 +66,7 @@ public class MainMenu extends AppCompatActivity implements DuoMenuView.OnMenuCli
         goToFragment(new MainFragment(), false);
         mMenuAdapter.setViewSelected(0, true);
         setTitle(mTitles.get(0));
+
     }
 
     private void handleToolbar() {
@@ -79,7 +100,10 @@ public class MainMenu extends AppCompatActivity implements DuoMenuView.OnMenuCli
     @Override
     public void onHeaderClicked() {
         Toast.makeText(this, "onHeaderClicked", Toast.LENGTH_SHORT).show();
+        //startActivity(new Intent(this,headerCreator.class));
+
     }
+
 
     private void goToFragment(Fragment fragment, boolean addToBackStack) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -90,6 +114,8 @@ public class MainMenu extends AppCompatActivity implements DuoMenuView.OnMenuCli
 
         transaction.add(R.id.container, fragment).commit();
     }
+
+
 
     @Override
     public void onOptionClicked(int position, Object objectClicked) {
@@ -114,15 +140,17 @@ public class MainMenu extends AppCompatActivity implements DuoMenuView.OnMenuCli
         private DuoDrawerLayout mDuoDrawerLayout;
         private DuoMenuView mDuoMenuView;
         private Toolbar mToolbar;
-        private DuoMenuView duo;
 
         ViewHolder() {
             mDuoDrawerLayout = (DuoDrawerLayout) findViewById(R.id.drawer);
             mDuoMenuView = (DuoMenuView) mDuoDrawerLayout.getMenuView();
             mToolbar = (Toolbar) findViewById(R.id.toolbar);
-            //duo = (DuoMenuView) findViewById(R.id.Duo);
 
         }
+    }
+    public void openActivity(View v){
+        startActivity(new Intent(this,Login.class));
+        finish();
     }
 
 }
