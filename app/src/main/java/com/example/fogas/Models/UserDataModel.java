@@ -14,8 +14,8 @@ public class UserDataModel extends RealmObject {
     String password;
 
     PegDataModel pegs;
-    //TODO: Kellhet progress tábla?
-    RealmDictionary<String> progress;
+
+    Progress progress;
     RealmList<SequenceDataModel> sequences;
     RealmList<HintDataModel> hints;
     Date registryDate;
@@ -45,14 +45,14 @@ public class UserDataModel extends RealmObject {
         this.hints = hints;
     }
 
-
-    public RealmDictionary<String> getProgress() {
+    public Progress getProgress() {
         return progress;
     }
 
-    public void setProgress(RealmDictionary<String> progress) {
+    public void setProgress(Progress progress) {
         this.progress = progress;
     }
+
 
     public Date getRegistryDate() {
         return registryDate;

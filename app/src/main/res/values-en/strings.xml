@@ -34,5 +34,9 @@
         <item>Settings</item>
         <item>About</item>
     </array>
+    <string name="VendegUser">Guest</string>
+    <string name="VendegTitle">Rookie</string>
+    <string name="LoginTitle">Login</string>
+    <string name="LogOffTitle">Log Off</string>
     <!-- Menu -->
 </resources>

@@ -35,5 +35,9 @@
         <item>Beállítások</item>
         <item>Tudnivalók</item>
     </array>
+    <string name="VendegUser">Vendég</string>
+    <string name="VendegTitle">Zöldfülű</string>
+    <string name="LoginTitle">Belépés</string>
+    <string name="LogOffTitle">Kilépés</string>
     <!-- Menü -->
 </resources>
