@@ -39,4 +39,10 @@
     <string name="LoginTitle">Login</string>
     <string name="LogOffTitle">Log Off</string>
     <!-- Menu -->
+    <!-- Login -->
+    <string name="belepes">Sign in</string>
+    <string name="nevfelirat">Username</string>
+    <string name="passwordfelirat">Password</string>
+    <string name="noaccount"><u>Don\'t have account yet? Click to register.</u></string>
+    <!-- Login -->
 </resources>

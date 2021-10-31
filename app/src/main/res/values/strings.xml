@@ -39,14 +39,11 @@
     <string name="VendegTitle">Zöldfülű</string>
     <string name="LoginTitle">Belépés</string>
     <string name="LogOffTitle">Kilépés</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
     <!-- Menü -->
+    <!-- Login -->
+    <string name="belepes">Bejelentkezés</string>
+    <string name="nevfelirat">Felhasználónév</string>
+    <string name="passwordfelirat">Jelszó</string>
+    <string name="noaccount"><u>Nem rendelkezel még fiókkal? Regisztráció</u></string>
+    <!-- Menu -->
 </resources>
