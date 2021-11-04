@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,8 +22,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.fogas.Models.PegDataModel;
+import com.example.fogas.Models.PegModel;
+import com.example.fogas.Models.UserDataModel;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 
 
 public class game extends AppCompatActivity {
@@ -28,7 +37,7 @@ public class game extends AppCompatActivity {
 
     private int i=0;
     String [] betuk = new String[10];
-    private Realm letterRealm;
+    public Realm letterRealm;
     private Context mContext;
     private Activity mActivity;
     private ConstraintLayout mConstraintLayout;
@@ -38,6 +47,9 @@ public class game extends AppCompatActivity {
     private TextView part;
     private TextView hiba;
     private TextView fejlec;
+    private PegModel peg;
+    private PegDataModel pegs;
+   // private final Executor executor = Executors.newSingleThreadExecutor();
 
 
     public static final String EXTRA_TEXT = "com.example.application.example.EXTRA_TEXT";
@@ -62,7 +74,6 @@ public class game extends AppCompatActivity {
         part = (TextView) findViewById(R.id.part_jelzo);
         hiba = (TextView) findViewById(R.id.hiba);
         fejlec = (TextView) findViewById(R.id.szam_fejlec);
-        letterRealm = Realm.getDefaultInstance();
 
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,6 +182,11 @@ public class game extends AppCompatActivity {
 
 
         String betu= szam.getText().toString();
+        if(i==0)
+        {
+            pegs  = new PegDataModel();
+            pegs.setPegs(new RealmList<>());
+        }
         if(i<9) {
             if (betu.length() == 1 && betu.matches("[a-zA-Z]+")) {
                 betuk[i] = betu;
@@ -190,6 +206,7 @@ public class game extends AppCompatActivity {
             if (betu.length() == 1 && betu.matches("[a-zA-Z]+")) {
             betuk[i] = betu;
             saveData(betu);
+            letterRealm.close();
 
             i = i + 1;
             //part.setText(i+1 + "/9");
@@ -218,38 +235,51 @@ public class game extends AppCompatActivity {
 
     }
 
-    private  void saveData (String b){
+    private  void saveData (String b) {
+        letterRealm = Realm.getDefaultInstance();
 
-        letterRealm.executeTransactionAsync(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                int num;
-                if(i==0){
-                    num = i;
-                }
-                else {
-                    num = (i - 1);
-                }
-                PegDataModel peg = new PegDataModel(num,b);
-                peg.setPegWord("");
-                realm.insertOrUpdate(peg);
-            }
+                letterRealm.executeTransactionAsync(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        int num;
+                        if (i == 0) {
+                            num = i;
+                        } else {
+                            num = (i - 1);
+                        }
+                        peg = new PegModel();
+                        peg.setLetter(b);
+                        peg.setNum(num);
+                        pegs.setOnePeg(peg);
+                        pegs.setUserName("");
+                        if(num== 9) {
+                            realm.insertOrUpdate(pegs);
+                        }
+                    }
 
-        }, new Realm.Transaction.OnSuccess(){
-            @Override
-            public void onSuccess(){
-                //Transaction successfull
-                Toast.makeText(game.this,"Success " ,Toast.LENGTH_LONG).show();
-            }
-        }, new Realm.Transaction.OnError(){
-            @Override
-            public  void onError(Throwable error){
-                //Transaction failed and automatically canceled
-                String errors = error.toString();
-                Toast.makeText(game.this,errors,Toast.LENGTH_LONG).show();
-            }
-        });
+                }, new Realm.Transaction.OnSuccess() {
+                    @Override
+                    public void onSuccess() {
+                        //Transaction successfull
+                        //Toast.makeText(game.this, Thread.currentThread().getName(), Toast.LENGTH_LONG).show();
+                    }
+                }, new Realm.Transaction.OnError() {
+                    @Override
+                    public void onError(Throwable error) {
+                        //Transaction failed and automatically canceled
+                        String errors = error.toString();
+                        Toast.makeText(game.this, errors, Toast.LENGTH_LONG).show();
+                        letterRealm.close();
+                    }
+                });
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        letterRealm.close();
+        Log.v("gamedestroy","Game activity destroyed");
     }
 
 

@@ -13,6 +13,7 @@ public class UserDataModel extends RealmObject {
     @PrimaryKey
     String userName;
     String password;
+    String title;
     boolean loggedIn;
     PegDataModel pegs;
     Progress progress;
@@ -24,9 +25,9 @@ public class UserDataModel extends RealmObject {
 
     public UserDataModel(){}
 
-    public UserDataModel(String userName,String password){
-        this.userName = userName;
-        this.password = password;
+    public UserDataModel(String user,String pass){
+        this.userName = user;
+        this.password = pass;
         registryDate = new Date();
         pegs = new PegDataModel();
         progress = new Progress();
@@ -108,6 +109,14 @@ public class UserDataModel extends RealmObject {
 
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
 

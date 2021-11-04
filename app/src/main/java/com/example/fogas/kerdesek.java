@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class kerdesek extends AppCompatActivity {
     private TextView hibaTv;
     private int bevIfInt;
     private String tempPontokString;
+    private Button skipBtn;
 
 
     String [] valaszok = new String[20];
@@ -91,8 +93,10 @@ public class kerdesek extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kerdesek);
         getSupportActionBar().hide();
+
         TextView teszt = (TextView) findViewById(R.id.hibaTv);
         teszt.setVisibility(View.INVISIBLE);
+        skipBtn = (Button) findViewById(R.id.skipBtn);
 
         for(int i =0;i<20;i++){
             mylist.add(i);
@@ -304,5 +308,10 @@ public class kerdesek extends AppCompatActivity {
             if(Character.digit(s.charAt(i),radix) < 0) return false;
         }
         return true;
+    }
+
+    public void skipQuestions(View v){
+        startActivity(new Intent(this,MainMenu.class));
+        finish();
     }
 }

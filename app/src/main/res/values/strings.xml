@@ -24,6 +24,7 @@
     <string name="betuKerdesekPontok">Megfelelő válaszok száma: </string>
     <string name="kerdesgeneralasBetu">Kerem adja meg a következő számhoz tartozó betűt: </string>
     <string name="betuHiba">Nem egy betűt adott meg</string>
+    <string name="kihagyas">Kihagyás</string>
 
     <!-- Fogasok -->
     <!-- Menü -->
@@ -45,5 +46,18 @@
     <string name="nevfelirat">Felhasználónév</string>
     <string name="passwordfelirat">Jelszó</string>
     <string name="noaccount"><u>Nem rendelkezel még fiókkal? Regisztráció</u></string>
+    <string name="notValidLogin">Nem megfelelő felhasználónév vagy jelszó!</string>
     <!-- Menu -->
+    <!-- Register -->
+    <string name="regisztraciofelirat">Regisztráció</string>
+    <string name="passwordujrafelirat">Jelszó újra</string>
+    <string name="kuldesgomb">Küldés</string>
+    <string name="sikeresregtitle">Sikeres regisztráció</string>
+    <string name="sikeresregtext">Sikeresen regsztráltál! Tovább a belépéshez.</string>
+    <string name="useralreadyexists">Felhasználónév foglalt.</string>
+    <!-- Register -->
+
+    <!--UserTitles-->
+    <string name="feledekeny">Feledékeny</string>
+    <!--UserTitles-->
 </resources>

@@ -24,6 +24,7 @@
     <string name="kerdesLeiras">Choose the right pair for each number/letter.</string>
     <string name="feladat">Exercise</string>
     <string name="betuHiba">Invalid format (a letter needed)</string>
+    <string name="kihagyas">Skip</string>
     <!-- Pegs -->
     <!-- Menu -->
     <array name="menuOptions">
@@ -40,9 +41,21 @@
     <string name="LogOffTitle">Log Off</string>
     <!-- Menu -->
     <!-- Login -->
-    <string name="belepes">Sign in</string>
+    <string name="belepes">Login</string>
     <string name="nevfelirat">Username</string>
     <string name="passwordfelirat">Password</string>
-    <string name="noaccount"><u>Don\'t have account yet? Click to register.</u></string>
+    <string name="noaccount"><u>Don\'t have account yet? Click here to register.</u></string>
+    <string name="notValidLogin">Incorrect username or password!</string>
     <!-- Login -->
+    <!-- Register -->
+    <string name="regisztraciofelirat">Registration</string>
+    <string name="passwordujrafelirat">Password again</string>
+    <string name="kuldesgomb">Send</string>
+    <string name="sikeresregtitle">Registration successful</string>
+    <string name="sikeresregtext">Registration was successful! Now you can log in.</string>
+    <string name="useralreadyexists">User already exists with this username.</string>
+    <!-- Register -->
+    <!--UserTitles-->
+    <string name="feledekeny">Oblivious</string>
+    <!--UserTitles-->
 </resources>

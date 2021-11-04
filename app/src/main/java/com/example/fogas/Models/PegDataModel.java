@@ -1,53 +1,40 @@
 package com.example.fogas.Models;
 
+import java.util.ArrayList;
+
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 public class PegDataModel extends RealmObject {
+    String userName;
+    RealmList<PegModel> pegs;
 
-    UserDataModel user;
-    @PrimaryKey
-    int pegNum;
-    String pegLetter;
-    String pegWord;
+    public RealmList<PegModel> getPegs() {
+        return pegs;
+    }
+
+    public void setPegs(RealmList<PegModel> pegs) {
+        this.pegs = pegs;
+    }
+
+    public void setOnePeg(PegModel p)
+    {
+        pegs.add(p);
+    }
+    public PegModel getOnePeg(int i){
+        return pegs.get(i);
+    }
 
     public PegDataModel(){}
 
-    public UserDataModel getUser() {
-        return user;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUser(UserDataModel user) {
-        this.user = user;
+    public void setUserName(String user) {
+        this.userName = user;
     }
 
-    public PegDataModel(int pegNum, String pegLetter){
-        this.pegNum = pegNum;
-        this.pegLetter = pegLetter;
-    }
 
-    public int getPegNum() {
-        return pegNum;
-    }
-
-    public void setPegNum(int pegNum) {
-        this.pegNum = pegNum;
-    }
-
-    public String getPegLetter() {
-        return pegLetter;
-    }
-
-    public void setPegLetter(String pegLetter) {
-        this.pegLetter = pegLetter;
-    }
-
-    public String getPegWord() {
-        return pegWord;
-    }
-
-    public void setPegWord(String pegWord) {
-        this.pegWord = pegWord;
-    }
 }

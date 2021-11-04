@@ -9,6 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.fogas.Models.UserDataModel;
+
+import io.realm.Realm;
 
 public class Login extends AppCompatActivity {
 
@@ -17,6 +22,8 @@ public class Login extends AppCompatActivity {
     private Button loginMainBtn;
     private TextView noProfileTv;
     private Context context;
+    private Realm loginRealm;
+    private TextView notValidTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,14 +34,46 @@ public class Login extends AppCompatActivity {
         userEt = (EditText) findViewById(R.id.userEt);
         loginMainBtn = (Button) findViewById(R.id.loginBtn);
         noProfileTv = (TextView) findViewById(R.id.noProfileTv);
+        notValidTv = (TextView) findViewById(R.id.notValidTv);
         context = this;
 
         noProfileTv.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
                 startActivity(new Intent(context,Register.class));
+                finish();
             }
         });
+    }
+
+    public void LoginAttempt(View v){
+        try {
+            loginRealm = Realm.getDefaultInstance();
+            loginRealm.executeTransaction(r->{
+                UserDataModel isValid = loginRealm.where(UserDataModel.class)
+                        .equalTo("userName",userEt.getText().toString())
+                        .equalTo("password",passwordEt.getText().toString())
+                        .findFirst();
+                //if username and password are valid (database contains them)
+                if(isValid!=null){
+                    isValid.setLoggedIn(true);
+                    startActivity(new Intent(this,MainMenu.class));
+                    finish();
+                }else{
+                    notValidTv.setText(R.string.notValidLogin);
+                }
+            });
+
+        }catch(Throwable e){
+            String error = e.toString();
+            Toast.makeText(this,error,Toast.LENGTH_LONG).show();
+        }finally{
+            if(loginRealm != null){
+                loginRealm.close();
+            }
+        }
+
+
     }
 
 }

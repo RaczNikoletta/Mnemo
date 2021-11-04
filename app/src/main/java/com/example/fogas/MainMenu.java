@@ -18,11 +18,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fogas.Models.UserDataModel;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import io.realm.Realm;
 import nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout;
 import nl.psdcompany.duonavigationdrawer.views.DuoMenuView;
 import nl.psdcompany.duonavigationdrawer.widgets.DuoDrawerToggle;
@@ -31,9 +33,14 @@ import okhttp3.internal.http2.Header;
 public class MainMenu extends AppCompatActivity implements DuoMenuView.OnMenuClickListener {
     private MenuAdapter mMenuAdapter;
     private ViewHolder mViewHolder;
-    private View header;
-    private Button but;
     private Context cont;
+    private View headerv;
+    private View footerv;
+    private Button loginBtn;
+    private Button logOffBtn;
+    private TextView userTv;
+    private TextView titleTv;
+    private Realm mainRealm;
 
 
     private ArrayList<String> mTitles = new ArrayList<>();
@@ -45,9 +52,6 @@ public class MainMenu extends AppCompatActivity implements DuoMenuView.OnMenuCli
         setContentView(R.layout.activity_main_menu);
         mTitles = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.menuOptions)));
         cont = this;
-
-
-
 
 
         // Initialize the views
@@ -92,9 +96,33 @@ public class MainMenu extends AppCompatActivity implements DuoMenuView.OnMenuCli
         mViewHolder.mDuoMenuView.setAdapter(mMenuAdapter);
     }
 
+    //If Log off button clicked
     @Override
     public void onFooterClicked() {
-        Toast.makeText(this, "onFooterClicked", Toast.LENGTH_SHORT).show();
+        try {
+            mainRealm = Realm.getDefaultInstance();
+            mainRealm.executeTransaction(r -> {
+                UserDataModel getlogged = mainRealm.where(UserDataModel.class)
+                        .equalTo("loggedIn", true).findFirst();
+                if (getlogged != null) {
+                    getlogged.setLoggedIn(false);
+                    startActivity(new Intent(this,MainMenu.class));
+                    finish();
+                } else {
+                    //This should not happen
+                    Toast.makeText(this, "Log off fail check database login variable", Toast.LENGTH_LONG).show();
+                }
+
+            });
+        } catch (Throwable e) {
+            Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
+        } finally {
+            if (mainRealm != null) {
+                mainRealm.close();
+            }
+
+
+        }
     }
 
     @Override
@@ -114,7 +142,6 @@ public class MainMenu extends AppCompatActivity implements DuoMenuView.OnMenuCli
 
         transaction.add(R.id.container, fragment).commit();
     }
-
 
 
     @Override
@@ -145,12 +172,55 @@ public class MainMenu extends AppCompatActivity implements DuoMenuView.OnMenuCli
             mDuoDrawerLayout = (DuoDrawerLayout) findViewById(R.id.drawer);
             mDuoMenuView = (DuoMenuView) mDuoDrawerLayout.getMenuView();
             mToolbar = (Toolbar) findViewById(R.id.toolbar);
+            headerv = mDuoMenuView.getHeaderView();
+            footerv = mDuoMenuView.getFooterView();
+            try {
+                userTv = headerv.findViewById(R.id.userTv);
+                titleTv = headerv.findViewById(R.id.titleTv);
+                loginBtn = headerv.findViewById(R.id.loginBtn);
+                logOffBtn = footerv.findViewById(R.id.logOffBtn);
+            } catch (Throwable e) {
+                Toast.makeText(cont, e.toString(), Toast.LENGTH_LONG).show();
+            }
 
         }
     }
-    public void openActivity(View v){
-        startActivity(new Intent(this,Login.class));
-        finish();
+
+    public void openActivity(View v) {
+        startActivity(new Intent(this, Login.class));
     }
+
+
+    @Override
+    protected void onStart() {
+        try {
+            super.onStart();
+            mainRealm = Realm.getDefaultInstance();
+            mainRealm.executeTransaction(r -> {
+                UserDataModel getlogged = mainRealm.where(UserDataModel.class)
+                        .equalTo("loggedIn", true).findFirst();
+                if(getlogged !=null)
+                {
+                    userTv.setText(getlogged.getUserName());
+                    titleTv.setText(getlogged.getTitle());
+                    loginBtn.setVisibility(View.GONE);
+                    logOffBtn.setVisibility(View.VISIBLE);
+                }else{
+                    userTv.setText(R.string.VendegUser);
+                    loginBtn.setVisibility(View.VISIBLE);
+                    logOffBtn.setVisibility(View.GONE);
+                }
+
+            });
+        }catch(Throwable e){
+            Toast.makeText(this,e.toString(),Toast.LENGTH_LONG).show();
+        }finally {
+            if(mainRealm != null)
+            {
+                mainRealm.close();
+            }
+        }
+    }
+
 
 }
