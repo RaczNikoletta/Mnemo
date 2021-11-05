@@ -67,7 +67,7 @@ public class MainMenu extends AppCompatActivity implements DuoMenuView.OnMenuCli
         handleDrawer();
 
         // Show main fragment in container
-        goToFragment(new MainFragment(), false);
+        goToFragment(new PracticeFragment(), false);
         mMenuAdapter.setViewSelected(0, true);
         setTitle(mTitles.get(0));
 
@@ -155,7 +155,7 @@ public class MainMenu extends AppCompatActivity implements DuoMenuView.OnMenuCli
         // Navigate to the right fragment
         switch (position) {
             default:
-                goToFragment(new MainFragment(), false);
+                goToFragment(new PracticeFragment(), false);
                 break;
         }
 

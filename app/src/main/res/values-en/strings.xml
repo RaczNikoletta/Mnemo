@@ -58,4 +58,9 @@
     <!--UserTitles-->
     <string name="feledekeny">Oblivious</string>
     <!--UserTitles-->
+    <!--Practice mode-->
+    <string name="fogasbetukgyak">Peg (letter) practice</string>
+    <string name="fogasszavakgyak">Peg (word) practice</string>
+    <string name="fogasszamsorkgyak">Sequence practice</string>
+    <!--Practice mode-->
 </resources>

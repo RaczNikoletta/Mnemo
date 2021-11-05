@@ -60,4 +60,11 @@
     <!--UserTitles-->
     <string name="feledekeny">Feledékeny</string>
     <!--UserTitles-->
+    <!--Practice mode-->
+    <string name="fogasbetukgyak">Fogasok (betűk) gyakorlása</string>
+    <string name="fogasszavakgyak">Fogasok (szavak) gyakorlása</string>
+    <string name="fogasszamsorkgyak">Számsorok gyakorlása</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--Practice mode-->
 </resources>

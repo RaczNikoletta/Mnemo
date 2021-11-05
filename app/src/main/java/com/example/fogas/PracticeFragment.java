@@ -7,9 +7,13 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,21 +21,46 @@ import android.widget.Toast;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MainFragment extends Fragment {
+public class PracticeFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
-        view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+        View view = inflater.inflate(R.layout.fragment_practice, container, false);
+        view.findViewById(R.id.wordPracticeBtn).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "Clicked a button!", Toast.LENGTH_SHORT).show();
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Clicked wordpractice button!", Toast.LENGTH_SHORT).show();
             }
         });
-        ViewPager pager = (ViewPager) view.findViewById(R.id.pager);
-        pager.setAdapter(new PagerAdapter());
+        //int i = ((ViewGroup)getView().getParent()).getId();
+        view.findViewById(R.id.letterPracticeBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Clicked letterpracitce button!", Toast.LENGTH_SHORT).show();
+                /*try {
+                    letterPracticeFragment letterFrag = new letterPracticeFragment();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(i, letterFrag, "findLetterFragment")
+                            .addToBackStack(null)
+                            .commit();
+                }catch(Throwable e){
+                    Log.d("pracitcefragment","letterpractice click error");
+                }*/
+            }
+        });
+        view.findViewById(R.id.sequencePracticeBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Clicked sequencepracitce button!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        ImageButton wordPracticeBtn = (ImageButton) view.findViewById(R.id.wordPracticeBtn);
+        //wordPracticeBtn.setClipToOutline(true);
+        ImageButton letterPracticeBtn = (ImageButton) view.findViewById(R.id.letterPracticeBtn);
+        ImageButton sequencePracticeBtn = (ImageButton) view.findViewById(R.id.sequencePracticeBtn);
+        // ib.setClipToOutline(true);
         return view;
     }
+
 
     private class PagerAdapter extends androidx.viewpager.widget.PagerAdapter {
 
