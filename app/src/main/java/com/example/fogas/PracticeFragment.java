@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.util.Log;
@@ -36,7 +37,7 @@ public class PracticeFragment extends Fragment {
         view.findViewById(R.id.letterPracticeBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Clicked letterpracitce button!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Clicked letterpractice button!", Toast.LENGTH_SHORT).show();
                 /*try {
                     letterPracticeFragment letterFrag = new letterPracticeFragment();
                     getActivity().getSupportFragmentManager().beginTransaction().replace(i, letterFrag, "findLetterFragment")
@@ -60,6 +61,8 @@ public class PracticeFragment extends Fragment {
         // ib.setClipToOutline(true);
         return view;
     }
+
+
 
 
     private class PagerAdapter extends androidx.viewpager.widget.PagerAdapter {
