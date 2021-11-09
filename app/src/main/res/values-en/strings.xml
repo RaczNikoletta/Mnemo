@@ -66,4 +66,9 @@
     <!--WordPracticeFragment -->
     <string name="noPegwordsinDB">You have to add peg words first!</string>
     <!--WordPracticeFragment -->
+    <!--Fragment update -->
+    <string name="setpegLetters">Update letters</string>
+    <string name="setpegWords">Update words</string>
+    <string name="setSequences">Update sequences</string>
+    <!--Fragment update -->
 </resources>

@@ -11,7 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:orientation="horizontal">
+        android:background="@drawable/round_outline"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:outlineProvider="paddedBounds">
 
         <ImageButton
             android:id="@+id/letterPracticeBtn"

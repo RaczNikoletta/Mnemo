@@ -70,4 +70,9 @@
     <!--WordPracticeFragment -->
     <string name="noPegwordsinDB">Először meg kell adnod a szavakat!</string>
     <!--WordPracticeFragment -->
+    <!--Fragment update -->
+    <string name="setpegLetters">Betűk kezelése</string>
+    <string name="setpegWords">Szavak kezelése</string>
+    <string name="setSequences">Számsorok kezelése</string>
+    <!--Fragment update -->
 </resources>
