@@ -154,6 +154,12 @@ public class MainMenu extends AppCompatActivity implements DuoMenuView.OnMenuCli
 
         // Navigate to the right fragment
         switch (position) {
+            case(0):
+                goToFragment(new PracticeFragment(), false);
+                break;
+            case(1):
+                goToFragment(new updateFragment(),false);
+                break;
             default:
                 goToFragment(new PracticeFragment(), false);
                 break;

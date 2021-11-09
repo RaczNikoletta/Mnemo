@@ -63,4 +63,7 @@
     <string name="fogasszavakgyak">Peg (word) practice</string>
     <string name="fogasszamsorkgyak">Sequence practice</string>
     <!--Practice mode-->
+    <!--WordPracticeFragment -->
+    <string name="noPegwordsinDB">You have to add peg words first!</string>
+    <!--WordPracticeFragment -->
 </resources>

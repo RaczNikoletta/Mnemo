@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
@@ -31,6 +32,15 @@ public class PracticeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(), "Clicked wordpractice button!", Toast.LENGTH_SHORT).show();
+                try {
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ft.add(R.id.container,new wordPracticeFragment())
+                            .addToBackStack(null)
+                            .commit();
+                }catch(Throwable e){
+                    Log.d("practicefragment","letterpractice click error "+ e.toString());
+                }
             }
         });
         //int i = ((ViewGroup)getView().getParent()).getId();
@@ -38,20 +48,21 @@ public class PracticeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Clicked letterpractice button!", Toast.LENGTH_SHORT).show();
-                /*try {
-                    letterPracticeFragment letterFrag = new letterPracticeFragment();
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(i, letterFrag, "findLetterFragment")
+                try {
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ft.add(R.id.container,new letterPracticeFragment())
                             .addToBackStack(null)
                             .commit();
                 }catch(Throwable e){
-                    Log.d("pracitcefragment","letterpractice click error");
-                }*/
+                    Log.d("practicefragment","wordpractice click error "+ e.toString());
+                }
             }
         });
         view.findViewById(R.id.sequencePracticeBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Clicked sequencepracitce button!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Clicked sequencepractice button!", Toast.LENGTH_SHORT).show();
             }
         });
         ImageButton wordPracticeBtn = (ImageButton) view.findViewById(R.id.wordPracticeBtn);
