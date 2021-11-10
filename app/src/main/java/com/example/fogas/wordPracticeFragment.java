@@ -93,6 +93,7 @@ public class wordPracticeFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_word_practice, container, false);
     }
 
+    //TODO ne csak az elsőt nézze, hanem for ciklusban
     public boolean checkIfWordsInDatabase(){
         try{
         wordRealm = Realm.getDefaultInstance();

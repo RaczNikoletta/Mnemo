@@ -71,8 +71,16 @@
     <string name="noPegwordsinDB">Először meg kell adnod a szavakat!</string>
     <!--WordPracticeFragment -->
     <!--Fragment update -->
-    <string name="setpegLetters">Betűk kezelése</string>
-    <string name="setpegWords">Szavak kezelése</string>
+    <string name="setpegLetters">Betűk, szavak kezelése</string>
+    <string name="setpegHints">Segítségek kezelése</string>
     <string name="setSequences">Számsorok kezelése</string>
     <!--Fragment update -->
+    <!--Fragment letter update -->
+    <string name="pegnumberTV">Fogas száma</string>
+    <string name="pegletterTV">Betűje</string>
+    <string name="pegwordTV">Szava</string>
+    <string name="saveUpdates">Mentés</string>
+    <string name="loginrequest">Kérem jelentezzen be!</string>
+    <string name="loginrequest2">Ehhez a funkcióhoz be kell jelentkeznie. Szeretne bejelentkezni?</string>
+    <!--Fragment letter update -->
 </resources>

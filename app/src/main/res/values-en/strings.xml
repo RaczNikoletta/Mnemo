@@ -67,8 +67,16 @@
     <string name="noPegwordsinDB">You have to add peg words first!</string>
     <!--WordPracticeFragment -->
     <!--Fragment update -->
-    <string name="setpegLetters">Update letters</string>
-    <string name="setpegWords">Update words</string>
+    <string name="setpegLetters">Update letters, words</string>
+    <string name="setpegHints">Update hints</string>
     <string name="setSequences">Update sequences</string>
     <!--Fragment update -->
+    <!--Fragment letter update -->
+    <string name="pegnumberTV">Number of peg</string>
+    <string name="pegletterTV">Peg letter</string>
+    <string name="pegwordTV">Peg word</string>
+    <string name="saveUpdates">Save</string>
+    <string name="loginrequest">Please log in!</string>
+    <string name="loginrequest2">You have to log in for this function. Do you want to?</string>
+    <!--Fragment letter update -->
 </resources>

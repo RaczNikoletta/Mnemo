@@ -7,27 +7,16 @@ import io.realm.annotations.PrimaryKey;
 
 public class ProgressDataModel extends RealmObject {
     @PrimaryKey
-    int progressId;
-    UserDataModel user;
+    String userName;
     RealmList<Progress> progressForEachGame;
 
     public ProgressDataModel(){}
 
-    public int getProgressId() {
-        return progressId;
+
+    public String getUserName() {
+        return userName;
     }
 
-    public void setProgressId(int progressId) {
-        this.progressId = progressId;
-    }
-
-    public UserDataModel getUser() {
-        return user;
-    }
-
-    public void setUser(UserDataModel user) {
-        this.user = user;
-    }
 
     public RealmList<Progress> getProgressForEachGame() {
         return progressForEachGame;

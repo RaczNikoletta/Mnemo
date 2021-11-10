@@ -35,7 +35,7 @@ public class PracticeFragment extends Fragment {
                 try {
                     FragmentManager fm = getFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
-                    ft.add(R.id.container,new wordPracticeFragment())
+                    ft.replace(R.id.container,new wordPracticeFragment())
                             .addToBackStack(null)
                             .commit();
                 }catch(Throwable e){
@@ -51,7 +51,7 @@ public class PracticeFragment extends Fragment {
                 try {
                     FragmentManager fm = getFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
-                    ft.add(R.id.container,new letterPracticeFragment())
+                    ft.replace(R.id.container,new letterPracticeFragment())
                             .addToBackStack(null)
                             .commit();
                 }catch(Throwable e){
