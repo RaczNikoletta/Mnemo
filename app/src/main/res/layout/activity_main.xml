@@ -9,6 +9,8 @@
 
     <!-- komment -->
 
+    <!-- masik komment -->
+
     <TextView
         android:id="@+id/font"
         android:layout_width="wrap_content"

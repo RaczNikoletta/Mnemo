@@ -28,8 +28,6 @@ import io.realm.RealmResults;
 public class letterUpdateFragment extends Fragment {
 
     private Realm updaterRealm;
-    private String sectionLetter;
-    private String sectionWord;
     private String temp;
 
     public letterUpdateFragment() {
@@ -53,9 +51,8 @@ public class letterUpdateFragment extends Fragment {
                 R.id.pegletterTv5,R.id.pegletterTv6,R.id.pegletterTv7,R.id.pegletterTv8,
                 R.id.pegletterTv9,R.id.pegwordTv0,R.id.pegwordTv1,R.id.pegwordTv2,R.id.pegwordTv3,R.id.pegwordTv4,R.id.pegwordTv5,
                 R.id.pegwordTv6,R.id.pegwordTv7,R.id.pegwordTv8,R.id.pegwordTv9};
-        PegModel p = new PegModel();
-        sectionLetter = "pegletterTv";
-        sectionWord = "pegwordTv";
+
+        PegModel p;
         EditText eLetter;
         EditText eWord;
         try{
@@ -73,7 +70,6 @@ public class letterUpdateFragment extends Fragment {
                         eLetter = view.findViewById(ids[i]);
                         eWord = view.findViewById(ids[i+10]);
                         if(p!= null) {
-                            temp = sectionLetter + Integer.toString(i);
                             eLetter.setText(p.getLetter());
                             eWord.setText(p.getWord());
                         }else{
