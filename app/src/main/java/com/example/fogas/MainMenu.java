@@ -1,9 +1,13 @@
 package com.example.fogas;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -67,7 +71,7 @@ public class MainMenu extends AppCompatActivity implements DuoMenuView.OnMenuCli
         handleDrawer();
 
         // Show main fragment in container
-        goToFragment(new PracticeFragment(), false);
+        goToFragment(new PracticeFragment(), false, "practiceFragment");
         mMenuAdapter.setViewSelected(0, true);
         setTitle(mTitles.get(0));
 
@@ -106,7 +110,7 @@ public class MainMenu extends AppCompatActivity implements DuoMenuView.OnMenuCli
                         .equalTo("loggedIn", true).findFirst();
                 if (getlogged != null) {
                     getlogged.setLoggedIn(false);
-                    startActivity(new Intent(this,MainMenu.class));
+                    startActivity(new Intent(this, MainMenu.class));
                     finish();
                 } else {
                     //This should not happen
@@ -133,15 +137,45 @@ public class MainMenu extends AppCompatActivity implements DuoMenuView.OnMenuCli
     }
 
 
-    private void goToFragment(Fragment fragment, boolean addToBackStack) {
+    private void goToFragment(Fragment fragment, boolean addToBackStack, String tag) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        if (tag.equals("updateFragment")) {
+            try {
+                mainRealm = Realm.getDefaultInstance();
+                UserDataModel user = mainRealm.where(UserDataModel.class).equalTo("loggedIn", true).findFirst();
+                if (user == null) {
 
-        if (addToBackStack) {
-            transaction.addToBackStack(null);
-        }
 
-        transaction.add(R.id.container, fragment).commit();
+                    new AlertDialog.Builder(this)
+                            .setTitle(R.string.loginrequest)
+                            .setMessage(R.string.loginrequest2)
+
+                            // Specifying a listener allows you to take an action before dismissing the dialog.
+                            // The dialog is automatically dismissed when a dialog button is clicked.
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    startActivity(new Intent(getBaseContext(), Login.class));
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            })
+
+                            // A null listener allows the button to dismiss the dialog and take no further action.
+                            .setIcon(getResources().getDrawable(R.drawable.ic_baseline_error_24))
+                            .show();
+                }else {transaction.add(R.id.container, fragment, tag).addToBackStack("MainMenu").commit();}
+            } catch (Throwable e) {
+                Toast.makeText(getBaseContext(), e.toString(), Toast.LENGTH_LONG).show();
+            }
+        } else
+        {transaction.add(R.id.container, fragment, tag).addToBackStack("MainMenu").commit();}
+
     }
+
 
 
     @Override
@@ -154,17 +188,14 @@ public class MainMenu extends AppCompatActivity implements DuoMenuView.OnMenuCli
 
         // Navigate to the right fragment
         switch (position) {
-            case(0):
-                goToFragment(new PracticeFragment(), false);
-                break;
             case(1):
-                goToFragment(new updateFragment(),false);
+                goToFragment(new updateFragment(),false,"updateFragment");
                 break;
             case(2):
                 goToFragment(new wordPracticeFragment(), false);
                 break;
             default:
-                goToFragment(new PracticeFragment(), false);
+                goToFragment(new PracticeFragment(), false,"practiceFragment");
                 break;
         }
 

@@ -27,7 +27,9 @@ import io.realm.Realm;
 public class updateFragment extends Fragment {
 
     private Button letterBtn;
+    private Button hintBtn;
     private Realm updaterRealm;
+    UserDataModel userLogged;
 
     public updateFragment() {
         // Required empty public constructor
@@ -38,50 +40,46 @@ public class updateFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_update, container,false);
+        setRetainInstance(true);
+        updaterRealm = Realm.getDefaultInstance();
+        userLogged = updaterRealm.where(UserDataModel.class).equalTo("loggedIn", true).findFirst();
         view.findViewById(R.id.letterBtn).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 try {
-                    updaterRealm = Realm.getDefaultInstance();
-                    UserDataModel user = updaterRealm.where(UserDataModel.class).equalTo("loggedIn", true).findFirst();
-                    if (user != null) {
+                    if (userLogged != null) {
                         FragmentManager fm = getFragmentManager();
                         FragmentTransaction ft = fm.beginTransaction();
-                        ft.replace(R.id.container, new letterUpdateFragment())
+                        ft.replace(R.id.container, new letterUpdateFragment(),"letterUpdate")
                                 .addToBackStack(null)
                                 .commit();
 
-                    } else {
-
-                        new AlertDialog.Builder(getContext())
-                                .setTitle(R.string.loginrequest)
-                                .setMessage(R.string.loginrequest2)
-
-                                // Specifying a listener allows you to take an action before dismissing the dialog.
-                                // The dialog is automatically dismissed when a dialog button is clicked.
-                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        startActivity(new Intent(getContext(), Login.class));
-                                    }
-                                })
-                                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                                    }
-                                })
-
-                                // A null listener allows the button to dismiss the dialog and take no further action.
-                                .setIcon(getResources().getDrawable(R.drawable.ic_baseline_error_24))
-                                .show();
                     }
-
                 } catch (Throwable e) {
                     Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
 
                 }
             }
         });
+
+        view.findViewById(R.id.hintBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try{
+                if (userLogged != null) {
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ft.replace(R.id.container, new hintUpdateFragment(),"hintUpdate")
+                            .addToBackStack(null)
+                            .commit();
+
+                }
+            } catch (Throwable e) {
+                Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+
+            }
+        }
+    });
 
 
         // Inflate the layout for this fragment

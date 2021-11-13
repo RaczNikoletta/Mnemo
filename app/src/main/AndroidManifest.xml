@@ -20,6 +20,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainMenu"
+            android:configChanges="orientation|screenSize"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

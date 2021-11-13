@@ -78,5 +78,10 @@
     <string name="saveUpdates">Save</string>
     <string name="loginrequest">Please log in!</string>
     <string name="loginrequest2">You have to log in for this function. Do you want to?</string>
+    <string name="databaseUpdated">Updated successfully</string>
+    <string name="databaseUpdated2">Database updated successfully. Page will reload now.</string>
     <!--Fragment letter update -->
+    <!--Fragment hint update -->
+    <string name="checkhints">Your hints</string>
+    <!--Fragment hint update -->
 </resources>

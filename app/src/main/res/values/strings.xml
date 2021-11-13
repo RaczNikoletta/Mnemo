@@ -82,5 +82,10 @@
     <string name="saveUpdates">Mentés</string>
     <string name="loginrequest">Kérem jelentezzen be!</string>
     <string name="loginrequest2">Ehhez a funkcióhoz be kell jelentkeznie. Szeretne bejelentkezni?</string>
+    <string name="databaseUpdated">Sikeres adatváltozatás.</string>
+    <string name="databaseUpdated2">Az adatok változatatása sikeres volt. Az oldal újra fog töltődni.</string>
     <!--Fragment letter update -->
+    <!--Fragment hint update -->
+    <string name="checkhints">Segítségeid</string>
+    <!--Fragment hint update -->
 </resources>
