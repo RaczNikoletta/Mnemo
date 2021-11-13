@@ -192,7 +192,7 @@ public class MainMenu extends AppCompatActivity implements DuoMenuView.OnMenuCli
                 goToFragment(new updateFragment(),false,"updateFragment");
                 break;
             case(2):
-                goToFragment(new wordPracticeFragment(), false);
+                goToFragment(new chainFragment(), false, "chainFragment");
                 break;
             default:
                 goToFragment(new PracticeFragment(), false,"practiceFragment");
