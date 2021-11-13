@@ -1,45 +1,32 @@
 package com.example.fogas.Models;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 public class HintDataModel extends RealmObject {
-    UserDataModel user;
-    @PrimaryKey
-    int pegNum;
-    String hint;
-    byte [] image;
 
-    public UserDataModel getUser() {
-        return user;
+    String username;
+    RealmList<HintModel> hints;
+
+    public HintDataModel(){}
+
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser(UserDataModel user) {
-        this.user = user;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public int getPegNum() {
-        return pegNum;
+    public RealmList<HintModel> getHints() {
+        return hints;
     }
 
-    public void setPegNum(int pegNum) {
-        this.pegNum = pegNum;
+    public void setHints(RealmList<HintModel> hints) {
+        this.hints = hints;
     }
 
-    public String getHint() {
-        return hint;
-    }
 
-    public void setHint(String hint) {
-        this.hint = hint;
-    }
-
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
 
 }
