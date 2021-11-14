@@ -91,5 +91,8 @@
     <string name="reminder">Emlékeztető szó</string>
     <string name="reminderPhoto">Emlékeztető kép (Maximális méret 16MB!)</string>
     <string name="browse">Kép tallózása</string>
+    <string name="edit">Szerkesztés</string>
+    <string name="delete">Törlés</string>
+    <string name="peg">Fogas száma</string>
     <!--Fragment hint update -->
 </resources>

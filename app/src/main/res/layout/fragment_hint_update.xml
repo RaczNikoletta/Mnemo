@@ -23,12 +23,37 @@
     <ListView
         android:id="@+id/hintList"
         android:layout_width="match_parent"
-        android:layout_height="457dp" />
+        android:layout_height="457dp" >
+
+    </ListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/editBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:text="@string/edit" />
+
+        <Button
+            android:id="@+id/deleteBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:text="@string/delete" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/addHintBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:backgroundTint="@color/colorPrimaryDark"
         android:text="@string/hozzaadGomb" />
 

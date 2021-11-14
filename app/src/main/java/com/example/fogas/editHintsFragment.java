@@ -5,6 +5,7 @@ import static android.app.Activity.RESULT_OK;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -18,92 +19,102 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fogas.Models.HintDataModel;
 import com.example.fogas.Models.HintModel;
-import com.example.fogas.Models.PegDataModel;
-import com.example.fogas.Models.PegModel;
 import com.example.fogas.Models.UserDataModel;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import io.realm.Realm;
-import io.realm.RealmList;
 
-public class addHintsFragment extends Fragment {
+public class editHintsFragment extends Fragment {
 
-    public addHintsFragment() {
-        // Required empty public constructor
-    }
-    private Realm addRealm;
-    private ArrayAdapter<String> adapter;
+    private String pegNum;
+    private String[] splitedPeg;
+    private TextView fogasEditTv;
+    private EditText hintStringEt2;
+    private ImageView imageView10;
+    private Button browseButton2;
+    private Button saveHintsBtn2;
+    private Realm editHintRealm;
     private UserDataModel user;
-    private PegDataModel pegModel;
-    private RealmList pegRealmList;
-    private PegModel tempPeg;
-    private ArrayList<String> pegList;
-    private Spinner pegSpinner;
-    private EditText hintStringEt;
-    private Button browseBtn;
-    private Button saveHintsBtn;
-    private Uri imageUri;
-    private ImageView imageView;
-    private static final int PICK_IMAGE = 100;
-    private Bitmap imageBmp;
-    private HintDataModel hintData;
+    private HintDataModel hints;
     private HintModel hint;
+    private static final int PICK_IMAGE = 100;
+    private Uri imageUri;
+    private Bitmap imageBmp;
     private File imageFile;
     private long fileSizeInMB;
-    private HintDataModel userHints;
+
+    public editHintsFragment() {
+        // Required empty public constructor
+    }
+
+    public static editHintsFragment newInstance(String pegNum) {
+        editHintsFragment f = new editHintsFragment();
+        Bundle args = new Bundle();
+        f.setArguments(args);
+        args.putString("pegNum", pegNum);
+        f.setArguments(args);
+        return f;
+    }
+
+    /*fogasEditTv;
+    private EditText hintStringEt2;
+    private ImageView imageView10;
+    private Button browseButton;
+    private Button saveHintsBtn2;-
+
+     */
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_add_hints, container, false);
-        pegSpinner = view.findViewById(R.id.pegSpinner2);
-        hintStringEt = view.findViewById(R.id.hintStringEt);
-        browseBtn = view.findViewById(R.id.browseBtn);
-        saveHintsBtn = view.findViewById(R.id.saveHintsBtn);
-        imageView = view.findViewById(R.id.imageView);
-        hintData = new HintDataModel();
-        pegList = new ArrayList<String>();
-        setRetainInstance(true);
-
-        // Inflate the layout for this fragment
-        try{
-            addRealm = Realm.getDefaultInstance();
-            user = addRealm.where(UserDataModel.class).equalTo("loggedIn",true).findFirst();
-            if(user != null){
-                pegModel = addRealm.where(PegDataModel.class).equalTo("userName",user.getUserName()).findFirst();
-                if(pegModel != null){
-                    pegRealmList = pegModel.getPegs();
-                    for(int i=0;i<pegRealmList.size();i++){
-                        tempPeg = new PegModel();
-                        tempPeg = (PegModel) pegRealmList.get(i);
-                        if(tempPeg!=null) {
-                            pegList.add(String.valueOf(tempPeg.getNum()));
-                        }
-                    }
-                }
-            }
-
-        }catch (Throwable e){
-            Toast.makeText(getContext(),e.toString(),Toast.LENGTH_LONG).show();
+        View view = inflater.inflate(R.layout.fragment_edit_hints, container, false);
+        fogasEditTv = (TextView) view.findViewById(R.id.fogasEditTv);
+        hintStringEt2 = (EditText) view.findViewById(R.id.hintStringEt2);
+        imageView10 = (ImageView) view.findViewById(R.id.imageView10);
+        browseButton2 = (Button) view.findViewById(R.id.browseBtn2);
+        saveHintsBtn2 = (Button) view.findViewById(R.id.saveHintsBtn2);
+        try {
+            Bundle args = getArguments();
+            pegNum = args.getString("pegNum", "");
+        } catch (Throwable e) {
+            Toast.makeText(getContext(), "arguments error " + e.toString(), Toast.LENGTH_LONG).show();
         }
-        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1,pegList);
-        pegSpinner.setAdapter(adapter);
+        Toast.makeText(getContext(), pegNum, Toast.LENGTH_LONG).show();
+        // split into pegnum and hintstring
+        splitedPeg = pegNum.split("\\s+");
 
-        //browse image
-        view.findViewById(R.id.browseBtn).setOnClickListener(new View.OnClickListener() {
+        fogasEditTv.setText(splitedPeg[0]);
+        hintStringEt2.setText(splitedPeg[1]);
+
+        try {
+            editHintRealm = Realm.getDefaultInstance();
+
+            user = editHintRealm.where(UserDataModel.class).equalTo("loggedIn", true).findFirst();
+            hints = user.getHints();
+            hint = hints.getOneHint(Integer.parseInt(splitedPeg[0]));
+        } catch (Throwable e) {
+            Toast.makeText(getContext(), "Database error: " + e.toString(), Toast.LENGTH_LONG).show();
+        }
+        try {
+
+            Bitmap bmp = BitmapFactory.decodeByteArray(hint.getImage(), 0, hint.getImage().length);
+            imageView10.setImageBitmap(Bitmap.createScaledBitmap(bmp, 600, 600, false));
+        } catch (Throwable e) {
+            Toast.makeText(getContext(), "Bitmap error: " + e.toString(), Toast.LENGTH_LONG).show();
+        }
+
+        view.findViewById(R.id.browseBtn2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
@@ -111,9 +122,10 @@ public class addHintsFragment extends Fragment {
             }
         });
 
-        view.findViewById(R.id.saveHintsBtn).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.saveHintsBtn2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 imageBmp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
@@ -144,19 +156,19 @@ public class addHintsFragment extends Fragment {
                 } else {
 
                     try {
-                        addRealm.executeTransaction(r -> {
+                        editHintRealm.executeTransaction(r -> {
                             try {
                                 hint = new HintModel();
-                                hint.setPegnum(Integer.parseInt(pegSpinner.getSelectedItem().toString()));
-                                hint.setHint(hintStringEt.getText().toString());
+                                hint.setPegnum(Integer.parseInt(fogasEditTv.getText().toString()));
+                                hint.setHint(hintStringEt2.getText().toString());
                                 hint.setImage(byteArray);
-                                addRealm.insertOrUpdate(addRealm.copyToRealmOrUpdate(hint));
+                                editHintRealm.insertOrUpdate(editHintRealm.copyToRealmOrUpdate(hint));
                             }catch (Throwable e){
                                 Toast.makeText(getContext(), "hint" + " " + e.toString(), Toast.LENGTH_LONG).show();
                             }
                             HintDataModel usdata = user.getHints();
 
-                                usdata.setOneHint(hint);
+                            usdata.setOneHint(hint);
 
 
 
@@ -191,34 +203,34 @@ public class addHintsFragment extends Fragment {
                             Toast.makeText(getContext(), "alertdialog" + " " + e.toString(), Toast.LENGTH_LONG).show();
                         }
 
-
-
-
                     } catch (Throwable e) {
                         Toast.makeText(getContext(), "executetrans" + " " + e.toString(), Toast.LENGTH_LONG).show();
                     }finally {
-                        addRealm.close();
+                        editHintRealm.close();
                     }
                 }
             }
+
         });
 
+        // Inflate the layout for this fragment
         return view;
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
             try {
-            imageUri = data.getData();
-                imageBmp = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(),imageUri);
+                imageUri = data.getData();
+                imageBmp = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), imageUri);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            imageView.setImageURI(imageUri);
-            imageFile = new File(""+imageUri);
+            imageView10.setImageURI(imageUri);
+            imageFile = new File("" + imageUri);
 
         }
+
     }
 }
