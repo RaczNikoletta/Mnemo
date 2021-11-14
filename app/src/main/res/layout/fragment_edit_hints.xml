@@ -6,28 +6,27 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:orientation="vertical"
-    tools:context=".addHintsFragment">
+    tools:context=".editHintsFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/textView22"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="@string/choosepeg"
+        android:text="@string/peg"
         android:textSize="22dp"
-        app:layout_constraintBottom_toTopOf="@+id/pegSpinner2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/pegSpinner2"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/fogasEditTv"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/textView7"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
     <TextView
         android:id="@+id/textView7"
@@ -36,33 +35,29 @@
         android:layout_marginTop="80dp"
         android:text="@string/reminder"
         android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="@id/hintStringEt"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/pegSpinner2"
+        app:layout_constraintEnd_toEndOf="@id/hintStringEt2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/hintStringEt"
+        android:id="@+id/hintStringEt2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView22"
+        app:layout_constraintBottom_toTopOf="@+id/textView20"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView20"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:text="@string/reminderPhoto"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintBottom_toTopOf="@+id/imageView10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,15 +65,15 @@
         app:layout_constraintVertical_bias="0.174" />
 
     <LinearLayout
-        android:id="@+id/linlay"
+        android:id="@+id/linlay1"
         android:layout_width="0dp"
         android:layout_height="200dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/saveHintsBtn"
+        app:layout_constraintBottom_toTopOf="@+id/saveHintsBtn2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/browseBtn"
+        app:layout_constraintTop_toBottomOf="@+id/browseBtn2"
         app:layout_constraintVertical_bias="1.0">
 
         <ScrollView
@@ -88,7 +83,7 @@
             android:layout_marginTop="15dp">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/imageView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center_vertical"
@@ -97,21 +92,21 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/browseBtn"
+        android:id="@+id/browseBtn2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@color/colorPrimaryDark"
         android:text="@string/browse"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintBottom_toTopOf="@+id/imageView10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView20"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/saveHintsBtn"
+        android:id="@+id/saveHintsBtn2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
@@ -120,7 +115,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linlay"
+        app:layout_constraintTop_toBottomOf="@id/linlay1"
         app:layout_constraintVertical_bias="0.961" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

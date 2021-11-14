@@ -87,5 +87,8 @@
     <string name="reminder">Set reminder word</string>
     <string name="reminderPhoto">Set reminder photo (Maximum 16MB!)</string>
     <string name="browse">Browse image</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="peg">Peg number</string>
     <!--Fragment hint update -->
 </resources>

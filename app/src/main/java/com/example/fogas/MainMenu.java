@@ -167,12 +167,12 @@ public class MainMenu extends AppCompatActivity implements DuoMenuView.OnMenuCli
                             // A null listener allows the button to dismiss the dialog and take no further action.
                             .setIcon(getResources().getDrawable(R.drawable.ic_baseline_error_24))
                             .show();
-                }else {transaction.add(R.id.container, fragment, tag).addToBackStack("MainMenu").commit();}
+                }else {transaction.replace(R.id.container, fragment, tag).addToBackStack("MainMenu").commit();}
             } catch (Throwable e) {
                 Toast.makeText(getBaseContext(), e.toString(), Toast.LENGTH_LONG).show();
             }
         } else
-        {transaction.add(R.id.container, fragment, tag).addToBackStack("MainMenu").commit();}
+        {transaction.replace(R.id.container, fragment, tag).addToBackStack("MainMenu").commit();}
 
     }
 
