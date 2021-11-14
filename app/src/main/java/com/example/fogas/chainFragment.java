@@ -66,10 +66,13 @@ public class chainFragment extends Fragment {
         view.findViewById(R.id.listButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String miazisten;
+                int i = 0;
+                Long[] miazisten = null;
                 for (Long local : testArray){
-
+                    miazisten[i] = local;
+                    i++;
                 }
+                txtvw1.setText(fastReturnInLong(miazisten).toString());
             }
         });
 
