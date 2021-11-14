@@ -87,5 +87,9 @@
     <!--Fragment letter update -->
     <!--Fragment hint update -->
     <string name="checkhints">Segítségeid</string>
+    <string name="choosepeg">Kérem válassza ki a megfelelő fogast</string>
+    <string name="reminder">Emlékeztető szó</string>
+    <string name="reminderPhoto">Emlékeztető kép (Maximális méret 16MB!)</string>
+    <string name="browse">Kép tallózása</string>
     <!--Fragment hint update -->
 </resources>

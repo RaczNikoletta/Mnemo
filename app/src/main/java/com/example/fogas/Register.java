@@ -16,11 +16,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fogas.Models.HintDataModel;
 import com.example.fogas.Models.PegDataModel;
 import com.example.fogas.Models.PegModel;
+import com.example.fogas.Models.ProgressDataModel;
 import com.example.fogas.Models.UserDataModel;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import io.realm.Realm;
 import io.realm.RealmQuery;
@@ -76,6 +79,9 @@ public class Register extends AppCompatActivity {
                     UserDataModel newUser = new UserDataModel();
                     newUser.setUserName(usernameEt.getText().toString());
                     newUser.setPassword(passwordregEt.getText().toString());
+                    newUser.setRegistryDate(new Date());
+                    newUser.setHints(new HintDataModel(usernameEt.getText().toString()));
+                    newUser.setProgress(new ProgressDataModel(usernameEt.getText().toString()));
                     newUser.setTitle(getResources().getString(R.string.feledekeny));
                     registerRealm.insertOrUpdate(newUser);
                     //check if registration was successful

@@ -13,6 +13,11 @@ public class ProgressDataModel extends RealmObject {
     public ProgressDataModel(){}
 
 
+    public ProgressDataModel(String name){
+        userName = name;
+    }
+
+
     public String getUserName() {
         return userName;
     }
