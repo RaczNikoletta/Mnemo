@@ -7,6 +7,8 @@
     android:background="@drawable/gamemainbackground"
     tools:context=".MainActivity">
 
+    <!-- komment -->
+
     <!-- masik komment -->
 
     <TextView
