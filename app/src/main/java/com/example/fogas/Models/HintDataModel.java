@@ -5,18 +5,22 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 public class HintDataModel extends RealmObject {
-
-    String username;
+    @PrimaryKey
+    String userName;
     RealmList<HintModel> hints;
 
     public HintDataModel(){}
 
+    public HintDataModel(String name){
+        userName = name;
+    }
+
     public String getUsername() {
-        return username;
+        return userName;
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.userName = username;
     }
 
     public RealmList<HintModel> getHints() {
@@ -25,6 +29,10 @@ public class HintDataModel extends RealmObject {
 
     public void setHints(RealmList<HintModel> hints) {
         this.hints = hints;
+    }
+
+    public void setOneHint(HintModel hint){
+        hints.add(hint);
     }
 
 

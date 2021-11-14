@@ -16,9 +16,10 @@ public class UserDataModel extends RealmObject {
     String title;
     boolean loggedIn;
     PegDataModel pegs;
-    Progress progress;
+    ProgressDataModel progress;
     RealmList<SequenceDataModel> sequences;
-    RealmList<HintDataModel> hints;
+
+    HintDataModel hints;
     Date registryDate;
     double GameTimeInMin;
 
@@ -30,9 +31,8 @@ public class UserDataModel extends RealmObject {
         this.password = pass;
         registryDate = new Date();
         pegs = new PegDataModel();
-        progress = new Progress();
         sequences = new RealmList<SequenceDataModel>();
-        hints = new RealmList<HintDataModel>();
+        hints = new HintDataModel();
         GameTimeInMin = 0;
         loggedIn = false;
 
@@ -54,19 +54,12 @@ public class UserDataModel extends RealmObject {
         this.sequences = sequences;
     }
 
-    public RealmList<HintDataModel> getHints() {
-        return hints;
-    }
 
-    public void setHints(RealmList<HintDataModel> hints) {
-        this.hints = hints;
-    }
-
-    public Progress getProgress() {
+    public ProgressDataModel getProgress() {
         return progress;
     }
 
-    public void setProgress(Progress progress) {
+    public void setProgress(ProgressDataModel progress) {
         this.progress = progress;
     }
 
@@ -117,6 +110,18 @@ public class UserDataModel extends RealmObject {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public void setOneHint(HintModel hintout){
+        hints.setOneHint(hintout);
+    }
+
+    public HintDataModel getHints() {
+        return hints;
+    }
+
+    public void setHints(HintDataModel hints) {
+        this.hints = hints;
     }
 
 

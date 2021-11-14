@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:orientation="vertical"
     android:scrollbarSize="24dp"
     tools:context=".hintUpdateFragment">
@@ -28,7 +29,7 @@
         android:id="@+id/addHintBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:text="@string/hozzaadGomb" />
 
 </LinearLayout>

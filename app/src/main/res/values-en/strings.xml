@@ -83,5 +83,9 @@
     <!--Fragment letter update -->
     <!--Fragment hint update -->
     <string name="checkhints">Your hints</string>
+    <string name="choosepeg">Please choose the right peg</string>
+    <string name="reminder">Set reminder word</string>
+    <string name="reminderPhoto">Set reminder photo (Maximum 16MB!)</string>
+    <string name="browse">Browse image</string>
     <!--Fragment hint update -->
 </resources>

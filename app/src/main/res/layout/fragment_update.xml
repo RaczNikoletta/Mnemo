@@ -31,6 +31,7 @@
             android:id="@+id/letterBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimaryDark"
             android:text="@string/start"
             android:textAlignment="textEnd" />
     </LinearLayout>
@@ -57,6 +58,7 @@
             android:id="@+id/hintBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimaryDark"
             android:text="@string/start"
             android:textAlignment="textEnd" />
     </LinearLayout>
@@ -83,6 +85,7 @@
             android:id="@+id/sequenceBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimaryDark"
             android:text="@string/start" />
     </LinearLayout>
 
