@@ -20,7 +20,16 @@ public class PegDataModel extends RealmObject {
 
     public void setOnePeg(PegModel p)
     {
-        pegs.add(p);
+        boolean isExists = false;
+        for(int i=0;i<pegs.size();i++){
+            if(pegs.get(i).getNum() == p.getNum()){
+                isExists =true;
+                pegs.get(i).setLetter(p.getLetter());
+                pegs.get(i).setWord(p.getWord());
+            }
+        }if(!isExists){
+            pegs.add(p);
+    }
     }
     public PegModel getOnePeg(int i){
         return pegs.get(i);

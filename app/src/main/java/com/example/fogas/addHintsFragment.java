@@ -125,8 +125,8 @@ public class addHintsFragment extends Fragment {
                 //TODO test with bigger image than 16MB
                 if (fileSizeInMB > 16) {
                     new AlertDialog.Builder(getContext())
-                            .setTitle(R.string.loginrequest + " " + fileSizeInMB)
-                            .setMessage(R.string.loginrequest2 + " " + fileSizeInMB)
+                            .setTitle(R.string.above16mb1 + " " + fileSizeInMB)
+                            .setMessage(R.string.above16mb2 + " " + fileSizeInMB)
 
                             // Specifying a listener allows you to take an action before dismissing the dialog.
                             // The dialog is automatically dismissed when a dialog button is clicked.

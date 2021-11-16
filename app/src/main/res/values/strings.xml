@@ -84,12 +84,19 @@
     <string name="loginrequest2">Ehhez a funkcióhoz be kell jelentkeznie. Szeretne bejelentkezni?</string>
     <string name="databaseUpdated">Sikeres adatváltozatás.</string>
     <string name="databaseUpdated2">Az adatok változatatása sikeres volt. Az oldal újra fog töltődni.</string>
+    <string name="choosePeg">Válassz számot!</string>
+    <string name="addNewPeg"><u>Új számot szeretnék megadni</u></string>
+    <string name="numberMandatory">Szám megadása kötelező!</string>
+    <string name="numberError">Kötelező egy kétjegyű számot megadni!</string>
+    <string name="letterorwordmand">Betű vagy szó megadása kötelező!</string>
     <!--Fragment letter update -->
     <!--Fragment hint update -->
     <string name="checkhints">Segítségeid</string>
     <string name="choosepeg">Kérem válassza ki a megfelelő fogast</string>
     <string name="reminder">Emlékeztető szó</string>
     <string name="reminderPhoto">Emlékeztető kép (Maximális méret 16MB!)</string>
+    <string name="above16mb1">The picture is above 16MB</string>
+    <string name="above16mb2">A feltöltött kép mérete nagyobb mint 16MB kérem válasszon másikat</string>
     <string name="browse">Kép tallózása</string>
     <string name="edit">Szerkesztés</string>
     <string name="delete">Törlés</string>
