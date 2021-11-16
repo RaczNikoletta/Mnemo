@@ -6,7 +6,6 @@ import io.realm.annotations.PrimaryKey;
 
 public class SequenceDataModel extends RealmObject {
     UserDataModel user;
-
     RealmList<PegModel> sequence;
     RealmList<String> story;
 
@@ -40,6 +39,21 @@ public class SequenceDataModel extends RealmObject {
 
     public SequenceDataModel(RealmList<PegModel> sequence){
         this.sequence = sequence;
+    }
+
+    public PegModel getOneFromSeq(int position){
+        PegModel temp = new PegModel();
+        if(position > sequence.size()){
+            return null;
+        }
+        if(position < 0){
+            return null;
+        }
+        for(int i=0;i<sequence.size();i++){
+            if(i==position){
+                temp = sequence.get(i);
+            }
+        }return temp;
     }
 
 }

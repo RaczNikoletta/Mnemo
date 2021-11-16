@@ -45,8 +45,6 @@ public class hintUpdateFragment extends Fragment {
     private ArrayAdapter<String> adapter;
     private ArrayList<String> hintStrings;
     private HintModel h;
-    private Button editBtn;
-    private Button deleteBtn;
     private String clicked;
     private String [] splitedClicked;
     //TODO check if item is selected !! it is mandatory
@@ -58,8 +56,6 @@ public class hintUpdateFragment extends Fragment {
         setRetainInstance(true);
         hintList = view.findViewById(R.id.hintList);
         addHintBtn = view.findViewById(R.id.addHintBtn);
-        editBtn = view.findViewById(R.id.editBtn);
-        deleteBtn = view.findViewById(R.id.deleteBtn);
 
         hintStrings = new ArrayList<>();
         try{

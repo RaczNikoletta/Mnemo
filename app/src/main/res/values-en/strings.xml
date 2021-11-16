@@ -98,4 +98,7 @@
     <string name="delete">Delete</string>
     <string name="peg">Peg number</string>
     <!--Fragment hint update -->
+    <!--Fragment sequence update -->
+    <string name="sequences">Your sequences</string>
+    <!--Fragment sequence update -->
 </resources>

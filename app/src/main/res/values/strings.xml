@@ -102,4 +102,7 @@
     <string name="delete">Törlés</string>
     <string name="peg">Fogas száma</string>
     <!--Fragment hint update -->
+    <!--Fragment sequence update -->
+    <string name="sequences">Számsoraid</string>
+    <!--Fragment sequence update -->
 </resources>

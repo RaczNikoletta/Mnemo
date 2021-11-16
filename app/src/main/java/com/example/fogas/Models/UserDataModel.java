@@ -24,7 +24,7 @@ public class UserDataModel extends RealmObject {
     double GameTimeInMin;
 
 
-    public UserDataModel(){}
+    public UserDataModel(){sequences = new RealmList<>();}
 
     public UserDataModel(String user,String pass){
         this.userName = user;
@@ -122,6 +122,34 @@ public class UserDataModel extends RealmObject {
 
     public void setHints(HintDataModel hints) {
         this.hints = hints;
+    }
+
+    public boolean setOneSequence(SequenceDataModel s){
+        int counter =0;
+        //check if sequence is already exists in the database
+        if(sequences == null){
+            sequences = new RealmList<>();
+        }
+        for(int i=0;i<sequences.size();i++){
+            SequenceDataModel temp = sequences.get(i);
+            if(temp!=null){
+            for(int j=0;j<temp.sequence.size();j++){
+                if(temp.sequence.size()!=s.sequence.size()){
+                    break;
+                }
+                else {
+                    assert temp.sequence.get(i) != null;
+                    if(temp.sequence.get(i).getNum() == s.sequence.get(i).getNum()){
+                        counter++;
+                    }
+                }
+            }}
+        }
+
+        if(counter < s.sequence.size()){
+            sequences.add(s);
+            return true;
+        }else return false;
     }
 
 
