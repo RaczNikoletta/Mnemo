@@ -6,11 +6,18 @@ import io.realm.annotations.PrimaryKey;
 
 public class SequenceDataModel extends RealmObject {
     UserDataModel user;
-    @PrimaryKey
-    long sequence;
+
+    RealmList<PegModel> sequence;
     RealmList<String> story;
 
 
+    public RealmList<PegModel> getSequence() {
+        return sequence;
+    }
+
+    public void setSequence(RealmList<PegModel> sequence) {
+        this.sequence = sequence;
+    }
 
     public UserDataModel getUser() {
         return user;
@@ -22,14 +29,6 @@ public class SequenceDataModel extends RealmObject {
 
     public SequenceDataModel(){}
 
-    public long getSequence() {
-        return sequence;
-    }
-
-    public void setSequence(long sequence) {
-        this.sequence = sequence;
-    }
-
     public RealmList<String> getStory() {
         return story;
     }
@@ -39,7 +38,7 @@ public class SequenceDataModel extends RealmObject {
     }
 
 
-    public SequenceDataModel(long sequence){
+    public SequenceDataModel(RealmList<PegModel> sequence){
         this.sequence = sequence;
     }
 
