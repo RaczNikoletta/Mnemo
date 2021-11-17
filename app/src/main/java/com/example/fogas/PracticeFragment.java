@@ -3,6 +3,7 @@ package com.example.fogas;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.core.content.ContextCompat;
@@ -27,6 +28,7 @@ public class PracticeFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_practice, container, false);
         view.findViewById(R.id.wordPracticeBtn).setOnClickListener(new View.OnClickListener() {
             @Override

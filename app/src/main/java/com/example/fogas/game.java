@@ -49,6 +49,7 @@ public class game extends AppCompatActivity {
     private TextView fejlec;
     private PegModel peg;
     private PegDataModel pegs;
+    private TextView teszt;
    // private final Executor executor = Executors.newSingleThreadExecutor();
 
 
@@ -282,6 +283,7 @@ public class game extends AppCompatActivity {
         letterRealm.close();
         Log.v("gamedestroy","Game activity destroyed");
     }
+
 
 
 }
