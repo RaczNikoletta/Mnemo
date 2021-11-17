@@ -1,5 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">fogas</string>
-    <string name="memoria_fogas">Memoria fogas</string>
+    <string name="memoria_fogas">Memória fogas</string>
     <string name="start">Start</string>
+    <string name="hozzaadGomb">Hozzáad</string>
+    <string name="segitsegGomb">Segítség</string>
+    <!-- Fogasok -->
+    <string name="nullas">Kérem adja meg a nullához tartozó betűt!</string>
+    <string name="egyes">Kérem adja meg az egyeshez tartozó betűt!</string>
+    <string name="kettes">Kérem adja meg a ketteshez tartozó betűt</string>
+    <string name="harmas">Kérem adja meg a hármashoz tartozó betűt</string>
+    <string name="negyes">Kérem adja meg a négyeshez tartozó betűt</string>
+    <string name="otos">Kérem adja meg az ötöshöz tartozó betűt</string>
+    <string name="hatos">Kérem adja meg a hatoshoz tartozó betűt</string>
+    <string name="hetes">Kérem adja meg a heteshez tartozó betűt</string>
+    <string name="nyolcas">Kérem adja meg a nyolcashoz tartozó betűt</string>
+    <string name="kilences">Kérem adja meg a kilenceshez tartozó betűt</string>
+    <string name="jatekrolGomb">Játékról</string>
+    <string name="segitsegSzoveg1">Az itt megadott betűk alapján tudsz a következő lépésben szavakat megadni.</string>
+    <string name="betuKerdesekHiba">Nem megfelelő formátum.</string>
+    <string name="kerdesLeiras">Találd ki melyik számnak/betűnek melyik a párja.</string>
+    <string name="feladat">Feladat</string>
+    <string name="betuKerdesekPontok">Megfelelő válaszok száma: </string>
+    <string name="kerdesgeneralasBetu">Kerem adja meg a következő számhoz tartozó betűt: </string>
+    <string name="betuHiba">Nem egy betűt adott meg</string>
+    <string name="kihagyas">Kihagyás</string>
+
+    <!-- Fogasok -->
+    <!-- Menü -->
+    <array name="menuOptions">
+        <item>Gyakorlás</item>
+        <item>Fogasok szerkeszétése</item>
+        <item>Új számsor megadása</item>
+        <item>Statisztika megtekintése</item>
+        <item>Beállítások</item>
+        <item>Tudnivalók</item>
+    </array>
+    <string name="VendegUser">Vendég</string>
+    <string name="VendegTitle">Zöldfülű</string>
+    <string name="LoginTitle">Belépés</string>
+    <string name="LogOffTitle">Kilépés</string>
+    <!-- Menü -->
+    <!-- Login -->
+    <string name="belepes">Bejelentkezés</string>
+    <string name="nevfelirat">Felhasználónév</string>
+    <string name="passwordfelirat">Jelszó</string>
+    <string name="noaccount"><u>Nem rendelkezel még fiókkal? Regisztráció</u></string>
+    <string name="notValidLogin">Nem megfelelő felhasználónév vagy jelszó!</string>
+    <!-- Menu -->
+    <!-- Register -->
+    <string name="regisztraciofelirat">Regisztráció</string>
+    <string name="passwordujrafelirat">Jelszó újra</string>
+    <string name="kuldesgomb">Küldés</string>
+    <string name="sikeresregtitle">Sikeres regisztráció</string>
+    <string name="sikeresregtext">Sikeresen regsztráltál! Tovább a belépéshez.</string>
+    <string name="useralreadyexists">Felhasználónév foglalt.</string>
+    <!-- Register -->
+
+    <!--UserTitles-->
+    <string name="feledekeny">Feledékeny</string>
+    <!--UserTitles-->
+    <!--Practice mode-->
+    <string name="fogasbetukgyak">Fogasok (betűk) gyakorlása</string>
+    <string name="fogasszavakgyak">Fogasok (szavak) gyakorlása</string>
+    <string name="fogasszamsorkgyak">Számsorok gyakorlása</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <!--Practice mode-->
+    <!--WordPracticeFragment -->
+    <string name="noPegwordsinDB">Először meg kell adnod a szavakat!</string>
+    <!--WordPracticeFragment -->
+    <!--Fragment update -->
+    <string name="setpegLetters">Betűk, szavak kezelése</string>
+    <string name="setpegHints">Segítségek kezelése</string>
+    <string name="setSequences">Számsorok kezelése</string>
+    <!--Fragment update -->
+    <!--Fragment letter update -->
+    <string name="pegnumberTV">Fogas száma</string>
+    <string name="pegletterTV">Betűje</string>
+    <string name="pegwordTV">Szava</string>
+    <string name="saveUpdates">Mentés</string>
+    <string name="loginrequest">Kérem jelentezzen be!</string>
+    <string name="loginrequest2">Ehhez a funkcióhoz be kell jelentkeznie. Szeretne bejelentkezni?</string>
+    <string name="databaseUpdated">Sikeres adatváltozatás.</string>
+    <string name="databaseUpdated2">Az adatok változatatása sikeres volt. Az oldal újra fog töltődni.</string>
+    <string name="choosePeg">Válassz számot!</string>
+    <string name="addNewPeg"><u>Új számot szeretnék megadni</u></string>
+    <string name="numberMandatory">Szám megadása kötelező!</string>
+    <string name="numberError">Kötelező egy kétjegyű számot megadni!</string>
+    <string name="letterorwordmand">Betű vagy szó megadása kötelező!</string>
+    <!--Fragment letter update -->
+    <!--Fragment hint update -->
+    <string name="checkhints">Segítségeid</string>
+    <string name="choosepeg">Kérem válassza ki a megfelelő fogast</string>
+    <string name="reminder">Emlékeztető szó</string>
+    <string name="reminderPhoto">Emlékeztető kép (Maximális méret 16MB!)</string>
+    <string name="above16mb1">The picture is above 16MB</string>
+    <string name="above16mb2">A feltöltött kép mérete nagyobb mint 16MB kérem válasszon másikat</string>
+    <string name="browse">Kép tallózása</string>
+    <string name="edit">Szerkesztés</string>
+    <string name="delete">Törlés</string>
+    <string name="peg">Fogas száma</string>
+    <!--Fragment hint update -->
+    <!--Fragment sequence update -->
+    <string name="sequences">Számsoraid</string>
+    <!--Fragment sequence update -->
 </resources>

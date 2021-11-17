@@ -1,13 +1,13 @@
 package com.example.fogas;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,25 +15,46 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.example.fogas.Models.PegDataModel;
+import com.example.fogas.Models.PegModel;
+import com.example.fogas.Models.UserDataModel;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
+import io.realm.Realm;
+import io.realm.RealmList;
 
 
 public class game extends AppCompatActivity {
-    int i=0;
+
+
+    private int i=0;
     String [] betuk = new String[10];
+    public Realm letterRealm;
     private Context mContext;
     private Activity mActivity;
-
     private ConstraintLayout mConstraintLayout;
     private Button helpButton;
-
     private PopupWindow mPopupWindow;
+    private TextView szam;
+    private TextView part;
+    private TextView hiba;
+    private TextView fejlec;
+    private PegModel peg;
+    private PegDataModel pegs;
+   // private final Executor executor = Executors.newSingleThreadExecutor();
 
 
     public static final String EXTRA_TEXT = "com.example.application.example.EXTRA_TEXT";
    
-
+ //hello
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +70,10 @@ public class game extends AppCompatActivity {
         // Get the widgets reference from XML layout
         mConstraintLayout = (ConstraintLayout) findViewById(R.id.cl);
         helpButton = (Button) findViewById(R.id.helpBtn);
+        szam = (TextView) findViewById(R.id.betu);
+        part = (TextView) findViewById(R.id.part_jelzo);
+        hiba = (TextView) findViewById(R.id.hiba);
+        fejlec = (TextView) findViewById(R.id.szam_fejlec);
 
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,49 +148,49 @@ public class game extends AppCompatActivity {
     public void kijelzo(){
         TextView fejlec = (TextView) findViewById(R.id.szam_fejlec);
         if (i == 1) {
-            fejlec.setText("Adja meg az egyhez tartozo betut");
+            fejlec.setText(getString(R.string.egyes));
         }
         if(i==2){
-            fejlec.setText("Adja meg a keteshez tartozo betut");
+            fejlec.setText(getString(R.string.kettes));
         }
         if(i==3){
-            fejlec.setText("Adja meg a harmashoz tartozo betut");
+            fejlec.setText(getString(R.string.harmas));
         }
         if(i==4){
-            fejlec.setText("Adja meg a negyeshez tartozo betut");
+            fejlec.setText(getString(R.string.negyes));
         }
         if(i==5){
-            fejlec.setText("Adja meg az otoshoz tartozo betut");
+            fejlec.setText(getString(R.string.otos));
         }
         if(i==6){
-            fejlec.setText("Adja meg a hatoshoz tartozo betut");
+            fejlec.setText(getString(R.string.hatos));
         }
         if(i==7){
-            fejlec.setText("Adja meg a heteshez tartozo betut");
+            fejlec.setText(getString(R.string.hetes));
         }
         if(i==8){
-            fejlec.setText("Adja meg a nyolcashoz tartozo betut");
+            fejlec.setText(getString(R.string.nyolcas));
         }
         if(i==9){
-            fejlec.setText("Adja meg a kilenchez tartozo betut");
+            fejlec.setText(getString(R.string.kilences));
         }
+
 
     }
 
     public void katthozzad(View view) {
 
 
-        TextView szam = (TextView) findViewById(R.id.betu);
-        TextView part = (TextView) findViewById(R.id.part_jelzo);
-        TextView hiba = (TextView) findViewById(R.id.hiba);
-        TextView fejlec = (TextView) findViewById(R.id.szam_fejlec);
-
-
         String betu= szam.getText().toString();
+        if(i==0)
+        {
+            pegs  = new PegDataModel();
+            pegs.setPegs(new RealmList<>());
+        }
         if(i<9) {
             if (betu.length() == 1 && betu.matches("[a-zA-Z]+")) {
                 betuk[i] = betu;
-
+                saveData(betu);
                 i = i + 1;
                 part.setText(i + "/9");
                kijelzo();
@@ -174,12 +199,14 @@ public class game extends AppCompatActivity {
 
 
             } else {
-                hiba.setText("Nem egy betut adott meg!");
+                hiba.setText(R.string.betuHiba);
             }
         }
         else{
             if (betu.length() == 1 && betu.matches("[a-zA-Z]+")) {
             betuk[i] = betu;
+            saveData(betu);
+            letterRealm.close();
 
             i = i + 1;
             //part.setText(i+1 + "/9");
@@ -194,7 +221,7 @@ public class game extends AppCompatActivity {
                 finish();
 
         } else {
-            hiba.setText("Nem egy betut adott meg!");
+            hiba.setText(R.string.betuHiba);
         }
 
 
@@ -207,4 +234,54 @@ public class game extends AppCompatActivity {
 
 
     }
+
+    private  void saveData (String b) {
+        letterRealm = Realm.getDefaultInstance();
+
+                letterRealm.executeTransactionAsync(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        int num;
+                        if (i == 0) {
+                            num = i;
+                        } else {
+                            num = (i - 1);
+                        }
+                        peg = new PegModel();
+                        peg.setLetter(b);
+                        peg.setNum(num);
+                        peg.setWord("");
+                        pegs.setOnePeg(peg);
+                        pegs.setUserName("");
+                        if(num== 9) {
+                            realm.insertOrUpdate(pegs);
+                        }
+                    }
+
+                }, new Realm.Transaction.OnSuccess() {
+                    @Override
+                    public void onSuccess() {
+                        //Transaction successfull
+                        //Toast.makeText(game.this, Thread.currentThread().getName(), Toast.LENGTH_LONG).show();
+                    }
+                }, new Realm.Transaction.OnError() {
+                    @Override
+                    public void onError(Throwable error) {
+                        //Transaction failed and automatically canceled
+                        String errors = error.toString();
+                        Toast.makeText(game.this, errors, Toast.LENGTH_LONG).show();
+                        letterRealm.close();
+                    }
+                });
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        letterRealm.close();
+        Log.v("gamedestroy","Game activity destroyed");
+    }
+
+
 }

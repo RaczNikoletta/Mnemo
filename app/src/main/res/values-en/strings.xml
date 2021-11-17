@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">fogas</string>
+    <string name="memoria_fogas">Peg memory</string>
+    <string name="start">Start</string>
+    <!-- Pegs -->
+    <string name="nullas">Please enter the letter for number zero!</string>
+    <string name="egyes">Please enter the letter for number one!</string>
+    <string name="kettes">Please enter the letter for number two!</string>
+    <string name="harmas">Please enter the letter for number three!</string>
+    <string name="negyes">Please enter the letter for number four!</string>
+    <string name="otos">Please enter the letter for number five!</string>
+    <string name="hatos">Please enter the letter for number six!</string>
+    <string name="hetes">Please enter the letter for number seven!</string>
+    <string name="nyolcas">Please enter the letter for number eight!</string>
+    <string name="kilences">Please enter the letter for number nine!</string>
+    <string name="hozzaadGomb">Add</string>
+    <string name="segitsegGomb">Help</string>
+    <string name="jatekrolGomb">About Game</string>
+    <string name="segitsegSzoveg1">Based on the letters you enter here, you can enter words in the next step.</string>
+    <string name="betuKerdesekHiba">Ivalid format.</string>
+    <string name = "betuKerdesekPontok">Number of right answers: </string>
+    <string name = "kerdesgeneralasBetu">Please enter the letter for the number: </string>
+    <string name="kerdesLeiras">Choose the right pair for each number/letter.</string>
+    <string name="feladat">Exercise</string>
+    <string name="betuHiba">Invalid format (a letter needed)</string>
+    <string name="kihagyas">Skip</string>
+    <!-- Pegs -->
+    <!-- Menu -->
+    <array name="menuOptions">
+        <item>Practice mode</item>
+        <item>Updating pegs, hints</item>
+        <item>New sequence</item>
+        <item>Check statistics</item>
+        <item>Settings</item>
+        <item>About</item>
+    </array>
+    <string name="VendegUser">Guest</string>
+    <string name="VendegTitle">Rookie</string>
+    <string name="LoginTitle">Login</string>
+    <string name="LogOffTitle">Log Off</string>
+    <!-- Menu -->
+    <!-- Login -->
+    <string name="belepes">Login</string>
+    <string name="nevfelirat">Username</string>
+    <string name="passwordfelirat">Password</string>
+    <string name="noaccount"><u>Don\'t have account yet? Click here to register.</u></string>
+    <string name="notValidLogin">Incorrect username or password!</string>
+    <!-- Login -->
+    <!-- Register -->
+    <string name="regisztraciofelirat">Registration</string>
+    <string name="passwordujrafelirat">Password again</string>
+    <string name="kuldesgomb">Send</string>
+    <string name="sikeresregtitle">Registration successful</string>
+    <string name="sikeresregtext">Registration was successful! Now you can log in.</string>
+    <string name="useralreadyexists">User already exists with this username.</string>
+    <!-- Register -->
+    <!--UserTitles-->
+    <string name="feledekeny">Oblivious</string>
+    <!--UserTitles-->
+    <!--Practice mode-->
+    <string name="fogasbetukgyak">Peg (letter) practice</string>
+    <string name="fogasszavakgyak">Peg (word) practice</string>
+    <string name="fogasszamsorkgyak">Sequence practice</string>
+    <!--Practice mode-->
+    <!--WordPracticeFragment -->
+    <string name="noPegwordsinDB">You have to add peg words first!</string>
+    <!--WordPracticeFragment -->
+    <!--Fragment update -->
+    <string name="setpegLetters">Update letters, words</string>
+    <string name="setpegHints">Update hints</string>
+    <string name="setSequences">Update sequences</string>
+    <!--Fragment update -->
+    <!--Fragment letter update -->
+    <string name="pegnumberTV">Number of peg</string>
+    <string name="pegletterTV">Peg letter</string>
+    <string name="pegwordTV">Peg word</string>
+    <string name="saveUpdates">Save</string>
+    <string name="loginrequest">Please log in!</string>
+    <string name="loginrequest2">You have to log in for this function. Do you want to?</string>
+    <string name="databaseUpdated">Updated successfully</string>
+    <string name="databaseUpdated2">Database updated successfully. Page will reload now.</string>
+    <string name="choosePeg">Choose a  number!</string>
+    <string name="addNewPeg"><u>I want to add a new number</u></string>
+    <string name="numberMandatory">You have to specify the number</string>
+    <string name="numberError">Peg number have to be a number between 10 and 99</string>
+    <string name="letterorwordmand">You have to specify a letter or a word!</string>
+    <!--Fragment letter update -->
+    <!--Fragment hint update -->
+    <string name="checkhints">Your hints</string>
+    <string name="choosepeg">Please choose the right peg</string>
+    <string name="reminder">Set reminder word</string>
+    <string name="reminderPhoto">Set reminder photo (Maximum 16MB!)</string>
+    <string name="above16mb1">The picture is above 16MB</string>
+    <string name="above16mb2">The picture is above 16MB, please choose another one.</string>
+    <string name="browse">Browse image</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="peg">Peg number</string>
+    <!--Fragment hint update -->
+    <!--Fragment sequence update -->
+    <string name="sequences">Your sequences</string>
+    <!--Fragment sequence update -->
+</resources>
