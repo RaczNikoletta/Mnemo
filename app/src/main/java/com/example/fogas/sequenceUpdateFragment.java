@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -48,12 +49,13 @@ public class sequenceUpdateFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_sequnce_update, container, false);
 
         sequenceListv = (ListView) view.findViewById(R.id.sequenceListv);
-        tempseq = new SequenceDataModel();
         user = new UserDataModel();
         listofs = new ArrayList<>();
         sequenceUpdateRealm = Realm.getDefaultInstance();
+        tempseq = new SequenceDataModel();
 
         try {
+            dummyseq();
         } catch (Throwable e) {
             Toast.makeText(getContext(), "makedummyexception " + e.toString(), Toast.LENGTH_LONG).show();
         }
@@ -117,6 +119,15 @@ public class sequenceUpdateFragment extends Fragment {
             tempseq.setUser(user);
             tempseq.setSequence(user.getPegs().getPegs());
             user.setOneSequence(tempseq);
+            sequenceUpdateRealm.insertOrUpdate(user);
+            for(int i=0;i<user.getPegs().getPegs().size();i++){
+                try {
+                    user.getPegs().getPegs().get(i).setWord("teszt");
+                }catch(Throwable e){
+                    Toast.makeText(getContext(),"getpegs setword error: "+e.toString(),Toast.LENGTH_LONG).show();
+                }
+            }
+
             sequenceUpdateRealm.insertOrUpdate(user);
         });
 

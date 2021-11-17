@@ -250,6 +250,7 @@ public class game extends AppCompatActivity {
                         peg = new PegModel();
                         peg.setLetter(b);
                         peg.setNum(num);
+                        peg.setWord("");
                         pegs.setOnePeg(peg);
                         pegs.setUserName("");
                         if(num== 9) {
