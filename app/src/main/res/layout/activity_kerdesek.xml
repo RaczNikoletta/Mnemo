@@ -21,7 +21,6 @@
         android:id="@+id/mehet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#1E3DEA"
         android:onClick="kezdes"
         android:text="valasz"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -87,6 +86,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/kerdes"
         app:layout_constraintVertical_bias="0.067" />
+<<<<<<< HEAD
+=======
 
     <TextView
         android:id="@+id/hibaTv"
@@ -121,4 +122,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+>>>>>>> 98091e4e71557b68ff7337cfe5a49877404f2d49
 </androidx.constraintlayout.widget.ConstraintLayout>

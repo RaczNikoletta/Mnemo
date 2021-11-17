@@ -6,6 +6,8 @@
         <entry key="..\:/Users/Gergo/AndroidStudioProjects/fogas/app/src/main/res/layout/activity_game.xml" value="0.3625" />
         <entry key="..\:/Users/Gergo/AndroidStudioProjects/fogas/app/src/main/res/layout/activity_kerdesek.xml" value="0.35052083333333334" />
         <entry key="..\:/Users/Gergo/AndroidStudioProjects/fogas/app/src/main/res/layout/activity_main.xml" value="0.33" />
+<<<<<<< HEAD
+=======
         <entry key="..\:/Users/Gergo/AndroidStudioProjects/vegleges/game_memory/app/src/main/res/layout/activity_kerdesek.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/raczn/.gradle/caches/transforms-3/8d7ef1d6da5fefe00a4f6795c2b914af/transformed/jetified-duo-navigation-drawer-3.0.0/res/layout/duo_view_footer.xml" value="0.2857142857142857" />
         <entry key="..\:/Users/raczn/.gradle/caches/transforms-3/8d7ef1d6da5fefe00a4f6795c2b914af/transformed/jetified-duo-navigation-drawer-3.0.0/res/layout/duo_view_header.xml" value="0.2857142857142857" />
@@ -42,6 +44,7 @@
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/userheader.xml" value="0.2857142857142857" />
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
+>>>>>>> 98091e4e71557b68ff7337cfe5a49877404f2d49
       </map>
     </option>
   </component>
