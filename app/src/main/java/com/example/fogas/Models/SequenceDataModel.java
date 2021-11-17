@@ -26,7 +26,13 @@ public class SequenceDataModel extends RealmObject {
         this.user = user;
     }
 
-    public SequenceDataModel(){}
+    public void setPegsFromDatabase(UserDataModel u){
+        sequence = u.getPegs().getPegs();
+        for(int i=0;i<sequence.size();i++){
+            story.add(sequence.get(i).getWord());
+        }
+    }
+    public  SequenceDataModel(){}
 
     public RealmList<String> getStory() {
         return story;
@@ -54,6 +60,27 @@ public class SequenceDataModel extends RealmObject {
                 temp = sequence.get(i);
             }
         }return temp;
+    }
+
+    public boolean isEqual(SequenceDataModel s){
+        boolean isExists = false;
+        int counter =0;
+        //check if sequence is already exists in the database
+                for(int j=0;j<sequence.size();j++){
+                    if(sequence.size()!=s.sequence.size()){
+                        break;
+                    }
+                    else {
+                        assert sequence.get(j) != null;
+                        if(sequence.get(j).getNum() == s.sequence.get(j).getNum()){
+                            counter++;
+                        }
+                    }
+                }
+
+        if(counter < s.sequence.size()){
+            return false;
+        }else return true;
     }
 
 }

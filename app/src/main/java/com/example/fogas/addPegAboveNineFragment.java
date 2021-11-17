@@ -1,6 +1,7 @@
 package com.example.fogas;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -128,10 +129,31 @@ public class addPegAboveNineFragment extends Fragment {
                         user.getPegs().setOnePeg(peg);
                         aboveNineRealm.insertOrUpdate(user);
 
+                        new AlertDialog.Builder(getContext())
+                                .setTitle(R.string.databaseUpdated)
+                                .setMessage(R.string.databaseUpdated2)
 
+                                // Specifying a listener allows you to take an action before dismissing the dialog.
+                                // The dialog is automatically dismissed when a dialog button is clicked.
+                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        try {
+                                            FragmentManager fm = getFragmentManager();
+                                            FragmentTransaction ft = fm.beginTransaction();
+                                            ft.replace(R.id.container, new letterUpdateFragment(), "letterUpdate")
+                                                    .addToBackStack(null)
+                                                    .commit();
+                                        } catch (Throwable e) {
+                                            Toast.makeText(getContext(), "Fragment change error " + e.toString(), Toast.LENGTH_LONG).show();
+                                        }
+
+                                    }
+                                })
+
+                                // A null listener allows the button to dismiss the dialog and take no further action.
+                                .setIcon(getResources().getDrawable(R.drawable.ic_baseline_done_outline_24))
+                                .show();
                     }
-
-
                     });
                 }catch(Throwable e){
                     Toast.makeText(getContext(),e.toString(),Toast.LENGTH_LONG).show();

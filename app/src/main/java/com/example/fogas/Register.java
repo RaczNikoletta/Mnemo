@@ -94,6 +94,11 @@ public class Register extends AppCompatActivity {
                         if(pegs != null) {
                             pegs.setUserName(usernameEt.getText().toString());
                             users.setPegs(pegs);
+                            registerRealm.insertOrUpdate(users);
+                        }else{
+                                PegDataModel temppegs = new PegDataModel(users.getUserName());
+                                users.setPegs(temppegs);
+                                registerRealm.insertOrUpdate(users);
                         }
 
 
