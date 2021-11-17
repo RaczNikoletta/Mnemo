@@ -80,15 +80,25 @@
     <string name="loginrequest2">You have to log in for this function. Do you want to?</string>
     <string name="databaseUpdated">Updated successfully</string>
     <string name="databaseUpdated2">Database updated successfully. Page will reload now.</string>
+    <string name="choosePeg">Choose a  number!</string>
+    <string name="addNewPeg"><u>I want to add a new number</u></string>
+    <string name="numberMandatory">You have to specify the number</string>
+    <string name="numberError">Peg number have to be a number between 10 and 99</string>
+    <string name="letterorwordmand">You have to specify a letter or a word!</string>
     <!--Fragment letter update -->
     <!--Fragment hint update -->
     <string name="checkhints">Your hints</string>
     <string name="choosepeg">Please choose the right peg</string>
     <string name="reminder">Set reminder word</string>
     <string name="reminderPhoto">Set reminder photo (Maximum 16MB!)</string>
+    <string name="above16mb1">The picture is above 16MB</string>
+    <string name="above16mb2">The picture is above 16MB, please choose another one.</string>
     <string name="browse">Browse image</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
     <string name="peg">Peg number</string>
     <!--Fragment hint update -->
+    <!--Fragment sequence update -->
+    <string name="sequences">Your sequences</string>
+    <!--Fragment sequence update -->
 </resources>

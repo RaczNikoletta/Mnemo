@@ -18,22 +18,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageButton
+            android:id="@+id/letterBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:src="@drawable/updateletters" />
+
         <TextView
             android:id="@+id/setLettersTv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/colorPrimary"
+            android:gravity="center"
             android:text="@string/setpegLetters"
-            android:textSize="30dp" />
+            android:textAlignment="center"
+            android:textSize="31dp" />
 
-        <Button
-            android:id="@+id/letterBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:text="@string/start"
-            android:textAlignment="textEnd" />
     </LinearLayout>
 
     <LinearLayout
@@ -46,21 +48,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageButton
+            android:id="@+id/hintBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:src="@drawable/updatehints" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/colorPrimary"
+            android:gravity="center"
             android:text="@string/setpegHints"
+            android:textAlignment="center"
             android:textSize="35dp" />
 
-        <Button
-            android:id="@+id/hintBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:text="@string/start"
-            android:textAlignment="textEnd" />
     </LinearLayout>
 
     <LinearLayout
@@ -74,19 +78,22 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.587">
 
+        <ImageButton
+            android:id="@+id/sequenceBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:src="@drawable/updatesequences" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="@string/setSequences"
+            android:textAlignment="textEnd"
             android:textSize="35dp" />
 
-        <Button
-            android:id="@+id/sequenceBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:text="@string/start" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

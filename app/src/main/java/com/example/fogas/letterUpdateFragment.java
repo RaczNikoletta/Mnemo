@@ -14,12 +14,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fogas.Models.PegDataModel;
 import com.example.fogas.Models.PegModel;
 import com.example.fogas.Models.UserDataModel;
+
+import java.util.ArrayList;
 
 import io.realm.Realm;
 import io.realm.RealmList;
@@ -41,6 +47,16 @@ public class letterUpdateFragment extends Fragment {
     private String let;
     private String word;
     private int[] ids;
+    private ArrayList<String> pegAboveNine;
+    private Spinner aboveNineSpinner;
+    private EditText pegLetterAboveNineEt;
+    private EditText pegWordAboveNineEt;
+    private  ArrayAdapter<String> pegAdapter;
+    private PegDataModel pegmodelAboveNine;
+    private RealmList pegRealmListAboveNine;
+    private PegModel tempAboveNine;
+    private String selectedFromSpinner;
+    private TextView newNumberTv;
 
     public letterUpdateFragment() {
         // Required empty public constructor
@@ -65,9 +81,91 @@ public class letterUpdateFragment extends Fragment {
                 R.id.pegletterTv9, R.id.pegwordTv0, R.id.pegwordTv1, R.id.pegwordTv2, R.id.pegwordTv3, R.id.pegwordTv4, R.id.pegwordTv5,
                 R.id.pegwordTv6, R.id.pegwordTv7, R.id.pegwordTv8, R.id.pegwordTv9};
 
-        if (savedInstanceState != null) {
+        /*private ArrayList<String> pegAboveNine;
+        private Spinner aboveNineSpinner;
+        private EditText pegLetterAboveNineEt;
+        private EditText pegWordAboveNineEt;
+        private  ArrayAdapter<String> pegAdapter;*/
 
+        pegAboveNine = new ArrayList<>();
+        aboveNineSpinner = (Spinner) view.findViewById(R.id.aboveNineSpinner);
+        pegLetterAboveNineEt = (EditText) view.findViewById(R.id.pegLetterAboveNineEt);
+        pegWordAboveNineEt = (EditText) view.findViewById(R.id.pegWordAboveNineEt);
+        newNumberTv = (TextView) view.findViewById(R.id.newNumberTv);
+
+
+        try{
+            updaterRealm = Realm.getDefaultInstance();
+            user = updaterRealm.where(UserDataModel.class).equalTo("loggedIn",true).findFirst();
+            if(user != null){
+                pegmodelAboveNine = updaterRealm.where(PegDataModel.class).equalTo("userName",user.getUserName()).findFirst();
+                if(pegmodelAboveNine != null){
+                    pegRealmListAboveNine = pegmodelAboveNine.getPegs();
+                    for(int i=0;i<pegRealmListAboveNine.size();i++){
+                        tempAboveNine = new PegModel();
+                        tempAboveNine = (PegModel) pegRealmListAboveNine.get(i);
+                        if(tempAboveNine!=null) {
+                            if(tempAboveNine.getNum()>9) {
+                                try {
+                                    pegAboveNine.add(String.valueOf(tempAboveNine.getNum()));
+                                }catch(Throwable e){
+                                    Toast.makeText(getContext(),"for loop add: " + i +" "+e.toString(),Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        }catch (Throwable e){
+            Toast.makeText(getContext(),e.toString(),Toast.LENGTH_LONG).show();
         }
+        pegAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1,pegAboveNine);
+        aboveNineSpinner.setAdapter(pegAdapter);
+
+        view.findViewById(R.id.newNumberTv).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.container, new addPegAboveNineFragment(), "addPegAboveNine")
+                        .addToBackStack(null)
+                        .commit();
+
+            }
+        });
+
+        ((Spinner) view.findViewById(R.id.aboveNineSpinner)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View v, int position, long l) {
+                selectedFromSpinner = aboveNineSpinner.getSelectedItem().toString();
+                for(int i=0;i<pegRealmListAboveNine.size();i++) {
+                    tempAboveNine = new PegModel();
+                    tempAboveNine = (PegModel) pegRealmListAboveNine.get(i);
+                    if (tempAboveNine != null) {
+                        if(tempAboveNine.getNum() == Integer.parseInt(selectedFromSpinner))
+                        {
+                            if(tempAboveNine.getLetter() == null){
+                                pegLetterAboveNineEt.setText("");
+                            }else{
+                            pegLetterAboveNineEt.setText(tempAboveNine.getLetter());}
+                            if(tempAboveNine.getWord() == null) {
+                                pegWordAboveNineEt.setText("");
+                            }else{
+                            pegWordAboveNineEt.setText(tempAboveNine.getWord());}
+                        }
+                    }
+                }
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
 
         PegModel p;
         try {
@@ -79,6 +177,7 @@ public class letterUpdateFragment extends Fragment {
                     pegs = peg.getPegs();
                     //set rows from database
                     for (int i = 0; i < pegs.size(); i++) {
+                        if(pegs.get(i).getNum()<10){
                         p = pegs.get(i);
                         eLetter = view.findViewById(ids[i]);
                         eWord = view.findViewById(ids[i + 10]);
@@ -90,7 +189,7 @@ public class letterUpdateFragment extends Fragment {
                             eWord.setText("");
                         }
 
-                    }
+                    }}
                 } else {
                     Toast.makeText(getContext(), "PegDataModel query returned null object (letterUpdateFragment.java function startQuery())", Toast.LENGTH_LONG).show();
                 }

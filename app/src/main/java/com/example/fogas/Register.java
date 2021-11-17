@@ -20,12 +20,14 @@ import com.example.fogas.Models.HintDataModel;
 import com.example.fogas.Models.PegDataModel;
 import com.example.fogas.Models.PegModel;
 import com.example.fogas.Models.ProgressDataModel;
+import com.example.fogas.Models.SequenceDataModel;
 import com.example.fogas.Models.UserDataModel;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
@@ -82,6 +84,7 @@ public class Register extends AppCompatActivity {
                     newUser.setRegistryDate(new Date());
                     newUser.setHints(new HintDataModel(usernameEt.getText().toString()));
                     newUser.setProgress(new ProgressDataModel(usernameEt.getText().toString()));
+                    newUser.setSequences(new RealmList<SequenceDataModel>());
                     newUser.setTitle(getResources().getString(R.string.feledekeny));
                     registerRealm.insertOrUpdate(newUser);
                     //check if registration was successful

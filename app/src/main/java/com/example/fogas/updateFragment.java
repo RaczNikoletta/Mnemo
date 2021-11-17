@@ -81,6 +81,26 @@ public class updateFragment extends Fragment {
         }
     });
 
+        view.findViewById(R.id.sequenceBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try{
+                    if (userLogged != null) {
+                        FragmentManager fm = getFragmentManager();
+                        FragmentTransaction ft = fm.beginTransaction();
+                        ft.replace(R.id.container, new sequenceUpdateFragment(),"sequenceUpdate")
+                                .addToBackStack(null)
+                                .commit();
+
+                    }
+                } catch (Throwable e) {
+                    Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+        });
+
 
         // Inflate the layout for this fragment
         return view;
