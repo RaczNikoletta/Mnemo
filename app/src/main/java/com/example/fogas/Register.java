@@ -2,14 +2,18 @@ package com.example.fogas;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,12 +27,10 @@ import com.example.fogas.Models.ProgressDataModel;
 import com.example.fogas.Models.SequenceDataModel;
 import com.example.fogas.Models.UserDataModel;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 import io.realm.Realm;
 import io.realm.RealmList;
-import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
 public class Register extends AppCompatActivity {
@@ -39,6 +41,7 @@ public class Register extends AppCompatActivity {
     private Button sendRegisterBtn;
     private Context context;
     private TextView alreadyExists;
+    private int requestId =99;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,7 @@ public class Register extends AppCompatActivity {
         sendRegisterBtn = (Button) findViewById(R.id.sendRegisterBtn);
         alreadyExists = (TextView) findViewById(R.id.alreadyExists);
         context = this;
+
 
 
     }
@@ -78,27 +82,55 @@ public class Register extends AppCompatActivity {
                             .setIcon(getResources().getDrawable(R.drawable.ic_baseline_error_24))
                             .show();
                 }else {
-                    UserDataModel newUser = new UserDataModel();
-                    newUser.setUserName(usernameEt.getText().toString());
-                    newUser.setPassword(passwordregEt.getText().toString());
-                    newUser.setRegistryDate(new Date());
-                    newUser.setHints(new HintDataModel(usernameEt.getText().toString()));
-                    newUser.setProgress(new ProgressDataModel(usernameEt.getText().toString()));
-                    newUser.setSequences(new RealmList<SequenceDataModel>());
-                    newUser.setTitle(getResources().getString(R.string.feledekeny));
-                    registerRealm.insertOrUpdate(newUser);
+                    try {
+                        UserDataModel newUser = new UserDataModel();
+                        newUser.setUserName(usernameEt.getText().toString());
+                        newUser.setPassword(passwordregEt.getText().toString());
+                        newUser.setRegistryDate(new Date());
+                        newUser.setHints(new HintDataModel(usernameEt.getText().toString()));
+                        newUser.setProgress(new ProgressDataModel(usernameEt.getText().toString()));
+                        newUser.setSequences(new RealmList<SequenceDataModel>());
+                        newUser.setTitle(getResources().getString(R.string.feledekeny));
+                        newUser.setPegs(new PegDataModel());
+                        newUser.getPegs().setUserName("xxxxxxxxxx");
+                        registerRealm.insertOrUpdate(newUser);
+                    }catch(Throwable e){
+                        Toast.makeText(this,"phase one" +e.toString(),Toast.LENGTH_LONG).show();
+                    }
                     //check if registration was successful
                     UserDataModel users = registerRealm.where(UserDataModel.class).equalTo("userName", usernameEt.getText().toString()).findFirst();
                     if (users != null) {
                         PegDataModel pegs = registerRealm.where(PegDataModel.class).equalTo("userName","").findFirst();
                         if(pegs != null) {
-                            pegs.setUserName(usernameEt.getText().toString());
-                            users.setPegs(pegs);
-                            registerRealm.insertOrUpdate(users);
-                        }else{
-                                PegDataModel temppegs = new PegDataModel(users.getUserName());
-                                users.setPegs(temppegs);
+                            try {
+                                pegs.setUserName(usernameEt.getText().toString());
+                                users.setPegs(pegs);
                                 registerRealm.insertOrUpdate(users);
+                                PegDataModel nullPegs = registerRealm.where(PegDataModel.class).equalTo("userName","xxxxxxxxxx").findFirst();
+                                nullPegs.deleteFromRealm();
+                            }catch (Throwable e){
+                                Toast.makeText(this,"phase two" +e.toString(),Toast.LENGTH_LONG).show();
+                            }
+                        }else{
+                            try {
+                                PegDataModel temppegs = new PegDataModel(users.getUserName());
+                                 PegModel temppeg = new PegModel();
+                                 temppeg.setNum(0);
+                                 temppeg.setLetter("");
+                                 temppeg.setWord("");
+                                 registerRealm.insertOrUpdate(temppeg);
+                                 temppegs.setOnePeg(temppeg);
+                                 temppegs.setUserName(users.getUserName());
+                                registerRealm.insertOrUpdate(temppegs);
+                                users.setPegs(temppegs);
+                                registerRealm.insertOrUpdate(users);//xxxxxxxxxx
+                                RealmResults<PegDataModel> nullPegs = registerRealm.where(PegDataModel.class).equalTo("userName","xxxxxxxxxx").findAll();
+                                nullPegs.deleteAllFromRealm();
+                                registerRealm.insertOrUpdate(nullPegs);
+
+                            }catch (Throwable e){
+                                Toast.makeText(this,"phase three" +e.toString(),Toast.LENGTH_LONG).show();
+                            }
                         }
 
 
@@ -115,6 +147,8 @@ public class Register extends AppCompatActivity {
                                 // The dialog is automatically dismissed when a dialog button is clicked.
                                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
+
+
                                         startActivity(new Intent(context, Login.class));
                                     }
                                 })
@@ -137,6 +171,7 @@ public class Register extends AppCompatActivity {
     }
 }
 
-
-
 }
+
+
+

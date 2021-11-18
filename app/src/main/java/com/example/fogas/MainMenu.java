@@ -1,5 +1,6 @@
 package com.example.fogas;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -56,6 +57,7 @@ public class MainMenu extends AppCompatActivity implements DuoMenuView.OnMenuCli
         setContentView(R.layout.activity_main_menu);
         mTitles = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.menuOptions)));
         cont = this;
+
 
 
         // Initialize the views

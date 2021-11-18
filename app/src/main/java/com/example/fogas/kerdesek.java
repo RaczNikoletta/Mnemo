@@ -2,6 +2,7 @@ package com.example.fogas;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +23,7 @@ public class kerdesek extends AppCompatActivity {
     private int bevIfInt;
     private String tempPontokString;
     private Button skipBtn;
+    NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
 
     String [] valaszok = new String[20];

@@ -21,6 +21,7 @@
     <string name="betuKerdesekHiba">Ivalid format.</string>
     <string name = "betuKerdesekPontok">Number of right answers: </string>
     <string name = "kerdesgeneralasBetu">Please enter the letter for the number: </string>
+    <string name="kerdesgeneralasSzo">Please enter the word for the number: </string>
     <string name="kerdesLeiras">Choose the right pair for each number/letter.</string>
     <string name="feladat">Exercise</string>
     <string name="betuHiba">Invalid format (a letter needed)</string>
@@ -122,4 +123,9 @@
     <!--Fragment sequence update -->
     <string name="sequences">Your sequences</string>
     <!--Fragment sequence update -->
+    <!--Push notification-->
+    <string name="timeToPractice">"It's time to practice!"</string>
+    <string name="timeToPractice2">"You need to recall what you learned so far"</string>
+    <string name="addNewPegs">"You have few pegs, let's add some"</string>
+    <!--Push notification -->
 </resources>
