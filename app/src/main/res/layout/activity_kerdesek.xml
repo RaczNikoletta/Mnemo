@@ -86,8 +86,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/kerdes"
         app:layout_constraintVertical_bias="0.067" />
-<<<<<<< HEAD
-=======
 
     <TextView
         android:id="@+id/hibaTv"
@@ -122,5 +120,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
->>>>>>> 98091e4e71557b68ff7337cfe5a49877404f2d49
+
 </androidx.constraintlayout.widget.ConstraintLayout>

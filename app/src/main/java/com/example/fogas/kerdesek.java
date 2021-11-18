@@ -13,12 +13,6 @@ import java.util.Collections;
 
 
 public class kerdesek extends AppCompatActivity {
-<<<<<<< HEAD
-    int []kieset_szam = new int[10];
-    int []kieset_betu = new int[10];
-    int kieset_szamok_szama=0;
-    int kieset_betuk_szama=0;
-=======
     int [] sorrend=new int[21];
     int index = 0;
     ArrayList<Integer> mylist = new ArrayList<Integer>();
@@ -37,40 +31,26 @@ public class kerdesek extends AppCompatActivity {
 
 
 
->>>>>>> 98091e4e71557b68ff7337cfe5a49877404f2d49
 
     public String kerdes(int szam){
         String vege="";
-        if(szam==0){
+        if(szam==0 || szam==2 || szam==3 || szam==5 ||szam==6 || szam==8){
             vege = "-hoz";
         }
-        if(szam==1){
+        if(szam==1 || szam==4 ||szam==7 ||szam==9){
             vege = "-hez";
         }
-        if(szam==2){
-            vege = "-hoz";
+        return vege;
+    }
+
+    public String kerdes2(int szam){
+        String vege="";
+        if(szam==0 || szam==2 ||szam==3||szam==4||szam==6 ||szam==7||szam==8||szam==9){
+            vege = "a";
         }
-        if(szam==3){
-            vege = "-hoz";
+        if(szam==1 ||szam==5){
+            vege = "az";
         }
-<<<<<<< HEAD
-        if(szam==4){
-            vege = "-hez";
-        }
-        if(szam==5){
-            vege = "-hoz";
-        }
-        if(szam==6){
-            vege = "-hoz";
-        }
-        if(szam==7){
-            vege = "-hez";
-        }
-        if(szam==8){
-            vege = "-hoz";
-        }
-        if(szam==9){
-=======
         return vege;
     }
     public String kerdes3(String betu){
@@ -101,14 +81,11 @@ public class kerdesek extends AppCompatActivity {
                 betu.equalsIgnoreCase("L")||betu.equalsIgnoreCase("M")||betu.equalsIgnoreCase("N")||betu.equalsIgnoreCase("P")||
                 betu.equalsIgnoreCase("R")||betu.equalsIgnoreCase("S")||betu.equalsIgnoreCase("T")||betu.equalsIgnoreCase("V")||
                 betu.equalsIgnoreCase("W")||betu.equalsIgnoreCase("X")||betu.equalsIgnoreCase("Z")){
->>>>>>> 98091e4e71557b68ff7337cfe5a49877404f2d49
             vege = "-hez";
         }
-
-
-
         return vege;
     }
+
 
 
     @Override
@@ -138,19 +115,9 @@ public class kerdesek extends AppCompatActivity {
 
 
 
-        int betu_szamolo=0;
-        int szam_szamolo=0;
 
+    }
 
-<<<<<<< HEAD
-
-        for(int i =0;i<20;i++){
-            int vagy = (int)Math.floor(Math.random()*(1-0+1)+0);
-            int hanyadik;
-            if(vagy==0 && szam_szamolo!=10){
-                //ha 0 akkor betu
-                hanyadik = (int)Math.floor(Math.random()*(9-0+1)+0);
-=======
 
     public void kezdes(View view) {
         TextView bevitel = (TextView) findViewById(R.id.bevitel);
@@ -160,12 +127,11 @@ public class kerdesek extends AppCompatActivity {
         //check if bev is an integer to prevent parseint exception  43w
         if(isInteger(bev))
         {
-          bevIfInt = Integer.parseInt(bev);
+            bevIfInt = Integer.parseInt(bev);
         }
         //int bevIfInt = Integer.parseInt(bev);
 
         if (bevitel.length() == 1 && ((bev.matches("[a-zA-Z]+")) || (bevIfInt <= 9 && bevIfInt >=0))){
->>>>>>> 98091e4e71557b68ff7337cfe5a49877404f2d49
 
 
             if(index<20) {
@@ -175,20 +141,7 @@ public class kerdesek extends AppCompatActivity {
                     helyes_valaszok[i] = betuk[i];
                 }
 
-                betu_szamolo = betu_szamolo+1;
 
-
-<<<<<<< HEAD
-
-            }
-            else{
-                //ha 1 akkor szam
-                szam_szamolo = szam_szamolo+1;
-
-
-
-
-=======
                 for(int i=10;i<20;i++){
                     helyes_valaszok[i]= String.valueOf(i-10);
                 }
@@ -230,7 +183,6 @@ public class kerdesek extends AppCompatActivity {
            String teszteles = "";
             for(int i =0;i<20;i++){
                 teszteles = teszteles+ i+". "+helyes_valaszok[i]+"="+valaszok[i]+"\n";
->>>>>>> 98091e4e71557b68ff7337cfe5a49877404f2d49
             }
             teszt.setText(teszteles);
 
@@ -242,59 +194,6 @@ public class kerdesek extends AppCompatActivity {
 
 
 
-<<<<<<< HEAD
-        }
-
-    }
-
-    public void kezdes(View view) {
-
-        TextView text1 = (TextView) findViewById(R.id.textView);
-        text1.setVisibility(View.INVISIBLE);
-        TextView text2 = (TextView) findViewById(R.id.textView2);
-        text2.setVisibility(View.INVISIBLE);
-        TextView gomb = (TextView) findViewById(R.id.mehet);
-        gomb.setText("Valasz");
-        TextView bevitel = (TextView) findViewById(R.id.bevitel);
-        bevitel.setVisibility(View.VISIBLE);
-        Intent intent  = getIntent();
-        String [] betuk = intent.getStringArrayExtra("chars");
-        TextView kerdes = (TextView) findViewById(R.id.kerdes);
-
-
-        Random rand = new Random();
-        int betu_vagy_szam =(int)Math.floor(Math.random()*(1-0+1)+0);
-        //ha betu 1 ha szam 0
-        int nullatol_kilencig =(int)Math.floor(Math.random()*(9-0+1)+0);
-
-        if(betu_vagy_szam==1){
-            kerdes.setText("Melyik betu tartozik a "+ nullatol_kilencig+kerdes(nullatol_kilencig)+"?");
-            kieset_betu[kieset_szamok_szama] = nullatol_kilencig;
-
-
-            kieset_betuk_szama= kieset_szamok_szama+1;
-            if(betuk[nullatol_kilencig].equals(bevitel.getText().toString())){
-
-            }
-
-
-        }
-        else if(betu_vagy_szam==0){
-            kerdes.setText("masik ag");
-            kieset_szam[kieset_szamok_szama] = nullatol_kilencig;
-
-
-            kieset_szamok_szama= kieset_szamok_szama+1;
-        }
-
-
-
-
-
-
-
-
-=======
 
 
 
@@ -320,7 +219,7 @@ public class kerdesek extends AppCompatActivity {
 
 
         }else
-            {
+        {
             hibaTv.setText((getString(R.string.betuKerdesekHiba)));
         }
 
@@ -328,55 +227,55 @@ public class kerdesek extends AppCompatActivity {
     }
 
     public void megjelenites(View view) {
-            if(futas==0){
-                TextView gomb2 = (TextView) findViewById(R.id.mehet2);
-                gomb2.setText("Kerdes generalasa");
+        if(futas==0){
+            TextView gomb2 = (TextView) findViewById(R.id.mehet2);
+            gomb2.setText("Kerdes generalasa");
 
 
-                TextView text1 = (TextView) findViewById(R.id.textView);
-                text1.setVisibility(View.INVISIBLE);
-                TextView text2 = (TextView) findViewById(R.id.textView2);
-                text2.setVisibility(View.INVISIBLE);
+            TextView text1 = (TextView) findViewById(R.id.textView);
+            text1.setVisibility(View.INVISIBLE);
+            TextView text2 = (TextView) findViewById(R.id.textView2);
+            text2.setVisibility(View.INVISIBLE);
 
 
 
             futas = futas +1;
+        }
+        else{
+            TextView gomb2 = (TextView) findViewById(R.id.mehet2);
+            gomb2.setVisibility(View.INVISIBLE);
+            TextView bevitel = (TextView) findViewById(R.id.bevitel);
+            bevitel.setVisibility(View.VISIBLE);
+            TextView gomb = (TextView) findViewById(R.id.mehet);
+            gomb.setVisibility(View.VISIBLE);
+            Intent intent = getIntent();
+            String[] betuk = intent.getStringArrayExtra("chars");
+            TextView kerdes = (TextView) findViewById(R.id.kerdes);
+
+
+            //TODO keredesek generálására egy külön függvény?
+            String[] kerdesek = new String[20];
+
+            for (int i = 0; i < 10; i++) {
+                //melyik betu tartozik + a/az + "" + szam + hoz/hez
+                kerdesek[i] = "Melyik betu tartozik " + kerdes2(i) + " " + i + kerdes(i) + "?";
+                kerdesek[i] = (getString(R.string.kerdesgeneralasBetu)) + i;
             }
-            else{
-                TextView gomb2 = (TextView) findViewById(R.id.mehet2);
-                gomb2.setVisibility(View.INVISIBLE);
-                TextView bevitel = (TextView) findViewById(R.id.bevitel);
-                bevitel.setVisibility(View.VISIBLE);
-                TextView gomb = (TextView) findViewById(R.id.mehet);
-                gomb.setVisibility(View.VISIBLE);
-                Intent intent = getIntent();
-                String[] betuk = intent.getStringArrayExtra("chars");
-                TextView kerdes = (TextView) findViewById(R.id.kerdes);
 
+            for (int i = 10; i < 20; i++) {
+                kerdesek[i] =
+                        "Melyik szam tatozik " + kerdes3(betuk[i - 10].toUpperCase()) + " "
+                                + betuk[i - 10].toUpperCase() + kerdes4(betuk[i - 10].toUpperCase()) + "?";
 
-                //TODO keredesek generálására egy külön függvény?
-                String[] kerdesek = new String[20];
+            }
 
-                for (int i = 0; i < 10; i++) {
-                    //melyik betu tartozik + a/az + "" + szam + hoz/hez
-                    kerdesek[i] = "Melyik betu tartozik " + kerdes2(i) + " " + i + kerdes(i) + "?";
-                    kerdesek[i] = (getString(R.string.kerdesgeneralasBetu)) + i;
-                }
-
-                for (int i = 10; i < 20; i++) {
-                    kerdesek[i] =
-                            "Melyik szam tatozik " + kerdes3(betuk[i - 10].toUpperCase()) + " "
-                                    + betuk[i - 10].toUpperCase() + kerdes4(betuk[i - 10].toUpperCase()) + "?";
-
-                }
-
-                kerdes.setText(kerdesek[sorrend[index]]);
-                //valaszok[sorrend[index]]= bevitel.getText().toString();
+            kerdes.setText(kerdesek[sorrend[index]]);
+            //valaszok[sorrend[index]]= bevitel.getText().toString();
 
 
 
-                TextView teszt = (TextView) findViewById(R.id.hibaTv);
-                teszt.setVisibility(View.VISIBLE);
+            TextView teszt = (TextView) findViewById(R.id.hibaTv);
+            teszt.setVisibility(View.VISIBLE);
                 /*
                 String teszteles = "";
                 for(int i =0;i<20;i++){
@@ -386,7 +285,7 @@ public class kerdesek extends AppCompatActivity {
                 */
 
 
-            }
+        }
 
 
 
@@ -414,6 +313,5 @@ public class kerdesek extends AppCompatActivity {
     public void skipQuestions(View v){
         startActivity(new Intent(this,MainMenu.class));
         finish();
->>>>>>> 98091e4e71557b68ff7337cfe5a49877404f2d49
     }
 }
