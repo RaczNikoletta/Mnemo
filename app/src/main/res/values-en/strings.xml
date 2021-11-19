@@ -55,6 +55,7 @@
     <string name="sikeresregtitle">Registration successful</string>
     <string name="sikeresregtext">Registration was successful! Now you can log in.</string>
     <string name="useralreadyexists">User already exists with this username.</string>
+    <string name="passwordsnotequal">Passwords are not the same!</string>
     <!-- Register -->
     <!--UserTitles-->
     <string name="feledekeny">Oblivious</string>

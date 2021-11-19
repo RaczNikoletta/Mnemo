@@ -37,6 +37,7 @@ public class PegDataModel extends RealmObject {
 
     public PegDataModel(){}
 
+
     public String getUserName() {
         return userName;
     }
@@ -48,12 +49,6 @@ public class PegDataModel extends RealmObject {
     public PegDataModel(String u){
         userName = u;
         pegs = new RealmList<>();
-        for(int i=0;i<9;i++){
-            PegModel temppeg = new PegModel();
-            temppeg.setNum(i);
-            temppeg.setLetter("");
-            temppeg.setWord("");
-        }
     }
 
 

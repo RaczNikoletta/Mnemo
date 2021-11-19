@@ -56,6 +56,7 @@
     <string name="sikeresregtitle">Sikeres regisztráció</string>
     <string name="sikeresregtext">Sikeresen regsztráltál! Tovább a belépéshez.</string>
     <string name="useralreadyexists">Felhasználónév foglalt.</string>
+    <string name="passwordsnotequal">Jelszavak nem egyeznek!</string>
     <!-- Register -->
 
     <!--UserTitles-->
