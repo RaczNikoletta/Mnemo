@@ -19,6 +19,8 @@ public class UserDataModel extends RealmObject {
     ProgressDataModel progress;
     RealmList<SequenceDataModel> sequences;
 
+    int pegId;
+
     HintDataModel hints;
     Date registryDate;
     double GameTimeInMin;
@@ -30,9 +32,9 @@ public class UserDataModel extends RealmObject {
         this.userName = user;
         this.password = pass;
         registryDate = new Date();
-        pegs = new PegDataModel();
+        pegs = new PegDataModel(user);
         sequences = new RealmList<SequenceDataModel>();
-        hints = new HintDataModel();
+        hints = new HintDataModel(user);
         GameTimeInMin = 0;
         loggedIn = false;
 
@@ -150,6 +152,15 @@ public class UserDataModel extends RealmObject {
             sequences.add(s);
             return true;
         }else return false;
+    }
+
+
+    public int getPegId() {
+        return pegId;
+    }
+
+    public void setPegId(int pegId) {
+        this.pegId = pegId;
     }
 
 

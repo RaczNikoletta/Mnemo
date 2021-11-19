@@ -37,7 +37,6 @@ public class HintDataModel extends RealmObject {
         for(int i=0;i<hints.size();i++) {
             if (hints.get(i).getPegnum() == hint.getPegnum()) {
                 isExist = true;
-                hints.get(i).setHint(hint.hint);
                 hints.get(i).setImage(hint.image);
             }
         }if(!isExist){

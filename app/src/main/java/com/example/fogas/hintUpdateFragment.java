@@ -2,14 +2,19 @@ package com.example.fogas;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fogas.Models.HintDataModel;
@@ -69,7 +75,7 @@ public class hintUpdateFragment extends Fragment {
                         h = new HintModel();
                         h = (HintModel) hintRealmList.get(i);
                         if(h!=null) {
-                            hintStrings.add(h.getPegnum()+"     "+h.getHint());
+                            hintStrings.add(h.getPegnum()+" ");
                         }
                     }
                 }
@@ -79,7 +85,21 @@ public class hintUpdateFragment extends Fragment {
             Toast.makeText(getContext(),e.toString(),Toast.LENGTH_LONG).show();
         }
         //set ListView
-        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1,hintStrings);
+        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1,hintStrings){
+            @NonNull
+            @Override
+            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                TextView text = (TextView) view.findViewById(android.R.id.text1);
+                if (hintStrings.size()>=1){
+                    text.setTextColor(Color.WHITE);
+                    text.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    text.setTypeface(text.getTypeface(), Typeface.BOLD);
+                    text.setTextSize(TypedValue.COMPLEX_UNIT_DIP,20);
+                }
+                return view;
+            }
+        };
         hintList.setAdapter(adapter);
         hintList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

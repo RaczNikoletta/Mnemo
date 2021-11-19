@@ -127,6 +127,7 @@
     <!--Fragment hint update -->
     <!--Fragment sequence update -->
     <string name="sequences">Számsoraid</string>
+    <string name="storyTv">Történet</string>
     <!--Fragment sequence update -->
     <!--Push notification-->
     <string name="timeToPractice">"ELjött az idő a gyakorlásra!"</string>

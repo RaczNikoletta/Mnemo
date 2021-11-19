@@ -123,6 +123,7 @@
     <!--Fragment hint update -->
     <!--Fragment sequence update -->
     <string name="sequences">Your sequences</string>
+    <string name="storyTv">Story</string>
     <!--Fragment sequence update -->
     <!--Push notification-->
     <string name="timeToPractice">"It's time to practice!"</string>

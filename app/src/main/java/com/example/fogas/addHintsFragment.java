@@ -70,7 +70,6 @@ public class addHintsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_hints, container, false);
         pegSpinner = view.findViewById(R.id.pegSpinner2);
-        hintStringEt = view.findViewById(R.id.hintStringEt);
         browseBtn = view.findViewById(R.id.browseBtn);
         saveHintsBtn = view.findViewById(R.id.saveHintsBtn);
         imageView = view.findViewById(R.id.imageView);
@@ -148,7 +147,6 @@ public class addHintsFragment extends Fragment {
                             try {
                                 hint = new HintModel();
                                 hint.setPegnum(Integer.parseInt(pegSpinner.getSelectedItem().toString()));
-                                hint.setHint(hintStringEt.getText().toString());
                                 hint.setImage(byteArray);
                                 addRealm.insertOrUpdate(addRealm.copyToRealmOrUpdate(hint));
                             }catch (Throwable e){

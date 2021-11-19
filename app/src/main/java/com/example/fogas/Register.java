@@ -146,34 +146,24 @@ public class Register extends AppCompatActivity {
                             .setIcon(getResources().getDrawable(R.drawable.ic_baseline_error_24))
                             .show();
                 }
-                else{
+                else {
                     try {
-                        UserDataModel newUser = new UserDataModel();
-                        newUser.setUserName(usernameEt.getText().toString());
-                        newUser.setPassword(passwordregEt.getText().toString());
-                        newUser.setRegistryDate(new Date());
-                        newUser.setHints(new HintDataModel(usernameEt.getText().toString()));
-                        newUser.setProgress(new ProgressDataModel(usernameEt.getText().toString()));
-                        newUser.setSequences(new RealmList<SequenceDataModel>());
+                        UserDataModel newUser = new UserDataModel(usernameEt.getText().toString(), passwordregagEt.getText().toString());
                         newUser.setTitle(getResources().getString(R.string.feledekeny));
-                        newUser.setPegs(new PegDataModel(usernameEt.getText().toString()));
+                        for(int i=0;i<10;i++){
+                            PegModel p =new PegModel();
+                            p.setNum(i);
+                            p.setLetter("");
+                            p.setWord("");
+                            registerRealm.insertOrUpdate(p);
+                            newUser.getPegs().setOnePeg(p);
+                        }
                         registerRealm.insertOrUpdate(newUser);
-                    }catch(Throwable e){
-                        Toast.makeText(this,"phase one" +e.toString(),Toast.LENGTH_LONG).show();
+                    } catch (Throwable e) {
+                        Toast.makeText(this, "phase one" + e.toString(), Toast.LENGTH_LONG).show();
                     }
                     //check if registration was successful
                     UserDataModel users = registerRealm.where(UserDataModel.class).equalTo("userName", usernameEt.getText().toString()).findFirst();
-                    if (users != null) {
-                        PegDataModel pegs = registerRealm.where(PegDataModel.class).equalTo("userName","").findFirst();
-                        if(pegs != null) {
-                            try {
-                                pegs.setUserName(usernameEt.getText().toString());
-                                users.setPegs(pegs);
-                                registerRealm.insertOrUpdate(users);
-                            } catch (Throwable e) {
-                                Toast.makeText(this, "phase two" + e.toString(), Toast.LENGTH_LONG).show();
-                            }
-                        }
 
 
 
@@ -200,7 +190,6 @@ public class Register extends AppCompatActivity {
                                 .setIcon(getResources().getDrawable(R.drawable.ic_baseline_done_outline_24))
                                 .show();
                     }
-                }
             });
         }catch(Throwable e){
             String error = e.toString();

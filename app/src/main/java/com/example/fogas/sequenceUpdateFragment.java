@@ -1,12 +1,17 @@
 package com.example.fogas;
 
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fogas.Models.PegDataModel;
@@ -55,7 +61,7 @@ public class sequenceUpdateFragment extends Fragment {
         tempseq = new SequenceDataModel();
 
         try {
-            dummyseq();
+            //dummyseq();
         } catch (Throwable e) {
             Toast.makeText(getContext(), "makedummyexception " + e.toString(), Toast.LENGTH_LONG).show();
         }
@@ -77,7 +83,21 @@ public class sequenceUpdateFragment extends Fragment {
             Toast.makeText(getContext(), "create list" + " " + e.toString(), Toast.LENGTH_LONG).show();
         }
         try {
-            adapterofs = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, listofs);
+            adapterofs = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, listofs){
+                @NonNull
+                @Override
+                public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                    View view = super.getView(position, convertView, parent);
+                    TextView text = (TextView) view.findViewById(android.R.id.text1);
+                    if (listofs.size()>=1){
+                        text.setTextColor(Color.WHITE);
+                        text.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                        text.setTypeface(text.getTypeface(), Typeface.BOLD);
+                        text.setTextSize(TypedValue.COMPLEX_UNIT_DIP,20);
+                    }
+                    return view;
+                }
+            };
             sequenceListv.setAdapter(adapterofs);
         } catch (Throwable e) {
             Toast.makeText(getContext(), "adapterset exception " + e.toString(), Toast.LENGTH_LONG).show();
