@@ -2,6 +2,7 @@ package com.example.fogas;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -127,7 +128,7 @@ public class kerdesek extends AppCompatActivity {
         //check if bev is an integer to prevent parseint exception  43w
         if(isInteger(bev))
         {
-          bevIfInt = Integer.parseInt(bev);
+            bevIfInt = Integer.parseInt(bev);
         }
         //int bevIfInt = Integer.parseInt(bev);
 
@@ -219,7 +220,7 @@ public class kerdesek extends AppCompatActivity {
 
 
         }else
-            {
+        {
             hibaTv.setText((getString(R.string.betuKerdesekHiba)));
         }
 
@@ -227,55 +228,55 @@ public class kerdesek extends AppCompatActivity {
     }
 
     public void megjelenites(View view) {
-            if(futas==0){
-                TextView gomb2 = (TextView) findViewById(R.id.mehet2);
-                gomb2.setText("Kerdes generalasa");
+        if(futas==0){
+            TextView gomb2 = (TextView) findViewById(R.id.mehet2);
+            gomb2.setText("Kerdes generalasa");
 
 
-                TextView text1 = (TextView) findViewById(R.id.textView);
-                text1.setVisibility(View.INVISIBLE);
-                TextView text2 = (TextView) findViewById(R.id.textView2);
-                text2.setVisibility(View.INVISIBLE);
+            TextView text1 = (TextView) findViewById(R.id.textView);
+            text1.setVisibility(View.INVISIBLE);
+            TextView text2 = (TextView) findViewById(R.id.textView2);
+            text2.setVisibility(View.INVISIBLE);
 
 
 
             futas = futas +1;
+        }
+        else{
+            TextView gomb2 = (TextView) findViewById(R.id.mehet2);
+            gomb2.setVisibility(View.INVISIBLE);
+            TextView bevitel = (TextView) findViewById(R.id.bevitel);
+            bevitel.setVisibility(View.VISIBLE);
+            TextView gomb = (TextView) findViewById(R.id.mehet);
+            gomb.setVisibility(View.VISIBLE);
+            Intent intent = getIntent();
+            String[] betuk = intent.getStringArrayExtra("chars");
+            TextView kerdes = (TextView) findViewById(R.id.kerdes);
+
+
+            //TODO keredesek generálására egy külön függvény?
+            String[] kerdesek = new String[20];
+
+            for (int i = 0; i < 10; i++) {
+                //melyik betu tartozik + a/az + "" + szam + hoz/hez
+                kerdesek[i] = "Melyik betu tartozik " + kerdes2(i) + " " + i + kerdes(i) + "?";
+                kerdesek[i] = (getString(R.string.kerdesgeneralasBetu)) + i;
             }
-            else{
-                TextView gomb2 = (TextView) findViewById(R.id.mehet2);
-                gomb2.setVisibility(View.INVISIBLE);
-                TextView bevitel = (TextView) findViewById(R.id.bevitel);
-                bevitel.setVisibility(View.VISIBLE);
-                TextView gomb = (TextView) findViewById(R.id.mehet);
-                gomb.setVisibility(View.VISIBLE);
-                Intent intent = getIntent();
-                String[] betuk = intent.getStringArrayExtra("chars");
-                TextView kerdes = (TextView) findViewById(R.id.kerdes);
 
+            for (int i = 10; i < 20; i++) {
+                kerdesek[i] =
+                        "Melyik szam tatozik " + kerdes3(betuk[i - 10].toUpperCase()) + " "
+                                + betuk[i - 10].toUpperCase() + kerdes4(betuk[i - 10].toUpperCase()) + "?";
 
-                //TODO keredesek generálására egy külön függvény?
-                String[] kerdesek = new String[20];
+            }
 
-                for (int i = 0; i < 10; i++) {
-                    //melyik betu tartozik + a/az + "" + szam + hoz/hez
-                    kerdesek[i] = "Melyik betu tartozik " + kerdes2(i) + " " + i + kerdes(i) + "?";
-                    kerdesek[i] = (getString(R.string.kerdesgeneralasBetu)) + i;
-                }
-
-                for (int i = 10; i < 20; i++) {
-                    kerdesek[i] =
-                            "Melyik szam tatozik " + kerdes3(betuk[i - 10].toUpperCase()) + " "
-                                    + betuk[i - 10].toUpperCase() + kerdes4(betuk[i - 10].toUpperCase()) + "?";
-
-                }
-
-                kerdes.setText(kerdesek[sorrend[index]]);
-                //valaszok[sorrend[index]]= bevitel.getText().toString();
+            kerdes.setText(kerdesek[sorrend[index]]);
+            //valaszok[sorrend[index]]= bevitel.getText().toString();
 
 
 
-                TextView teszt = (TextView) findViewById(R.id.hibaTv);
-                teszt.setVisibility(View.VISIBLE);
+            TextView teszt = (TextView) findViewById(R.id.hibaTv);
+            teszt.setVisibility(View.VISIBLE);
                 /*
                 String teszteles = "";
                 for(int i =0;i<20;i++){
@@ -285,7 +286,7 @@ public class kerdesek extends AppCompatActivity {
                 */
 
 
-            }
+        }
 
 
 

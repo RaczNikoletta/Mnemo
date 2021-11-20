@@ -6,7 +6,6 @@ import io.realm.annotations.PrimaryKey;
 public class HintModel extends RealmObject {
     @PrimaryKey
     int Pegnum;
-    String hint;
     byte [] image;
 
    public HintModel(){}
@@ -19,13 +18,6 @@ public class HintModel extends RealmObject {
         Pegnum = pegnum;
     }
 
-    public String getHint() {
-        return hint;
-    }
-
-    public void setHint(String hint) {
-        this.hint = hint;
-    }
 
     public byte[] getImage() {
         return image;

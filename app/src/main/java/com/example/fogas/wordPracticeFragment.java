@@ -153,6 +153,111 @@ public class wordPracticeFragment extends Fragment {
 
 
                         kerdes.setText(kerdes.getResources().getString(R.string.egyes_szo));
+                        ellenorzes = true;
+                    }
+                    else{
+                        hiba_szo.setVisibility(View.VISIBLE);
+
+                    }
+
+
+//hello
+
+                }
+                if(index!=0&&index<10){
+                    if(szoveg_bevitel.getText().toString().matches("[a-zA-Z]+")&& szoveg_bevitel.toString().length()>=1) {
+                        hiba_szo.setVisibility(View.INVISIBLE);
+                        if (index == 2) {
+                            kerdes.setText(kerdes.getResources().getString(R.string.kettes_szo));
+                        }
+                        if (index == 3) {
+                            kerdes.setText(kerdes.getResources().getString(R.string.harmas_szo));
+                        }
+                        if (index == 4) {
+                            kerdes.setText(kerdes.getResources().getString(R.string.negyes_szo));
+                        }
+                        if (index == 5) {
+                            kerdes.setText(kerdes.getResources().getString(R.string.otos_szo));
+                        }
+                        if (index == 6) {
+                            kerdes.setText(kerdes.getResources().getString(R.string.hatos_szo));
+                        }
+                        if (index == 7) {
+                            kerdes.setText(kerdes.getResources().getString(R.string.hetes_szo));
+                        }
+                        if (index == 8) {
+                            kerdes.setText(kerdes.getResources().getString(R.string.nyolcas_szo));
+                        }
+                        if (index == 9) {
+                            kerdes.setText(kerdes.getResources().getString(R.string.kilences_szo));
+                        }
+
+
+                        szavak[index] = szoveg_bevitel.getText().toString();
+
+                        String teszteles = "";
+                        for (int i = 0; i < 10; i++) {
+                            teszteles = teszteles + szavak[i] + "\n";
+                        }
+                        teszt.setText(teszteles);
+                        ellenorzes = true;
+                    }
+                    else{
+                        hiba_szo.setVisibility(View.VISIBLE);
+                    }
+
+                }
+                if(ellenorzes!=false) {
+                    index = index + 1;
+                }
+                if(index==10){
+                    hideKeyboard(getActivity()); //won't work
+
+                    try {
+                        FragmentManager fm = getFragmentManager();
+                        FragmentTransaction ft = fm.beginTransaction();
+                        ft.replace(R.id.container,new PracticeFragment(),"Add hints fragment")
+                                .addToBackStack(null)
+                                .commit();
+
+                    }catch(Throwable e){
+                        Log.d("practicefragment","letterpractice click error "+ e.toString());
+                    }
+
+
+                }
+            }
+        });
+
+
+
+
+
+
+
+        return view;
+
+
+
+        View view =  inflater.inflate(R.layout.fragment_word_practice,container,false);
+        kerdes = (TextView) view.findViewById(R.id.szoveg_kerdes);
+        szoveg_bevitel = (TextView) view.findViewById(R.id.szoveg_bevitel);
+        hiba_szo = (TextView) view.findViewById(R.id.hiba_szo);
+
+
+
+        view.findViewById(R.id.szoveg_gomb).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                teszt = (TextView) view.findViewById(R.id.teszt);
+                boolean ellenorzes = false;
+                if(index==0){
+                    hiba_szo.setVisibility(View.INVISIBLE);
+                    if(szoveg_bevitel.getText().toString().matches("[a-zA-Z]+")&& szoveg_bevitel.toString().length()>=1){
+                        szavak[index] = szoveg_bevitel.getText().toString();
+
+
+                        kerdes.setText(kerdes.getResources().getString(R.string.egyes_szo));
                     ellenorzes = true;
                     }
                     else{
@@ -243,32 +348,32 @@ public class wordPracticeFragment extends Fragment {
     //TODO ne csak az elsőt nézze, hanem for ciklusban
     public boolean checkIfWordsInDatabase(){
         try{
-        wordRealm = Realm.getDefaultInstance();
-        wordRealm.executeTransaction(r->{
-            UserDataModel loggedUsr = wordRealm.where(UserDataModel.class).equalTo("loggedIn",true).findFirst();
-            if(loggedUsr != null) {
-                PegDataModel pegWord = wordRealm.where(PegDataModel.class).equalTo("userName", loggedUsr.getUserName()).findFirst();
-                if (pegWord != null) {
-                    PegModel firstPeg = pegWord.getOnePeg(0);
-                    if(firstPeg != null){
+            wordRealm = Realm.getDefaultInstance();
+            wordRealm.executeTransaction(r->{
+                UserDataModel loggedUsr = wordRealm.where(UserDataModel.class).equalTo("loggedIn",true).findFirst();
+                if(loggedUsr != null) {
+                    PegDataModel pegWord = wordRealm.where(PegDataModel.class).equalTo("userName", loggedUsr.getUserName()).findFirst();
+                    if (pegWord != null) {
+                        PegModel firstPeg = pegWord.getOnePeg(0);
+                        if(firstPeg != null){
                             if(firstPeg.getWord() != null){
                                 ifExists = true;
                             }
+                        }
                     }
-                }
 
 
                 }
 
-        });
+            });
 
-    }catch(Throwable e)
+        }catch(Throwable e)
         {
             Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
             return false;
 
         }
-            return ifExists;
+        return ifExists;
     }
 
 
@@ -278,3 +383,12 @@ public class wordPracticeFragment extends Fragment {
 
 
     }
+
+
+
+
+
+
+
+
+}

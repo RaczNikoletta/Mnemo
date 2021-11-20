@@ -7,6 +7,7 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 public class PegDataModel extends RealmObject {
+    @PrimaryKey
     String userName;
     RealmList<PegModel> pegs;
 
@@ -21,13 +22,18 @@ public class PegDataModel extends RealmObject {
     public void setOnePeg(PegModel p)
     {
         boolean isExists = false;
-        for(int i=0;i<pegs.size();i++){
-            if(pegs.get(i).getNum() == p.getNum()){
-                isExists =true;
+        if(pegs != null){
+        for(int i=0;i<pegs.size();i++) {
+            if (pegs.get(i).getNum() == p.getNum()) {
+                isExists = true;
                 pegs.get(i).setLetter(p.getLetter());
                 pegs.get(i).setWord(p.getWord());
             }
-        }if(!isExists){
+        }
+        }else{
+            pegs = new RealmList<>();
+        }
+        if(!isExists){
             pegs.add(p);
     }
     }
@@ -36,6 +42,7 @@ public class PegDataModel extends RealmObject {
     }
 
     public PegDataModel(){}
+
 
     public String getUserName() {
         return userName;
@@ -47,13 +54,6 @@ public class PegDataModel extends RealmObject {
 
     public PegDataModel(String u){
         userName = u;
-        pegs = new RealmList<>();
-        for(int i=0;i<9;i++){
-            PegModel temppeg = new PegModel();
-            temppeg.setNum(i);
-            temppeg.setLetter("");
-            temppeg.setWord("");
-        }
     }
 
 

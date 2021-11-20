@@ -22,7 +22,8 @@
     <string name="kerdesLeiras">Találd ki melyik számnak/betűnek melyik a párja.</string>
     <string name="feladat">Feladat</string>
     <string name="betuKerdesekPontok">Megfelelő válaszok száma: </string>
-    <string name="kerdesgeneralasBetu">Kerem adja meg a következő számhoz tartozó betűt: </string>
+    <string name="kerdesgeneralasBetu">Kérem adja meg a következő számhoz tartozó betűt: </string>
+    <string name="kerdesgeneralasSzo">Kérem adja meg a következő számhoz tartozó szót: </string>
     <string name="betuHiba">Nem egy betűt adott meg</string>
     <string name="kihagyas">Kihagyás</string>
 
@@ -55,6 +56,7 @@
     <string name="sikeresregtitle">Sikeres regisztráció</string>
     <string name="sikeresregtext">Sikeresen regsztráltál! Tovább a belépéshez.</string>
     <string name="useralreadyexists">Felhasználónév foglalt.</string>
+    <string name="passwordsnotequal">Jelszavak nem egyeznek!</string>
     <!-- Register -->
 
     <!--UserTitles-->
@@ -69,6 +71,27 @@
     <!--Practice mode-->
     <!--WordPracticeFragment -->
     <string name="noPegwordsinDB">Először meg kell adnod a szavakat!</string>
+    <string name="nullas_szo">Kérem adja meg a nullához tartozó szót!</string>
+
+    <string name="egyes_szo">Kérem adja meg az egyeshez tartozó szót!</string>
+
+    <string name="kettes_szo">Kérem adja meg a ketteshez tartozó szót!</string>
+
+    <string name="harmas_szo">Kérem adja meg a hármashoz tartozó szót!</string>
+
+    <string name="negyes_szo">Kérem adja meg a négyeshez tartozó szót!</string>
+
+    <string name="otos_szo">Kérem adja meg az ötöshöz tartozó szót!</string>
+
+    <string name="hatos_szo">Kérem adja meg a hatoshoz tartozó szót!</string>
+
+    <string name="hetes_szo">Kérem adja meg a heteshez tartozó szót!</string>
+
+    <string name="nyolcas_szo">Kérem adja meg a nyolcashoz tartozó szót!</string>
+
+    <string name="kilences_szo">Kérem adja meg a kilenceshez tartozó szót!</string>
+
+    <string name="hiba_szo">Nem tartalmazhat számot!</string>
     <!--WordPracticeFragment -->
     <string name="nullas_szo">Kérem adja meg a nullához tartozó szót!</string>
     <string name="egyes_szo">Kérem adja meg az egyeshez tartozó szót!</string>
@@ -115,5 +138,11 @@
     <!--Fragment hint update -->
     <!--Fragment sequence update -->
     <string name="sequences">Számsoraid</string>
+    <string name="storyTv">Történet</string>
     <!--Fragment sequence update -->
+    <!--Push notification-->
+    <string name="timeToPractice">"ELjött az idő a gyakorlásra!"</string>
+    <string name="timeToPractice2">"Fel kell idézned az eddig tanultakat, külöben elfelejtődnek!"</string>
+    <string name="addNewPegs">"Túl kevés fogasod van, adj meg újakat!"</string>
+    <!--Push notification -->
 </resources>

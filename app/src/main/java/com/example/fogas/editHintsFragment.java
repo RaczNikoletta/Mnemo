@@ -80,7 +80,6 @@ public class editHintsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_hints, container, false);
         fogasEditTv = (TextView) view.findViewById(R.id.fogasEditTv);
-        hintStringEt2 = (EditText) view.findViewById(R.id.hintStringEt2);
         imageView10 = (ImageView) view.findViewById(R.id.imageView10);
         browseButton2 = (Button) view.findViewById(R.id.browseBtn2);
         saveHintsBtn2 = (Button) view.findViewById(R.id.saveHintsBtn2);
@@ -95,7 +94,6 @@ public class editHintsFragment extends Fragment {
         splitedPeg = pegNum.split("\\s+");
 
         fogasEditTv.setText(splitedPeg[0]);
-        hintStringEt2.setText(splitedPeg[1]);
 
         try {
             editHintRealm = Realm.getDefaultInstance();
@@ -160,7 +158,6 @@ public class editHintsFragment extends Fragment {
                             try {
                                 hint = new HintModel();
                                 hint.setPegnum(Integer.parseInt(fogasEditTv.getText().toString()));
-                                hint.setHint(hintStringEt2.getText().toString());
                                 hint.setImage(byteArray);
                                 editHintRealm.insertOrUpdate(editHintRealm.copyToRealmOrUpdate(hint));
                             }catch (Throwable e){

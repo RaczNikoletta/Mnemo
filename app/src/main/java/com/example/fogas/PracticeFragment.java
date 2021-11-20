@@ -65,8 +65,18 @@ public class PracticeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(), "Clicked sequencepractice button!", Toast.LENGTH_SHORT).show();
+                try {
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ft.replace(R.id.container,new sequencePracticeFragment())
+                            .addToBackStack(null)
+                            .commit();
+                }catch(Throwable e){
+                    Log.d("practicefragment","wordpractice click error "+ e.toString());
+                }
             }
         });
+
         ImageButton wordPracticeBtn = (ImageButton) view.findViewById(R.id.wordPracticeBtn);
         //wordPracticeBtn.setClipToOutline(true);
         ImageButton letterPracticeBtn = (ImageButton) view.findViewById(R.id.letterPracticeBtn);

@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/checkhints"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="24dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/hintList"
@@ -27,6 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="457dp"
         android:layout_marginTop="85dp"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/addHintBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -43,6 +44,7 @@
         android:layout_marginBottom="44dp"
         android:backgroundTint="@color/colorPrimaryDark"
         android:text="@string/hozzaadGomb"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -63,7 +65,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="@color/colorPrimaryDark"
-            android:text="@string/delete" />
+            android:text="@string/delete"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/editBtn"
@@ -71,7 +74,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="@color/colorPrimaryDark"
-            android:text="@string/edit" />
+            android:text="@string/edit"
+            android:textColor="@color/white" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
