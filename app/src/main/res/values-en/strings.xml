@@ -21,6 +21,7 @@
     <string name="betuKerdesekHiba">Ivalid format.</string>
     <string name = "betuKerdesekPontok">Number of right answers: </string>
     <string name = "kerdesgeneralasBetu">Please enter the letter for the number: </string>
+    <string name="kerdesgeneralasSzo">Please enter the word for the number: </string>
     <string name="kerdesLeiras">Choose the right pair for each number/letter.</string>
     <string name="feladat">Exercise</string>
     <string name="betuHiba">Invalid format (a letter needed)</string>
@@ -54,6 +55,7 @@
     <string name="sikeresregtitle">Registration successful</string>
     <string name="sikeresregtext">Registration was successful! Now you can log in.</string>
     <string name="useralreadyexists">User already exists with this username.</string>
+    <string name="passwordsnotequal">Passwords are not the same!</string>
     <!-- Register -->
     <!--UserTitles-->
     <string name="feledekeny">Oblivious</string>
@@ -121,5 +123,11 @@
     <!--Fragment hint update -->
     <!--Fragment sequence update -->
     <string name="sequences">Your sequences</string>
+    <string name="storyTv">Story</string>
     <!--Fragment sequence update -->
+    <!--Push notification-->
+    <string name="timeToPractice">"It's time to practice!"</string>
+    <string name="timeToPractice2">"You need to recall what you learned so far"</string>
+    <string name="addNewPegs">"You have few pegs, let's add some"</string>
+    <!--Push notification -->
 </resources>

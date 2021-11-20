@@ -22,7 +22,8 @@
     <string name="kerdesLeiras">Találd ki melyik számnak/betűnek melyik a párja.</string>
     <string name="feladat">Feladat</string>
     <string name="betuKerdesekPontok">Megfelelő válaszok száma: </string>
-    <string name="kerdesgeneralasBetu">Kerem adja meg a következő számhoz tartozó betűt: </string>
+    <string name="kerdesgeneralasBetu">Kérem adja meg a következő számhoz tartozó betűt: </string>
+    <string name="kerdesgeneralasSzo">Kérem adja meg a következő számhoz tartozó szót: </string>
     <string name="betuHiba">Nem egy betűt adott meg</string>
     <string name="kihagyas">Kihagyás</string>
 
@@ -55,6 +56,7 @@
     <string name="sikeresregtitle">Sikeres regisztráció</string>
     <string name="sikeresregtext">Sikeresen regsztráltál! Tovább a belépéshez.</string>
     <string name="useralreadyexists">Felhasználónév foglalt.</string>
+    <string name="passwordsnotequal">Jelszavak nem egyeznek!</string>
     <!-- Register -->
 
     <!--UserTitles-->
@@ -125,5 +127,11 @@
     <!--Fragment hint update -->
     <!--Fragment sequence update -->
     <string name="sequences">Számsoraid</string>
+    <string name="storyTv">Történet</string>
     <!--Fragment sequence update -->
+    <!--Push notification-->
+    <string name="timeToPractice">"ELjött az idő a gyakorlásra!"</string>
+    <string name="timeToPractice2">"Fel kell idézned az eddig tanultakat, külöben elfelejtődnek!"</string>
+    <string name="addNewPegs">"Túl kevés fogasod van, adj meg újakat!"</string>
+    <!--Push notification -->
 </resources>

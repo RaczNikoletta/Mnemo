@@ -18,6 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/sequences"
+            android:textColor="@color/white"
             android:textSize="22dp"
             android:textStyle="bold" />
 
@@ -30,10 +31,13 @@
 
         <Button
             android:id="@+id/seqenceEditBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/edit" />
+            android:background="@color/colorPrimaryDark"
+            android:text="@string/edit"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

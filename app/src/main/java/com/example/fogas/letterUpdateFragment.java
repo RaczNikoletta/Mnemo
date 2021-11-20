@@ -57,6 +57,7 @@ public class letterUpdateFragment extends Fragment {
     private PegModel tempAboveNine;
     private String selectedFromSpinner;
     private TextView newNumberTv;
+    private int belowten;
 
     public letterUpdateFragment() {
         // Required empty public constructor
@@ -196,8 +197,8 @@ public class letterUpdateFragment extends Fragment {
             } else {
 
                 new AlertDialog.Builder(getContext())
-                        .setTitle(R.string.databaseUpdated)
-                        .setMessage(R.string.databaseUpdated2)
+                        .setTitle(R.string.loginrequest)
+                        .setMessage(R.string.loginrequest2)
 
                         // Specifying a listener allows you to take an action before dismissing the dialog.
                         // The dialog is automatically dismissed when a dialog button is clicked.
@@ -214,7 +215,7 @@ public class letterUpdateFragment extends Fragment {
                         })
 
                         // A null listener allows the button to dismiss the dialog and take no further action.
-                        .setIcon(getResources().getDrawable(R.drawable.ic_baseline_error_24))
+                        .setIcon(getResources().getDrawable(R.drawable.ic_baseline_done_outline_24))
                         .show();
             }
 
@@ -228,55 +229,74 @@ public class letterUpdateFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    PegDataModel newDatas = new PegDataModel();
-                    newDatas.setPegs(new RealmList<PegModel>());
-                    updaterRealm.executeTransaction(r -> {
-                        for (int i = 0; i < pegs.size(); i++) {
-                            PegModel p = new PegModel();
-                            eLetter = view.findViewById(ids[i]);
-                            eWord = view.findViewById(ids[i + 10]);
-                            Log.v("letterupdate", i + " " + ids[i] + "ennyi");
-                            let = eLetter.getText().toString();
-                            word = eWord.getText().toString();
-                            p.setLetter(let);
-                            p.setWord(word);
-                            p.setNum(i);
-                            newDatas.setOnePeg(p);
-                        }
-                        newDatas.setUserName(user.getUserName());
-                        updaterRealm.insertOrUpdate(newDatas);
-                    });
+                    belowten=0;
+                    user = updaterRealm.where(UserDataModel.class).equalTo("loggedIn", true).findFirst();
+                    try {
+                        peg = updaterRealm.where(PegDataModel.class).equalTo("userName", user.getUserName()).findFirst();
+                    pegs = peg.getPegs();
+                    for(int i=0;i<pegs.size();i++){
+                        if(pegs.get(i).getNum()>9){
+
+                        }else
+                            belowten++;
+                    }
+                    }catch (Throwable e){
+                        Toast.makeText(getContext(), "phase one" + e.toString(), Toast.LENGTH_LONG).show();
+                    }
+                    try {
+                        Toast.makeText(getContext(), "belowten " + String.valueOf(belowten), Toast.LENGTH_LONG).show();
+                        updaterRealm.executeTransaction(r -> {
+                                    for (int i = 0; i < belowten; i++) {
+                                        try {
+                                            PegModel p = new PegModel();
+                                            eLetter = view.findViewById(ids[i]);
+                                            eWord = view.findViewById(ids[i + 10]);
+                                            Log.v("letterupdate", i + " " + ids[i] + "ennyi");
+                                            let = eLetter.getText().toString();
+                                            word = eWord.getText().toString();
+                                            p.setLetter(let);
+                                            p.setWord(word);
+                                            p.setNum(i);
+                                            updaterRealm.insertOrUpdate(p);
+                                            user.getPegs().setOnePeg(p);
+                                        }catch (Throwable e){
+                                            Toast.makeText(getContext(), "in loop" + e.toString() + String.valueOf(i), Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                            updaterRealm.copyToRealmOrUpdate(user);
+                        });
+                    }catch(Throwable e){
+                        Toast.makeText(getContext(), "Saving issue: " + e.toString(), Toast.LENGTH_LONG).show();
+                    }
 
                     new AlertDialog.Builder(getContext())
-                            .setTitle(R.string.loginrequest)
-                            .setMessage(R.string.loginrequest2)
+                            .setTitle(R.string.databaseUpdated)
+                            .setMessage(R.string.databaseUpdated2)
 
                             // Specifying a listener allows you to take an action before dismissing the dialog.
                             // The dialog is automatically dismissed when a dialog button is clicked.
                             .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                //reload the fragment
                                 public void onClick(DialogInterface dialog, int which) {
-                                    try {
-                                        Fragment frg = null;
-                                        frg = getFragmentManager().findFragmentByTag("letterUpdate");
-                                        FragmentManager fm = getFragmentManager();
-                                        FragmentTransaction ft = fm.beginTransaction();
-                                        ft.detach(frg);
-                                        ft.attach(frg);
-                                        ft.commit();
-                                    } catch (Throwable e) {
-                                        Log.d("practicefragment", "letterpractice click error " + e.toString());
-                                    }
+                                    FragmentManager fm = getFragmentManager();
+                                    FragmentTransaction ft = fm.beginTransaction();
+                                    ft.replace(R.id.container, new letterUpdateFragment(), "letterUpdate")
+                                            .addToBackStack(null)
+                                            .commit();
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
                                 }
                             })
 
-
                             // A null listener allows the button to dismiss the dialog and take no further action.
-                            .setIcon(getResources().getDrawable(R.drawable.ic_baseline_error_24))
+                            .setIcon(getResources().getDrawable(R.drawable.ic_baseline_done_outline_24))
                             .show();
 
                 } catch (Throwable e) {
-                    Toast.makeText(getContext(), "Saving issue: " + e.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "other issue: " + e.toString(), Toast.LENGTH_LONG).show();
                 }
 
             }

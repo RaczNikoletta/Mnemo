@@ -4,7 +4,6 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 public class PegModel extends RealmObject{
-    @PrimaryKey
     int num;
     String letter;
     String word;
