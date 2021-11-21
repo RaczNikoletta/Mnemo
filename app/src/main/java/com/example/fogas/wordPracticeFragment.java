@@ -20,8 +20,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,9 +31,11 @@ import com.example.fogas.Models.PegDataModel;
 import com.example.fogas.Models.PegModel;
 import com.example.fogas.Models.UserDataModel;
 
+import java.util.ArrayList;
 import java.util.zip.Inflater;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 import io.realm.RealmResults;
 
 /**
@@ -54,10 +58,21 @@ public class wordPracticeFragment extends Fragment {
     private TextView kerdes;
     private int index = 0;
     private String nyelv;
-    private String [] szavak = new String[10];
     private TextView szoveg_bevitel;
-    private TextView teszt;
-    private  TextView hiba_szo;
+    private Realm updaterRealm;
+    private UserDataModel user;
+    private RealmList pegRealmListAboveNine;
+    private PegDataModel pegmodelAboveNine;
+    private PegModel tempAboveNine;
+    private ArrayList<String> pegAboveNine;
+    private String selectedFromSpinner;
+    private Spinner aboveNineSpinner;
+    private EditText pegLetterAboveNineEt;
+    private EditText pegWordAboveNineEt;
+    String [] helyes_valaszok = new String[10];
+    String [] valaszok = new String[10];
+    private int pontok = 0;
+
 
     public wordPracticeFragment() {
         // Required empty public constructor
@@ -83,6 +98,38 @@ public class wordPracticeFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+        try{
+            updaterRealm = Realm.getDefaultInstance();
+            user = updaterRealm.where(UserDataModel.class).equalTo("loggedIn",true).findFirst();
+            if(user != null){
+                pegmodelAboveNine = updaterRealm.where(PegDataModel.class).equalTo("userName",user.getUserName()).findFirst();
+                if(pegmodelAboveNine != null){
+                    pegRealmListAboveNine = pegmodelAboveNine.getPegs();
+                    for(int i=0;i<pegRealmListAboveNine.size();i++){
+                        tempAboveNine = new PegModel();
+                        tempAboveNine = (PegModel) pegRealmListAboveNine.get(i);
+                        if(tempAboveNine!=null) {
+                            if(tempAboveNine.getNum()>9) {
+                                try {
+                                    pegAboveNine.add(String.valueOf(tempAboveNine.getNum()));
+                                }catch(Throwable e){
+                                    Toast.makeText(getContext(),"for loop add: " + i +" "+e.toString(),Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        }catch (Throwable e){
+            Toast.makeText(getContext(),e.toString(),Toast.LENGTH_LONG).show();
+        }
+
+
+
+
+
 
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
@@ -132,41 +179,67 @@ public class wordPracticeFragment extends Fragment {
         setRetainInstance(true);
 
 
-        // Inflate the layout for this fragment
+
 
         View view =  inflater.inflate(R.layout.fragment_word_practice,container,false);
+
+
+
+
+
+
+        // Inflate the layout for this fragment
+
+
         kerdes = (TextView) view.findViewById(R.id.szoveg_kerdes);
         szoveg_bevitel = (TextView) view.findViewById(R.id.szoveg_bevitel);
-        hiba_szo = (TextView) view.findViewById(R.id.hiba_szo);
+
+
+
 
 
 
         view.findViewById(R.id.szoveg_gomb).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                teszt = (TextView) view.findViewById(R.id.teszt);
                 boolean ellenorzes = false;
                 if(index==0){
-                    hiba_szo.setVisibility(View.INVISIBLE);
-                    if(szoveg_bevitel.getText().toString().matches("[a-zA-Z]+")&& szoveg_bevitel.toString().length()>=1){
-                        szavak[index] = szoveg_bevitel.getText().toString();
+
+
+                        valaszok[index] = szoveg_bevitel.getText().toString();
+
+                        tempAboveNine = new PegModel();
+                        for(int i = 0;i<10;i++){
+                            tempAboveNine = (PegModel) pegRealmListAboveNine.get(i);
+                            if(tempAboveNine.getWord().toString()==null){
+                                helyes_valaszok[i] = "";
+                            }
+                            else{
+                                helyes_valaszok[i] = tempAboveNine.getWord().toString();
+                            }
+
+
+                        }
+
+
+                        //ekkor megkapja az 1-es indexü elem betüjét
 
 
                         kerdes.setText(kerdes.getResources().getString(R.string.egyes_szo));
                         ellenorzes = true;
-                    }
-                    else{
-                        hiba_szo.setVisibility(View.VISIBLE);
+                        //szoveg_bevitel.setText("");
 
-                    }
+
+                        index = index + 1;
+
 
 
 //hello
 
                 }
-                if(index!=0&&index<10){
-                    if(szoveg_bevitel.getText().toString().matches("[a-zA-Z]+")&& szoveg_bevitel.toString().length()>=1) {
-                        hiba_szo.setVisibility(View.INVISIBLE);
+                if(index>0&&index<10){
+
+
                         if (index == 2) {
                             kerdes.setText(kerdes.getResources().getString(R.string.kettes_szo));
                         }
@@ -193,25 +266,32 @@ public class wordPracticeFragment extends Fragment {
                         }
 
 
-                        szavak[index] = szoveg_bevitel.getText().toString();
+                        valaszok[index-1] = szoveg_bevitel.getText().toString();
+                        pegAboveNine = new ArrayList<>();
+                        pegAboveNine.add(String.valueOf(tempAboveNine.getWord()));
 
-                        String teszteles = "";
-                        for (int i = 0; i < 10; i++) {
-                            teszteles = teszteles + szavak[i] + "\n";
-                        }
-                        teszt.setText(teszteles);
+
                         ellenorzes = true;
-                    }
-                    else{
-                        hiba_szo.setVisibility(View.VISIBLE);
-                    }
+                        szoveg_bevitel.setText("");
+                        index = index + 1;
+
 
                 }
-                if(ellenorzes!=false) {
-                    index = index + 1;
-                }
-                if(index==10){
+
+                else{
+                    valaszok[index-1]=szoveg_bevitel.getText().toString();
+                    for(int i = 0;i<10;i++){
+                        if(helyes_valaszok[i].equals(valaszok[i])){
+                            pontok= pontok+1;
+                        }
+                    }
                     hideKeyboard(getActivity()); //won't work
+                    String teszteles = "";
+
+
+
+                    kerdes.setText(pontok+"");
+
 
                     try {
                         FragmentManager fm = getFragmentManager();
@@ -219,6 +299,7 @@ public class wordPracticeFragment extends Fragment {
                         ft.replace(R.id.container,new PracticeFragment(),"Add hints fragment")
                                 .addToBackStack(null)
                                 .commit();
+
 
                     }catch(Throwable e){
                         Log.d("practicefragment","letterpractice click error "+ e.toString());
@@ -236,6 +317,9 @@ public class wordPracticeFragment extends Fragment {
 
 
         return view;
+
+
+
 
 
     }
@@ -277,4 +361,13 @@ public class wordPracticeFragment extends Fragment {
 
 
 
-}
+    }
+
+
+
+
+
+
+
+
+
