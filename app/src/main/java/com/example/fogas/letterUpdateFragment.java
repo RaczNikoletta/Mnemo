@@ -283,6 +283,9 @@ public class letterUpdateFragment extends Fragment {
                                         if (!(TextUtils.isEmpty(pegWordAboveNineEt.getText().toString()))) {
                                             user.getPegs().getPegs().get(i).setWord(pegWordAboveNineEt.getText().toString());
                                         }
+                                        if (!(TextUtils.isEmpty(pegWordAboveNineEt.getText().toString()))) {
+                                            user.getPegs().getPegs().get(i).setWord(pegWordAboveNineEt.getText().toString());
+                                        }
                                     }
                                 }}
                             } catch (Throwable e) {

@@ -23,6 +23,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -72,6 +74,8 @@ public class wordPracticeFragment extends Fragment {
     String [] helyes_valaszok = new String[10];
     String [] valaszok = new String[10];
     private int pontok = 0;
+    private ImageButton helpImage;
+    private ImageView imageViewHint;
 
 
     public wordPracticeFragment() {
@@ -193,7 +197,9 @@ public class wordPracticeFragment extends Fragment {
 
         kerdes = (TextView) view.findViewById(R.id.szoveg_kerdes);
         szoveg_bevitel = (TextView) view.findViewById(R.id.szoveg_bevitel);
-
+        helpImage = view.findViewById(R.id.helpImage);
+        imageViewHint = view.findViewById(R.id.imageViewHint);
+        imageViewHint.setVisibility(View.INVISIBLE);
 
 
 
