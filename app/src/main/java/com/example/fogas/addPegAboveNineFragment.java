@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,11 +50,54 @@ public class addPegAboveNineFragment extends Fragment {
         letterabovenEt = view.findViewById(R.id.letterabovenEt);
         wordabovenEt = view.findViewById(R.id.wordabovenEt);
         saveabovenBtn = view.findViewById(R.id.saveabovenBtn);
+        aboveNineRealm = Realm.getDefaultInstance();
+        user = aboveNineRealm.where(UserDataModel.class).equalTo("loggedIn",true).findFirst();
+
+        numberabovenEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                try {
+                    String[] tempSplited;
+                    StringBuilder tempLetters = new StringBuilder();
+                    String tempPegs;
+                    tempPegs = numberabovenEt.getText().toString();
+                    tempSplited = tempPegs.split("");
+                    if(tempSplited.length>1) {
+                        for (int i = 0; i < tempSplited.length; i++) {
+                            for (int j = 0; j < user.getPegs().getPegs().size(); j++) {
+                                if (user.getPegs().getPegs().get(j).getNum() == Integer.parseInt(tempSplited[i])) {
+                                    tempLetters.append(user.getPegs().getPegs().get(j).getLetter());
+                                }
+                            }
+                        }
+                    }
+
+
+                    letterabovenEt.setText(tempLetters);
+                }catch (Throwable e){
+                    Toast.makeText(getContext(),"find letters "+e.toString(),Toast.LENGTH_LONG).show();
+                }
+
+
+
+
+            }
+        });
+
         view.findViewById(R.id.saveabovenBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try{
-                    aboveNineRealm = Realm.getDefaultInstance();
                     aboveNineRealm.executeTransaction(r->{
                     peg = new PegModel();
                     if (TextUtils.isEmpty(numberabovenEt.getText().toString())) {
@@ -125,7 +170,6 @@ public class addPegAboveNineFragment extends Fragment {
 
                     if(emptyCounter<2 && (!TextUtils.isEmpty(numberabovenEt.getText().toString())) ){
                         aboveNineRealm.insertOrUpdate(peg);
-                        user = aboveNineRealm.where(UserDataModel.class).equalTo("loggedIn",true).findFirst();
                         user.getPegs().setOnePeg(peg);
                         aboveNineRealm.insertOrUpdate(user);
 

@@ -1,5 +1,11 @@
 package com.example.fogas;
 
+import static android.content.Context.ALARM_SERVICE;
+
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,7 +58,7 @@ public class letterUpdateFragment extends Fragment {
     private Spinner aboveNineSpinner;
     private EditText pegLetterAboveNineEt;
     private EditText pegWordAboveNineEt;
-    private  ArrayAdapter<String> pegAdapter;
+    private ArrayAdapter<String> pegAdapter;
     private PegDataModel pegmodelAboveNine;
     private RealmList pegRealmListAboveNine;
     private PegModel tempAboveNine;
@@ -73,9 +80,9 @@ public class letterUpdateFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-                View view = inflater.inflate(R.layout.fragment_letter_update, container, false);
-                setRetainInstance(true);
-
+        View view = inflater.inflate(R.layout.fragment_letter_update, container, false);
+        setRetainInstance(true);
+        createNotificationChannel();
 
         ids = new int[]{R.id.pegletterTv0, R.id.pegletterTv1, R.id.pegletterTv2, R.id.pegletterTv3, R.id.pegletterTv4,
                 R.id.pegletterTv5, R.id.pegletterTv6, R.id.pegletterTv7, R.id.pegletterTv8,
@@ -95,22 +102,22 @@ public class letterUpdateFragment extends Fragment {
         newNumberTv = (TextView) view.findViewById(R.id.newNumberTv);
 
 
-        try{
+        try {
             updaterRealm = Realm.getDefaultInstance();
-            user = updaterRealm.where(UserDataModel.class).equalTo("loggedIn",true).findFirst();
-            if(user != null){
-                pegmodelAboveNine = updaterRealm.where(PegDataModel.class).equalTo("userName",user.getUserName()).findFirst();
-                if(pegmodelAboveNine != null){
+            user = updaterRealm.where(UserDataModel.class).equalTo("loggedIn", true).findFirst();
+            if (user != null) {
+                pegmodelAboveNine = updaterRealm.where(PegDataModel.class).equalTo("userName", user.getUserName()).findFirst();
+                if (pegmodelAboveNine != null) {
                     pegRealmListAboveNine = pegmodelAboveNine.getPegs();
-                    for(int i=0;i<pegRealmListAboveNine.size();i++){
+                    for (int i = 0; i < pegRealmListAboveNine.size(); i++) {
                         tempAboveNine = new PegModel();
                         tempAboveNine = (PegModel) pegRealmListAboveNine.get(i);
-                        if(tempAboveNine!=null) {
-                            if(tempAboveNine.getNum()>9) {
+                        if (tempAboveNine != null) {
+                            if (tempAboveNine.getNum() > 9) {
                                 try {
                                     pegAboveNine.add(String.valueOf(tempAboveNine.getNum()));
-                                }catch(Throwable e){
-                                    Toast.makeText(getContext(),"for loop add: " + i +" "+e.toString(),Toast.LENGTH_LONG).show();
+                                } catch (Throwable e) {
+                                    Toast.makeText(getContext(), "for loop add: " + i + " " + e.toString(), Toast.LENGTH_LONG).show();
                                 }
                             }
                         }
@@ -118,10 +125,10 @@ public class letterUpdateFragment extends Fragment {
                 }
             }
 
-        }catch (Throwable e){
-            Toast.makeText(getContext(),e.toString(),Toast.LENGTH_LONG).show();
+        } catch (Throwable e) {
+            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
         }
-        pegAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1,pegAboveNine);
+        pegAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, pegAboveNine);
         aboveNineSpinner.setAdapter(pegAdapter);
 
         view.findViewById(R.id.newNumberTv).setOnClickListener(new View.OnClickListener() {
@@ -140,20 +147,21 @@ public class letterUpdateFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View v, int position, long l) {
                 selectedFromSpinner = aboveNineSpinner.getSelectedItem().toString();
-                for(int i=0;i<pegRealmListAboveNine.size();i++) {
+                for (int i = 0; i < pegRealmListAboveNine.size(); i++) {
                     tempAboveNine = new PegModel();
                     tempAboveNine = (PegModel) pegRealmListAboveNine.get(i);
                     if (tempAboveNine != null) {
-                        if(tempAboveNine.getNum() == Integer.parseInt(selectedFromSpinner))
-                        {
-                            if(tempAboveNine.getLetter() == null){
+                        if (tempAboveNine.getNum() == Integer.parseInt(selectedFromSpinner)) {
+                            if (tempAboveNine.getLetter() == null) {
                                 pegLetterAboveNineEt.setText("");
-                            }else{
-                            pegLetterAboveNineEt.setText(tempAboveNine.getLetter());}
-                            if(tempAboveNine.getWord() == null) {
+                            } else {
+                                pegLetterAboveNineEt.setText(tempAboveNine.getLetter());
+                            }
+                            if (tempAboveNine.getWord() == null) {
                                 pegWordAboveNineEt.setText("");
-                            }else{
-                            pegWordAboveNineEt.setText(tempAboveNine.getWord());}
+                            } else {
+                                pegWordAboveNineEt.setText(tempAboveNine.getWord());
+                            }
                         }
                     }
                 }
@@ -178,19 +186,20 @@ public class letterUpdateFragment extends Fragment {
                     pegs = peg.getPegs();
                     //set rows from database
                     for (int i = 0; i < pegs.size(); i++) {
-                        if(pegs.get(i).getNum()<10){
-                        p = pegs.get(i);
-                        eLetter = view.findViewById(ids[i]);
-                        eWord = view.findViewById(ids[i + 10]);
-                        if (p != null) {
-                            eLetter.setText(p.getLetter());
-                            eWord.setText(p.getWord());
-                        } else {
-                            eLetter.setText("");
-                            eWord.setText("");
-                        }
+                        if (pegs.get(i).getNum() < 10) {
+                            p = pegs.get(i);
+                            eLetter = view.findViewById(ids[i]);
+                            eWord = view.findViewById(ids[i + 10]);
+                            if (p != null) {
+                                eLetter.setText(p.getLetter());
+                                eWord.setText(p.getWord());
+                            } else {
+                                eLetter.setText("");
+                                eWord.setText("");
+                            }
 
-                    }}
+                        }
+                    }
                 } else {
                     Toast.makeText(getContext(), "PegDataModel query returned null object (letterUpdateFragment.java function startQuery())", Toast.LENGTH_LONG).show();
                 }
@@ -229,43 +238,59 @@ public class letterUpdateFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    belowten=0;
+                    belowten = 0;
                     user = updaterRealm.where(UserDataModel.class).equalTo("loggedIn", true).findFirst();
                     try {
                         peg = updaterRealm.where(PegDataModel.class).equalTo("userName", user.getUserName()).findFirst();
-                    pegs = peg.getPegs();
-                    for(int i=0;i<pegs.size();i++){
-                        if(pegs.get(i).getNum()>9){
+                        pegs = peg.getPegs();
+                        for (int i = 0; i < pegs.size(); i++) {
+                            if (pegs.get(i).getNum() > 9) {
 
-                        }else
-                            belowten++;
-                    }
-                    }catch (Throwable e){
+                            } else
+                                belowten++;
+                        }
+                    } catch (Throwable e) {
                         Toast.makeText(getContext(), "phase one" + e.toString(), Toast.LENGTH_LONG).show();
                     }
                     try {
-                        Toast.makeText(getContext(), "belowten " + String.valueOf(belowten), Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getContext(), "belowten " + String.valueOf(belowten), Toast.LENGTH_LONG).show();
                         updaterRealm.executeTransaction(r -> {
-                                    for (int i = 0; i < belowten; i++) {
-                                        try {
-                                            PegModel p = new PegModel();
-                                            eLetter = view.findViewById(ids[i]);
-                                            eWord = view.findViewById(ids[i + 10]);
-                                            Log.v("letterupdate", i + " " + ids[i] + "ennyi");
-                                            let = eLetter.getText().toString();
-                                            word = eWord.getText().toString();
-                                            p.setLetter(let);
-                                            p.setWord(word);
-                                            p.setNum(i);
-                                            updaterRealm.insertOrUpdate(p);
-                                            user.getPegs().setOnePeg(p);
-                                        }catch (Throwable e){
-                                            Toast.makeText(getContext(), "in loop" + e.toString() + String.valueOf(i), Toast.LENGTH_LONG).show();
+                            for (int i = 0; i < belowten; i++) {
+                                try {
+                                    PegModel p = new PegModel();
+                                    eLetter = view.findViewById(ids[i]);
+                                    eWord = view.findViewById(ids[i + 10]);
+                                    Log.v("letterupdate", i + " " + ids[i] + "ennyi");
+                                    let = eLetter.getText().toString();
+                                    word = eWord.getText().toString();
+                                    p.setLetter(let);
+                                    p.setWord(word);
+                                    p.setNum(i);
+                                    updaterRealm.insertOrUpdate(p);
+                                    user.getPegs().setOnePeg(p);
+                                } catch (Throwable e) {
+                                    Toast.makeText(getContext(), "in loop" + e.toString() + String.valueOf(i), Toast.LENGTH_LONG).show();
+                                }
+                            }
+                            try {
+                                if(aboveNineSpinner.getSelectedItem()!=null){
+                                int tempAboveNine = Integer.parseInt(aboveNineSpinner.getSelectedItem().toString());
+                                for (int i = 0; i < user.getPegs().getPegs().size(); i++) {
+                                    if (user.getPegs().getPegs().get(i).getNum() == tempAboveNine) {
+                                        if (!(TextUtils.isEmpty(pegLetterAboveNineEt.getText().toString()))) {
+                                            user.getPegs().getPegs().get(i).setLetter(pegLetterAboveNineEt.getText().toString());
+                                        }
+                                        if (!(TextUtils.isEmpty(pegWordAboveNineEt.getText().toString()))) {
+                                            user.getPegs().getPegs().get(i).setWord(pegWordAboveNineEt.getText().toString());
                                         }
                                     }
+                                }}
+                            } catch (Throwable e) {
+                                Toast.makeText(getContext(), "Peg above nine: " + e.toString(), Toast.LENGTH_LONG).show();
+                            }
                             updaterRealm.copyToRealmOrUpdate(user);
                         });
-                    }catch(Throwable e){
+                    } catch (Throwable e) {
                         Toast.makeText(getContext(), "Saving issue: " + e.toString(), Toast.LENGTH_LONG).show();
                     }
 
@@ -277,17 +302,32 @@ public class letterUpdateFragment extends Fragment {
                             // The dialog is automatically dismissed when a dialog button is clicked.
                             .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    FragmentManager fm = getFragmentManager();
-                                    FragmentTransaction ft = fm.beginTransaction();
-                                    ft.replace(R.id.container, new letterUpdateFragment(), "letterUpdate")
-                                            .addToBackStack(null)
-                                            .commit();
-                                }
-                            })
-                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    PegDataModel checkpegs = user.getPegs();
+                                    int counter = 0;
+                                    for(int i=0;i< checkpegs.getPegs().size();i++){
+                                        if(!checkpegs.getPegs().get(i).getWord().equals("")){
+                                            counter++;
+                                        }
+                                        if(!checkpegs.getPegs().get(i).getLetter().equals("")){
+                                            counter++;
+                                        }
+                                    }
+                                    //Toast.makeText(getContext(),"counter "+String.valueOf(counter),Toast.LENGTH_LONG).show();
+                                    if (counter >= 10) {
+                                        long timeAtButtonClick = System.currentTimeMillis();
+                                        Intent intent = new Intent(getContext(),PracticeNotificationManager.class);
+                                        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(),0,intent,0);
 
+                                        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+
+                                        long tenSecondsInMillis = 1000*10;
+                                        alarmManager.set(AlarmManager.RTC_WAKEUP,timeAtButtonClick+tenSecondsInMillis,pendingIntent);
+                                    }
+                                        FragmentManager fm = getFragmentManager();
+                                        FragmentTransaction ft = fm.beginTransaction();
+                                        ft.replace(R.id.container, new letterUpdateFragment(), "letterUpdate")
+                                                .addToBackStack(null)
+                                                .commit();
                                 }
                             })
 
@@ -310,6 +350,20 @@ public class letterUpdateFragment extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putIntArray("idsof",ids);
+        outState.putIntArray("idsof", ids);
     }
+    private  void createNotificationChannel(){
+        CharSequence name = "PracticeNotifyChannel";
+        String desctiption = "Channel for practice";
+        int importance = NotificationManager.IMPORTANCE_DEFAULT;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("notifyUser",name,importance);
+            channel.setDescription(desctiption);
+
+            NotificationManager notificationManager = getActivity().getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+
 }

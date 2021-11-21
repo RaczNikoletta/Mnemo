@@ -8,93 +8,91 @@
     android:background="@color/colorPrimary"
     tools:context=".notificationGame">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl2"
+    <FrameLayout
+        android:id="@+id/frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/sendBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:text="@string/hozzaadGomb"
-        tools:layout_editor_absoluteX="152dp"
-        tools:layout_editor_absoluteY="261dp" />
+            <Button
+                android:id="@+id/sendNotBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="268dp"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:text="@string/hozzaadGomb"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/answerEt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/questionTv"
-        app:layout_constraintVertical_bias="0.067" />
+            <EditText
+                android:id="@+id/answerNotEt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toTopOf="@+id/sendNotBtn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/questionNotTv" />
 
-    <TextView
-        android:id="@+id/questionTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/nullas"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.534"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.143" />
+            <TextView
+                android:id="@+id/questionNotTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nullas"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/sendNotBtn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/part_jelzo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0/9"
-        app:layout_constraintBottom_toTopOf="@+id/questionTv"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.445" />
+            <TextView
+                android:id="@+id/part_jelzo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0/9"
+                app:layout_constraintBottom_toTopOf="@+id/questionNotTv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/hiba"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#F40303"
-        app:layout_constraintBottom_toTopOf="@+id/sendBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/answerEt"
-        app:layout_constraintVertical_bias="0.15" />
+            <TextView
+                android:id="@+id/hibaNotTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#F40303"
+                app:layout_constraintBottom_toTopOf="@+id/sendNotBtn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/answerNotEt" />
 
-    <Button
-        android:id="@+id/helpBtn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#7E7474"
-        android:text="@string/segitsegGomb"
-        android:textColor="@color/white"
-        android:textColorLink="#817676"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sendBtn"
-        app:layout_constraintVertical_bias="0.185" />
+            <Button
+                android:id="@+id/helpNotBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#7E7474"
+                android:text="@string/segitsegGomb"
+                android:textColor="@color/white"
+                android:textColorLink="#817676"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sendNotBtn"
+                app:layout_constraintVertical_bias="0.187" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

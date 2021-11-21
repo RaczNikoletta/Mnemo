@@ -99,7 +99,7 @@
     <string name="databaseUpdated">Sikeres adatváltozatás.</string>
     <string name="databaseUpdated2">Az adatok változatatása sikeres volt. Az oldal újra fog töltődni.</string>
     <string name="choosePeg">Válassz számot!</string>
-    <string name="addNewPeg"><u>Új számot szeretnék megadni</u></string>
+    <string name="addNewPeg"><u>Új fogast szeretnék megadni</u></string>
     <string name="numberMandatory">Szám megadása kötelező!</string>
     <string name="numberError">Kötelező egy kétjegyű számot megadni!</string>
     <string name="letterorwordmand">Betű vagy szó megadása kötelező!</string>
