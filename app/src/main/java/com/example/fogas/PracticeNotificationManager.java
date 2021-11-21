@@ -37,8 +37,8 @@ public class PracticeNotificationManager extends BroadcastReceiver {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context,"notifyUser")
                 .setSmallIcon(R.drawable.letterpracticeimage)
-                .setContentTitle("It's time to practice")
-                .setContentText("You need to recall what you learned so far")
+                .setContentTitle(context.getString(R.string.timeToPractice))
+                .setContentText(context.getString(R.string.timeToPractice2))
                 .setPriority(NotificationCompat.PRIORITY_MAX)
                 .setAutoCancel(true)
                 .setSound(alarmSound, AudioManager.STREAM_ALARM)

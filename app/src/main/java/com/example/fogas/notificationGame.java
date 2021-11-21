@@ -9,6 +9,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -16,11 +17,22 @@ import com.example.fogas.Models.HintDataModel;
 import com.example.fogas.Models.PegDataModel;
 import com.example.fogas.Models.UserDataModel;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import io.realm.Realm;
 
 public class notificationGame extends AppCompatActivity {
+    SharedPreferences prefs = null;
+    private int repeat;
+    String datum;
     private ArrayList<String> questions;
     private Realm memoRealm;
     private UserDataModel user;
@@ -35,6 +47,9 @@ public class notificationGame extends AppCompatActivity {
         setContentView(R.layout.activity_notification_game);
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         superMemo2 = new SuperMemo2();
+        prefs = getSharedPreferences("repeatDatas",MODE_PRIVATE);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd HH:mm:ss", Locale.getDefault());
+        datum = sdf.format(new Date());
         //Toast.makeText(this,"from create: "+user.getPegs().getPegs().size(),Toast.LENGTH_LONG).show();
         questions = new ArrayList<>();
         generateQuestions();
@@ -51,37 +66,59 @@ public class notificationGame extends AppCompatActivity {
         try{
             pegs = user.getPegs();
             hints = user.getHints();
-            Toast.makeText(getBaseContext(),String.valueOf(pegs.getPegs().size()),Toast.LENGTH_LONG).show();
-            if (pegs.getPegs().size() <= 10) {
-                try {
-                    new AlertDialog.Builder(this)
-                            .setTitle(R.string.addNewPegs)
-                            .setMessage(R.string.addNewPegs)
 
-                            // Specifying a listener allows you to take an action before dismissing the dialog.
-                            // The dialog is automatically dismissed when a dialog button is clicked.
-                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                                    transaction.replace(R.id.cl2, new letterUpdateFragment(), "fromNotificaton");
-
-                                }
-                            })
-                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-
-                                }
-                            })
-                            .setIcon(getResources().getDrawable(R.drawable.ic_baseline_error_24))
-                            .show();
-                }catch (Throwable e){
-                    Toast.makeText(getBaseContext(),"dialog: "+e.toString(),Toast.LENGTH_LONG).show();
-                }
-            }
         }catch (Throwable e){
             Toast.makeText(getBaseContext(),"other: "+e.toString(),Toast.LENGTH_LONG).show();
         }
+
+    }
+
+    private void checkResults(){
+
+        //write out needed datas
+        repeat = prefs.getInt("repeats_key",1);
+        FileOutputStream fileout = null;
+        {
+            try {
+                fileout = openFileOutput("memoDatas",MODE_APPEND);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            datum = datum +"\n";
+            try {
+                fileout.write(datum.getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }finally {
+                if(fileout!=null){
+                    try {
+                        fileout.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
+        File file = getExternalFilesDir(null);
+        String filename = file.getAbsolutePath()+"superMemoDatas.txt";
+        FileOutputStream fs = null;
+        try {
+            fs = new FileOutputStream(filename);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            fs.write(Integer.toString(repeat).getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            fs.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
@@ -99,5 +136,12 @@ public class notificationGame extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
 
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("repeats_key",repeat+1);
+        editor.commit();
+    }
 }

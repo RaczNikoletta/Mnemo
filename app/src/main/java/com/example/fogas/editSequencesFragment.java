@@ -38,7 +38,7 @@ public class editSequencesFragment extends Fragment {
     SequenceDataModel foundSeq = new SequenceDataModel();
     //private ArrayList<String> story = new ArrayList<>();
     StringBuilder storyBuilder = new StringBuilder();
-    String story;
+    private RealmList<String> story;
     private Button saveStoryBt;
 
     public static editSequencesFragment newInstance(String sequence) {
@@ -58,6 +58,7 @@ public class editSequencesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_edit_sequences, container, false);
         storyEt = view.findViewById(R.id.storyEt);
         seqTv = view.findViewById(R.id.seqTv);
+        story = new RealmList<>();
         try {
             Bundle args = getArguments();
             sequence = args.getString("sequence", "");
@@ -84,17 +85,28 @@ public class editSequencesFragment extends Fragment {
                     foundSeq = user.getSequences().get(i);
                 }
             }
+
         }catch (Throwable e){
             Toast.makeText(getContext(),"find seq error: " + e.toString(),Toast.LENGTH_LONG).show();
         }
 
-        for(int i=0;i<foundSeq.getSequence().size();i++){
+
+       /* for(int i=0;i<foundSeq.getSequence();i++){
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 storyBuilder.append(foundSeq.getSequence().get(i).getWord()+ " ");
+
             }
+        }/*
+        */
+        StringBuilder buildstory = new StringBuilder();
+        story = foundSeq.getStory();
+        ArrayList<String>storyList = new ArrayList<>();
+
+        for(int i=0;i<story.size();i++){
+            buildstory.append(story.get(i)).append(" ");
         }
         seqTv.setText(sequence);
-        storyEt.setText(storyBuilder.toString());
+        storyEt.setText(buildstory.toString());
 
 
 

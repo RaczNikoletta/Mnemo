@@ -40,6 +40,7 @@
             android:layout_weight="1"
             android:text="@string/fogasszamsorkgyak"
             android:textAlignment="center"
+            android:textColor="@color/white"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -81,6 +82,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/fogasbetukgyak"
+            android:textColor="@color/white"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -118,6 +120,7 @@
             android:layout_weight="1"
             android:text="@string/fogasszavakgyak"
             android:textAlignment="center"
+            android:textColor="@color/white"
             android:textSize="30sp"
             android:textStyle="bold" />
 
