@@ -5,9 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".wordPracticeFragment">
-<?xml version="1.0" encoding="UTF-8"?>
-
-    <FrameLayout tools:context=".wordPracticeFragment" android:layout_height="match_parent" android:layout_width="match_parent" xmlns:tools="http://schemas.android.com/tools" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -55,47 +52,6 @@
 
             />
 
-        <TextView
-            android:id="@+id/teszt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/szoveg_gomb"
-            app:layout_constraintVertical_bias="0.069" />
-
-        <TextView
-            android:id="@+id/hiba_szo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/hiba_szo"
-            android:textColor="#FA0000"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/szoveg_bevitel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/szoveg_kerdes"
-            app:layout_constraintVertical_bias="0.285" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-    -<androidx.constraintlayout.widget.ConstraintLayout android:layout_height="match_parent" android:layout_width="match_parent" android:background="@color/colorPrimary">
-
-    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" app:layout_constraintVertical_bias="0.022" app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.498" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent" android:text="@string/nullas_szo" android:id="@+id/szoveg_kerdes"/>
-
-    <EditText android:layout_height="wrap_content" android:layout_width="wrap_content" app:layout_constraintVertical_bias="0.08" app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.497" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent" android:id="@+id/szoveg_bevitel" app:layout_constraintTop_toBottomOf="@+id/szoveg_kerdes" android:inputType="textPersonName" android:ems="10" android:layout_marginTop="17dp"/>
-
-    <Button android:layout_height="wrap_content" android:layout_width="wrap_content" app:layout_constraintVertical_bias="0.071" app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.498" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent" android:text="@string/hozzaadGomb" android:id="@+id/szoveg_gomb" app:layout_constraintTop_toBottomOf="@+id/szoveg_bevitel"/>
-
-    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" app:layout_constraintVertical_bias="0.069" app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.498" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent" android:text="TextView" android:id="@+id/teszt" app:layout_constraintTop_toBottomOf="@+id/szoveg_gomb"/>
-
-    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" app:layout_constraintVertical_bias="0.285" app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.498" app:layout_constraintEnd_toEndOf="parent" android:text="@string/hiba_szo" android:id="@+id/hiba_szo" app:layout_constraintTop_toBottomOf="@+id/szoveg_kerdes" app:layout_constraintBottom_toTopOf="@+id/szoveg_bevitel" android:visibility="invisible" android:textColor="#FA0000"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

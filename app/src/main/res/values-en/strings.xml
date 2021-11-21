@@ -67,27 +67,7 @@
     <!--Practice mode-->
     <!--WordPracticeFragment -->
     <string name="noPegwordsinDB">You have to add peg words first!</string>
-    <string name="nullas_szo">Please enter the word for number zero!</string>
 
-    <string name="egyes_szo">Please enter the word for number one!</string>
-
-    <string name="kettes_szo">Please enter the word for number two!</string>
-
-    <string name="harmas_szo">Please enter the word for number three!</string>
-
-    <string name="negyes_szo">Please enter the word for number four!</string>
-
-    <string name="otos_szo">Please enter the word for number five!</string>
-
-    <string name="hatos_szo">Please enter the word for number six!</string>
-
-    <string name="hetes_szo">Please enter the word for number seven!</string>
-
-    <string name="nyolcas_szo">Please enter the word for number eight!</string>
-
-    <string name="kilences_szo">Please enter the word for number nine!</string>
-
-    <string name="hiba_szo">Cannot contain a number!</string>
     <!--WordPracticeFragment -->
     <string name="nullas_szo">Please enter the word for number zero!</string>
     <string name="egyes_szo">Please enter the word for number one!</string>
