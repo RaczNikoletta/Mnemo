@@ -12,8 +12,7 @@ public class Progress extends RealmObject {
     int gameId;
     Date lastPractice;
     int lastResult;
-    double avgResult;
-    Date timeInGame;
+    double timeInGame;
 
     public Progress(){};
 
@@ -41,18 +40,11 @@ public class Progress extends RealmObject {
         this.lastResult = lastResult;
     }
 
-    public double getAvgResult() {
-        return avgResult;
-    }
-
-    public void setAvgResult(double avgResult) {
-        this.avgResult = avgResult;
-    }
-    public Date getTimeInGame() {
+    public double getTimeInGame() {
         return timeInGame;
     }
 
-    public void setTimeInGame(Date timeInGame) {
+    public void setTimeInGame(double timeInGame) {
         this.timeInGame = timeInGame;
     }
 

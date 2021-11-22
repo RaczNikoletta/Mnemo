@@ -19,7 +19,7 @@
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/activity_login.xml" value="0.25878594249201275" />
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/activity_main.xml" value="0.18857142857142858" />
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/activity_main_fregment.xml" value="0.1" />
-        <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/activity_main_menu.xml" value="0.18857142857142858" />
+        <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/activity_main_menu.xml" value="0.1" />
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/activity_notification_game.xml" value="0.2857142857142857" />
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/activity_register.xml" value="0.3828571428571429" />
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/content.xml" value="0.42857142857142855" />
@@ -39,10 +39,12 @@
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/fragment_word_practice.xml" value="0.1989051094890511" />
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/fregment_practice.xml" value="0.1" />
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/menu.xml" value="0.42857142857142855" />
-        <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/popupfogas_layout.xml" value="0.1" />
+        <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/popupfogas_layout.xml" value="0.2857142857142857" />
+        <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/right_answer_layout.xml" value="0.42857142857142855" />
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/round_outline.xml" value="0.1" />
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/userfooter.xml" value="0.3828571428571429" />
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/userheader.xml" value="0.2857142857142857" />
+        <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/wrong_answer_layout.xml" value="0.18958333333333333" />
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
       </map>

@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 
@@ -16,6 +17,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,15 +27,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fogas.Models.PegDataModel;
 import com.example.fogas.Models.PegModel;
+import com.example.fogas.Models.Progress;
+import com.example.fogas.Models.ProgressDataModel;
 import com.example.fogas.Models.UserDataModel;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.zip.Inflater;
 
 import io.realm.Realm;
@@ -76,6 +83,10 @@ public class wordPracticeFragment extends Fragment {
     private int pontok = 0;
     private ImageButton helpImage;
     private ImageView imageViewHint;
+    private long tStart;
+    private long tEnd;
+    private long tDelta;
+    private double elapsedSeconds;
 
 
     public wordPracticeFragment() {
@@ -102,7 +113,7 @@ public class wordPracticeFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
+        //WORDPRACTICE GameID = 2
         try{
             updaterRealm = Realm.getDefaultInstance();
             user = updaterRealm.where(UserDataModel.class).equalTo("loggedIn",true).findFirst();
@@ -181,6 +192,7 @@ public class wordPracticeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setRetainInstance(true);
+        tStart = System.currentTimeMillis();
 
 
 
@@ -273,6 +285,35 @@ public class wordPracticeFragment extends Fragment {
 
 
                         valaszok[index-1] = szoveg_bevitel.getText().toString();
+                        if(valaszok[index-1].equals(helyes_valaszok[index-1]))
+                        {
+                           LayoutInflater inf = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                           View popupView = inf.inflate(R.layout.right_answer_layout,null);
+                            int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                            int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                            boolean focusable = true; // lets taps outside the popup also dismiss it
+                            final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+                            popupWindow.setBackgroundDrawable(new BitmapDrawable());
+                            popupWindow.setOutsideTouchable(true);
+
+                            // show the popup window
+                            // which view you pass in doesn't matter, it is only used for the window tolken
+                            popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+                        }
+                        else{
+                            LayoutInflater inf = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                            View popupView = inf.inflate(R.layout.wrong_answer_layout,null);
+                            int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                            int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                            boolean focusable = true; // lets taps outside the popup also dismiss it
+                            final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+                            popupWindow.setBackgroundDrawable(new BitmapDrawable());
+                            popupWindow.setOutsideTouchable(true);
+
+                            // show the popup window
+                            // which view you pass in doesn't matter, it is only used for the window tolken
+                            popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+                        }
                         pegAboveNine = new ArrayList<>();
                         pegAboveNine.add(String.valueOf(tempAboveNine.getWord()));
 
@@ -287,6 +328,12 @@ public class wordPracticeFragment extends Fragment {
                 else{
                     valaszok[index-1]=szoveg_bevitel.getText().toString();
                     for(int i = 0;i<10;i++){
+                        if(i==9){
+                            tEnd = System.currentTimeMillis();
+                            tDelta = tEnd -tStart;
+                            elapsedSeconds = tDelta/1000.0;
+
+                        }
                         if(helyes_valaszok[i].equals(valaszok[i])){
                             pontok= pontok+1;
                         }
@@ -297,6 +344,7 @@ public class wordPracticeFragment extends Fragment {
 
 
                     kerdes.setText(pontok+"");
+                    insertProgress();
 
 
                     try {
@@ -359,6 +407,24 @@ public class wordPracticeFragment extends Fragment {
 
         }
         return ifExists;
+    }
+
+    public void insertProgress(){
+        updaterRealm.executeTransaction(r-> {
+            user = updaterRealm.where(UserDataModel.class).equalTo("loggedIn", true).findFirst();
+            assert user != null;
+            Progress newProg = new Progress();
+            ProgressDataModel progress = user.getProgress();
+            newProg.setGameId(2);
+            newProg.setTimeInGame(elapsedSeconds / 60);
+            newProg.setLastResult(pontok);
+            Date now = new Date();
+            progress.addProgress(newProg,now);
+            updaterRealm.insertOrUpdate(user);
+        });
+
+
+
     }
 
 
