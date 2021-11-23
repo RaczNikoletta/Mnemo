@@ -40,6 +40,7 @@ import com.example.fogas.Models.ProgressDataModel;
 import com.example.fogas.Models.UserDataModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.zip.Inflater;
 
@@ -78,8 +79,8 @@ public class wordPracticeFragment extends Fragment {
     private Spinner aboveNineSpinner;
     private EditText pegLetterAboveNineEt;
     private EditText pegWordAboveNineEt;
-    String [] helyes_valaszok = new String[10];
-    String [] valaszok = new String[10];
+    private String [] helyes_valaszok = new String[10];
+    private String [] valaszok = new String[10];
     private int pontok = 0;
     private ImageButton helpImage;
     private ImageView imageViewHint;
@@ -87,7 +88,13 @@ public class wordPracticeFragment extends Fragment {
     private long tEnd;
     private long tDelta;
     private double elapsedSeconds;
+    private ArrayList<Integer> indexek = new ArrayList<>();
+    private TextView gomb;
+    private int max = 0;
 
+    private int db = 0;
+
+    private  TextView teszt;
 
     public wordPracticeFragment() {
         // Required empty public constructor
@@ -122,6 +129,7 @@ public class wordPracticeFragment extends Fragment {
                 if(pegmodelAboveNine != null){
                     pegRealmListAboveNine = pegmodelAboveNine.getPegs();
                     for(int i=0;i<pegRealmListAboveNine.size();i++){
+                        max = pegRealmListAboveNine.size();
                         tempAboveNine = new PegModel();
                         tempAboveNine = (PegModel) pegRealmListAboveNine.get(i);
                         if(tempAboveNine!=null) {
@@ -154,26 +162,10 @@ public class wordPracticeFragment extends Fragment {
 
 
 
-        /*if(!checkIfWordsInDatabase())
 
-            if(getContext()!= null) {
-                new AlertDialog.Builder(getContext())
-                        .setTitle(R.string.noPegwordsinDB)
-                        .setMessage(R.string.noPegwordsinDB)
 
-                        // Specifying a listener allows you to take an action before dismissing the dialog.
-                        // The dialog is automatically dismissed when a dialog button is clicked.
-                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        })
 
-                        // A null listener allows the button to dismiss the dialog and take no further action.
-                        .setIcon(getResources().getDrawable(R.drawable.ic_baseline_error_24))
-                        .show();
-            }
 
-        }*/
     }
 
     public static void hideKeyboard(Activity activity) {
@@ -212,6 +204,9 @@ public class wordPracticeFragment extends Fragment {
         helpImage = view.findViewById(R.id.helpImage);
         imageViewHint = view.findViewById(R.id.imageViewHint);
         imageViewHint.setVisibility(View.INVISIBLE);
+        gomb = (TextView) view.findViewById(R.id.szoveg_gomb);
+
+        teszt = (TextView) view.findViewById(R.id.teszteles);
 
 
 
@@ -220,146 +215,151 @@ public class wordPracticeFragment extends Fragment {
         view.findViewById(R.id.szoveg_gomb).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean ellenorzes = false;
-                if(index==0){
+
+
+                String string = szoveg_bevitel.getText().toString();
+                boolean numeric = true;
+                try {
+                    Double num = Double.parseDouble(string);
+                } catch (NumberFormatException e) {
+                    numeric = false;
+                }
+
+                if (numeric||db==0) {
+                    if (index == 0) {
 
 
                         valaszok[index] = szoveg_bevitel.getText().toString();
 
-                        tempAboveNine = new PegModel();
-                        for(int i = 0;i<10;i++){
-                            tempAboveNine = (PegModel) pegRealmListAboveNine.get(i);
-                            if(tempAboveNine.getWord().toString()==null){
-                                helyes_valaszok[i] = "";
-                            }
-                            else{
-                                helyes_valaszok[i] = tempAboveNine.getWord().toString();
-                            }
-
-
-                        }
 
 
                         //ekkor megkapja az 1-es indexü elem betüjét
 
 
-                        kerdes.setText(kerdes.getResources().getString(R.string.egyes_szo));
-                        ellenorzes = true;
+
+
                         //szoveg_bevitel.setText("");
 
+                        if (db == 0) {
+                            db = 1;
+                            kerdes.setVisibility(View.VISIBLE);
+                            szoveg_bevitel.setVisibility(View.VISIBLE);
+                            helpImage.setVisibility(View.VISIBLE);
+                            gomb.setText(kerdes.getResources().getString(R.string.hozzaadGomb));
 
-                        index = index + 1;
+                            tempAboveNine = new PegModel();
 
+                            for (int i = 0; i < max; i++) {
+                                tempAboveNine = (PegModel) pegRealmListAboveNine.get(i);
+                                indexek.add(tempAboveNine.getNum());
+                            }
+
+
+                            Collections.shuffle(indexek);
+
+                            for (int i = 0; i < 10; i++) {
+                                tempAboveNine = (PegModel) pegRealmListAboveNine.get(indexek.get(i));
+
+                                helyes_valaszok[i] = tempAboveNine.getWord().toString();
+
+
+                            }
+                            kerdes.setText(kerdes.getResources().getString(R.string.kerdes_szo) + " " + helyes_valaszok[index] + "?");
+
+                        } else {
+
+                            index = index + 1;
+                        }
 
 
 //hello
 
-                }
-                if(index>0&&index<10){
+                    }
+                    if (index > 0 && db == 1) {
+                        if (index > 0 && index < 10) {
+                            String ki = "";
+                            for (int i = 0; i < 10; i++) {
+                                ki = ki + indexek.get(i) + "=" + valaszok[i] + " ";
+                            }
+                            teszt.setText(ki);
 
 
-                        if (index == 2) {
-                            kerdes.setText(kerdes.getResources().getString(R.string.kettes_szo));
+                            kerdes.setText(kerdes.getResources().getString(R.string.kerdes_szo) + " " + helyes_valaszok[index] + "?");
+
+
+                            valaszok[index - 1] = szoveg_bevitel.getText().toString();
+                            if (indexek.get(index - 1).equals(Integer.parseInt(valaszok[index - 1]))) {
+                                LayoutInflater inf = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                View popupView = inf.inflate(R.layout.right_answer_layout, null);
+                                int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                                int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                                boolean focusable = true; // lets taps outside the popup also dismiss it
+                                final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+                                popupWindow.setBackgroundDrawable(new BitmapDrawable());
+                                popupWindow.setOutsideTouchable(true);
+
+                                // show the popup window
+                                // which view you pass in doesn't matter, it is only used for the window tolken
+                                popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+                            } else {
+                                LayoutInflater inf = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                View popupView = inf.inflate(R.layout.wrong_answer_layout, null);
+                                int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                                int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                                boolean focusable = true; // lets taps outside the popup also dismiss it
+                                final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+                                popupWindow.setBackgroundDrawable(new BitmapDrawable());
+                                popupWindow.setOutsideTouchable(true);
+
+                                // show the popup window
+                                // which view you pass in doesn't matter, it is only used for the window tolken
+                                popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+                            }
+                            pegAboveNine = new ArrayList<>();
+                            pegAboveNine.add(String.valueOf(tempAboveNine.getWord()));
+
+
+                            szoveg_bevitel.setText("");
+                            index = index + 1;
+
+
+                        } else {
+
+                            valaszok[index - 1] = szoveg_bevitel.getText().toString();
+                            for (int i = 0; i < 10; i++) {
+                                if (i == 9) {
+                                    tEnd = System.currentTimeMillis();
+                                    tDelta = tEnd - tStart;
+                                    elapsedSeconds = tDelta / 1000.0;
+
+                                }
+                                if (indexek.get(i).equals(Integer.parseInt(valaszok[i]))) {
+                                    pontok = pontok + 1;
+
+                                }
+                            }
+                            hideKeyboard(getActivity()); //won't work
+
+
+                            kerdes.setText(pontok + "");
+                            insertProgress();
+
+                        /*
+                        try {
+                            FragmentManager fm = getFragmentManager();
+                            FragmentTransaction ft = fm.beginTransaction();
+                            ft.replace(R.id.container, new PracticeFragment(), "Add hints fragment")
+                                    .addToBackStack(null)
+                                    .commit();
+
+
+                        } catch (Throwable e) {
+                            Log.d("practicefragment", "letterpractice click error " + e.toString());
                         }
-                        if (index == 3) {
-                            kerdes.setText(kerdes.getResources().getString(R.string.harmas_szo));
-                        }
-                        if (index == 4) {
-                            kerdes.setText(kerdes.getResources().getString(R.string.negyes_szo));
-                        }
-                        if (index == 5) {
-                            kerdes.setText(kerdes.getResources().getString(R.string.otos_szo));
-                        }
-                        if (index == 6) {
-                            kerdes.setText(kerdes.getResources().getString(R.string.hatos_szo));
-                        }
-                        if (index == 7) {
-                            kerdes.setText(kerdes.getResources().getString(R.string.hetes_szo));
-                        }
-                        if (index == 8) {
-                            kerdes.setText(kerdes.getResources().getString(R.string.nyolcas_szo));
-                        }
-                        if (index == 9) {
-                            kerdes.setText(kerdes.getResources().getString(R.string.kilences_szo));
-                        }
+*/
 
-
-                        valaszok[index-1] = szoveg_bevitel.getText().toString();
-                        if(valaszok[index-1].equals(helyes_valaszok[index-1]))
-                        {
-                           LayoutInflater inf = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                           View popupView = inf.inflate(R.layout.right_answer_layout,null);
-                            int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-                            int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-                            boolean focusable = true; // lets taps outside the popup also dismiss it
-                            final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
-                            popupWindow.setBackgroundDrawable(new BitmapDrawable());
-                            popupWindow.setOutsideTouchable(true);
-
-                            // show the popup window
-                            // which view you pass in doesn't matter, it is only used for the window tolken
-                            popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-                        }
-                        else{
-                            LayoutInflater inf = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                            View popupView = inf.inflate(R.layout.wrong_answer_layout,null);
-                            int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-                            int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-                            boolean focusable = true; // lets taps outside the popup also dismiss it
-                            final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
-                            popupWindow.setBackgroundDrawable(new BitmapDrawable());
-                            popupWindow.setOutsideTouchable(true);
-
-                            // show the popup window
-                            // which view you pass in doesn't matter, it is only used for the window tolken
-                            popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-                        }
-                        pegAboveNine = new ArrayList<>();
-                        pegAboveNine.add(String.valueOf(tempAboveNine.getWord()));
-
-
-                        ellenorzes = true;
-                        szoveg_bevitel.setText("");
-                        index = index + 1;
-
-
-                }
-
-                else{
-                    valaszok[index-1]=szoveg_bevitel.getText().toString();
-                    for(int i = 0;i<10;i++){
-                        if(i==9){
-                            tEnd = System.currentTimeMillis();
-                            tDelta = tEnd -tStart;
-                            elapsedSeconds = tDelta/1000.0;
-
-                        }
-                        if(helyes_valaszok[i].equals(valaszok[i])){
-                            pontok= pontok+1;
                         }
                     }
-                    hideKeyboard(getActivity()); //won't work
-                    String teszteles = "";
-
-
-
-                    kerdes.setText(pontok+"");
-                    insertProgress();
-
-
-                    try {
-                        FragmentManager fm = getFragmentManager();
-                        FragmentTransaction ft = fm.beginTransaction();
-                        ft.replace(R.id.container,new PracticeFragment(),"Add hints fragment")
-                                .addToBackStack(null)
-                                .commit();
-
-
-                    }catch(Throwable e){
-                        Log.d("practicefragment","letterpractice click error "+ e.toString());
-                    }
-
-
                 }
             }
         });
