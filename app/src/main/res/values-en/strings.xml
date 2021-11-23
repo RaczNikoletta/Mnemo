@@ -121,4 +121,10 @@
     <string name="timeToPractice2">"You need to recall what you learned so far"</string>
     <string name="addNewPegs">"You have few pegs, let's add some"</string>
     <!--Push notification -->
+    <!--Before_sequence -->
+    <string name="chooseSeqandLevel">Please choose sequence and level</string>
+    <string name="easyLevel">Easy</string>
+    <string name="mediumLevel">Medium</string>
+    <string name="hardLevel">Hard</string>
+    <!--Before_sequence -->
 </resources>

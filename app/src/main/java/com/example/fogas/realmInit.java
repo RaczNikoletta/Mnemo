@@ -14,18 +14,15 @@ public class realmInit extends Application {
 
     @Override
     public void onCreate() {
-        Log.v("valami" ,Thread.currentThread().getName());
+        Log.v("Thread name: " ,Thread.currentThread().getName());
         super.onCreate();
         Realm.init(getApplicationContext());
         //for basic realm
         //RealmConfiguration configuration = new RealmConfiguration.Builder().name("RealmData.realm").build();
         Realm.setDefaultConfiguration(initializeRealmConfig());
-        //Log.v("valami" ,Thread.currentThread().getName());
     }
 
     public RealmConfiguration initializeRealmConfig() {
-        RealmEncryptionKeyProvider realmEncryptionKeyProvider = new RealmEncryptionKeyProvider(this);
-        byte [] encryptionKey = realmEncryptionKeyProvider.getSecureRealmKey();
 
         return new RealmConfiguration.Builder()
                 .name("RealmData.realm")

@@ -125,4 +125,10 @@
     <string name="timeToPractice2">"Fel kell idézned az eddig tanultakat, külöben elfelejtődnek!"</string>
     <string name="addNewPegs">"Túl kevés fogasod van, adj meg újakat!"</string>
     <!--Push notification -->
+    <!--Before_sequence -->
+    <string name="chooseSeqandLevel">Kérlek válassz számsort és nehézségi fokozatot!</string>
+    <string name="easyLevel">Könnyű</string>
+    <string name="mediumLevel">Közepes</string>
+    <string name="hardLevel">Hard</string>
+    <!--Before_sequence -->
 </resources>

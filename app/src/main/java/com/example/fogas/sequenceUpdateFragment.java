@@ -61,7 +61,7 @@ public class sequenceUpdateFragment extends Fragment {
         tempseq = new SequenceDataModel();
 
         try {
-            //dummyseq();
+            dummyseq();
         } catch (Throwable e) {
             Toast.makeText(getContext(), "makedummyexception " + e.toString(), Toast.LENGTH_LONG).show();
         }

@@ -33,7 +33,7 @@ public class PracticeFragment extends Fragment {
         view.findViewById(R.id.wordPracticeBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Clicked wordpractice button!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Clicked wordpractice button!", Toast.LENGTH_SHORT).show();
                 try {
                     FragmentManager fm = getFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
@@ -49,7 +49,7 @@ public class PracticeFragment extends Fragment {
         view.findViewById(R.id.letterPracticeBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Clicked letterpractice button!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Clicked letterpractice button!", Toast.LENGTH_SHORT).show();
                 try {
                     FragmentManager fm = getFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
@@ -64,11 +64,11 @@ public class PracticeFragment extends Fragment {
         view.findViewById(R.id.sequencePracticeBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Clicked sequencepractice button!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Clicked sequencepractice button!", Toast.LENGTH_SHORT).show();
                 try {
                     FragmentManager fm = getFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
-                    ft.replace(R.id.container,new sequencePracticeFragment())
+                    ft.replace(R.id.container,new before_sequence_practice())
                             .addToBackStack(null)
                             .commit();
                 }catch(Throwable e){

@@ -18,9 +18,6 @@ public class UserDataModel extends RealmObject {
     PegDataModel pegs;
     ProgressDataModel progress;
     RealmList<SequenceDataModel> sequences;
-
-    int pegId;
-
     HintDataModel hints;
     Date registryDate;
     double GameTimeInMin;
@@ -35,6 +32,7 @@ public class UserDataModel extends RealmObject {
         pegs = new PegDataModel(user);
         sequences = new RealmList<SequenceDataModel>();
         hints = new HintDataModel(user);
+        progress = new ProgressDataModel(userName);
         GameTimeInMin = 0;
         loggedIn = false;
 
@@ -126,41 +124,23 @@ public class UserDataModel extends RealmObject {
         this.hints = hints;
     }
 
-    public boolean setOneSequence(SequenceDataModel s){
-        int counter =0;
+    public void setOneSequence(SequenceDataModel s){
+        boolean isExists = false;
         //check if sequence is already exists in the database
         if(sequences == null){
             sequences = new RealmList<>();
         }
         for(int i=0;i<sequences.size();i++){
             SequenceDataModel temp = sequences.get(i);
-            if(temp!=null){
-            for(int j=0;j<temp.sequence.size();j++){
-                if(temp.sequence.size()!=s.sequence.size()){
-                    break;
-                }
-                else {
-                    assert temp.sequence.get(i) != null;
-                    if(temp.sequence.get(i).getNum() == s.sequence.get(i).getNum()){
-                        counter++;
-                    }
-                }
-            }}
+            if(s.isEqual(temp))
+            {
+                isExists = true;
+            }
         }
 
-        if(counter < s.sequence.size()){
+        if(!isExists){
             sequences.add(s);
-            return true;
-        }else return false;
-    }
-
-
-    public int getPegId() {
-        return pegId;
-    }
-
-    public void setPegId(int pegId) {
-        this.pegId = pegId;
+        }
     }
 
 
