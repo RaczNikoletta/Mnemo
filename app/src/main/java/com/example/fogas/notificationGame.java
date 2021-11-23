@@ -142,6 +142,7 @@ public class notificationGame extends AppCompatActivity {
 
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt("repeats_key",repeat+1);
+        editor.putBoolean("first_not",false);
         editor.commit();
     }
 }
