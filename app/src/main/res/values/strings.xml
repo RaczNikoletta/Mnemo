@@ -73,16 +73,7 @@
     <string name="noPegwordsinDB">Először meg kell adnod a szavakat!</string>
 
     <!--WordPracticeFragment -->
-    <string name="nullas_szo">Kérem adja meg a nullához tartozó szót!</string>
-    <string name="egyes_szo">Kérem adja meg az egyeshez tartozó szót!</string>
-    <string name="kettes_szo">Kérem adja meg a ketteshez tartozó szót!</string>
-    <string name="harmas_szo">Kérem adja meg a hármashoz tartozó szót!</string>
-    <string name="negyes_szo">Kérem adja meg a négyeshez tartozó szót!</string>
-    <string name="otos_szo">Kérem adja meg az ötöshöz tartozó szót!</string>
-    <string name="hatos_szo">Kérem adja meg a hatoshoz tartozó szót!</string>
-    <string name="hetes_szo">Kérem adja meg a heteshez tartozó szót!</string>
-    <string name="nyolcas_szo">Kérem adja meg a nyolcashoz tartozó szót!</string>
-    <string name="kilences_szo">Kérem adja meg a kilenceshez tartozó szót!</string>
+    <string name="kerdes_szo">Melyik szám tartozik a következö szohoz:</string>
     <string name="hiba_szo">Nem tartalmazhat számot!</string>
     <!--Fragment update -->
     <string name="setpegLetters">Betűk, szavak kezelése</string>
