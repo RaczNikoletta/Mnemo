@@ -13,32 +13,13 @@ public class ProgressDataModel extends RealmObject {
     @PrimaryKey
     String userName;
     RealmList<Progress> progressForEachGame;
-    RealmList<Integer> allRes;
-    Double avgRes;
 
-    public RealmList<Integer> getAllRes() {
-        return allRes;
-    }
-
-    public void setAllRes(RealmList<Integer> allRes) {
-        this.allRes = allRes;
-    }
-
-    public Double getAvgRes() {
-        return avgRes;
-    }
-
-    public void setAvgRes(Double avgRes) {
-        this.avgRes = avgRes;
-    }
 
     public ProgressDataModel(){}
 
 
     public ProgressDataModel(String name){
         userName = name;
-        allRes = new RealmList<>();
-        avgRes = 0.0;
 
     }
 
@@ -61,9 +42,8 @@ public class ProgressDataModel extends RealmObject {
             assert progressForEachGame.get(i) != null;
             if(p.gameId == progressForEachGame.get(i).gameId){
                 progressForEachGame.get(i).setLastPractice(now);
-                allRes.add(p.lastResult);
-                this.setAvgRes(getAvg(p.lastResult));
-                progressForEachGame.get(i).setLastResult(p.lastResult);
+                progressForEachGame.get(i).addResult(p.results.get(0));
+                progressForEachGame.get(i).setAvg();
                 progressForEachGame.get(i).setTimeInGame(progressForEachGame.get(i).getTimeInGame()+p.getTimeInGame());
                 isExists = true;
             }
@@ -73,16 +53,6 @@ public class ProgressDataModel extends RealmObject {
 
     }
 
-    public double getAvg(double lastRes){
-        int sum = 0;
-        for(int i=0;i<allRes.size();i++){
-            sum += allRes.get(i);
-        }
-        if(allRes.size()==0){
-            return lastRes;
-        }
-        return (sum/(allRes.size()-1.0));
-    }
 
 
 }

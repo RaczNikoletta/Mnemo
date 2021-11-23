@@ -103,6 +103,7 @@ public class letterUpdateFragment extends Fragment {
 
 
         try {
+            //todo kiszedni függvénybe
             updaterRealm = Realm.getDefaultInstance();
             user = updaterRealm.where(UserDataModel.class).equalTo("loggedIn", true).findFirst();
             if (user != null) {
@@ -145,12 +146,15 @@ public class letterUpdateFragment extends Fragment {
 
         ((Spinner) view.findViewById(R.id.aboveNineSpinner)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
+            //Todo kiszedni függvénybe
             public void onItemSelected(AdapterView<?> adapterView, View v, int position, long l) {
                 selectedFromSpinner = aboveNineSpinner.getSelectedItem().toString();
+                //get all peg from the user
                 for (int i = 0; i < pegRealmListAboveNine.size(); i++) {
                     tempAboveNine = new PegModel();
                     tempAboveNine = (PegModel) pegRealmListAboveNine.get(i);
                     if (tempAboveNine != null) {
+                        //check if i. is equals the selected
                         if (tempAboveNine.getNum() == Integer.parseInt(selectedFromSpinner)) {
                             if (tempAboveNine.getLetter() == null) {
                                 pegLetterAboveNineEt.setText("");
@@ -178,6 +182,7 @@ public class letterUpdateFragment extends Fragment {
 
         PegModel p;
         try {
+            //todo kiszedni függvénybe
             updaterRealm = Realm.getDefaultInstance();
             user = updaterRealm.where(UserDataModel.class).equalTo("loggedIn", true).findFirst();
             if (user != null) {
@@ -243,11 +248,11 @@ public class letterUpdateFragment extends Fragment {
                     try {
                         peg = updaterRealm.where(PegDataModel.class).equalTo("userName", user.getUserName()).findFirst();
                         pegs = peg.getPegs();
+                        //count pegs below ten to know bounds
                         for (int i = 0; i < pegs.size(); i++) {
-                            if (pegs.get(i).getNum() > 9) {
-
-                            } else
+                            if (pegs.get(i).getNum() < 9) {
                                 belowten++;
+                            }
                         }
                     } catch (Throwable e) {
                         Toast.makeText(getContext(), "phase one" + e.toString(), Toast.LENGTH_LONG).show();

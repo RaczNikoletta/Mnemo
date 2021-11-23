@@ -413,11 +413,10 @@ public class wordPracticeFragment extends Fragment {
         updaterRealm.executeTransaction(r-> {
             user = updaterRealm.where(UserDataModel.class).equalTo("loggedIn", true).findFirst();
             assert user != null;
-            Progress newProg = new Progress();
+            Progress newProg = new Progress(2);
             ProgressDataModel progress = user.getProgress();
-            newProg.setGameId(2);
             newProg.setTimeInGame(elapsedSeconds / 60);
-            newProg.setLastResult(pontok);
+            newProg.addResult(pontok);
             Date now = new Date();
             progress.addProgress(newProg,now);
             updaterRealm.insertOrUpdate(user);
