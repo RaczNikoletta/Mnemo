@@ -6,8 +6,10 @@ import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -65,6 +67,8 @@ public class letterUpdateFragment extends Fragment {
     private String selectedFromSpinner;
     private TextView newNumberTv;
     private int belowten;
+    private SharedPreferences prefs = null;
+    private boolean isFirst;
 
     public letterUpdateFragment() {
         // Required empty public constructor
@@ -83,6 +87,8 @@ public class letterUpdateFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_letter_update, container, false);
         setRetainInstance(true);
         createNotificationChannel();
+        prefs = getActivity().getSharedPreferences("repeatDatas", Context.MODE_PRIVATE);
+        isFirst = prefs.getBoolean("first_not",true);
 
         ids = new int[]{R.id.pegletterTv0, R.id.pegletterTv1, R.id.pegletterTv2, R.id.pegletterTv3, R.id.pegletterTv4,
                 R.id.pegletterTv5, R.id.pegletterTv6, R.id.pegletterTv7, R.id.pegletterTv8,
@@ -250,7 +256,7 @@ public class letterUpdateFragment extends Fragment {
                         pegs = peg.getPegs();
                         //count pegs below ten to know bounds
                         for (int i = 0; i < pegs.size(); i++) {
-                            if (pegs.get(i).getNum() < 9) {
+                            if (pegs.get(i).getNum() <= 9) {
                                 belowten++;
                             }
                         }
@@ -321,7 +327,7 @@ public class letterUpdateFragment extends Fragment {
                                         }
                                     }
                                     //Toast.makeText(getContext(),"counter "+String.valueOf(counter),Toast.LENGTH_LONG).show();
-                                    if (counter >= 10) {
+                                    if (counter >= 10 && isFirst) {
                                         long timeAtButtonClick = System.currentTimeMillis();
                                         Intent intent = new Intent(getContext(),PracticeNotificationManager.class);
                                         PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(),0,intent,0);
