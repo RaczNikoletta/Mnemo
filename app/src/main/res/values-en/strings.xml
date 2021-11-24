@@ -67,9 +67,11 @@
     <!--Practice mode-->
     <!--WordPracticeFragment -->
     <string name="noPegwordsinDB">You have to add peg words first!</string>
+    <string name="noHintInDB">There is no hint for this peg in database</string>
 
     <!--WordPracticeFragment -->
     <string name="kerdes_szo">Which number belongs to the next word:</string>
+    <string name="kerdes_betu">Which number belongs to the next letter:</string>
     <string name="hiba_szo">Cannot contain a number!</string>
     <!--Fragment update -->
     <string name="setpegLetters">Update letters, words</string>

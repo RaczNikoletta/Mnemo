@@ -327,7 +327,7 @@ public class letterUpdateFragment extends Fragment {
                                         }
                                     }
                                     //Toast.makeText(getContext(),"counter "+String.valueOf(counter),Toast.LENGTH_LONG).show();
-                                    if (counter >= 10 && isFirst) {
+                                    if (counter >= 10) {
                                         long timeAtButtonClick = System.currentTimeMillis();
                                         Intent intent = new Intent(getContext(),PracticeNotificationManager.class);
                                         PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(),0,intent,0);

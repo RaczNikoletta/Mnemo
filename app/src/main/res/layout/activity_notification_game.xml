@@ -28,6 +28,7 @@
                 android:layout_marginBottom="268dp"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:text="@string/hozzaadGomb"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
@@ -37,8 +38,12 @@
                 android:id="@+id/answerNotEt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
                 android:ems="10"
                 android:inputType="textPersonName"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/sendNotBtn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +53,6 @@
                 android:id="@+id/questionNotTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/nullas"
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:textStyle="bold"
@@ -61,7 +65,8 @@
                 android:id="@+id/part_jelzo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0/9"
+                android:text="0/10"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toTopOf="@+id/questionNotTv"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -77,20 +82,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/answerNotEt" />
 
-            <Button
-                android:id="@+id/helpNotBtn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#7E7474"
-                android:text="@string/segitsegGomb"
-                android:textColor="@color/white"
-                android:textColorLink="#817676"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sendNotBtn"
-                app:layout_constraintVertical_bias="0.187" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>

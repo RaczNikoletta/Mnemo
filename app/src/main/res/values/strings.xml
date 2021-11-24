@@ -71,9 +71,11 @@
     <!--Practice mode-->
     <!--WordPracticeFragment -->
     <string name="noPegwordsinDB">Először meg kell adnod a szavakat!</string>
+    <string name="noHintInDB">Ehhez a fogashoz nem adtál meg segítséget</string>
 
     <!--WordPracticeFragment -->
     <string name="kerdes_szo">Melyik szám tartozik a következö szohoz:</string>
+    <string name="kerdes_betu">Melyik szám tartozik a következő betűhöz? </string>
     <string name="hiba_szo">Nem tartalmazhat számot!</string>
     <!--Fragment update -->
     <string name="setpegLetters">Betűk, szavak kezelése</string>

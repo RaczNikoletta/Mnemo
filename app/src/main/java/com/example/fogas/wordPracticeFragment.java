@@ -226,6 +226,8 @@ public class wordPracticeFragment extends Fragment {
                     if (bmp.get(index) != null) {
                         imageViewHint.setVisibility(View.VISIBLE);
                         imageViewHint.setImageBitmap(Bitmap.createBitmap(bmp.get(index)));
+                    }else{
+                        Toast.makeText(getContext(),R.string.noHintInDB,Toast.LENGTH_LONG).show();
                     }
                 }
 
