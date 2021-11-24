@@ -98,8 +98,8 @@ public class wordPracticeFragment extends Fragment {
     HashMap<Integer,Bitmap> bmp = new HashMap<>();
 
     private int db = 0;
+    private int helyes = 0;
 
-    private  TextView teszt;
 
     public wordPracticeFragment() {
         // Required empty public constructor
@@ -211,7 +211,7 @@ public class wordPracticeFragment extends Fragment {
         imageViewHint.setVisibility(View.INVISIBLE);
         gomb = (TextView) view.findViewById(R.id.szoveg_gomb);
 
-        teszt = (TextView) view.findViewById(R.id.teszteles);
+
 
         helpImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -276,13 +276,18 @@ public class wordPracticeFragment extends Fragment {
 
                             for (int i = 0; i < max; i++) {
                                 tempAboveNine = (PegModel) pegRealmListAboveNine.get(i);
-                                indexek.add(tempAboveNine.getNum());
+                                if(!tempAboveNine.getWord().equals("")){
+                                    indexek.add(tempAboveNine.getNum());
+                                    helyes = helyes + 1;
+
+                                }
+
                             }
 
 
                             Collections.shuffle(indexek);
 
-                            for (int i = 0; i < 10; i++) {
+                            for (int i = 0; i < helyes; i++) {
                                 tempAboveNine = (PegModel) pegRealmListAboveNine.get(indexek.get(i));
 
                                 helyes_valaszok[i] = tempAboveNine.getWord().toString();
@@ -306,12 +311,8 @@ public class wordPracticeFragment extends Fragment {
 
                     }
                     if (index > 0 && db == 1) {
-                        if (index > 0 && index < 10) {
-                            String ki = "";
-                            for (int i = 0; i < 10; i++) {
-                                ki = ki + indexek.get(i) + "=" + valaszok[i] + " ";
-                            }
-                            teszt.setText(ki);
+                        if (index > 0 && (index < 10&& index<helyes)) {
+
 
 
                             kerdes.setText(kerdes.getResources().getString(R.string.kerdes_szo) + " " + helyes_valaszok[index] + "?");
@@ -353,8 +354,8 @@ public class wordPracticeFragment extends Fragment {
                         } else {
 
                             valaszok[index - 1] = szoveg_bevitel.getText().toString();
-                            for (int i = 0; i < 10; i++) {
-                                if (i == 9) {
+                            for (int i = 0; i < helyes; i++) {
+                                if (i == helyes-1) {
                                     tEnd = System.currentTimeMillis();
                                     tDelta = tEnd - tStart;
                                     elapsedSeconds = tDelta / 1000.0;
@@ -371,7 +372,7 @@ public class wordPracticeFragment extends Fragment {
                             kerdes.setText(pontok + "");
                             insertProgress();
 
-                        /*
+
                         try {
                             FragmentManager fm = getFragmentManager();
                             FragmentTransaction ft = fm.beginTransaction();
@@ -383,7 +384,7 @@ public class wordPracticeFragment extends Fragment {
                         } catch (Throwable e) {
                             Log.d("practicefragment", "letterpractice click error " + e.toString());
                         }
-*/
+
 
                         }
                     }
