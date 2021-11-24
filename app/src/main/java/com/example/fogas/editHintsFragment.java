@@ -127,7 +127,6 @@ public class editHintsFragment extends Fragment {
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 imageBmp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
-                imageBmp.recycle();
                 long fileSizeinBytes = imageFile.length();
                 long fileSizeInKB = fileSizeinBytes / 1024;
                 fileSizeInMB = fileSizeInKB / 1024;

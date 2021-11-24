@@ -231,9 +231,6 @@ public class game extends AppCompatActivity {
         }
 
 
-
-
-
     }
 
     private  void saveData (String b) {

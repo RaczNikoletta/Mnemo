@@ -6,11 +6,10 @@
     android:background="@color/colorPrimaryDark">
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/wrongIv"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
         android:layout_margin="5dip"
-        android:src="@drawable/ic_baseline_error_24"></ImageView>
+        android:src="@drawable/ic_baseline_error_24"/>
 
 </RelativeLayout>
