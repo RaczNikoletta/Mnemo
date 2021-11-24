@@ -27,6 +27,7 @@
     <string name="betuHiba">Nem egy betűt adott meg</string>
     <string name="kihagyas">Kihagyás</string>
 
+
     <!-- Fogasok -->
     <!-- Menü -->
     <array name="menuOptions">
@@ -97,6 +98,7 @@
     <string name="numberError">Kötelező egy kétjegyű számot megadni!</string>
     <string name="letterorwordmand">Betű vagy szó megadása kötelező!</string>
     <!--Fragment letter update -->
+    <string name="kerdesgeleraloBetu">Melyik szám tartozik a következö betűhöz:</string>
     <!--Fragment hint update -->
     <string name="checkhints">Segítségeid</string>
     <string name="choosepeg">Kérem válassza ki a megfelelő fogast</string>

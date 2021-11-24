@@ -289,6 +289,10 @@ public class wordPracticeFragment extends Fragment {
 
                             Collections.shuffle(indexek);
 
+                            if(helyes>=10){
+                                helyes = 10;
+                            }
+
                             for (int i = 0; i < helyes; i++) {
                                 tempAboveNine = (PegModel) pegRealmListAboveNine.get(indexek.get(i));
 

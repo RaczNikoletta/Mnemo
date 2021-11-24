@@ -26,6 +26,7 @@
     <string name="feladat">Exercise</string>
     <string name="betuHiba">Invalid format (a letter needed)</string>
     <string name="kihagyas">Skip</string>
+    <string name="kerdesgeleraloBetu">Please enter the letter for the number: </string>
     <!-- Pegs -->
     <!-- Menu -->
     <array name="menuOptions">
