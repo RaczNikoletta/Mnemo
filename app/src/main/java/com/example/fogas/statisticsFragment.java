@@ -65,7 +65,7 @@ public class statisticsFragment extends Fragment {
                 assert user.getProgress().getProgressForEachGame().get(i) != null;
                 minInGame += user.getProgress().getProgressForEachGame().get(i).getTimeInGame();
             }
-            timeInGameTv.setText(getResources().getString(R.string.timeInGameStat) + " " + Double.toString(minInGame).toString()+" "+ getResources().getString(R.string.min));
+            timeInGameTv.setText(getResources().getString(R.string.timeInGameStat) + " " + String.format( "%.1f",minInGame)+" "+ getResources().getString(R.string.min));
         }catch (Throwable e){
             Toast.makeText(getContext(),e.toString(),Toast.LENGTH_LONG).show();
         }
