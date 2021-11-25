@@ -52,6 +52,14 @@ public class ProgressDataModel extends RealmObject {
         }
 
     }
+    public Progress getProgressById(int id){
+        Progress temp = new Progress();
+        for (int i=0;i<progressForEachGame.size();i++){
+            if(progressForEachGame.get(i).gameId==id){
+                temp = progressForEachGame.get(i);
+            }
+        }return temp;
+    }
 
 
 

@@ -134,6 +134,7 @@ public class editHintsFragment extends Fragment {
                     fileSizeInMB = fileSizeInKB / 1024;
 
 
+
                 //TODO test with bigger image than 16MB
                 if (fileSizeInMB > 16 && isNew) {
                     new AlertDialog.Builder(getContext())

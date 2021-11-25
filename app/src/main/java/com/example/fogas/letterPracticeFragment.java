@@ -426,10 +426,11 @@ public class letterPracticeFragment extends Fragment {
         updaterRealm.executeTransaction(r-> {
             user = updaterRealm.where(UserDataModel.class).equalTo("loggedIn", true).findFirst();
             assert user != null;
-            Progress newProg = new Progress(2);
+            Progress newProg = new Progress(1);
             ProgressDataModel progress = user.getProgress();
             newProg.setTimeInGame(elapsedSeconds / 60);
             newProg.addResult(pontok);
+            newProg.setAvg();
             Date now = new Date();
             progress.addProgress(newProg,now);
             updaterRealm.insertOrUpdate(user);

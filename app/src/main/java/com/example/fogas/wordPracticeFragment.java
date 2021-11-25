@@ -452,6 +452,7 @@ public class wordPracticeFragment extends Fragment {
             newProg.setTimeInGame(elapsedSeconds / 60);
             newProg.addResult(pontok);
             Date now = new Date();
+            newProg.setAvg();
             progress.addProgress(newProg,now);
             updaterRealm.insertOrUpdate(user);
         });

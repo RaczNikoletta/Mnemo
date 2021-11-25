@@ -26,13 +26,23 @@ public class SequenceDataModel extends RealmObject {
         this.user = user;
     }
 
-    public void setPegsFromDatabase(UserDataModel u){
-        sequence = u.getPegs().getPegs();
+    public void generateStory(){
+        if(story == null){
+            story = new RealmList<>();
+        }
+        sequence = user.getPegs().getPegs();
         for(int i=0;i<sequence.size();i++){
             story.add(sequence.get(i).getWord());
         }
     }
     public  SequenceDataModel(){}
+
+    public SequenceDataModel(UserDataModel u){
+        user = u;
+        sequence = new RealmList<>();
+        story = new RealmList<>();
+
+    }
 
     public RealmList<String> getStory() {
         return story;

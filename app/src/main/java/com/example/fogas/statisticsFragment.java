@@ -7,58 +7,70 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link statisticsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.fogas.Models.UserDataModel;
+
+import io.realm.Realm;
+
 public class statisticsFragment extends Fragment {
+    private TextView StatisticsTitle;
+    private TextView letterStatTv;
+    private TextView wordStatTv;
+    private TextView sequenceStatTv;
+    private TextView timeInGameTv;
+    private Realm statRealm;
+    private UserDataModel user;
+    private double minInGame;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public statisticsFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment statisticsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static statisticsFragment newInstance(String param1, String param2) {
-        statisticsFragment fragment = new statisticsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_statistics, container, false);
+        View view = inflater.inflate(R.layout.fragment_statistics, container, false);
+        statRealm = Realm.getDefaultInstance();
+        user = statRealm.where(UserDataModel.class).equalTo("loggedIn",true).findFirst();
+        StatisticsTitle = view.findViewById(R.id.StatisticsTitle);
+        letterStatTv = view.findViewById(R.id.letterStatTv);
+        wordStatTv = view.findViewById(R.id.wordStatTv);
+        sequenceStatTv = view.findViewById(R.id.sequenceStatTv);
+        timeInGameTv = view.findViewById(R.id.timeInGameTv);
+        StatisticsTitle.setText(R.string.statistics);
+        try {
+            if (user.getProgress().getProgressById(1) != null) {
+                letterStatTv.setText(getResources().getString(R.string.statisticsLetter) + " " + Double.toString(user.getProgress().getProgressById(1).getAvgRes()).toString());
+            } else {
+                letterStatTv.setText(getResources().getString(R.string.statisticsLetter) + " ");
+            }
+            if (user.getProgress().getProgressById(2) != null) {
+                wordStatTv.setText(getResources().getString(R.string.statisticsWord) + " " + Double.toString(user.getProgress().getProgressById(2).getAvgRes()).toString());
+            } else {
+                wordStatTv.setText(getResources().getString(R.string.statisticsWord) + " ");
+            }
+            if (user.getProgress().getProgressById(3) != null) {
+                sequenceStatTv.setText(getResources().getString(R.string.statisticsSequence) + " " + Double.toString(user.getProgress().getProgressById(3).getAvgRes()).toString());
+            } else {
+                sequenceStatTv.setText(getResources().getString(R.string.statisticsSequence) + " ");
+            }
+            minInGame = 0;
+            for (int i = 0; i < user.getProgress().getProgressForEachGame().size(); i++) {
+                assert user.getProgress().getProgressForEachGame().get(i) != null;
+                minInGame += user.getProgress().getProgressForEachGame().get(i).getTimeInGame();
+            }
+            timeInGameTv.setText(getResources().getString(R.string.timeInGameStat) + " " + Double.toString(minInGame).toString()+" "+ getResources().getString(R.string.min));
+        }catch (Throwable e){
+            Toast.makeText(getContext(),e.toString(),Toast.LENGTH_LONG).show();
+        }
+
+
+        return view;
     }
 }

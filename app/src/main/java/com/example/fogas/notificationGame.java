@@ -2,11 +2,14 @@ package com.example.fogas;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -36,8 +39,10 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 
 public class notificationGame extends AppCompatActivity {
     SharedPreferences prefs = null;
@@ -62,6 +67,8 @@ public class notificationGame extends AppCompatActivity {
     private int counter = 0;
     private int score = 0;
     private Context context;
+    RealmList<Double> toInsert = new RealmList<>();
+    int reps =0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +76,6 @@ public class notificationGame extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification_game);
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        superMemo2 = new SuperMemo2();
         prefs = getSharedPreferences("repeatDatas",MODE_PRIVATE);
         SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd HH:mm:ss", Locale.getDefault());
         datum = sdf.format(new Date());
@@ -80,6 +86,7 @@ public class notificationGame extends AppCompatActivity {
         answerNotEt = findViewById(R.id.answerNotEt);
         questionNot = findViewById(R.id.questionNotTv);
         part_jelzo = findViewById(R.id.part_jelzo);
+        createNotificationChannel();
         //Toast.makeText(this,"from create: "+user.getPegs().getPegs().size(),Toast.LENGTH_LONG).show();
         generateQuestions();
         questionNot.setText(answerNotEt.getResources().getString(R.string.kerdes_betu)+" " + questionLetter.get(counter));
@@ -147,7 +154,34 @@ public class notificationGame extends AppCompatActivity {
                     } if (counter == 9) {
                         sendNotBtn.setVisibility(View.INVISIBLE);
                         answerNotEt.setVisibility(View.INVISIBLE);
-                        questionNot.setText(Integer.toString(score));
+                        questionNot.setTextColor(getResources().getColor(R.color.white));
+                        questionNot.setText(getResources().getString(R.string.score)+Integer.toString(score));
+                        int interval = checkResults();
+                        new AlertDialog.Builder(context)
+                                .setTitle(R.string.nextPractice1)
+                                .setMessage(getResources().getString(R.string.nextPractice2) +" "+ Integer.toString(interval) +" "+ getResources().getString(R.string.days))
+
+                                // Specifying a listener allows you to take an action before dismissing the dialog.
+                                // The dialog is automatically dismissed when a dialog button is clicked.
+                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        long timeAtButtonClick = System.currentTimeMillis();
+                                        Intent intent = new Intent(context,PracticeNotificationManager.class);
+                                        PendingIntent pendingIntent = PendingIntent.getBroadcast(context,0,intent,0);
+
+                                        AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
+
+                                        long daysToMili = TimeUnit.DAYS.toMillis(interval);
+                                        alarmManager.set(AlarmManager.RTC_WAKEUP,timeAtButtonClick+daysToMili,pendingIntent);
+
+                                            startActivity(new Intent(context,MainMenu.class));
+
+                                    }
+                                })
+
+                                // A null listener allows the button to dismiss the dialog and take no further action.
+                                .setIcon(getResources().getDrawable(R.drawable.ic_baseline_help_center_24))
+                                .show();
                     }
                     if (half && counter<9) {
                         if (counter <= 5) {
@@ -174,6 +208,7 @@ public class notificationGame extends AppCompatActivity {
 
             memoRealm = Realm.getDefaultInstance();
             user = memoRealm.where(UserDataModel.class).equalTo("loggedIn", true).findFirst();
+            user.getNotifications();
         } catch(Throwable e){
             Toast.makeText(getBaseContext(),"phase one: "+e.toString(),Toast.LENGTH_LONG).show();
             }
@@ -226,51 +261,18 @@ public class notificationGame extends AppCompatActivity {
         }
     }
 
-    private void checkResults(){
-
-        //write out needed datas
-        repeat = prefs.getInt("repeats_key",1);
-        FileOutputStream fileout = null;
-        {
-            try {
-                fileout = openFileOutput("memoDatas",MODE_APPEND);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            datum = datum +"\n";
-            try {
-                fileout.write(datum.getBytes());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }finally {
-                if(fileout!=null){
-                    try {
-                        fileout.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-
-        File file = getExternalFilesDir(null);
-        String filename = file.getAbsolutePath()+"superMemoDatas.txt";
-        FileOutputStream fs = null;
-        try {
-            fs = new FileOutputStream(filename);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            fs.write(Integer.toString(repeat).getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            fs.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private int checkResults(){
+        reps = user.getNotifications();
+        reps+=1;
+        superMemo2 = new SuperMemo2((score/2),reps,2.5,user.getLastNotification().get(2));
+        memoRealm.executeTransaction(r-> {
+            toInsert = superMemo2.getResult();
+            user.setLastNotification(toInsert);
+            user.setNotifications(reps);
+            memoRealm.insertOrUpdate(user);
+        });
+        //Toast.makeText(context,toInsert.get(0)+" "+toInsert.get(1)+" "+toInsert.get(2),Toast.LENGTH_LONG).show();
+        return (int)(double)toInsert.get(2);
 
 
     }
@@ -298,4 +300,17 @@ public class notificationGame extends AppCompatActivity {
         editor.putBoolean("first_not",false);
         editor.commit();
     }
+    private  void createNotificationChannel(){
+        CharSequence name = "PracticeNotifyChannel";
+        String desctiption = "Channel for practice";
+        int importance = NotificationManager.IMPORTANCE_HIGH;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("notifyUser",name,importance);
+            channel.setDescription(desctiption);
+
+            NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
 }

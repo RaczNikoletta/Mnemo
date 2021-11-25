@@ -369,7 +369,7 @@ public class letterUpdateFragment extends Fragment {
     private  void createNotificationChannel(){
         CharSequence name = "PracticeNotifyChannel";
         String desctiption = "Channel for practice";
-        int importance = NotificationManager.IMPORTANCE_DEFAULT;
+        int importance = NotificationManager.IMPORTANCE_HIGH;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel("notifyUser",name,importance);
             channel.setDescription(desctiption);

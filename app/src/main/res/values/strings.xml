@@ -119,6 +119,10 @@
     <string name="timeToPractice">"ELjött az idő a gyakorlásra!"</string>
     <string name="timeToPractice2">"Fel kell idézned az eddig tanultakat, külöben elfelejtődnek!"</string>
     <string name="addNewPegs">"Túl kevés fogasod van, adj meg újakat!"</string>
+    <string name="nextPractice2">Az ideális következő gyakorlás: </string>
+    <string name="nextPractice1">Következő gyakorlás</string>
+    <string name="days"> nap</string>
+    <string name="score">Pontszám: </string>
     <!--Push notification -->
     <!--Before_sequence -->
     <string name="chooseSeqandLevel">Kérlek válassz számsort és nehézségi fokozatot!</string>
@@ -126,4 +130,13 @@
     <string name="mediumLevel">Közepes</string>
     <string name="hardLevel">Hard</string>
     <!--Before_sequence -->
+    <!--Statistics-->
+    <string name="statistics">Statisztika</string>
+    <string name="statisticsLetter">Betűk gyakorlása:</string>
+    <string name="statisticsWord">Szavak gyakorlása:</string>
+    <string name="statisticsSequence">Számsorok gyakorlása:</string>
+    <string name="timeInGameStat">Gyakorlással töltött idő: </string>
+    <string name="min">perc</string>
+    <string name="avgPoint">Átlag pontszám: </string>
+    <!--Statistics-->
 </resources>
