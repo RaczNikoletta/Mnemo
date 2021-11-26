@@ -27,6 +27,7 @@
     <string name="betuHiba">Nem egy betűt adott meg</string>
     <string name="kihagyas">Kihagyás</string>
 
+
     <!-- Fogasok -->
     <!-- Menü -->
     <array name="menuOptions">
@@ -71,9 +72,11 @@
     <!--Practice mode-->
     <!--WordPracticeFragment -->
     <string name="noPegwordsinDB">Először meg kell adnod a szavakat!</string>
+    <string name="noHintInDB">Ehhez a fogashoz nem adtál meg segítséget</string>
 
     <!--WordPracticeFragment -->
     <string name="kerdes_szo">Melyik szám tartozik a következö szohoz:</string>
+    <string name="kerdes_betu">Melyik szám tartozik a következő betűhöz? </string>
     <string name="hiba_szo">Nem tartalmazhat számot!</string>
     <!--Fragment update -->
     <string name="setpegLetters">Betűk, szavak kezelése</string>
@@ -95,6 +98,7 @@
     <string name="numberError">Kötelező egy kétjegyű számot megadni!</string>
     <string name="letterorwordmand">Betű vagy szó megadása kötelező!</string>
     <!--Fragment letter update -->
+    <string name="kerdesgeleraloBetu">Melyik szám tartozik a következö betűhöz:</string>
     <!--Fragment hint update -->
     <string name="checkhints">Segítségeid</string>
     <string name="choosepeg">Kérem válassza ki a megfelelő fogast</string>
@@ -115,6 +119,10 @@
     <string name="timeToPractice">"ELjött az idő a gyakorlásra!"</string>
     <string name="timeToPractice2">"Fel kell idézned az eddig tanultakat, külöben elfelejtődnek!"</string>
     <string name="addNewPegs">"Túl kevés fogasod van, adj meg újakat!"</string>
+    <string name="nextPractice2">Az ideális következő gyakorlás: </string>
+    <string name="nextPractice1">Következő gyakorlás</string>
+    <string name="days"> nap</string>
+    <string name="score">Pontszám: </string>
     <!--Push notification -->
     <!--Before_sequence -->
     <string name="chooseSeqandLevel">Kérlek válassz számsort és nehézségi fokozatot!</string>
@@ -122,4 +130,25 @@
     <string name="mediumLevel">Közepes</string>
     <string name="hardLevel">Hard</string>
     <!--Before_sequence -->
+    <!--Statistics-->
+    <string name="statistics">Statisztika</string>
+    <string name="statisticsLetter">Betűk gyakorlása:</string>
+    <string name="statisticsWord">Szavak gyakorlása:</string>
+    <string name="statisticsSequence">Számsorok gyakorlása:</string>
+    <string name="timeInGameStat">Gyakorlással töltött idő: </string>
+    <string name="min">perc</string>
+    <string name="avgPoint">Átlag pontszám: </string>
+    <string name="seqponints">Számsorok összpontszám: </string>
+    <!--Statistics-->
+    <!--Easyseqpractice-->
+    <string name="easyPracTitle">Könnyű gyakorlás</string>
+    <string name="mediumPracTitle">Haladó gyakorlás</string>
+    <string name="hardPracTitle">Nehéz gyakorlás</string>
+    <string name="righAnswer1">Helyes válasz</string>
+    <string name="righAnswer2">A válasz helyes! +5 pont</string>
+    <string name="righAnswer3">Right answer! +10 scores</string>
+    <string name="righAnswer4">Right answer! +15 scores</string>
+    <string name="wrongAnswer1">A válasz helytelen</string>
+    <string name="wrongAnswer2">A válasz helytelen! +0 pont A helyes válasz: </string>
+    <!--Easyseqpractice-->
 </resources>

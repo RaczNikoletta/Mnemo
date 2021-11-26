@@ -56,5 +56,21 @@ public class PegDataModel extends RealmObject {
         userName = u;
     }
 
+    public int[]counter(){
+        int wordCount = 0;
+        int letterCount = 0;
+        int [] counters = new int[2];
+        for(int i=0;i<pegs.size();i++){
+            if(!pegs.get(i).getWord().equals("")){
+                wordCount++;
+            }if(!pegs.get(i).getLetter().equals("")){
+                letterCount ++;
+            }
+
+        }counters[0] = letterCount;
+        counters[1] = wordCount;
+        return counters;
+    }
+
 
 }

@@ -7,6 +7,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
@@ -42,6 +44,7 @@ import com.example.fogas.Models.UserDataModel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.zip.Inflater;
 
 import io.realm.Realm;
@@ -82,7 +85,7 @@ public class wordPracticeFragment extends Fragment {
     private String [] helyes_valaszok = new String[10];
     private String [] valaszok = new String[10];
     private int pontok = 0;
-    private ImageButton helpImage;
+    private ImageButton helpImageBtn;
     private ImageView imageViewHint;
     private long tStart;
     private long tEnd;
@@ -91,10 +94,12 @@ public class wordPracticeFragment extends Fragment {
     private ArrayList<Integer> indexek = new ArrayList<>();
     private TextView gomb;
     private int max = 0;
+    int [] bekerultSzamok = new int[10];
+    HashMap<Integer,Bitmap> bmp = new HashMap<>();
 
     private int db = 0;
+    private int helyes = 0;
 
-    private  TextView teszt;
 
     public wordPracticeFragment() {
         // Required empty public constructor
@@ -201,12 +206,34 @@ public class wordPracticeFragment extends Fragment {
 
         kerdes = (TextView) view.findViewById(R.id.szoveg_kerdes);
         szoveg_bevitel = (TextView) view.findViewById(R.id.szoveg_bevitel);
-        helpImage = view.findViewById(R.id.helpImage);
+        helpImageBtn = view.findViewById(R.id.helpImage);
         imageViewHint = view.findViewById(R.id.imageViewHint);
         imageViewHint.setVisibility(View.INVISIBLE);
         gomb = (TextView) view.findViewById(R.id.szoveg_gomb);
 
-        teszt = (TextView) view.findViewById(R.id.teszteles);
+
+
+        helpImageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext()," onclicked hint: "+index,Toast.LENGTH_LONG).show();
+                if(index!=0) {
+                    if (bmp.get(index - 1) != null) {
+                        imageViewHint.setVisibility(View.VISIBLE);
+                        imageViewHint.setImageBitmap(Bitmap.createBitmap(bmp.get(index -1)));
+                    }
+                }else{
+                    if (bmp.get(index) != null) {
+                        imageViewHint.setVisibility(View.VISIBLE);
+                        imageViewHint.setImageBitmap(Bitmap.createBitmap(bmp.get(index)));
+                    }else{
+                        Toast.makeText(getContext(),R.string.noHintInDB,Toast.LENGTH_LONG).show();
+                    }
+                }
+
+
+            }
+        });
 
 
 
@@ -244,23 +271,37 @@ public class wordPracticeFragment extends Fragment {
                             db = 1;
                             kerdes.setVisibility(View.VISIBLE);
                             szoveg_bevitel.setVisibility(View.VISIBLE);
-                            helpImage.setVisibility(View.VISIBLE);
+                            helpImageBtn.setVisibility(View.VISIBLE);
                             gomb.setText(kerdes.getResources().getString(R.string.hozzaadGomb));
 
                             tempAboveNine = new PegModel();
 
                             for (int i = 0; i < max; i++) {
                                 tempAboveNine = (PegModel) pegRealmListAboveNine.get(i);
-                                indexek.add(tempAboveNine.getNum());
+                                if(!tempAboveNine.getWord().equals("")){
+                                    indexek.add(tempAboveNine.getNum());
+                                    helyes = helyes + 1;
+
+                                }
+
                             }
 
 
                             Collections.shuffle(indexek);
 
-                            for (int i = 0; i < 10; i++) {
+                            if(helyes>=10){
+                                helyes = 10;
+                            }
+
+                            for (int i = 0; i < helyes; i++) {
                                 tempAboveNine = (PegModel) pegRealmListAboveNine.get(indexek.get(i));
 
                                 helyes_valaszok[i] = tempAboveNine.getWord().toString();
+                                bekerultSzamok[i] =tempAboveNine.getNum();
+
+                                if(user.getHints().getOneHint(tempAboveNine.getNum()).getImage()!=null)
+                                       bmp.put(i,BitmapFactory.decodeByteArray(user.getHints().getOneHint(tempAboveNine.getNum()).getImage(),0,
+                                        user.getHints().getOneHint(tempAboveNine.getNum()).getImage().length));
 
 
                             }
@@ -276,12 +317,8 @@ public class wordPracticeFragment extends Fragment {
 
                     }
                     if (index > 0 && db == 1) {
-                        if (index > 0 && index < 10) {
-                            String ki = "";
-                            for (int i = 0; i < 10; i++) {
-                                ki = ki + indexek.get(i) + "=" + valaszok[i] + " ";
-                            }
-                            teszt.setText(ki);
+                        if (index > 0 && (index < 10&& index<helyes)) {
+
 
 
                             kerdes.setText(kerdes.getResources().getString(R.string.kerdes_szo) + " " + helyes_valaszok[index] + "?");
@@ -291,29 +328,25 @@ public class wordPracticeFragment extends Fragment {
                             if (indexek.get(index - 1).equals(Integer.parseInt(valaszok[index - 1]))) {
                                 LayoutInflater inf = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                                 View popupView = inf.inflate(R.layout.right_answer_layout, null);
-                                int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-                                int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-                                boolean focusable = true; // lets taps outside the popup also dismiss it
-                                final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
-                                popupWindow.setBackgroundDrawable(new BitmapDrawable());
-                                popupWindow.setOutsideTouchable(true);
+                                ImageView image = popupView.findViewById(R.id.rightIV);
 
                                 // show the popup window
                                 // which view you pass in doesn't matter, it is only used for the window tolken
-                                popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+                               Toast toast = new Toast(getContext());
+                               toast.setGravity(Gravity.CENTER,0,0);
+                               toast.setView(popupView);
+                               toast.show();
                             } else {
                                 LayoutInflater inf = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                                 View popupView = inf.inflate(R.layout.wrong_answer_layout, null);
-                                int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-                                int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-                                boolean focusable = true; // lets taps outside the popup also dismiss it
-                                final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
-                                popupWindow.setBackgroundDrawable(new BitmapDrawable());
-                                popupWindow.setOutsideTouchable(true);
+                                ImageView image = popupView.findViewById(R.id.wrongIv);
 
                                 // show the popup window
                                 // which view you pass in doesn't matter, it is only used for the window tolken
-                                popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+                                Toast toast = new Toast(getContext());
+                                toast.setGravity(Gravity.CENTER,0,0);
+                                toast.setView(popupView);
+                                toast.show();
                             }
                             pegAboveNine = new ArrayList<>();
                             pegAboveNine.add(String.valueOf(tempAboveNine.getWord()));
@@ -321,13 +354,14 @@ public class wordPracticeFragment extends Fragment {
 
                             szoveg_bevitel.setText("");
                             index = index + 1;
+                            imageViewHint.setVisibility(View.INVISIBLE);
 
 
                         } else {
 
                             valaszok[index - 1] = szoveg_bevitel.getText().toString();
-                            for (int i = 0; i < 10; i++) {
-                                if (i == 9) {
+                            for (int i = 0; i < helyes; i++) {
+                                if (i == helyes-1) {
                                     tEnd = System.currentTimeMillis();
                                     tDelta = tEnd - tStart;
                                     elapsedSeconds = tDelta / 1000.0;
@@ -344,7 +378,7 @@ public class wordPracticeFragment extends Fragment {
                             kerdes.setText(pontok + "");
                             insertProgress();
 
-                        /*
+
                         try {
                             FragmentManager fm = getFragmentManager();
                             FragmentTransaction ft = fm.beginTransaction();
@@ -356,7 +390,7 @@ public class wordPracticeFragment extends Fragment {
                         } catch (Throwable e) {
                             Log.d("practicefragment", "letterpractice click error " + e.toString());
                         }
-*/
+
 
                         }
                     }
@@ -418,6 +452,7 @@ public class wordPracticeFragment extends Fragment {
             newProg.setTimeInGame(elapsedSeconds / 60);
             newProg.addResult(pontok);
             Date now = new Date();
+            newProg.setAvg();
             progress.addProgress(newProg,now);
             updaterRealm.insertOrUpdate(user);
         });

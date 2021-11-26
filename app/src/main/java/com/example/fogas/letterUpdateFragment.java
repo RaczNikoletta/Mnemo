@@ -327,7 +327,7 @@ public class letterUpdateFragment extends Fragment {
                                         }
                                     }
                                     //Toast.makeText(getContext(),"counter "+String.valueOf(counter),Toast.LENGTH_LONG).show();
-                                    if (counter >= 10 && isFirst) {
+                                    if (counter >= 10) {
                                         long timeAtButtonClick = System.currentTimeMillis();
                                         Intent intent = new Intent(getContext(),PracticeNotificationManager.class);
                                         PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(),0,intent,0);
@@ -369,7 +369,7 @@ public class letterUpdateFragment extends Fragment {
     private  void createNotificationChannel(){
         CharSequence name = "PracticeNotifyChannel";
         String desctiption = "Channel for practice";
-        int importance = NotificationManager.IMPORTANCE_DEFAULT;
+        int importance = NotificationManager.IMPORTANCE_HIGH;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel("notifyUser",name,importance);
             channel.setDescription(desctiption);

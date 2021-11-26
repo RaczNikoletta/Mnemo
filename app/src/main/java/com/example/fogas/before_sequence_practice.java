@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -91,6 +93,44 @@ public class before_sequence_practice extends Fragment {
                 clicked = list.get(position);
             }
         });
+
+        view.findViewById(R.id.easyBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.container,sequencePracticeFragmentEasy.newInstance(clicked), "easy sequences")
+                        .addToBackStack(null)
+                        .commit();
+
+
+            }
+        });
+        view.findViewById(R.id.mediumBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.container,SequencePracticeMedium.newInstance(clicked), "medium sequences")
+                        .addToBackStack(null)
+                        .commit();
+
+
+            }
+        });
+        view.findViewById(R.id.hardBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.container, new SequencePracticeHard(), "hard sequences")
+                        .addToBackStack(null)
+                        .commit();
+
+
+            }
+        });
+
 
 
         return view;

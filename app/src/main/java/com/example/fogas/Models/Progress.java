@@ -16,6 +16,7 @@ public class Progress extends RealmObject {
     Date lastPractice;
     double timeInGame;
     double avgRes;
+
     RealmList<Integer> results;
 
     public Progress(int gameId){

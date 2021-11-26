@@ -142,7 +142,6 @@ public class MainMenu extends AppCompatActivity implements DuoMenuView.OnMenuCli
 
     private void goToFragment(Fragment fragment, boolean addToBackStack, String tag) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        if (tag.equals("updateFragment")) {
             try {
                 mainRealm = Realm.getDefaultInstance();
                 UserDataModel user = mainRealm.where(UserDataModel.class).equalTo("loggedIn", true).findFirst();
@@ -174,8 +173,6 @@ public class MainMenu extends AppCompatActivity implements DuoMenuView.OnMenuCli
             } catch (Throwable e) {
                 Toast.makeText(getBaseContext(), e.toString(), Toast.LENGTH_LONG).show();
             }
-        } else
-        {transaction.replace(R.id.container, fragment, tag).addToBackStack("MainMenu").commit();}
 
     }
 

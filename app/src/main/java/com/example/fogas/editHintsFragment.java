@@ -53,6 +53,7 @@ public class editHintsFragment extends Fragment {
     private Bitmap imageBmp;
     private File imageFile;
     private long fileSizeInMB;
+    private boolean isNew = false;
 
     public editHintsFragment() {
         // Required empty public constructor
@@ -123,20 +124,22 @@ public class editHintsFragment extends Fragment {
         view.findViewById(R.id.saveHintsBtn2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(isNew) {
 
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                imageBmp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-                byte[] byteArray = stream.toByteArray();
-                imageBmp.recycle();
-                long fileSizeinBytes = imageFile.length();
-                long fileSizeInKB = fileSizeinBytes / 1024;
-                fileSizeInMB = fileSizeInKB / 1024;
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    imageBmp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                    byte[] byteArray = stream.toByteArray();
+                    long fileSizeinBytes = imageFile.length();
+                    long fileSizeInKB = fileSizeinBytes / 1024;
+                    fileSizeInMB = fileSizeInKB / 1024;
+
+
 
                 //TODO test with bigger image than 16MB
-                if (fileSizeInMB > 16) {
+                if (fileSizeInMB > 16 && isNew) {
                     new AlertDialog.Builder(getContext())
-                            .setTitle(R.string.loginrequest + " " + fileSizeInMB)
-                            .setMessage(R.string.loginrequest2 + " " + fileSizeInMB)
+                            .setTitle(R.string.above16mb1 + " " + fileSizeInMB)
+                            .setMessage(R.string.above16mb2 + " " + fileSizeInMB)
 
                             // Specifying a listener allows you to take an action before dismissing the dialog.
                             // The dialog is automatically dismissed when a dialog button is clicked.
@@ -151,7 +154,7 @@ public class editHintsFragment extends Fragment {
                             .show();
 
 
-                } else {
+                } else if(isNew) {
 
                     try {
                         editHintRealm.executeTransaction(r -> {
@@ -160,7 +163,7 @@ public class editHintsFragment extends Fragment {
                                 hint.setPegnum(Integer.parseInt(fogasEditTv.getText().toString()));
                                 hint.setImage(byteArray);
                                 editHintRealm.insertOrUpdate(editHintRealm.copyToRealmOrUpdate(hint));
-                            }catch (Throwable e){
+                            } catch (Throwable e) {
                                 Toast.makeText(getContext(), "hint" + " " + e.toString(), Toast.LENGTH_LONG).show();
                             }
                             HintDataModel usdata = user.getHints();
@@ -168,10 +171,11 @@ public class editHintsFragment extends Fragment {
                             usdata.setOneHint(hint);
 
 
-
-
-
                         });
+                    } catch (Throwable e) {
+                        Toast.makeText(getContext(), "hint" + " " + e.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }
                         try {
                             new AlertDialog.Builder(getContext())
                                     .setTitle(R.string.databaseUpdated)
@@ -199,13 +203,32 @@ public class editHintsFragment extends Fragment {
                         }catch (Throwable e){
                             Toast.makeText(getContext(), "alertdialog" + " " + e.toString(), Toast.LENGTH_LONG).show();
                         }
-
-                    } catch (Throwable e) {
-                        Toast.makeText(getContext(), "executetrans" + " " + e.toString(), Toast.LENGTH_LONG).show();
-                    }finally {
+                    finally {
                         editHintRealm.close();
                     }
-                }
+                }new AlertDialog.Builder(getContext())
+                        .setTitle(R.string.databaseUpdated)
+                        .setMessage(R.string.databaseUpdated2)
+
+                        // Specifying a listener allows you to take an action before dismissing the dialog.
+                        // The dialog is automatically dismissed when a dialog button is clicked.
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                try {
+                                    FragmentManager fm = getFragmentManager();
+                                    FragmentTransaction ft = fm.beginTransaction();
+                                    ft.replace(R.id.container, new hintUpdateFragment(), "hintUpdate")
+                                            .addToBackStack(null)
+                                            .commit();
+                                } catch (Throwable e) {
+                                    Toast.makeText(getContext(), "Fragment change error " + e.toString(), Toast.LENGTH_LONG).show();
+                                }
+
+                            }
+                        })
+                        // A null listener allows the button to dismiss the dialog and take no further action.
+                        .setIcon(getResources().getDrawable(R.drawable.ic_baseline_done_outline_24))
+                        .show();
             }
 
         });
@@ -226,6 +249,7 @@ public class editHintsFragment extends Fragment {
             }
             imageView10.setImageURI(imageUri);
             imageFile = new File("" + imageUri);
+            isNew = true;
 
         }
 

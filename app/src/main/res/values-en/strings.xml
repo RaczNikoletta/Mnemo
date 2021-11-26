@@ -26,6 +26,7 @@
     <string name="feladat">Exercise</string>
     <string name="betuHiba">Invalid format (a letter needed)</string>
     <string name="kihagyas">Skip</string>
+    <string name="kerdesgeleraloBetu">Please enter the letter for the number: </string>
     <!-- Pegs -->
     <!-- Menu -->
     <array name="menuOptions">
@@ -67,9 +68,11 @@
     <!--Practice mode-->
     <!--WordPracticeFragment -->
     <string name="noPegwordsinDB">You have to add peg words first!</string>
+    <string name="noHintInDB">There is no hint for this peg in database</string>
 
     <!--WordPracticeFragment -->
     <string name="kerdes_szo">Which number belongs to the next word:</string>
+    <string name="kerdes_betu">Which number belongs to the next letter:</string>
     <string name="hiba_szo">Cannot contain a number!</string>
     <!--Fragment update -->
     <string name="setpegLetters">Update letters, words</string>
@@ -111,6 +114,10 @@
     <string name="timeToPractice">"It's time to practice!"</string>
     <string name="timeToPractice2">"You need to recall what you learned so far"</string>
     <string name="addNewPegs">"You have few pegs, let's add some"</string>
+    <string name="nextPractice2">The ideal next practice: </string>
+    <string name="nextPractice1">Next practice</string>
+    <string name="days"> days</string>
+    <string name="score">Score: </string>
     <!--Push notification -->
     <!--Before_sequence -->
     <string name="chooseSeqandLevel">Please choose sequence and level</string>
@@ -118,4 +125,25 @@
     <string name="mediumLevel">Medium</string>
     <string name="hardLevel">Hard</string>
     <!--Before_sequence -->
+    <!--Statistics-->
+    <string name="statistics">Statistics</string>
+    <string name="statisticsLetter">Letter practice: </string>
+    <string name="statisticsWord">Word practice:</string>
+    <string name="statisticsSequence">Sequence practice: </string>
+    <string name="timeInGameStat">Practice time: </string>
+    <string name="min">minute</string>
+    <string name="avgPoint">Average points: </string>
+    <string name="seqponints">Sequences total score: </string>
+    <!--Statistics-->
+    <!--Easyseqpractice-->
+    <string name="easyPracTitle">Easy Practice</string>
+    <string name="mediumPracTitle">Medium practice</string>
+    <string name="hardPracTitle">Hard practice</string>
+    <string name="righAnswer1">Right answer!</string>
+    <string name="righAnswer2">Right answer! +5 scores</string>
+    <string name="righAnswer3">Right answer! +10 scores</string>
+    <string name="righAnswer4">Right answer! +15 scores</string>
+    <string name="wrongAnswer1">Answer is wrong</string>
+    <string name="wrongAnswer2">The answer is wrong! +0 score. The right answer is: </string>
+    <!--Easyseqpractice-->
 </resources>

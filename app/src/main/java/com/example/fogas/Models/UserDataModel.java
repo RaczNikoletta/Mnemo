@@ -20,6 +20,8 @@ public class UserDataModel extends RealmObject {
     RealmList<SequenceDataModel> sequences;
     HintDataModel hints;
     Date registryDate;
+    int notifications;
+    RealmList<Double> lastNotification;
     double GameTimeInMin;
 
 
@@ -35,7 +37,26 @@ public class UserDataModel extends RealmObject {
         progress = new ProgressDataModel(userName);
         GameTimeInMin = 0;
         loggedIn = false;
+        notifications = 0;
+        lastNotification = new RealmList<>();
+        lastNotification.add(0.0);
+        lastNotification.add(0.0);
+        lastNotification.add(0.0);
 
+    }
+    public int getNotifications() {
+        return notifications;
+    }
+    public RealmList<Double> getLastNotification() {
+        return lastNotification;
+    }
+
+    public void setLastNotification(RealmList<Double> lastNotification) {
+        this.lastNotification = lastNotification;
+    }
+
+    public void setNotifications(int notifications) {
+        this.notifications = notifications;
     }
 
     public PegDataModel getPegs() {
