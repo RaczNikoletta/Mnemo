@@ -163,8 +163,8 @@ public class addHintsFragment extends Fragment {
                         });
                         try {
                             new AlertDialog.Builder(getContext())
-                                    .setTitle(R.string.databaseUpdated)
-                                    .setMessage(R.string.databaseUpdated2)
+                                    .setTitle(R.string.righAnswer1)
+                                    .setMessage(R.string.righAnswer2)
 
                                     // Specifying a listener allows you to take an action before dismissing the dialog.
                                     // The dialog is automatically dismissed when a dialog button is clicked.
@@ -173,7 +173,7 @@ public class addHintsFragment extends Fragment {
                                             try {
                                                 FragmentManager fm = getFragmentManager();
                                                 FragmentTransaction ft = fm.beginTransaction();
-                                                ft.replace(R.id.container, new hintUpdateFragment(), "hintUpdate")
+                                                ft.replace(R.id.container, new before_sequence_practice(), "beforeseqprac")
                                                         .addToBackStack(null)
                                                         .commit();
                                             } catch (Throwable e) {

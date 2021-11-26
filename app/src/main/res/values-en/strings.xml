@@ -133,5 +133,17 @@
     <string name="timeInGameStat">Practice time: </string>
     <string name="min">minute</string>
     <string name="avgPoint">Average points: </string>
+    <string name="seqponints">Sequences total score: </string>
     <!--Statistics-->
+    <!--Easyseqpractice-->
+    <string name="easyPracTitle">Easy Practice</string>
+    <string name="mediumPracTitle">Medium practice</string>
+    <string name="hardPracTitle">Hard practice</string>
+    <string name="righAnswer1">Right answer!</string>
+    <string name="righAnswer2">Right answer! +5 scores</string>
+    <string name="righAnswer3">Right answer! +10 scores</string>
+    <string name="righAnswer4">Right answer! +15 scores</string>
+    <string name="wrongAnswer1">Answer is wrong</string>
+    <string name="wrongAnswer2">The answer is wrong! +0 score. The right answer is: </string>
+    <!--Easyseqpractice-->
 </resources>

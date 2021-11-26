@@ -56,7 +56,11 @@ public class statisticsFragment extends Fragment {
                 wordStatTv.setText(getResources().getString(R.string.statisticsWord) + " ");
             }
             if (user.getProgress().getProgressById(3) != null) {
-                sequenceStatTv.setText(getResources().getString(R.string.statisticsSequence) + " " + Double.toString(user.getProgress().getProgressById(3).getAvgRes()).toString());
+                int scores = 0;
+                for(int i=0;i<user.getProgress().getProgressById(3).getResults().size();i++){
+                    scores+=user.getProgress().getProgressById(3).getResults().get(i);
+                }
+                sequenceStatTv.setText(Integer.toString(scores).toString());
             } else {
                 sequenceStatTv.setText(getResources().getString(R.string.statisticsSequence) + " ");
             }
@@ -65,7 +69,7 @@ public class statisticsFragment extends Fragment {
                 assert user.getProgress().getProgressForEachGame().get(i) != null;
                 minInGame += user.getProgress().getProgressForEachGame().get(i).getTimeInGame();
             }
-            timeInGameTv.setText(getResources().getString(R.string.timeInGameStat) + " " + String.format( "%.1f",minInGame)+" "+ getResources().getString(R.string.min));
+            timeInGameTv.setText(getResources().getString(R.string.timeInGameStat) + " " + String.format( "%.0f",minInGame)+" "+ getResources().getString(R.string.min));
         }catch (Throwable e){
             Toast.makeText(getContext(),e.toString(),Toast.LENGTH_LONG).show();
         }

@@ -100,7 +100,6 @@ public class editSequencesFragment extends Fragment {
         */
         StringBuilder buildstory = new StringBuilder();
         story = foundSeq.getStory();
-        ArrayList<String>storyList = new ArrayList<>();
 
         for(int i=0;i<story.size();i++){
             buildstory.append(story.get(i)).append(" ");
