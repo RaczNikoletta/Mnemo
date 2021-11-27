@@ -39,7 +39,7 @@ public class before_sequence_practice extends Fragment {
     private Realm beforeSeqRealm;
     private SequenceDataModel tempseq;
     private ListView seqPracListV;
-    private String clicked;
+    private String clicked="";
 
 
 
@@ -97,6 +97,7 @@ public class before_sequence_practice extends Fragment {
         view.findViewById(R.id.easyBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!clicked.equals("")){
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(R.id.container,sequencePracticeFragmentEasy.newInstance(clicked), "easy sequences")
@@ -104,30 +105,34 @@ public class before_sequence_practice extends Fragment {
                         .commit();
 
 
-            }
+            }}
         });
         view.findViewById(R.id.mediumBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.container,SequencePracticeMedium.newInstance(clicked), "medium sequences")
-                        .addToBackStack(null)
-                        .commit();
+                if (!clicked.equals("")) {
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ft.replace(R.id.container, SequencePracticeMedium.newInstance(clicked), "medium sequences")
+                            .addToBackStack(null)
+                            .commit();
 
 
+                }
             }
         });
         view.findViewById(R.id.hardBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.container, new SequencePracticeHard(), "hard sequences")
-                        .addToBackStack(null)
-                        .commit();
+                if (!clicked.equals("")) {
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ft.replace(R.id.container, new SequencePracticeHard(), "hard sequences")
+                            .addToBackStack(null)
+                            .commit();
 
 
+                }
             }
         });
 

@@ -43,7 +43,7 @@ public class PracticeNotificationManager extends BroadcastReceiver {
                 .setAutoCancel(true)
                 .setSound(alarmSound, AudioManager.STREAM_ALARM)
                 .setVibrate(vibratePattern)
-                .addAction(R.drawable.letterpracticeimage,"Action Button",myIntent)
+                .addAction(R.drawable.letterpracticeimage,"Start game",myIntent)
                 .setContentIntent(myIntent)
                 .setOngoing(true);
 

@@ -116,7 +116,7 @@
     <string name="addNewPegs">"You have few pegs, let's add some"</string>
     <string name="nextPractice2">The ideal next practice: </string>
     <string name="nextPractice1">Next practice</string>
-    <string name="days"> days</string>
+    <string name="days"> day(s) after</string>
     <string name="score">Score: </string>
     <!--Push notification -->
     <!--Before_sequence -->

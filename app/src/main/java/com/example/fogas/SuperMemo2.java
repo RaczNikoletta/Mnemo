@@ -9,6 +9,7 @@ public class SuperMemo2 {
     double repetitionNumber;
     double easynessFactor;
     double interval;
+    RealmList<Double> resultarr;
 
     public  SuperMemo2(){}
     public SuperMemo2(int grade, double rep,double factor, double interval){
@@ -16,10 +17,10 @@ public class SuperMemo2 {
         repetitionNumber = rep;
         easynessFactor = factor;
         this.interval = interval;
+        resultarr = new RealmList<>();
     }
 
     public RealmList<Double> getResult(){
-        RealmList<Double> resultarr = new RealmList<>();
         double resultrep;
         double resulteasy;
         double resultint;
@@ -29,10 +30,10 @@ public class SuperMemo2 {
                 resultint = 1.0;
             }else if(repetitionNumber == 1){
                 resultint = 6.0;
-            }else
-            {
-                resultint = interval*easynessFactor;
-            }resultrep = repetitionNumber++;
+            }else {
+                resultint = interval * easynessFactor;
+            }
+            resultrep = repetitionNumber+=1.0;
          //incorrent response
         }else{
             resultrep = 0.0;

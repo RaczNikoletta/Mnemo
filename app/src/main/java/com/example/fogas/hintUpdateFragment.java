@@ -51,7 +51,7 @@ public class hintUpdateFragment extends Fragment {
     private ArrayAdapter<String> adapter;
     private ArrayList<String> hintStrings;
     private HintModel h;
-    private String clicked;
+    private String clicked="";
     private String [] splitedClicked;
     //TODO check if item is selected !! it is mandatory
     @Override
@@ -117,11 +117,12 @@ public class hintUpdateFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 try {
-                    FragmentManager fm = getFragmentManager();
-                    FragmentTransaction ft = fm.beginTransaction();
-                    ft.replace(R.id.container,new addHintsFragment(),"Add hints fragment")
-                            .addToBackStack(null)
-                            .commit();
+                        FragmentManager fm = getFragmentManager();
+                        FragmentTransaction ft = fm.beginTransaction();
+                        ft.replace(R.id.container, new addHintsFragment(), "Add hints fragment")
+                                .addToBackStack(null)
+                                .commit();
+
                 }catch(Throwable e){
                     Log.d("practicefragment","letterpractice click error "+ e.toString());
                 }
@@ -132,11 +133,13 @@ public class hintUpdateFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 try {
-                    FragmentManager fm = getFragmentManager();
-                    FragmentTransaction ft = fm.beginTransaction();
-                    ft.replace(R.id.container,editHintsFragment.newInstance(clicked),"Edit hints fragment")
-                            .addToBackStack(null)
-                            .commit();
+                    if(!clicked.equals("")) {
+                        FragmentManager fm = getFragmentManager();
+                        FragmentTransaction ft = fm.beginTransaction();
+                        ft.replace(R.id.container, editHintsFragment.newInstance(clicked), "Edit hints fragment")
+                                .addToBackStack(null)
+                                .commit();
+                    }
                 }catch(Throwable e){
                     Log.d("editHintsFragment","editHintsFragment click error "+ e.toString());
                 }
@@ -146,46 +149,47 @@ public class hintUpdateFragment extends Fragment {
         view.findViewById(R.id.deleteBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (!clicked.equals("")) {
+                    hintRealm.executeTransaction(r -> {
+                        try {
+                            HintDataModel datas = user.getHints();
+                            HintModel hint = datas.getOneHint(Integer.parseInt(splitedClicked[0]));
+                            hint.deleteFromRealm();
+                        } catch (Throwable e) {
+                            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+                        }
 
-                hintRealm.executeTransaction(r-> {
+                    });
                     try {
-                        HintDataModel datas = user.getHints();
-                        HintModel hint = datas.getOneHint(Integer.parseInt(splitedClicked[0]));
-                        hint.deleteFromRealm();
-                    }catch (Throwable e){
-                        Toast.makeText(getContext(),e.toString(), Toast.LENGTH_LONG).show();
+                        new AlertDialog.Builder(getContext())
+                                .setTitle(R.string.databaseUpdated)
+                                .setMessage(R.string.databaseUpdated2)
+
+                                // Specifying a listener allows you to take an action before dismissing the dialog.
+                                // The dialog is automatically dismissed when a dialog button is clicked.
+                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        try {
+                                            FragmentManager fm = getFragmentManager();
+                                            FragmentTransaction ft = fm.beginTransaction();
+                                            ft.replace(R.id.container, new hintUpdateFragment(), "hintUpdate")
+                                                    .addToBackStack(null)
+                                                    .commit();
+                                        } catch (Throwable e) {
+                                            Toast.makeText(getContext(), "Fragment change error " + e.toString(), Toast.LENGTH_LONG).show();
+                                        }
+
+                                    }
+                                })
+                                // A null listener allows the button to dismiss the dialog and take no further action.
+                                .setIcon(getResources().getDrawable(R.drawable.ic_baseline_done_outline_24))
+                                .show();
+                    } catch (Throwable e) {
+                        Toast.makeText(getContext(), "alertdialog" + " " + e.toString(), Toast.LENGTH_LONG).show();
                     }
 
-                });
-                try{
-                new AlertDialog.Builder(getContext())
-                        .setTitle(R.string.databaseUpdated)
-                        .setMessage(R.string.databaseUpdated2)
-
-                        // Specifying a listener allows you to take an action before dismissing the dialog.
-                        // The dialog is automatically dismissed when a dialog button is clicked.
-                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    FragmentManager fm = getFragmentManager();
-                                    FragmentTransaction ft = fm.beginTransaction();
-                                    ft.replace(R.id.container, new hintUpdateFragment(), "hintUpdate")
-                                            .addToBackStack(null)
-                                            .commit();
-                                } catch (Throwable e) {
-                                    Toast.makeText(getContext(), "Fragment change error " + e.toString(), Toast.LENGTH_LONG).show();
-                                }
-
-                            }
-                        })
-                        // A null listener allows the button to dismiss the dialog and take no further action.
-                        .setIcon(getResources().getDrawable(R.drawable.ic_baseline_done_outline_24))
-                        .show();
-            }catch (Throwable e){
-                Toast.makeText(getContext(), "alertdialog" + " " + e.toString(), Toast.LENGTH_LONG).show();
+                }
             }
-
-        }
 
         });
 

@@ -14,7 +14,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -159,7 +162,7 @@ public class notificationGame extends AppCompatActivity {
                         int interval = checkResults();
                         new AlertDialog.Builder(context)
                                 .setTitle(R.string.nextPractice1)
-                                .setMessage(getResources().getString(R.string.nextPractice2) +" "+ Integer.toString(interval) +" "+ getResources().getString(R.string.days))
+                                .setMessage(getResources().getString(R.string.nextPractice2) +" "+ Integer.toString(interval) +" "+  getResources().getString(R.string.days))
 
                                 // Specifying a listener allows you to take an action before dismissing the dialog.
                                 // The dialog is automatically dismissed when a dialog button is clicked.
@@ -172,9 +175,11 @@ public class notificationGame extends AppCompatActivity {
                                         AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
 
                                         long daysToMili = TimeUnit.DAYS.toMillis(interval);
+                                        Log.d("Daystomili", "DaysToMili: "+Long.toString(TimeUnit.DAYS.toMillis(interval)).toString());
                                         alarmManager.set(AlarmManager.RTC_WAKEUP,timeAtButtonClick+daysToMili,pendingIntent);
 
-                                            startActivity(new Intent(context,MainMenu.class));
+
+                                        startActivity(new Intent(context,MainMenu.class));
 
                                     }
                                 })
@@ -262,10 +267,13 @@ public class notificationGame extends AppCompatActivity {
     }
 
     private int checkResults(){
-        reps = user.getNotifications();
-        reps+=1;
-        superMemo2 = new SuperMemo2((score/2),reps,2.5,user.getLastNotification().get(2));
-        memoRealm.executeTransaction(r-> {
+        if(user.getLastNotification().get(1)==0.0) {
+            superMemo2 = new SuperMemo2((score / 2), reps, 2.5, 0);
+        }else{// resultrep .get(0),easyness .get(1),lastinterval get(2)
+            superMemo2 = new SuperMemo2((score / 2), user.getLastNotification().get(0),
+                    user.getLastNotification().get(1), user.getLastNotification().get(2));
+        }
+        memoRealm.executeTransaction(r -> {
             toInsert = superMemo2.getResult();
             user.setLastNotification(toInsert);
             user.setNotifications(reps);
@@ -277,19 +285,6 @@ public class notificationGame extends AppCompatActivity {
 
     }
 
-
-    private  void setNotificationChannel(){
-        CharSequence name = "PracticeNotifyChannel";
-        String desctiption = "Channel for practice";
-        int importance = NotificationManager.IMPORTANCE_HIGH;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel("notifyUser",name,importance);
-            channel.setDescription(desctiption);
-
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
-    }
 
     @Override
     protected void onStop() {

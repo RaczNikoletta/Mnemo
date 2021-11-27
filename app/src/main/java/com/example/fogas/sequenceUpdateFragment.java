@@ -43,7 +43,7 @@ public class sequenceUpdateFragment extends Fragment {
     private Realm sequenceUpdateRealm;
     private SequenceDataModel tempseq;
     private PegDataModel pegs;
-    private String clicked;
+    private String clicked="";
     SequenceDataModel splitedseq = new SequenceDataModel();
     RealmList<PegModel> tempPegs = new RealmList<>();
     private SequenceDataModel foundSeq = new SequenceDataModel();
@@ -121,11 +121,13 @@ public class sequenceUpdateFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 try {
-                    FragmentManager fm = getFragmentManager();
-                    FragmentTransaction ft = fm.beginTransaction();
-                    ft.replace(R.id.container, editSequencesFragment.newInstance(clicked), "Edit sequences")
-                            .addToBackStack(null)
-                            .commit();
+                    if(!clicked.equals("")) {
+                        FragmentManager fm = getFragmentManager();
+                        FragmentTransaction ft = fm.beginTransaction();
+                        ft.replace(R.id.container, editSequencesFragment.newInstance(clicked), "Edit sequences")
+                                .addToBackStack(null)
+                                .commit();
+                    }
                 } catch (Throwable e) {
                     Log.d("editHintsFragment", "editHintsFragment click error " + e.toString());
                 }
@@ -134,41 +136,43 @@ public class sequenceUpdateFragment extends Fragment {
         view.findViewById(R.id.deleteseqBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String[] splited = clicked.split("");
+                if (!clicked.equals("")) {
+                    String[] splited = clicked.split("");
 
-                try {
-                    RealmList<PegModel> pegs2 = new RealmList<>();
+                    try {
+                        RealmList<PegModel> pegs2 = new RealmList<>();
 
 
-                    for (int i = 0; i < splited.length; i++) {
-                        PegModel tempPeg = new PegModel();
-                        tempPeg.setNum(Integer.parseInt(splited[i]));
-                        tempPegs.add(tempPeg);
-                    }
-                } catch (Throwable e) {
-                    Toast.makeText(getContext(), "setpegs error: " + e.toString(), Toast.LENGTH_LONG).show();
-                }
-                try {
-                    splitedseq.setSequence(tempPegs);
-                    for (int i = 0; i < user.getSequences().size(); i++) {
-                        if (user.getSequences().get(i).isEqual(splitedseq)) {
-                            foundSeq = user.getSequences().get(i);
+                        for (int i = 0; i < splited.length; i++) {
+                            PegModel tempPeg = new PegModel();
+                            tempPeg.setNum(Integer.parseInt(splited[i]));
+                            tempPegs.add(tempPeg);
                         }
+                    } catch (Throwable e) {
+                        Toast.makeText(getContext(), "setpegs error: " + e.toString(), Toast.LENGTH_LONG).show();
                     }
-                } catch (Throwable e) {
-                    Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+                    try {
+                        splitedseq.setSequence(tempPegs);
+                        for (int i = 0; i < user.getSequences().size(); i++) {
+                            if (user.getSequences().get(i).isEqual(splitedseq)) {
+                                foundSeq = user.getSequences().get(i);
+                            }
+                        }
+                    } catch (Throwable e) {
+                        Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+                    }
+
+                    sequenceUpdateRealm.executeTransaction(r -> {
+                        foundSeq.deleteFromRealm();
+                    });
+
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ft.replace(R.id.container, new sequenceUpdateFragment(), "Edit sequences")
+                            .addToBackStack(null)
+                            .commit();
+
                 }
-
-                sequenceUpdateRealm.executeTransaction(r->{
-                    foundSeq.deleteFromRealm();
-                });
-
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.container, new sequenceUpdateFragment(), "Edit sequences")
-                        .addToBackStack(null)
-                        .commit();
-
             }
         });
 
