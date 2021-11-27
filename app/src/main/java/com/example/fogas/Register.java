@@ -71,7 +71,8 @@ public class Register extends AppCompatActivity {
 
        @Override
        public void afterTextChanged(Editable editable) {
-           UserDataModel userExists =  registerRealm.where(UserDataModel.class).equalTo("userName",usernameEt.getText().toString()).findFirst();
+           UserDataModel userExists =  registerRealm.where(UserDataModel.class).equalTo("userName",
+                   usernameEt.getText().toString()).findFirst();
            if(userExists == null){
                usernameEt.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_baseline_done_outline_24,0);
            }

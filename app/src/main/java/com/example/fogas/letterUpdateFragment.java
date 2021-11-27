@@ -328,6 +328,14 @@ public class letterUpdateFragment extends Fragment {
                                     }
                                     //Toast.makeText(getContext(),"counter "+String.valueOf(counter),Toast.LENGTH_LONG).show();
                                     if (counter >= 10) {
+                                        if(user.getLastNotification().get(1)!=0.0){
+                                            updaterRealm.executeTransaction(r-> {
+                                                user.getLastNotification().set(0, 0.0);
+                                                user.getLastNotification().set(1, 0.0);
+                                                user.getLastNotification().set(2, 0.0);
+                                                updaterRealm.insertOrUpdate(user);
+                                            } );
+                                        }
                                         long timeAtButtonClick = System.currentTimeMillis();
                                         Intent intent = new Intent(getContext(),PracticeNotificationManager.class);
                                         PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(),0,intent,0);

@@ -121,7 +121,7 @@
     <string name="addNewPegs">"Túl kevés fogasod van, adj meg újakat!"</string>
     <string name="nextPractice2">Az ideális következő gyakorlás: </string>
     <string name="nextPractice1">Következő gyakorlás</string>
-    <string name="days"> nap</string>
+    <string name="days"> nap múlva</string>
     <string name="score">Pontszám: </string>
     <!--Push notification -->
     <!--Before_sequence -->
