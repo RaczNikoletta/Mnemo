@@ -25,7 +25,7 @@
         android:text="Bevitt számsor"
         android:textSize="22sp" />
 
-    <TextView
+    <EditText
         android:id="@+id/chainViewText2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,16 +35,31 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="bottom|center"
-        android:orientation="vertical">
+        android:gravity="bottom|center">
 
         <Button
             android:id="@+id/listButton"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
             android:text="Listáz" />
+
+        <Button
+            android:id="@+id/listButton2"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="Hozzáad" />
+
+        <Button
+            android:id="@+id/listButton3"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="Betölt" />
+
     </LinearLayout>
 
 </LinearLayout>

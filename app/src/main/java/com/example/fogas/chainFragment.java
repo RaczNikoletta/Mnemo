@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fogas.Models.PegDataModel;
+import com.example.fogas.Models.PegModel;
 import com.example.fogas.Models.SequenceDataModel;
 import com.example.fogas.Models.UserDataModel;
 
@@ -29,10 +30,12 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,8 +44,8 @@ import io.realm.Realm;
 public class chainFragment extends Fragment {
 
     private Button btn1, btn2;
-    private EditText edtxt;
-    private TextView txtvw1, txtvw2, txtvw3;
+    private EditText edtxt, txtvw2;
+    private TextView txtvw1, txtvw3;
     private Realm realm;
     private UserDataModel user;
     private String newstring;
@@ -50,22 +53,27 @@ public class chainFragment extends Fragment {
     private ArrayList<String> theStrings = new ArrayList<String>();
     private SequenceDataModel sequenceUser;
     private HashMap<String, String> indexAdapter = new HashMap<String, String>();
-    private PegDataModel localStorage;
+    private PegDataModel localPegStorage;
+    private RealmList<String> realmStrings = new RealmList<String>();
 
     public chainFragment() {
         // Required empty public constructor
     }
 
-
+    //todo ne induljon el amíg be nincs jelentkezve user
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chain, container, false);
         edtxt = (EditText) view.findViewById(R.id.editTextTextPersonName);
         txtvw1 = (TextView) view.findViewById(R.id.chainViewText1);
-        txtvw2 = (TextView) view.findViewById(R.id.chainViewText2);
+        txtvw2 = (EditText) view.findViewById(R.id.chainViewText2);
+        btn1 = (Button) view.findViewById(R.id.listButton);
+        btn2 = (Button) view.findViewById(R.id.listButton2);
         realm = Realm.getDefaultInstance();
         user = realm.where(UserDataModel.class).equalTo("loggedIn", true).findFirst();
-        localStorage = user.getPegs();
+        localPegStorage = user.getPegs();
+//        sequenceUser = user.getSequences().first();
+//        RealmList<String> provider = new RealmList<>();
 /*
         view.findViewById(R.id.chainBtn).setOnClickListener(new View.OnClickListener(){
             @Override
@@ -89,28 +97,61 @@ public class chainFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
-                //todo wordFromDatabaseList indexnek veszi a beírt számokat, 9 fölött ez gond ha léteznek custom fogasok
-                //todo listázni(setText)-hez függvényt és nem a beépített list toString()-je csinálja őket
-                //todo módosítani a beírt szöveget (textview helyett edittextbe adja át) és el lehessen menteni (???)
+                //todo el lehessen menteni a beírt szöveged (???) realmlistuser.setoneseq
                 try {
                     if (edtxt.getText().toString() == "Számsort kérek!")
                     {
                         edtxt.getText().clear();
                     }
+
                      newstring = edtxt.getText().toString();
                      theStrings = wordFromDatabaseList(newstring, edtxt, " ");
                      txtvw1.setText(newstring);
                      txtvw2.setText(listParsedWords(theStrings));
-
-                     //user.setOneSequence(user.getSequences().first());
                 } catch (Throwable e)
                 {
                     Toast.makeText(getContext(), "hint" + " " + e.toString(), Toast.LENGTH_LONG).show();
                 }
             }
         });
+
+        view.findViewById(R.id.listButton2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+
+//                    provider.add(txtvw2.getText().toString());
+//                    sequenceUser.setStory(provider);
+                    System.out.println(sequenceUser.getStory().toString());
+                } catch (Throwable e){
+                    Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        view.findViewById(R.id.listButton3).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            //todo függvényeket úgy megírni hogy be is vigye őket az adatbázisba kattintásra
+            public void onClick(View view) {
+                try {
+                    txtvw2.setText(sequenceUser.getStory().toString());
+                    SequenceDataModel newModel = new SequenceDataModel();
+                    newModel.setUser(user);
+                    realmStrings.add(txtvw2.getText().toString());
+                    newModel.setStory(realmStrings);
+                    realmStrings.clear();
+                    realmStrings.add(txtvw2.getText().toString());
+                    newModel.setSequence(user.getPegs().getPegs());
+
+                } catch (Throwable e){
+                    Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
         return view;
     }
+
+
     //todo indexAdapter megvalósítás külön függvénybe
     @RequiresApi(api = Build.VERSION_CODES.N)
     private ArrayList<String> wordFromDatabaseList(String bunchOfNumbers, EditText beviteliMezo, String regexToSplit){
@@ -142,7 +183,10 @@ public class chainFragment extends Fragment {
             theReturnString += s + " ";
         }
         return theReturnString;
+
     }
+
+
 
     private Long chainedNumbers(ArrayList<String> stringArray){
         String returnNumbers = null;
