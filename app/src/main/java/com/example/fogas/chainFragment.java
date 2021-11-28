@@ -133,16 +133,18 @@ public class chainFragment extends Fragment {
             @Override
             //todo függvényeket úgy megírni hogy be is vigye őket az adatbázisba kattintásra
             public void onClick(View view) {
-                try {
-                    txtvw2.setText(sequenceUser.getStory().toString());
-                    SequenceDataModel newModel = new SequenceDataModel();
-                    newModel.setUser(user);
-                    realmStrings.add(txtvw2.getText().toString());
-                    newModel.setStory(realmStrings);
-                    realmStrings.clear();
-                    realmStrings.add(txtvw2.getText().toString());
-                    newModel.setSequence(user.getPegs().getPegs());
 
+                    SequenceDataModel newModel = new SequenceDataModel(user);
+                try {
+                    realm.executeTransaction( r -> {
+
+                        realmStrings.clear();
+                        realmStrings.add(txtvw2.getText().toString());
+                        newModel.setStory(realmStrings);
+                        newModel.setSequence(user.getPegs().getPegs());
+                        user.setOneSequence(newModel);
+                        realm.insertOrUpdate(user);
+                    });
                 } catch (Throwable e){
                     Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
                 }
