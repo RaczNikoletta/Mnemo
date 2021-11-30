@@ -90,7 +90,7 @@ public class editHintsFragment extends Fragment {
         } catch (Throwable e) {
             Toast.makeText(getContext(), "arguments error " + e.toString(), Toast.LENGTH_LONG).show();
         }
-        Toast.makeText(getContext(), pegNum, Toast.LENGTH_LONG).show();
+        //Toast.makeText(getContext(), pegNum, Toast.LENGTH_LONG).show();
         // split into pegnum and hintstring
         splitedPeg = pegNum.split("\\s+");
 
@@ -108,7 +108,7 @@ public class editHintsFragment extends Fragment {
         try {
 
             Bitmap bmp = BitmapFactory.decodeByteArray(hint.getImage(), 0, hint.getImage().length);
-            imageView10.setImageBitmap(Bitmap.createScaledBitmap(bmp, 600, 600, false));
+            imageView10.setImageBitmap(Bitmap.createBitmap(bmp));
         } catch (Throwable e) {
             Toast.makeText(getContext(), "Bitmap error: " + e.toString(), Toast.LENGTH_LONG).show();
         }

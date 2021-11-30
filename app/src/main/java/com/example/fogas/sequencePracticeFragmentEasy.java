@@ -225,4 +225,15 @@ public class sequencePracticeFragmentEasy extends Fragment {
 
 
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.container, new before_sequence_practice(), "beforeseq")
+                .addToBackStack(null)
+                .commit();
+
+    }
 }

@@ -159,7 +159,7 @@ public class SequencePracticeHard extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
                 String[] splitedSeq = hardsequencePracEt.getText().toString().split("");
-                String[] newSplited = new String [splitedSeq.length];
+                String[] newSplited = new String [splitedseq.getSequence().size()];
                 boolean biggerThanTen = false;
                 //check if index is in aboveNine arraylist
                 for(int i=0;i<splitedSeq.length-1;i++){
@@ -176,32 +176,27 @@ public class SequencePracticeHard extends Fragment {
                     }
                 }
                 try {
-                    //count numbers
-                        int x = splitedSeq.length-1;
-                        if ((!splitedSeq[x].equals("skip"))) {
-                            PegModel model = foundSeq.getSequence().get(x+1);
-                            if (model != null) {
-                                HintModel currentHint = user.getHints().getOneHint(model.getNum());
-                                if (currentHint != null && currentHint.getImage() != null) {
-                                    Bitmap bmp = BitmapFactory.decodeByteArray(currentHint.getImage(), 0, currentHint.getImage().length);
-                                    imageViewHintHard.setImageBitmap(Bitmap.createBitmap(bmp));
-                                }
-                            }
-                            imageViewHintHard.setVisibility(View.INVISIBLE);
-                            isVisible = false;
-                    }if(TextUtils.isEmpty(hardsequencePracEt.getText())){
-                        PegModel model = foundSeq.getSequence().get(0);
-                        if (model != null) {
-                            HintModel currentHint = user.getHints().getOneHint(model.getNum());
-                            if (currentHint != null && currentHint.getImage() != null) {
-                                Bitmap bmp = BitmapFactory.decodeByteArray(currentHint.getImage(), 0, currentHint.getImage().length);
-                                imageViewHintHard.setImageBitmap(Bitmap.createBitmap(bmp));
-                            }
-                        }
-                                imageViewHintHard.setVisibility(View.INVISIBLE);
-                                isVisible = false;
-
+                    //check if empty or above ten
+                    PegModel model = new PegModel();
+                    int x = splitedSeq.length - 1;
+                    if ((!splitedSeq[x].equals("skip")) && !TextUtils.isEmpty(hardsequencePracEt.getText())) {
+                        model = foundSeq.getSequence().get(x + 1);
                     }
+                    if (TextUtils.isEmpty(hardsequencePracEt.getText())) {
+                        model = foundSeq.getSequence().get(0);
+                    }
+                    if (model != null) {
+                        HintModel currentHint = user.getHints().getOneHint(model.getNum());
+                        if (currentHint != null && currentHint.getImage() != null) {
+                            //set image
+                            Bitmap bmp = BitmapFactory.decodeByteArray(currentHint.getImage(), 0,
+                                    currentHint.getImage().length);
+                            imageViewHintHard.setImageBitmap(Bitmap.createBitmap(bmp));
+                        }
+                    }
+                    imageViewHintHard.setVisibility(View.INVISIBLE);
+                    isVisible = false;
+
 
 
 
@@ -334,5 +329,16 @@ public class SequencePracticeHard extends Fragment {
             if(Character.digit(s.charAt(i),radix) < 0) return false;
         }
         return true;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.container, new before_sequence_practice(), "beforeseq")
+                .addToBackStack(null)
+                .commit();
+
     }
 }
