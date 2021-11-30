@@ -20,12 +20,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fogas.Models.PegModel;
 import com.example.fogas.Models.SequenceDataModel;
 import com.example.fogas.Models.UserDataModel;
 
 import java.util.ArrayList;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 
 public class before_sequence_practice extends Fragment {
 
@@ -40,6 +42,7 @@ public class before_sequence_practice extends Fragment {
     private SequenceDataModel tempseq;
     private ListView seqPracListV;
     private String clicked="";
+    private ArrayList<Integer> seqPegs;
 
 
 
@@ -50,6 +53,7 @@ public class before_sequence_practice extends Fragment {
         View view = inflater.inflate(R.layout.fragment_before_sequence_practice, container, false);
         beforeSeqRealm = Realm.getDefaultInstance();
         list = new ArrayList<>();
+        seqPegs = new ArrayList<>();
         seqPracListV = view.findViewById(R.id.seqPracListV);
         user = beforeSeqRealm.where(UserDataModel.class).equalTo("loggedIn", true).findFirst();
         for (int i = 0; i < user.getSequences().size(); i++) {
@@ -58,6 +62,7 @@ public class before_sequence_practice extends Fragment {
             for (int j = 0; j < tempseq.getSequence().size(); j++) {
                 temp.append(String.valueOf(tempseq.getSequence().get(j).getNum()));
                 if (j == tempseq.getSequence().size() - 1) {
+                    seqPegs.add(tempseq.getSequence().get(j).getNum());
                     list.add(String.valueOf(temp));
                 }
             }
@@ -127,7 +132,7 @@ public class before_sequence_practice extends Fragment {
                 if (!clicked.equals("")) {
                     FragmentManager fm = getFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
-                    ft.replace(R.id.container, new SequencePracticeHard(), "hard sequences")
+                    ft.replace(R.id.container,SequencePracticeHard.newInstance(clicked,seqPegs), "hard sequences")
                             .addToBackStack(null)
                             .commit();
 

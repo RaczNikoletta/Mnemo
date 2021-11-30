@@ -9,14 +9,15 @@
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="685dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13" >
+        app:layout_constraintVertical_bias="0.13">
 
         <TextView
             android:id="@+id/textView31"
@@ -37,6 +38,15 @@
             android:inputType="textPersonName"
             android:textColor="@color/white" />
 
+        <TextView
+            android:id="@+id/textView32"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/storyTv"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/hardstoryPracticeEt"
             android:layout_width="match_parent"
@@ -48,15 +58,50 @@
             android:singleLine="false"
             android:textColor="@color/white" />
 
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:backgroundTint="@color/colorPrimary"
+            android:src="@drawable/ic_baseline_help_center_24" />
+
         <Button
-            android:id="@+id/sendHardBtn"
+            android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
             android:background="@color/colorPrimaryDark"
-            android:text="@string/kuldesgomb"
-            android:textColor="@color/white" />
+            android:text="@string/kuldesgomb" />
+
+        <LinearLayout
+            android:id="@+id/hardLin"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/saveHintsBtn2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/browseBtn2"
+            app:layout_constraintVertical_bias="1.0">
+
+            <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp">
+
+                <ImageView
+                    android:id="@+id/imageViewHintHard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:src="@android:drawable/gallery_thumb" />
+            </ScrollView>
+        </LinearLayout>
+
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

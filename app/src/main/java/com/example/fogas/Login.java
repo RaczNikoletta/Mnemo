@@ -61,21 +61,10 @@ public class Login extends AppCompatActivity {
                         .findFirst();
                 //if username and password are valid (database contains them)
                 if(isValid!=null){
-                    /*long timeAtButtonClick = System.currentTimeMillis();
-                    Intent intent = new Intent(Login.this,PracticeNotificationManager.class);
-                    PendingIntent pendingIntent = PendingIntent.getBroadcast(Login.this,0,intent,0);
-
-                    AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-
-                    long tenSecondsInMillis = 1000*10;
-                    alarmManager.set(AlarmManager.RTC_WAKEUP,timeAtButtonClick+tenSecondsInMillis,pendingIntent);*/
-
                     isValid.setLoggedIn(true);
                     startActivity(new Intent(this,MainMenu.class));
                     finish();
                 }
-
-
                 else{
                     notValidTv.setText(R.string.notValidLogin);
                 }

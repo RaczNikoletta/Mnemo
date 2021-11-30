@@ -125,7 +125,7 @@ public class notificationGame extends AppCompatActivity {
                             counter++;
 
                         }
-                    } else if ((half && counter > 5) || wordBool) {
+                    } else if ((half && counter > 4) || wordBool) {
                         if (Integer.parseInt(answerNotEt.getText().toString()) == answerWord.get(counter)) {
                             score++;
                             LayoutInflater inf = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -154,7 +154,8 @@ public class notificationGame extends AppCompatActivity {
 
                         }
 
-                    } if (counter == 9) {
+                    } if (counter == 10) {
+                        part_jelzo.setVisibility(View.INVISIBLE);
                         sendNotBtn.setVisibility(View.INVISIBLE);
                         answerNotEt.setVisibility(View.INVISIBLE);
                         questionNot.setTextColor(getResources().getColor(R.color.white));
@@ -188,15 +189,15 @@ public class notificationGame extends AppCompatActivity {
                                 .setIcon(getResources().getDrawable(R.drawable.ic_baseline_help_center_24))
                                 .show();
                     }
-                    if (half && counter<9) {
-                        if (counter <= 5) {
+                    if (half && counter<10) {
+                        if (counter < 5) {
                             questionNot.setText(answerNotEt.getResources().getString(R.string.kerdes_betu) + " " + questionLetter.get(counter));
                         } else {
                             questionNot.setText(answerNotEt.getResources().getString(R.string.kerdes_szo) + " " + questionWord.get(counter));
                         }
-                    } else if (wordBool && counter <9) {
+                    } else if (wordBool && counter <10) {
                         questionNot.setText(answerNotEt.getResources().getString(R.string.kerdes_betu) + " " + questionLetter.get(counter));
-                    } else if (letterBool && counter <9) {
+                    } else if (letterBool && counter <10) {
                         questionNot.setText(answerNotEt.getResources().getString(R.string.kerdes_szo) + " " + questionWord.get(counter));
                     }
                     part_jelzo.setText(Integer.toString(counter+1) + "/10");

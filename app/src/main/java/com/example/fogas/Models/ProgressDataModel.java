@@ -45,7 +45,8 @@ public class ProgressDataModel extends RealmObject {
                     progressForEachGame.get(i).setLastPractice(now);
                     progressForEachGame.get(i).addResult(p.results.get(0));
                     progressForEachGame.get(i).setAvg();
-                    progressForEachGame.get(i).setTimeInGame(progressForEachGame.get(i).getTimeInGame() + p.getTimeInGame());
+                    progressForEachGame.get(i).setTimeInGame(progressForEachGame.get(i).getTimeInGame()
+                            + p.getTimeInGame());
                     isExists = true;
                 }
             }
