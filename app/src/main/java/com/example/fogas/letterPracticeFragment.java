@@ -1,5 +1,7 @@
 package com.example.fogas;
 
+import static io.realm.internal.SyncObjectServerFacade.getApplicationContext;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -356,6 +358,13 @@ public class letterPracticeFragment extends Fragment {
 
                             kerdes.setText(pontok + "");
                             insertProgress();
+
+                            Context context = getApplicationContext();
+                            CharSequence text = "Elért pontszám: " + pontok;
+                            int duration = Toast.LENGTH_SHORT;
+
+                            Toast toast = Toast.makeText(context, text, duration);
+                            toast.show();
 
 
                             try {

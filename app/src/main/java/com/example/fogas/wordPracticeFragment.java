@@ -50,6 +50,7 @@ import java.util.zip.Inflater;
 import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmResults;
+import io.realm.internal.SyncObjectServerFacade;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -377,6 +378,13 @@ public class wordPracticeFragment extends Fragment {
 
                             kerdes.setText(pontok + "");
                             insertProgress();
+
+                            Context context = SyncObjectServerFacade.getApplicationContext();
+                            CharSequence text = "Elért pontszám: " + pontok;
+                            int duration = Toast.LENGTH_SHORT;
+
+                            Toast toast = Toast.makeText(context, text, duration);
+                            toast.show();
 
 
                         try {
