@@ -97,17 +97,15 @@ public class chainFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
-                //todo el lehessen menteni a beírt szöveged (???) realmlistuser.setoneseq
                 try {
-                    if (edtxt.getText().toString() == "Számsort kérek!")
-                    {
-                        edtxt.getText().clear();
-                    }
-
-                     newstring = edtxt.getText().toString();
-                     theStrings = wordFromDatabaseList(newstring, edtxt, " ");
-                     txtvw1.setText(newstring);
-                     txtvw2.setText(listParsedWords(theStrings));
+                    //if (edtxt.getText().toString().contains("[0-9 ]+")) {
+                        newstring = edtxt.getText().toString();
+                        theStrings = wordFromDatabaseList(newstring, edtxt, " ");
+                        txtvw1.setText(newstring);
+                        txtvw2.setText(listParsedWords(theStrings));
+                    //} else {
+                     //   Toast.makeText(getContext(), "Csak számokat várunk!", Toast.LENGTH_LONG).show();
+                    //}
                 } catch (Throwable e)
                 {
                     Toast.makeText(getContext(), "hint" + " " + e.toString(), Toast.LENGTH_LONG).show();
@@ -119,10 +117,7 @@ public class chainFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 try {
-
-//                    provider.add(txtvw2.getText().toString());
-//                    sequenceUser.setStory(provider);
-                    System.out.println(sequenceUser.getStory().toString());
+                    txtvw1.setText(numChainFromWords(txtvw3.getText().toString()));
                 } catch (Throwable e){
                     Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
                 }
@@ -131,17 +126,25 @@ public class chainFragment extends Fragment {
         view.findViewById(R.id.listButton3).setOnClickListener(new View.OnClickListener() {
 
             @Override
-            //todo függvényeket úgy megírni hogy be is vigye őket az adatbázisba kattintásra
             public void onClick(View view) {
 
                     SequenceDataModel newModel = new SequenceDataModel(user);
+                    PegModel localPegModel = new PegModel();
+                    RealmList<PegModel> localRealmPeg = new RealmList<PegModel>();
                 try {
                     realm.executeTransaction( r -> {
 
+                        String[] localNums;
+                        localNums = edtxt.getText().toString().split(" ");
+
                         realmStrings.clear();
                         realmStrings.add(txtvw2.getText().toString());
+                        for (String s : localNums) {
+                            localPegModel.setWord(s); //a számokat a word-ben fogja tárolni mert num
+                        }                             //int típus és csak egy bejegyzést tud kezelni
+                        localRealmPeg.add(localPegModel);
                         newModel.setStory(realmStrings);
-                        newModel.setSequence(user.getPegs().getPegs());
+                        newModel.setSequence(localRealmPeg);
                         user.setOneSequence(newModel);
                         realm.insertOrUpdate(user);
                     });
@@ -176,6 +179,20 @@ public class chainFragment extends Fragment {
         }
         System.out.println(innerArray.toString());
         return innerArray;
+    };
+
+    private String numChainFromWords(String words)
+    {
+        String[] theWords = words.split(" ");
+        for (int i = 0; user.getSequences().size() < i; i++){
+            if (theWords.equals(user.getSequences().get(i).getStory()))
+            {
+                System.out.println("A Sequencek száma" + user.getSequences().size());
+                System.out.println("A talált sequence (word)" + user.getPegs().getOnePeg(i).getWord());
+                return user.getPegs().getOnePeg(i).getWord();
+            }
+        }
+        return "Nincs ilyen!";
     };
 
     private String listParsedWords(ArrayList<String> cleanStrings){

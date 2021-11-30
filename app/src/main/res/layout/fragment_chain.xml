@@ -15,7 +15,7 @@
         android:layout_weight="0"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Számsort kérek!" />
+        android:hint="Számsort kérek!"/>
 
     <TextView
         android:id="@+id/chainViewText1"
@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:text="Fogasok számsorból"
+        android:hint="Fogasok számsorból"
         android:textSize="26sp" />
 
     <LinearLayout
