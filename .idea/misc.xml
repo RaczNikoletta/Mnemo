@@ -30,6 +30,7 @@
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/fragment_chain.xml" value="0.42857142857142855" />
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/fragment_edit_hints.xml" value="0.25" />
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/fragment_edit_sequences.xml" value="0.3828571428571429" />
+        <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/fragment_help.xml" value="0.2857142857142857" />
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/fragment_hint_update.xml" value="0.21282798833819241" />
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/fragment_letter_practice.xml" value="0.1" />
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/fragment_letter_update.xml" value="0.2857142857142857" />
@@ -40,6 +41,7 @@
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/fragment_sequence_practice_hard.xml" value="0.26" />
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/fragment_sequence_practice_medium.xml" value="0.12571428571428572" />
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/fragment_sequnce_update.xml" value="0.23353293413173654" />
+        <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/fragment_settings.xml" value="0.2857142857142857" />
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/fragment_statistics.xml" value="0.30612244897959184" />
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/fragment_update.xml" value="0.19791666666666666" />
         <entry key="..\:/Users/raczn/AndroidStudioProjects/memory/game_memory/app/src/main/res/layout/fragment_word_practice.xml" value="0.1989051094890511" />

@@ -267,27 +267,20 @@ public class letterUpdateFragment extends Fragment {
                         //Toast.makeText(getContext(), "belowten " + String.valueOf(belowten), Toast.LENGTH_LONG).show();
                         updaterRealm.executeTransaction(r -> {
                             for (int i = 0; i < belowten; i++) {
+                                PegModel p = new PegModel();
                                 try {
-                                    PegModel p = new PegModel();
                                     eLetter = view.findViewById(ids[i]);
                                     eWord = view.findViewById(ids[i + 10]);
                                     Log.v("letterupdate", i + " " + ids[i] + "ennyi");
                                     let = eLetter.getText().toString();
                                     word = eWord.getText().toString();
-                                    p.setUserName(user.getUserName());
                                     p.setLetter(let);
                                     p.setWord(word);
                                     p.setNum(i);
-                                    RealmResults<PegModel>  userspeg = updaterRealm.where(PegModel.class).equalTo("userName",user.getUserName()).findAll();
-                                    for(PegModel model: userspeg) {
-                                        if(model.getNum()==p.getNum()){
-                                            model.deleteFromRealm();
-                                        }
-                                        }
+                                }catch(Throwable e){
+                                        Toast.makeText(getContext(),"beforeDelete" + e.toString(),Toast.LENGTH_LONG).show();
+                                    }
                                     user.getPegs().setOnePeg(p);
-                                } catch (Throwable e) {
-                                    Toast.makeText(getContext(), "in loop" + e.toString() + String.valueOf(i), Toast.LENGTH_LONG).show();
-                                }
                             }
                             try {
                                 if(aboveNineSpinner.getSelectedItem()!=null){

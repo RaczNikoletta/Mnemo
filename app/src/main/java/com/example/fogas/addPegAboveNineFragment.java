@@ -169,7 +169,6 @@ public class addPegAboveNineFragment extends Fragment {
                     }
 
                     if(emptyCounter<2 && (!TextUtils.isEmpty(numberabovenEt.getText().toString())) ){
-                        aboveNineRealm.insertOrUpdate(peg);
                         user.getPegs().setOnePeg(peg);
                         aboveNineRealm.insertOrUpdate(user);
 

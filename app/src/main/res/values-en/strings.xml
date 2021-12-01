@@ -146,4 +146,7 @@
     <string name="wrongAnswer1">Answer is wrong</string>
     <string name="wrongAnswer2">The answer is wrong! +0 score. The right answer is: </string>
     <!--Easyseqpractice-->
+    <!--Settings-->
+    <string name="notificationSetting">Notifications</string>
+    <!--Settings-->
 </resources>

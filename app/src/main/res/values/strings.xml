@@ -151,4 +151,7 @@
     <string name="wrongAnswer1">A válasz helytelen</string>
     <string name="wrongAnswer2">A válasz helytelen! +0 pont A helyes válasz: </string>
     <!--Easyseqpractice-->
+    <!--Settings-->
+    <string name="notificationSetting">Értesítések</string>
+    <!--Settings-->
 </resources>

@@ -197,6 +197,12 @@ public class MainMenu extends AppCompatActivity implements DuoMenuView.OnMenuCli
             case(3):
                 goToFragment(new statisticsFragment(), false, "statistics");
                 break;
+            case(4):
+                goToFragment(new SettingsFragment(),false,"settings");
+                break;
+            case(5):
+                goToFragment(new HelpFragment(),false,"help");
+                break;
             default:
                 goToFragment(new PracticeFragment(), false,"practiceFragment");
                 break;
@@ -242,8 +248,22 @@ public class MainMenu extends AppCompatActivity implements DuoMenuView.OnMenuCli
             mainRealm.executeTransaction(r -> {
                 UserDataModel getlogged = mainRealm.where(UserDataModel.class)
                         .equalTo("loggedIn", true).findFirst();
+
+
                 if(getlogged !=null)
                 {
+
+                    int minInGame = 0;
+                    if(getlogged.getProgress().getProgressForEachGame()!=null) {
+                        for (int i = 0; i < getlogged.getProgress().getProgressForEachGame().size(); i++) {
+                            if(getlogged.getProgress().getProgressForEachGame().get(i)!=null)
+                                minInGame += getlogged.getProgress().getProgressForEachGame().get(i).getTimeInGame();
+                        }
+                    }
+
+                    if(minInGame > 20){
+
+                    }
                     userTv.setText(getlogged.getUserName());
                     titleTv.setText(getlogged.getTitle());
                     loginBtn.setVisibility(View.GONE);
