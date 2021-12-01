@@ -183,9 +183,14 @@ public class chainFragment extends Fragment {
 
     private String numChainFromWords(String words)
     {
+        RealmList<String> stories = new RealmList<>();
         String[] theWords = words.split(" ");
+        for (String w: theWords){
+            stories.add(w);
+        }
+
         for (int i = 0; user.getSequences().size() < i; i++){
-            if (theWords.equals(user.getSequences().get(i).getStory()))
+            if (stories.equals(user.getSequences().get(i).getStory()))
             {
                 System.out.println("A Sequencek száma" + user.getSequences().size());
                 System.out.println("A talált sequence (word)" + user.getPegs().getOnePeg(i).getWord());
