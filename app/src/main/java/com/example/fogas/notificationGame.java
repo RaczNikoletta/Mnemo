@@ -110,7 +110,6 @@ public class notificationGame extends AppCompatActivity {
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.setView(popupView);
                             toast.show();
-                            counter++;
                         } else {
                             LayoutInflater inf = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                             View popupView = inf.inflate(R.layout.wrong_answer_layout, null);
@@ -122,9 +121,9 @@ public class notificationGame extends AppCompatActivity {
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.setView(popupView);
                             toast.show();
-                            counter++;
 
                         }
+                        counter++;
                     } else if ((half && counter > 4) || wordBool) {
                         if (Integer.parseInt(answerNotEt.getText().toString()) == answerWord.get(counter)) {
                             score++;
@@ -189,16 +188,20 @@ public class notificationGame extends AppCompatActivity {
                                 .setIcon(getResources().getDrawable(R.drawable.ic_baseline_help_center_24))
                                 .show();
                     }
+
                     if (half && counter<10) {
+                        Toast.makeText(getBaseContext(),"half" , Toast.LENGTH_SHORT).show();
                         if (counter < 5) {
                             questionNot.setText(answerNotEt.getResources().getString(R.string.kerdes_betu) + " " + questionLetter.get(counter));
                         } else {
                             questionNot.setText(answerNotEt.getResources().getString(R.string.kerdes_szo) + " " + questionWord.get(counter));
                         }
                     } else if (wordBool && counter <10) {
-                        questionNot.setText(answerNotEt.getResources().getString(R.string.kerdes_betu) + " " + questionLetter.get(counter));
+                        Toast.makeText(getBaseContext(),"word" , Toast.LENGTH_SHORT).show();
+                        questionNot.setText(answerNotEt.getResources().getString(R.string.kerdes_betu) + " " + questionWord.get(counter));
                     } else if (letterBool && counter <10) {
-                        questionNot.setText(answerNotEt.getResources().getString(R.string.kerdes_szo) + " " + questionWord.get(counter));
+                        Toast.makeText(getBaseContext(),"letter" , Toast.LENGTH_SHORT).show();
+                        questionNot.setText(answerNotEt.getResources().getString(R.string.kerdes_szo) + " " + questionLetter.get(counter));
                     }
                     part_jelzo.setText(Integer.toString(counter+1) + "/10");
                 }catch (Throwable e){
@@ -255,6 +258,7 @@ public class notificationGame extends AppCompatActivity {
         }catch(Throwable e){
             Toast.makeText(context,e.toString(),Toast.LENGTH_LONG).show();
         }
+        Toast.makeText(getBaseContext(),pegs.counter()[0] + " " +pegs.counter()[1],Toast.LENGTH_LONG).show();
         if(pegs.counter()[0]>=5 && pegs.counter()[1]>=5){
             half = true;
 

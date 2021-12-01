@@ -57,17 +57,21 @@ public class statisticsFragment extends Fragment {
             }
             if (user.getProgress().getProgressById(3) != null) {
                 int scores = 0;
-                for(int i=0;i<user.getProgress().getProgressById(3).getResults().size();i++){
-                    scores+=user.getProgress().getProgressById(3).getResults().get(i);
+                if(user.getProgress().getProgressById(3).getResults()!=null) {
+                    for (int i = 0; i < user.getProgress().getProgressById(3).getResults().size(); i++) {
+                        scores += user.getProgress().getProgressById(3).getResults().get(i);
+                    }
                 }
                 sequenceStatTv.setText(Integer.toString(scores).toString());
             } else {
                 sequenceStatTv.setText(getResources().getString(R.string.statisticsSequence) + " ");
             }
             minInGame = 0;
-            for (int i = 0; i < user.getProgress().getProgressForEachGame().size(); i++) {
-                assert user.getProgress().getProgressForEachGame().get(i) != null;
-                minInGame += user.getProgress().getProgressForEachGame().get(i).getTimeInGame();
+            if(user.getProgress().getProgressForEachGame()!=null) {
+                for (int i = 0; i < user.getProgress().getProgressForEachGame().size(); i++) {
+                    if(user.getProgress().getProgressForEachGame().get(i)!=null)
+                    minInGame += user.getProgress().getProgressForEachGame().get(i).getTimeInGame();
+                }
             }
             timeInGameTv.setText(getResources().getString(R.string.timeInGameStat) + " " + String.format( "%.0f",minInGame)+" "+ getResources().getString(R.string.min));
         }catch (Throwable e){
