@@ -162,6 +162,7 @@ public class chainFragment extends Fragment {
                                     localPegModel.setLetter(user.getPegs().getOnePeg(i).getLetter());
                                     localPegModel.setNum(user.getPegs().getOnePeg(i).getNum());
                                     localRealmPeg.add(localPegModel);
+                                    System.out.println(user.getPegs().getOnePeg(i).getWord());
                                 }
                             }
                         }
@@ -225,7 +226,13 @@ public class chainFragment extends Fragment {
         String theReturnString = new String();
         for(String s : cleanStrings)
         {
-            theReturnString += s + " ";
+            //if (s.equals(null)){
+            //    theReturnString += "";
+            //}
+            //else {
+                theReturnString += s + " ";
+            //}
+
         }
         return theReturnString;
 
