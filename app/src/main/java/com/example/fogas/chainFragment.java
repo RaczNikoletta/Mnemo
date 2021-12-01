@@ -155,6 +155,18 @@ public class chainFragment extends Fragment {
 
                         }
 
+                        for (int i = 0 ; i < user.getPegs().getPegs().size(); i++){
+                            for (int k = 0; k < localRealmStrings.size(); k++){
+                                if (localRealmStrings.get(k).equals(user.getPegs().getOnePeg(i).getWord())){
+                                    localPegModel.setWord(user.getPegs().getOnePeg(i).getWord());
+                                    localPegModel.setLetter(user.getPegs().getOnePeg(i).getLetter());
+                                    localPegModel.setNum(user.getPegs().getOnePeg(i).getNum());
+                                    localRealmPeg.add(localPegModel);
+                                }
+                            }
+                        }
+
+
                         newModel.setStory(localRealmStrings);
                         newModel.setSequence(localRealmPeg);
                         user.setOneSequence(newModel);
