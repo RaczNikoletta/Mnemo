@@ -28,6 +28,7 @@ import com.example.fogas.Models.UserDataModel;
 
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -117,7 +118,8 @@ public class chainFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 try {
-                    txtvw1.setText(numChainFromWords(txtvw3.getText().toString()));
+                    Toast.makeText(getContext(), " Button clicked", Toast.LENGTH_LONG).show();
+                    txtvw1.setText(numChainFromWords(txtvw2.getText().toString()));
                 } catch (Throwable e){
                     Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
                 }
@@ -125,25 +127,35 @@ public class chainFragment extends Fragment {
         });
         view.findViewById(R.id.listButton3).setOnClickListener(new View.OnClickListener() {
 
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
 
+
+                try {
                     SequenceDataModel newModel = new SequenceDataModel(user);
                     PegModel localPegModel = new PegModel();
                     RealmList<PegModel> localRealmPeg = new RealmList<PegModel>();
-                try {
+                    RealmList<String> localRealmStrings = new RealmList<String>();
+                    String localTheNums[] = edtxt.getText().toString().split(" ");
+                    ArrayList<String> localTheStrings = new ArrayList<String>();
                     realm.executeTransaction( r -> {
+                        String[] storySnippets = txtvw2.getText().toString().split(" ");
+                        String[] localNums = edtxt.getText().toString().split(" ");
 
-                        String[] localNums;
-                        localNums = edtxt.getText().toString().split(" ");
+                        //System.out.println(Arrays.toString(localNums));
 
-                        realmStrings.clear();
-                        realmStrings.add(txtvw2.getText().toString());
-                        for (String s : localNums) {
-                            localPegModel.setWord(s); //a számokat a word-ben fogja tárolni mert num
-                        }                             //int típus és csak egy bejegyzést tud kezelni
-                        localRealmPeg.add(localPegModel);
-                        newModel.setStory(realmStrings);
+                        //for (String s : localNums) {
+                        //    System.out.println("Idáig lefutott");
+                        //    localTheStrings.add(s);
+                        //}
+                        for (String s : storySnippets)
+                        {
+                            localRealmStrings.add(s);
+
+                        }
+
+                        newModel.setStory(localRealmStrings);
                         newModel.setSequence(localRealmPeg);
                         user.setOneSequence(newModel);
                         realm.insertOrUpdate(user);
@@ -155,7 +167,6 @@ public class chainFragment extends Fragment {
         });
         return view;
     }
-
 
     //todo indexAdapter megvalósítás külön függvénybe
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -173,11 +184,9 @@ public class chainFragment extends Fragment {
             indexAdapter.put(Integer.toString(user.getPegs().getOnePeg(idx).getNum()),user.getPegs().getOnePeg(idx).getWord());
             idx++;
         }
-        System.out.println(indexAdapter.toString());
         for (String s : splitLocalStrings){
             innerArray.add(indexAdapter.get(s));
         }
-        System.out.println(innerArray.toString());
         return innerArray;
     };
 
