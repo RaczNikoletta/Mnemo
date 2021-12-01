@@ -155,6 +155,7 @@ public class Register extends AppCompatActivity {
                         if(firstPegs!=null){
                             for(int i=0;i<firstPegs.getPegs().size();i++){
                                 PegModel p = new PegModel();
+                                p.setUserName(newUser.getUserName());
                                 p.setNum(i);
                                 p.setLetter(firstPegs.getPegs().get(i).getLetter());
                                 p.setWord("");
@@ -165,6 +166,7 @@ public class Register extends AppCompatActivity {
                         }else {
                             for (int i = 0; i < 10; i++) {
                                 PegModel p = new PegModel();
+                                p.setUserName(newUser.getUserName());
                                 p.setNum(i);
                                 p.setLetter("");
                                 p.setWord("");

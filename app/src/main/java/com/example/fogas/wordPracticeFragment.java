@@ -138,16 +138,7 @@ public class wordPracticeFragment extends Fragment {
                         max = pegRealmListAboveNine.size();
                         tempAboveNine = new PegModel();
                         tempAboveNine = (PegModel) pegRealmListAboveNine.get(i);
-                        if(tempAboveNine!=null) {
-                            if(tempAboveNine.getNum()>9) {
-                                try {
-                                    pegAboveNine.add(String.valueOf(tempAboveNine.getNum()));
-                                }catch(Throwable e){
-                                    Toast.makeText(getContext(),"for loop add: " + i +" "+e.toString(),Toast.LENGTH_LONG).show();
-                                }
-                            }
                         }
-                    }
                 }
             }
 

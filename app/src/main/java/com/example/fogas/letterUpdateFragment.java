@@ -274,10 +274,16 @@ public class letterUpdateFragment extends Fragment {
                                     Log.v("letterupdate", i + " " + ids[i] + "ennyi");
                                     let = eLetter.getText().toString();
                                     word = eWord.getText().toString();
+                                    p.setUserName(user.getUserName());
                                     p.setLetter(let);
                                     p.setWord(word);
                                     p.setNum(i);
-                                    updaterRealm.insertOrUpdate(p);
+                                    RealmResults<PegModel>  userspeg = updaterRealm.where(PegModel.class).equalTo("userName",user.getUserName()).findAll();
+                                    for(PegModel model: userspeg) {
+                                        if(model.getNum()==p.getNum()){
+                                            model.deleteFromRealm();
+                                        }
+                                        }
                                     user.getPegs().setOnePeg(p);
                                 } catch (Throwable e) {
                                     Toast.makeText(getContext(), "in loop" + e.toString() + String.valueOf(i), Toast.LENGTH_LONG).show();
@@ -317,17 +323,9 @@ public class letterUpdateFragment extends Fragment {
                             .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     PegDataModel checkpegs = user.getPegs();
-                                    int counter = 0;
-                                    for(int i=0;i< checkpegs.getPegs().size();i++){
-                                        if(!checkpegs.getPegs().get(i).getWord().equals("")){
-                                            counter++;
-                                        }
-                                        if(!checkpegs.getPegs().get(i).getLetter().equals("")){
-                                            counter++;
-                                        }
-                                    }
-                                    //Toast.makeText(getContext(),"counter "+String.valueOf(counter),Toast.LENGTH_LONG).show();
-                                    if (counter >= 10) {
+                                    int[] counter = checkpegs.counter();
+                                    //check pegs num -- set notification progress to null
+                                    if ((counter[0]+counter[1]) >= 10) {
                                         if(user.getLastNotification().get(1)!=0.0){
                                             updaterRealm.executeTransaction(r-> {
                                                 user.getLastNotification().set(0, 0.0);
