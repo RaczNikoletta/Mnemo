@@ -124,8 +124,36 @@ public class notificationGame extends AppCompatActivity {
 
                         }
                         counter++;
-                    } else if ((half && counter > 4) || wordBool) {
-                        if (Integer.parseInt(answerNotEt.getText().toString()) == answerWord.get(counter)) {
+                    } else if ((half && counter > 5)) {
+                        if (Integer.parseInt(answerNotEt.getText().toString()) == answerWord.get(counter - 5)) {
+                            score++;
+                            LayoutInflater inf = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                            View popupView = inf.inflate(R.layout.right_answer_layout, null);
+                            ImageView image = popupView.findViewById(R.id.rightIV);
+
+                            // show the popup window
+                            // which view you pass in doesn't matter, it is only used for the window tolken
+                            Toast toast = new Toast(context);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.setView(popupView);
+                            toast.show();
+                            counter++;
+                        } else {
+                            LayoutInflater inf = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                            View popupView = inf.inflate(R.layout.wrong_answer_layout, null);
+                            ImageView image = popupView.findViewById(R.id.wrongIv);
+
+                            // show the popup window
+                            // which view you pass in doesn't matter, it is only used for the window tolken
+                            Toast toast = new Toast(context);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.setView(popupView);
+                            toast.show();
+                            counter++;
+
+                        }
+                    }else if(wordBool){
+                         if (Integer.parseInt(answerNotEt.getText().toString()) == answerWord.get(counter)) {
                             score++;
                             LayoutInflater inf = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                             View popupView = inf.inflate(R.layout.right_answer_layout, null);
@@ -191,10 +219,15 @@ public class notificationGame extends AppCompatActivity {
 
                     if (half && counter<10) {
                         Toast.makeText(getBaseContext(),"half" , Toast.LENGTH_SHORT).show();
-                        if (counter < 5) {
+                        if (counter <= 5) {
+
                             questionNot.setText(answerNotEt.getResources().getString(R.string.kerdes_betu) + " " + questionLetter.get(counter));
                         } else {
-                            questionNot.setText(answerNotEt.getResources().getString(R.string.kerdes_szo) + " " + questionWord.get(counter));
+                            try {
+                                questionNot.setText(answerNotEt.getResources().getString(R.string.kerdes_szo) + " " + questionWord.get(counter-5));
+                            }catch (Throwable e){
+                                Toast.makeText(getBaseContext(),"Else ag"+e.toString(),Toast.LENGTH_LONG).show();
+                            }
                         }
                     } else if (wordBool && counter <10) {
                         Toast.makeText(getBaseContext(),"word" , Toast.LENGTH_SHORT).show();
@@ -205,7 +238,7 @@ public class notificationGame extends AppCompatActivity {
                     }
                     part_jelzo.setText(Integer.toString(counter+1) + "/10");
                 }catch (Throwable e){
-                    Toast.makeText(context,e.toString(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,"SEndnotBtn: "+e.toString(),Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -238,6 +271,7 @@ public class notificationGame extends AppCompatActivity {
                 questionWord.add(pegs.getPegs().get(i).getWord());
             }
         }
+        Toast.makeText(getBaseContext(),"Sizes: "+ Integer.toString(questionLetter.size())+ " " +Integer.toString(questionWord.size()),Toast.LENGTH_LONG).show();
         Collections.shuffle(questionLetter);
         Collections.shuffle(questionWord);
         try {
@@ -256,7 +290,7 @@ public class notificationGame extends AppCompatActivity {
                 }
             }
         }catch(Throwable e){
-            Toast.makeText(context,e.toString(),Toast.LENGTH_LONG).show();
+            Toast.makeText(context,"answerWordgenerate"+e.toString(),Toast.LENGTH_LONG).show();
         }
         Toast.makeText(getBaseContext(),pegs.counter()[0] + " " +pegs.counter()[1],Toast.LENGTH_LONG).show();
         if(pegs.counter()[0]>=5 && pegs.counter()[1]>=5){
