@@ -67,7 +67,7 @@ public class SequencePracticeHard extends Fragment {
         SequencePracticeHard fragment = new SequencePracticeHard();
         Bundle args = new Bundle();
         fragment.setArguments(args);
-        args.putIntegerArrayList("pegs",seqpegs);
+        args.putIntegerArrayList("aboveNine",seqpegs);
         args.putString("sequence", sequence);
         fragment.setArguments(args);
         return fragment;
@@ -92,7 +92,7 @@ public class SequencePracticeHard extends Fragment {
         try {
             Bundle args = getArguments();
             sequence = args.getString("sequence", "");
-            seqPegs = args.getIntegerArrayList("pegs");
+            seqPegs = args.getIntegerArrayList("aboveNine");
         } catch (Throwable e) {
             Toast.makeText(getContext(), "arguments error " + e.toString(), Toast.LENGTH_LONG).show();
         }
@@ -101,11 +101,21 @@ public class SequencePracticeHard extends Fragment {
         try {
             hardSeqPractRealm = Realm.getDefaultInstance();
             user = hardSeqPractRealm.where(UserDataModel.class).equalTo("loggedIn", true).findFirst();
-
+            boolean aboveNineBool = false;
             for (int i = 0; i < splited.length; i++) {
                 PegModel tempPeg = new PegModel();
-                tempPeg.setNum(Integer.parseInt(splited[i]));
+                for(int j=0;j<seqPegs.size();j++){
+                    if(i==seqPegs.get(j)){
+                        aboveNineBool = true;
+                        tempPeg.setNum(Integer.parseInt(splited[i]+""+splited[i+1]));
+                        i++;
+                    }
+                }
+                if(!aboveNineBool) {
+                    tempPeg.setNum(Integer.parseInt(splited[i]));
+                }
                 pegs.add(tempPeg);
+                aboveNineBool = false;
             }
         } catch (Throwable e) {
             Toast.makeText(getContext(), "setpegs error: " + e.toString(), Toast.LENGTH_LONG).show();
@@ -121,15 +131,12 @@ public class SequencePracticeHard extends Fragment {
             Toast.makeText(getContext(), "find seq error: " + e.toString(), Toast.LENGTH_LONG).show();
         }
 
-        for(int i=0;i<seqPegs.size();i++){
-            if(seqPegs.get(i)>9){
-                aboveNine.add(i);
-            }
-        }
         PegModel firstPeg = foundSeq.getSequence().get(0);
+        if(user.getHints().getOneHint(firstPeg.getNum())!=null){
         HintModel firstHint = user.getHints().getOneHint(firstPeg.getNum());
-        Bitmap bmp = BitmapFactory.decodeByteArray(firstHint.getImage(),0,firstHint.getImage().length);
-        imageViewHintHard.setImageBitmap(Bitmap.createBitmap(bmp));
+            Bitmap bmp = BitmapFactory.decodeByteArray(firstHint.getImage(), 0, firstHint.getImage().length);
+            imageViewHintHard.setImageBitmap(Bitmap.createBitmap(bmp));
+        }
 
         imageButton2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,27 +166,32 @@ public class SequencePracticeHard extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
                 String[] splitedSeq = hardsequencePracEt.getText().toString().split("");
-                String[] newSplited = new String [splitedseq.getSequence().size()];
-                boolean biggerThanTen = false;
-                //check if index is in aboveNine arraylist
-                for(int i=0;i<splitedSeq.length-1;i++){
-                    for(int j =0;j<aboveNine.size()-1;j++){
-                        //if it is in it --> bigger than ten
-                        if(i==aboveNine.get(j)){
-                            biggerThanTen = true;
-                            newSplited[i]="skip";
-                        }
+                String[] newSplited = new String[splitedseq.getSequence().size()];
+                try {
+                    boolean biggerThanTen = false;
+                    //check if index is in aboveNine arraylist
+                    for (int i = 0; i < splitedSeq.length; i++) {
+                        for (int j = 0; j < aboveNine.size(); j++) {
+                            //if it is in it --> bigger than ten
+                            if (i == aboveNine.get(j)) {
+                                biggerThanTen = true;
+                                newSplited[i] = splitedSeq[i] + "" + splitedSeq[i + 1];
+                                i++;
+                            }
 
+                        }
+                        if (!biggerThanTen) {
+                            newSplited[i] = splitedSeq[i];
+                        }
                     }
-                    if(!biggerThanTen){
-                        newSplited[i]=splitedSeq[i];
-                    }
+                }catch(Throwable e){
+                    Toast.makeText(getContext(),"Spliting: "+e.toString(),Toast.LENGTH_LONG).show();
                 }
                 try {
                     //check if empty or above ten
                     PegModel model = new PegModel();
                     int x = splitedSeq.length - 1;
-                    if ((!splitedSeq[x].equals("skip")) && !TextUtils.isEmpty(hardsequencePracEt.getText())) {
+                    if (!TextUtils.isEmpty(hardsequencePracEt.getText())) {
                         model = foundSeq.getSequence().get(x + 1);
                     }
                     if (TextUtils.isEmpty(hardsequencePracEt.getText())) {

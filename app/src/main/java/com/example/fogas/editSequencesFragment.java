@@ -39,13 +39,15 @@ public class editSequencesFragment extends Fragment {
     //private ArrayList<String> story = new ArrayList<>();
     StringBuilder storyBuilder = new StringBuilder();
     private RealmList<String> story;
+    private ArrayList<Integer> aboveNineIndexes;
     private Button saveStoryBt;
 
-    public static editSequencesFragment newInstance(String sequence) {
+    public static editSequencesFragment newInstance(String sequence, ArrayList<Integer>aboveNineIndexes) {
         editSequencesFragment f = new editSequencesFragment();
         Bundle args = new Bundle();
         f.setArguments(args);
         args.putString("sequence", sequence);
+        args.putIntegerArrayList("indexes",aboveNineIndexes);
         f.setArguments(args);
         return f;
     }
@@ -59,9 +61,11 @@ public class editSequencesFragment extends Fragment {
         storyEt = view.findViewById(R.id.storyEt);
         seqTv = view.findViewById(R.id.seqTv);
         story = new RealmList<>();
+        aboveNineIndexes = new ArrayList<>();
         try {
             Bundle args = getArguments();
             sequence = args.getString("sequence", "");
+            aboveNineIndexes = args.getIntegerArrayList("indexes");
         } catch (Throwable e) {
             Toast.makeText(getContext(), "arguments error " + e.toString(), Toast.LENGTH_LONG).show();
         }
@@ -71,10 +75,21 @@ public class editSequencesFragment extends Fragment {
             editSequenceRealm = Realm.getDefaultInstance();
             user = editSequenceRealm.where(UserDataModel.class).equalTo("loggedIn", true).findFirst();
 
+            boolean aboveNineBool = false;
             for (int i = 0; i < splited.length; i++) {
                 PegModel tempPeg = new PegModel();
-                tempPeg.setNum(Integer.parseInt(splited[i]));
-                pegs.add(tempPeg);
+                for(int j = 0;j<aboveNineIndexes.size();j++){
+                    if(i==aboveNineIndexes.get(j)){
+                        aboveNineBool = true;
+                        tempPeg.setNum(Integer.parseInt(splited[i]+""+splited[i+1]));
+                        i++;
+                    }
+                }
+                if(!aboveNineBool) {
+                    tempPeg.setNum(Integer.parseInt(splited[i]));
+                }
+                    pegs.add(tempPeg);
+                    aboveNineBool = false;
             }}catch(Throwable e){
                 Toast.makeText(getContext(), "setpegs error: " +e.toString(),Toast.LENGTH_LONG).show();
             }

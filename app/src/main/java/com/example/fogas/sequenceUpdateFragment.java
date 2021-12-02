@@ -39,10 +39,13 @@ public class sequenceUpdateFragment extends Fragment {
     private ListView sequenceListv;
     private ArrayAdapter<String> adapterofs;
     private ArrayList<String> listofs;
+    private ArrayList<Integer> toNextFrag;
     private UserDataModel user;
     private Realm sequenceUpdateRealm;
     private SequenceDataModel tempseq;
+    private ArrayList<ArrayList<Integer>> aboveNine;
     private PegDataModel pegs;
+    private int seqPos;
     private String clicked="";
     SequenceDataModel splitedseq = new SequenceDataModel();
     RealmList<PegModel> tempPegs = new RealmList<>();
@@ -63,6 +66,7 @@ public class sequenceUpdateFragment extends Fragment {
         listofs = new ArrayList<>();
         sequenceUpdateRealm = Realm.getDefaultInstance();
         tempseq = new SequenceDataModel();
+        aboveNine = new ArrayList<>();
 
         try {
             dummyseq();
@@ -70,13 +74,18 @@ public class sequenceUpdateFragment extends Fragment {
             Toast.makeText(getContext(), "makedummyexception " + e.toString(), Toast.LENGTH_LONG).show();
         }
         try {
-            user = sequenceUpdateRealm.where(UserDataModel.class).equalTo("loggedIn", true).findFirst();
+            user = sequenceUpdateRealm.where(UserDataModel.class).equalTo("loggedIn",
+                    true).findFirst();
             for (int i = 0; i < user.getSequences().size(); i++) {
                 tempseq = user.getSequences().get(i);
                 StringBuilder temp = new StringBuilder();
+                aboveNine.add(new ArrayList<>());
                 for (int j = 0; j < tempseq.getSequence().size(); j++) {
                     temp.append(String.valueOf(tempseq.getSequence().get(j).getNum()));
-                    if (j == tempseq.getSequence().size() - 1) {
+                    if(tempseq.getSequence().get(j).getNum()>9){
+                        aboveNine.get(i).add(j);
+                    }
+                    if (j == tempseq.getSequence().size()-1) {
                         listofs.add(String.valueOf(temp));
                     }
                 }
@@ -115,6 +124,7 @@ public class sequenceUpdateFragment extends Fragment {
                 }
                 sequenceListv.getChildAt(position).setBackgroundColor(getResources().getColor(android.R.color.holo_blue_dark));
                 clicked = listofs.get(position);
+                seqPos = position;
             }
         });
         view.findViewById(R.id.seqenceEditBtn).setOnClickListener(new View.OnClickListener() {
@@ -124,7 +134,8 @@ public class sequenceUpdateFragment extends Fragment {
                     if(!clicked.equals("")) {
                         FragmentManager fm = getFragmentManager();
                         FragmentTransaction ft = fm.beginTransaction();
-                        ft.replace(R.id.container, editSequencesFragment.newInstance(clicked), "Edit sequences")
+                        ft.replace(R.id.container, editSequencesFragment.newInstance(clicked,
+                                aboveNine.get(seqPos)), "Edit sequences")
                                 .addToBackStack(null)
                                 .commit();
                     }

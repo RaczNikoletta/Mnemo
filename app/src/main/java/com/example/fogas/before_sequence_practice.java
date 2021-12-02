@@ -42,7 +42,8 @@ public class before_sequence_practice extends Fragment {
     private SequenceDataModel tempseq;
     private ListView seqPracListV;
     private String clicked="";
-    private ArrayList<Integer> seqPegs;
+    private ArrayList<ArrayList<Integer>> aboveNine;
+    private int seqPos;
 
 
 
@@ -53,16 +54,19 @@ public class before_sequence_practice extends Fragment {
         View view = inflater.inflate(R.layout.fragment_before_sequence_practice, container, false);
         beforeSeqRealm = Realm.getDefaultInstance();
         list = new ArrayList<>();
-        seqPegs = new ArrayList<>();
+        aboveNine = new ArrayList<>();
         seqPracListV = view.findViewById(R.id.seqPracListV);
         user = beforeSeqRealm.where(UserDataModel.class).equalTo("loggedIn", true).findFirst();
         for (int i = 0; i < user.getSequences().size(); i++) {
             tempseq = user.getSequences().get(i);
             StringBuilder temp = new StringBuilder();
+            aboveNine.add(new ArrayList<>());
             for (int j = 0; j < tempseq.getSequence().size(); j++) {
                 temp.append(String.valueOf(tempseq.getSequence().get(j).getNum()));
+                if(tempseq.getSequence().get(j).getNum()>9){
+                    aboveNine.get(i).add(j);
+                }
                 if (j == tempseq.getSequence().size() - 1) {
-                    seqPegs.add(tempseq.getSequence().get(j).getNum());
                     list.add(String.valueOf(temp));
                 }
             }
@@ -96,6 +100,7 @@ public class before_sequence_practice extends Fragment {
                 }
                 seqPracListV.getChildAt(position).setBackgroundColor(getResources().getColor(android.R.color.holo_blue_dark));
                 clicked = list.get(position);
+                seqPos = position;
             }
         });
 
@@ -105,7 +110,7 @@ public class before_sequence_practice extends Fragment {
                 if(!clicked.equals("")){
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.container,sequencePracticeFragmentEasy.newInstance(clicked), "easy sequences")
+                ft.replace(R.id.container,sequencePracticeFragmentEasy.newInstance(clicked,aboveNine.get(seqPos)), "easy sequences")
                         .addToBackStack(null)
                         .commit();
 
@@ -118,7 +123,7 @@ public class before_sequence_practice extends Fragment {
                 if (!clicked.equals("")) {
                     FragmentManager fm = getFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
-                    ft.replace(R.id.container, SequencePracticeMedium.newInstance(clicked), "medium sequences")
+                    ft.replace(R.id.container, SequencePracticeMedium.newInstance(clicked,aboveNine.get(seqPos)), "medium sequences")
                             .addToBackStack(null)
                             .commit();
 
@@ -132,7 +137,7 @@ public class before_sequence_practice extends Fragment {
                 if (!clicked.equals("")) {
                     FragmentManager fm = getFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
-                    ft.replace(R.id.container,SequencePracticeHard.newInstance(clicked,seqPegs), "hard sequences")
+                    ft.replace(R.id.container,SequencePracticeHard.newInstance(clicked,aboveNine.get(seqPos)), "hard sequences")
                             .addToBackStack(null)
                             .commit();
 

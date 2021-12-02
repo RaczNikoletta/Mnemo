@@ -203,8 +203,9 @@ public class notificationGame extends AppCompatActivity {
                                         AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
 
                                         long daysToMili = TimeUnit.DAYS.toMillis(interval);
-                                        Log.d("Daystomili", "DaysToMili: "+Long.toString(TimeUnit.DAYS.toMillis(interval)).toString());
-                                        alarmManager.set(AlarmManager.RTC_WAKEUP,timeAtButtonClick+daysToMili,pendingIntent);
+                                        long tenSec = 1000*10;
+                                        Log.d("Daystomili", "DaysToMili: "+Long.toString(daysToMili).toString());
+                                        alarmManager.set(AlarmManager.RTC_WAKEUP,timeAtButtonClick+tenSec,pendingIntent);
 
 
                                         startActivity(new Intent(context,MainMenu.class));
@@ -218,7 +219,7 @@ public class notificationGame extends AppCompatActivity {
                     }
 
                     if (half && counter<10) {
-                        Toast.makeText(getBaseContext(),"half" , Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getBaseContext(),"half" , Toast.LENGTH_SHORT).show();
                         if (counter <= 5) {
 
                             questionNot.setText(answerNotEt.getResources().getString(R.string.kerdes_betu) + " " + questionLetter.get(counter));
@@ -230,10 +231,10 @@ public class notificationGame extends AppCompatActivity {
                             }
                         }
                     } else if (wordBool && counter <10) {
-                        Toast.makeText(getBaseContext(),"word" , Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getBaseContext(),"word" , Toast.LENGTH_SHORT).show();
                         questionNot.setText(answerNotEt.getResources().getString(R.string.kerdes_betu) + " " + questionWord.get(counter));
                     } else if (letterBool && counter <10) {
-                        Toast.makeText(getBaseContext(),"letter" , Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getBaseContext(),"letter" , Toast.LENGTH_SHORT).show();
                         questionNot.setText(answerNotEt.getResources().getString(R.string.kerdes_szo) + " " + questionLetter.get(counter));
                     }
                     part_jelzo.setText(Integer.toString(counter+1) + "/10");
@@ -271,7 +272,7 @@ public class notificationGame extends AppCompatActivity {
                 questionWord.add(pegs.getPegs().get(i).getWord());
             }
         }
-        Toast.makeText(getBaseContext(),"Sizes: "+ Integer.toString(questionLetter.size())+ " " +Integer.toString(questionWord.size()),Toast.LENGTH_LONG).show();
+        //Toast.makeText(getBaseContext(),"Sizes: "+ Integer.toString(questionLetter.size())+ " " +Integer.toString(questionWord.size()),Toast.LENGTH_LONG).show();
         Collections.shuffle(questionLetter);
         Collections.shuffle(questionWord);
         try {
@@ -292,7 +293,7 @@ public class notificationGame extends AppCompatActivity {
         }catch(Throwable e){
             Toast.makeText(context,"answerWordgenerate"+e.toString(),Toast.LENGTH_LONG).show();
         }
-        Toast.makeText(getBaseContext(),pegs.counter()[0] + " " +pegs.counter()[1],Toast.LENGTH_LONG).show();
+        //Toast.makeText(getBaseContext(),pegs.counter()[0] + " " +pegs.counter()[1],Toast.LENGTH_LONG).show();
         if(pegs.counter()[0]>=5 && pegs.counter()[1]>=5){
             half = true;
 

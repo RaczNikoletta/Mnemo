@@ -1,5 +1,6 @@
 package com.example.fogas.Models;
 
+import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -14,6 +15,7 @@ public class HintDataModel extends RealmObject {
 
     public HintDataModel(String name) {
         userName = name;
+        hints = new RealmList<>();
     }
 
     public String getUsername() {
@@ -46,11 +48,19 @@ public class HintDataModel extends RealmObject {
 
     public HintModel getOneHint(int pegNum) {
        HintModel hint = new HintModel();
+       boolean isExists = false;
+       if(hints==null){
+           hints = new RealmList<>();
+       }
         for (int i = 0; i < hints.size(); i++) {
             if (hints.get(i).getPegnum() == pegNum) {
+                isExists = true;
                 hint =hints.get(i);
             }
-        }return  hint;
+        }
+        if(isExists) {
+            return hint;
+        }else return null;
     }
 }
 

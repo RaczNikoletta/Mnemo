@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import com.example.fogas.Models.ProgressDataModel;
 import com.example.fogas.Models.SequenceDataModel;
 import com.example.fogas.Models.UserDataModel;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import io.realm.Realm;
@@ -44,14 +46,16 @@ public class SequencePracticeMedium extends Fragment {
     private SequenceDataModel splitedseq = new SequenceDataModel();
     private SequenceDataModel foundSeq = new SequenceDataModel();
     private RealmList<String> story = new RealmList<>();
+    private ArrayList<Integer>aboveNineIndexes;
 
 
 
-    public static SequencePracticeMedium newInstance(String sequence) {
+    public static SequencePracticeMedium newInstance(String sequence,ArrayList<Integer>aboveNine) {
         SequencePracticeMedium fragment = new SequencePracticeMedium();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         args.putString("sequence", sequence);
+        args.putIntegerArrayList("aboveNine",aboveNine);
         fragment.setArguments(args);
         return fragment;
     }
@@ -74,6 +78,7 @@ public class SequencePracticeMedium extends Fragment {
         try {
             Bundle args = getArguments();
             sequence = args.getString("sequence", "");
+            aboveNineIndexes = args.getIntegerArrayList("aboveNine");
         } catch (Throwable e) {
             Toast.makeText(getContext(), "arguments error " + e.toString(), Toast.LENGTH_LONG).show();
         }
@@ -83,10 +88,21 @@ public class SequencePracticeMedium extends Fragment {
             medSeqPractRealm = Realm.getDefaultInstance();
             user = medSeqPractRealm.where(UserDataModel.class).equalTo("loggedIn", true).findFirst();
 
+            boolean aboveNineBool = false;
             for (int i = 0; i < splited.length; i++) {
                 PegModel tempPeg = new PegModel();
-                tempPeg.setNum(Integer.parseInt(splited[i]));
+                for(int j = 0;j<aboveNineIndexes.size();j++){
+                    if(i==aboveNineIndexes.get(j)){
+                        aboveNineBool = true;
+                        tempPeg.setNum(Integer.parseInt(splited[i]+""+splited[i+1]));
+                        i++;
+                    }
+                }
+                if(!aboveNineBool) {
+                    tempPeg.setNum(Integer.parseInt(splited[i]));
+                }
                 pegs.add(tempPeg);
+                aboveNineBool = false;
             }
         } catch (Throwable e) {
             Toast.makeText(getContext(), "setpegs error: " + e.toString(), Toast.LENGTH_LONG).show();
