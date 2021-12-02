@@ -102,6 +102,7 @@ public class chainFragment extends Fragment {
                     //if (edtxt.getText().toString().contains("[0-9 ]+")) {
                         newstring = edtxt.getText().toString();
                         theStrings = wordFromDatabaseList(newstring, edtxt, " ");
+                        while (theStrings.remove(null)){}
                         txtvw1.setText(newstring);
                         txtvw2.setText(listParsedWords(theStrings));
                     //} else {
