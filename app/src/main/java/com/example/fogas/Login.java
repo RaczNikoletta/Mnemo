@@ -48,7 +48,7 @@ public class Login extends AppCompatActivity {
         createNotificationChannel();
         context = this;
 
-        if(Build.VERSION.SDK_INT >= 23) {
+       /* if(Build.VERSION.SDK_INT >= 23) {
             if (ActivityCompat.checkSelfPermission(getBaseContext(),
                     Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {//nincmég engedély
                 AlertDialog.Builder alertD = new AlertDialog.Builder(getBaseContext());
@@ -74,7 +74,7 @@ public class Login extends AppCompatActivity {
                 alertD.show();
 
             }
-        }//nincmég engedély
+        }//nincsmég engedély*/
 
         noProfileTv.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
