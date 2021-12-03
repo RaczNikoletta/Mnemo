@@ -45,8 +45,8 @@ import io.realm.RealmList;
 public class chainFragment extends Fragment {
 
     private Button btn1, btn2;
-    private EditText edtxt, txtvw2;
-    private TextView txtvw1, txtvw3;
+    private EditText edtxt ;
+    private TextView txtvw1, txtvw2 ;
     private Realm realm;
     private UserDataModel user;
     private String newstring;
@@ -67,9 +67,9 @@ public class chainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_chain, container, false);
         edtxt = (EditText) view.findViewById(R.id.editTextTextPersonName);
         txtvw1 = (TextView) view.findViewById(R.id.chainViewText1);
-        txtvw2 = (EditText) view.findViewById(R.id.chainViewText2);
+        txtvw2 = (TextView) view.findViewById(R.id.chainViewText2);
         btn1 = (Button) view.findViewById(R.id.listButton);
-        btn2 = (Button) view.findViewById(R.id.listButton2);
+//        btn2 = (Button) view.findViewById(R.id.listButton2);
         realm = Realm.getDefaultInstance();
         user = realm.where(UserDataModel.class).equalTo("loggedIn", true).findFirst();
         localPegStorage = user.getPegs();
@@ -114,18 +114,37 @@ public class chainFragment extends Fragment {
                 }
             }
         });
-
+/*
         view.findViewById(R.id.listButton2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
-                    Toast.makeText(getContext(), " Button clicked", Toast.LENGTH_LONG).show();
-                    txtvw1.setText(numChainFromWords(txtvw2.getText().toString()));
+                    ArrayList<String> storyArray = new ArrayList<String>();
+                    String[] stringArray = txtvw2.getText().toString().split(" ");
+                    String numbers = edtxt.getText().toString();
+                    for (String s : stringArray){
+                        storyArray.add(s);
+                    }
+
+                    for (int i = 0; i < user.getPegs().getPegs().size(); i++){
+                        if (storyArray.equals(user.getSequences().get(i).getStory())){
+                            numbers = "";
+                            for (int k = 0; k < user.getSequences().size(); k++)
+                            numbers += user.getSequences().get(k).getOneFromSeq(i).getNum() + " ";
+                            System.out.println(numbers);
+                        }
+                        edtxt.setText(numbers);
+                        System.out.println(storyArray.toString());
+                        System.out.println(user.getSequences().get(i).getStory().toString());
+                        }
+
                 } catch (Throwable e){
                     Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
                 }
             }
         });
+
+ */
         view.findViewById(R.id.listButton3).setOnClickListener(new View.OnClickListener() {
 
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -163,7 +182,6 @@ public class chainFragment extends Fragment {
 
                         for (int i = 0 ; i < user.getPegs().getPegs().size(); i++){
                             for (int k = 0; k < localRealmStrings.size(); k++){
-                                System.out.println("i is " + i + " K: is " + k);
                                 if (user.getPegs().getOnePeg(i).getWord().equals(localRealmStrings.get(k))){
                                     PegModel tempPeg = new PegModel();
                                     tempPeg.setWord(user.getPegs().getOnePeg(i).getWord());
@@ -182,6 +200,7 @@ public class chainFragment extends Fragment {
                         //realm.insertOrUpdate(newModel);
                         user.setOneSequence(newModel);
                         realm.insertOrUpdate(user);
+                        Toast.makeText(getContext(), "Bekerült az adatbázisba!", Toast.LENGTH_LONG).show();
                     });
                 } catch (Throwable e){
                     Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
