@@ -1,13 +1,19 @@
 package com.example.fogas;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -41,6 +47,34 @@ public class Login extends AppCompatActivity {
         notValidTv = (TextView) findViewById(R.id.notValidTv);
         createNotificationChannel();
         context = this;
+
+        if(Build.VERSION.SDK_INT >= 23) {
+            if (ActivityCompat.checkSelfPermission(getBaseContext(),
+                    Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {//nincmég engedély
+                AlertDialog.Builder alertD = new AlertDialog.Builder(getBaseContext());
+                alertD.setCancelable(false);
+                alertD.setTitle("Access");
+                alertD.setIcon(R.drawable.ic_baseline_lock_24);
+                alertD.setMessage("Please permit notifications!");
+                alertD.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        ActivityCompat.requestPermissions(Login.this, new String[]
+                                {Manifest.permission.ACCESS_NOTIFICATION_POLICY}, 1); //onRequestPermissions(...) fgv.
+                        // hívódik meg
+                    }
+                });
+                alertD.setNegativeButton("Nem", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(Login.this, "Nem tudsz hívást kezdeményezni", Toast.LENGTH_SHORT).show();
+                        //hivasBtn.setEnabled(false);
+                    }
+                });
+                alertD.show();
+
+            }
+        }//nincmég engedély
 
         noProfileTv.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

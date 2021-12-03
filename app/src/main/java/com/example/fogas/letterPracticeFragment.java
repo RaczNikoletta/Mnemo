@@ -271,7 +271,7 @@ public class letterPracticeFragment extends Fragment {
                                 helyes_valaszok[i] = tempAboveNine.getLetter().toString();
                                 bekerultSzamok[i] =tempAboveNine.getNum();
 
-                                if(user.getHints().getOneHint(tempAboveNine.getNum()).getImage()!=null)
+                                if(user.getHints().getOneHint(tempAboveNine.getNum())!=null)
                                     bmp.put(i, BitmapFactory.decodeByteArray(user.getHints().getOneHint(tempAboveNine.getNum()).getImage(),0,
                                             user.getHints().getOneHint(tempAboveNine.getNum()).getImage().length));
 

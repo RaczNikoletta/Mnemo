@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -135,38 +136,68 @@ public class SequencePracticeMedium extends Fragment {
         view.findViewById(R.id.sendMedBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tEnd = System.currentTimeMillis();
-                tDelta = tEnd - tStart;
-                elapsedSeconds = tDelta / 1000.0;
-                RealmList<PegModel> tempPegs = new RealmList<>();
-                SequenceDataModel tempSeq = new SequenceDataModel();
-                SequenceDataModel answerfoundSeq = new SequenceDataModel();
-                String[] tosplited = medsequencePracEt.getText().toString().split("");
-                for (int i = 0; i < tosplited.length; i++) {
-                    PegModel tempPeg = new PegModel();
-                    tempPeg.setNum(Integer.parseInt(tosplited[i]));
-                    tempPegs.add(tempPeg);
-                }
-                try {
-                    tempSeq.setSequence(tempPegs);
-                    for (int i = 0; i < user.getSequences().size(); i++) {
-                        if (user.getSequences().get(i).isEqual(tempSeq)) {
-                            answerfoundSeq = user.getSequences().get(i);
-                        }
+                if (!TextUtils.isEmpty(medsequencePracEt.getText().toString())) {
+                    tEnd = System.currentTimeMillis();
+                    tDelta = tEnd - tStart;
+                    elapsedSeconds = tDelta / 1000.0;
+                    RealmList<PegModel> tempPegs = new RealmList<>();
+                    SequenceDataModel tempSeq = new SequenceDataModel();
+                    SequenceDataModel answerfoundSeq = new SequenceDataModel();
+                    String[] tosplited = medsequencePracEt.getText().toString().split("");
+                    for (int i = 0; i < tosplited.length; i++) {
+                        PegModel tempPeg = new PegModel();
+                        tempPeg.setNum(Integer.parseInt(tosplited[i]));
+                        tempPegs.add(tempPeg);
                     }
+                    try {
+                        tempSeq.setSequence(tempPegs);
+                        for (int i = 0; i < user.getSequences().size(); i++) {
+                            if (user.getSequences().get(i).isEqual(tempSeq)) {
+                                answerfoundSeq = user.getSequences().get(i);
+                            }
+                        }
 
 
-                } catch (Throwable e) {
-                    Log.d("answerseq", e.toString());
-                }
-                if (answerfoundSeq.getSequence() != null) {
-                    if (foundSeq.isEqual(answerfoundSeq)) {
+                    } catch (Throwable e) {
+                        Log.d("answerseq", e.toString());
+                    }
+                    if (answerfoundSeq.getSequence() != null) {
+                        if (foundSeq.isEqual(answerfoundSeq)) {
+                            try {
+                                score = 10;
+                                insertProgress();
+                                new AlertDialog.Builder(getContext())
+                                        .setTitle(R.string.righAnswer1)
+                                        .setMessage(R.string.righAnswer3)
+
+                                        // Specifying a listener allows you to take an action before dismissing the dialog.
+                                        // The dialog is automatically dismissed when a dialog button is clicked.
+                                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                try {
+                                                    FragmentManager fm = getFragmentManager();
+                                                    FragmentTransaction ft = fm.beginTransaction();
+                                                    ft.replace(R.id.container, new before_sequence_practice(), "beforeseq")
+                                                            .addToBackStack(null)
+                                                            .commit();
+                                                } catch (Throwable e) {
+                                                    Toast.makeText(getContext(), "Fragment change error " + e.toString(), Toast.LENGTH_LONG).show();
+                                                }
+
+                                            }
+                                        })
+                                        // A null listener allows the button to dismiss the dialog and take no further action.
+                                        .setIcon(getResources().getDrawable(R.drawable.ic_rightanswersmile))
+                                        .show();
+                            } catch (Throwable e) {
+                                Toast.makeText(getContext(), "alertdialog" + " " + e.toString(), Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    } else {
                         try {
-                            score = 10;
-                            insertProgress();
                             new AlertDialog.Builder(getContext())
-                                    .setTitle(R.string.righAnswer1)
-                                    .setMessage(R.string.righAnswer3)
+                                    .setTitle(R.string.wrongAnswer1)
+                                    .setMessage(getResources().getString(R.string.wrongAnswer2) + " " + sequence)
 
                                     // Specifying a listener allows you to take an action before dismissing the dialog.
                                     // The dialog is automatically dismissed when a dialog button is clicked.
@@ -185,39 +216,11 @@ public class SequencePracticeMedium extends Fragment {
                                         }
                                     })
                                     // A null listener allows the button to dismiss the dialog and take no further action.
-                                    .setIcon(getResources().getDrawable(R.drawable.ic_rightanswersmile))
+                                    .setIcon(getResources().getDrawable(R.drawable.ic_wrondiaspp))
                                     .show();
                         } catch (Throwable e) {
                             Toast.makeText(getContext(), "alertdialog" + " " + e.toString(), Toast.LENGTH_LONG).show();
                         }
-                    }
-                } else {
-                    try {
-                        new AlertDialog.Builder(getContext())
-                                .setTitle(R.string.wrongAnswer1)
-                                .setMessage(getResources().getString(R.string.wrongAnswer2) + " " + sequence)
-
-                                // Specifying a listener allows you to take an action before dismissing the dialog.
-                                // The dialog is automatically dismissed when a dialog button is clicked.
-                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        try {
-                                            FragmentManager fm = getFragmentManager();
-                                            FragmentTransaction ft = fm.beginTransaction();
-                                            ft.replace(R.id.container, new before_sequence_practice(), "beforeseq")
-                                                    .addToBackStack(null)
-                                                    .commit();
-                                        } catch (Throwable e) {
-                                            Toast.makeText(getContext(), "Fragment change error " + e.toString(), Toast.LENGTH_LONG).show();
-                                        }
-
-                                    }
-                                })
-                                // A null listener allows the button to dismiss the dialog and take no further action.
-                                .setIcon(getResources().getDrawable(R.drawable.ic_wrondiaspp))
-                                .show();
-                    } catch (Throwable e) {
-                        Toast.makeText(getContext(), "alertdialog" + " " + e.toString(), Toast.LENGTH_LONG).show();
                     }
                 }
             }
