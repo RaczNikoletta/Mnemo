@@ -194,19 +194,19 @@ public class sequencePracticeFragmentEasy extends Fragment {
                                     .setTitle(R.string.wrongAnswer1)
                                     .setMessage(getResources().getString(R.string.wrongAnswer2) + " " + sequence)
 
-                                    // Specifying a listener allows you to take an action before dismissing the dialog.
-                                    // The dialog is automatically dismissed when a dialog button is clicked.
-                                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            try {
-                                                FragmentManager fm = getFragmentManager();
-                                                FragmentTransaction ft = fm.beginTransaction();
-                                                ft.replace(R.id.container, new before_sequence_practice(), "beforeseq")
-                                                        .addToBackStack(null)
-                                                        .commit();
-                                            } catch (Throwable e) {
-                                                Toast.makeText(getContext(), "Fragment change error " + e.toString(), Toast.LENGTH_LONG).show();
-                                            }
+                                        // Specifying a listener allows you to take an action before dismissing the dialog.
+                                        // The dialog is automatically dismissed when a dialog button is clicked.
+                                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                try {
+                                                    FragmentManager fm = getFragmentManager();
+                                                    FragmentTransaction ft = fm.beginTransaction();
+                                                    ft.replace(R.id.container, new before_sequence_practice(), "beforeseq")
+                                                            .addToBackStack(null)
+                                                            .commit();
+                                                } catch (Throwable e) {
+                                                    Toast.makeText(getContext(), "Fragment change error " + e.toString(), Toast.LENGTH_LONG).show();
+                                                }
 
                                         }
                                     })
