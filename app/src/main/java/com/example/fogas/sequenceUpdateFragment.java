@@ -32,6 +32,8 @@ import java.util.ArrayList;
 
 import io.realm.Realm;
 import io.realm.RealmList;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
 
 
 public class sequenceUpdateFragment extends Fragment {
@@ -47,9 +49,12 @@ public class sequenceUpdateFragment extends Fragment {
     private PegDataModel pegs;
     private int seqPos;
     private String clicked="";
-    SequenceDataModel splitedseq = new SequenceDataModel();
-    RealmList<PegModel> tempPegs = new RealmList<>();
+    private SequenceDataModel splitedseq = new SequenceDataModel();
+    private RealmList<PegModel> tempPegs = new RealmList<>();
     private SequenceDataModel foundSeq = new SequenceDataModel();
+    private SequenceDataModel seqToFind = new SequenceDataModel();
+    RealmList<SequenceDataModel> seqs = new RealmList<>();
+
 
     public sequenceUpdateFragment() {
         // Required empty public constructor
@@ -69,13 +74,16 @@ public class sequenceUpdateFragment extends Fragment {
         aboveNine = new ArrayList<>();
 
         try {
-            dummyseq();
+            //dummyseq();
         } catch (Throwable e) {
             Toast.makeText(getContext(), "makedummyexception " + e.toString(), Toast.LENGTH_LONG).show();
         }
         try {
+
+
             user = sequenceUpdateRealm.where(UserDataModel.class).equalTo("loggedIn",
                     true).findFirst();
+            seqs = user.getSequences();
             for (int i = 0; i < user.getSequences().size(); i++) {
                 tempseq = user.getSequences().get(i);
                 StringBuilder temp = new StringBuilder();
@@ -125,6 +133,7 @@ public class sequenceUpdateFragment extends Fragment {
                 sequenceListv.getChildAt(position).setBackgroundColor(getResources().getColor(android.R.color.holo_blue_dark));
                 clicked = listofs.get(position);
                 seqPos = position;
+                seqToFind = seqs.get(position);
             }
         });
         view.findViewById(R.id.seqenceEditBtn).setOnClickListener(new View.OnClickListener() {
@@ -151,31 +160,32 @@ public class sequenceUpdateFragment extends Fragment {
                     String[] splited = clicked.split("");
 
                     try {
-                        RealmList<PegModel> pegs2 = new RealmList<>();
-
-
-                        for (int i = 0; i < splited.length; i++) {
-                            PegModel tempPeg = new PegModel();
-                            tempPeg.setNum(Integer.parseInt(splited[i]));
-                            tempPegs.add(tempPeg);
-                        }
-                    } catch (Throwable e) {
-                        Toast.makeText(getContext(), "setpegs error: " + e.toString(), Toast.LENGTH_LONG).show();
-                    }
-                    try {
                         splitedseq.setSequence(tempPegs);
                         for (int i = 0; i < user.getSequences().size(); i++) {
-                            if (user.getSequences().get(i).isEqual(splitedseq)) {
-                                foundSeq = user.getSequences().get(i);
+                            if (user.getSequences().get(i) != null) {
+                                if (user.getSequences().get(i).isEqual(seqToFind)) {
+                                    foundSeq = user.getSequences().get(i);
+
+                                }
                             }
                         }
-                    } catch (Throwable e) {
-                        Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+
+                        sequenceUpdateRealm.executeTransaction(r->{
+                            if(foundSeq!=null){
+                                foundSeq.deleteFromRealm();
+                            }
+                        });
                     }
 
-                    sequenceUpdateRealm.executeTransaction(r -> {
-                        foundSeq.deleteFromRealm();
-                    });
+                        catch (Throwable e) {
+                            Toast.makeText(getContext(), "first" + e.toString(), Toast.LENGTH_LONG).show();
+                        }
+                        try{
+
+                    } catch (Throwable e) {
+                        Toast.makeText(getContext(), "find seqs"+e.toString(), Toast.LENGTH_LONG).show();
+                    }
+
 
                     FragmentManager fm = getFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
