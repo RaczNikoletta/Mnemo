@@ -73,41 +73,18 @@ public class chainFragment extends Fragment {
         realm = Realm.getDefaultInstance();
         user = realm.where(UserDataModel.class).equalTo("loggedIn", true).findFirst();
         localPegStorage = user.getPegs();
-//        sequenceUser = user.getSequences().first();
-//        RealmList<String> provider = new RealmList<>();
-/*
-        view.findViewById(R.id.chainBtn).setOnClickListener(new View.OnClickListener(){
-            @Override
 
-            public void onClick(View v){
-                try {
-                    String string1 = edtxt.getText().toString();
-
-                } catch (Throwable e){
-                    Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
-                    Log.wtf("EXCEPTION","Edit text exception\n"+e.toString());
-                    System.out.println(e.toString());
-                }
-
-               //Long long1 = Long.getLong(string1);
-               //testArray.add(long1);
-            }
-        });
-*/
         view.findViewById(R.id.listButton).setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
                 try {
-                    //if (edtxt.getText().toString().contains("[0-9 ]+")) {
                         newstring = edtxt.getText().toString();
                         theStrings = wordFromDatabaseList(newstring, edtxt, " ");
                         while (theStrings.remove(null)){}
                         txtvw1.setText(newstring);
                         txtvw2.setText(listParsedWords(theStrings));
-                    //} else {
-                     //   Toast.makeText(getContext(), "Csak számokat várunk!", Toast.LENGTH_LONG).show();
-                    //}
+
                 } catch (Throwable e)
                 {
                     Toast.makeText(getContext(), "hint" + " " + e.toString(), Toast.LENGTH_LONG).show();
@@ -154,30 +131,17 @@ public class chainFragment extends Fragment {
 
                 try {
                     SequenceDataModel newModel = new SequenceDataModel(user);
-                    PegModel localPegModel = new PegModel();
                     RealmList<PegModel> localRealmPeg = new RealmList<PegModel>();
                     RealmList<String> localRealmStrings = new RealmList<String>();
-                    String localTheNums[] = edtxt.getText().toString().split(" ");
-                    ArrayList<String> localTheStrings = new ArrayList<String>();
+
                     realm.executeTransaction( r -> {
                         String[] storySnippets = txtvw2.getText().toString().split(" ");
-                        String[] localNums = edtxt.getText().toString().split(" ");
-                        int[] localInt;
-                     //   {
-                     //       localInt[i] = Integer.parseInt(localNums[i]);
-                     //   }
 
-                        //System.out.println(Arrays.toString(localNums));
-
-                        //for (String s : localNums) {
-                        //    System.out.println("Idáig lefutott");
-                        //    localTheStrings.add(s);
-                        //}
                         for (int i = 0; i < storySnippets.length; i++)
                         {
-                            //if (!storySnippets[i].equals("null")) {
+
                                 localRealmStrings.add(storySnippets[i]);
-                            //}
+
                         }
 
                         for (int i = 0 ; i < user.getPegs().getPegs().size(); i++){
@@ -188,16 +152,11 @@ public class chainFragment extends Fragment {
                                     tempPeg.setLetter(user.getPegs().getOnePeg(i).getLetter());
                                     tempPeg.setNum(user.getPegs().getOnePeg(i).getNum());
                                     localRealmPeg.add(tempPeg);
-                                    //if(i!=0) {
-                                        //System.out.println(localRealmPeg.get(i).getNum());
-                                    //}
                                 }
                             }
                         }
-                        //System.out.println(localPegModel.getWord() + "The outside word");
                         newModel.setStory(localRealmStrings);
                         newModel.setSequence(localRealmPeg);//localRealmPeg jönne ide
-                        //realm.insertOrUpdate(newModel);
                         user.setOneSequence(newModel);
                         realm.insertOrUpdate(user);
                         Toast.makeText(getContext(), "Bekerült az adatbázisba!", Toast.LENGTH_LONG).show();
