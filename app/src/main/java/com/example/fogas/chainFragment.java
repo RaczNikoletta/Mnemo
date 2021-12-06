@@ -174,7 +174,6 @@ public class chainFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.N)
     private ArrayList<String> wordFromDatabaseList(String bunchOfNumbers, EditText beviteliMezo, String regexToSplit){
         String localString = beviteliMezo.getText().toString();
-        String[] bunchOfNumbersString = bunchOfNumbers.split(regexToSplit);
         String splitLocalStrings[] = localString.split(regexToSplit);
         ArrayList<String> innerArray = new ArrayList<String>();
         indexAdapter.clear();
