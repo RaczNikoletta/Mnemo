@@ -60,6 +60,10 @@
     <!-- Register -->
     <!--UserTitles-->
     <string name="feledekeny">Oblivious</string>
+    <string name="toddler">Toddler</string>
+    <string name="skilled">Skilled</string>
+    <string name="expert">Expert</string>
+    <string name="masterMind">MasterMind</string>
     <!--UserTitles-->
     <!--Practice mode-->
     <string name="fogasbetukgyak">Peg (letter) practice</string>
@@ -149,4 +153,10 @@
     <!--Settings-->
     <string name="notificationSetting">Notifications</string>
     <!--Settings-->
+    <!--Permission-->
+    <string name="Cancel">Cancel</string>
+    <string name="needPerm1">Need notification permission</string>
+    <string name="needPerm2">This app needs notification permission"</string>
+    <string name="grantBtn">Grant</string>
+    <!--Permission-->
 </resources>

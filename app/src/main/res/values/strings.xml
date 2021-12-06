@@ -62,6 +62,10 @@
 
     <!--UserTitles-->
     <string name="feledekeny">Feledékeny</string>
+    <string name="toddler">Tipegő</string>
+    <string name="skilled">Gyakorlott</string>
+    <string name="expert">Verhetetlen</string>
+    <string name="masterMind">Lángelme</string>
     <!--UserTitles-->
     <!--Practice mode-->
     <string name="fogasbetukgyak">Fogasok (betűk) gyakorlása</string>
@@ -154,4 +158,10 @@
     <!--Settings-->
     <string name="notificationSetting">Értesítések</string>
     <!--Settings-->
+    <!--Permission-->
+    <string name="Cancel">Mégsem</string>
+    <string name="needPerm1">Értesítés engedély</string>
+    <string name="needPerm2">Az applikációnak szükésge van engedélyre az értesítések küldéséhez</string>
+    <string name="grantBtn">Biztosít</string>
+    <!--Permission-->
 </resources>
