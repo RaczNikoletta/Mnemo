@@ -144,8 +144,8 @@ public class chainFragment extends Fragment {
 
                         }
 
-                        for (int i = 0 ; i < user.getPegs().getPegs().size(); i++){
-                            for (int k = 0; k < localRealmStrings.size(); k++){
+                        for (int k = 0 ; k < localRealmStrings.size(); k++){
+                            for (int i = 0; i < user.getPegs().getPegs().size(); i++){
                                 if (user.getPegs().getOnePeg(i).getWord().equals(localRealmStrings.get(k))){
                                     PegModel tempPeg = new PegModel();
                                     tempPeg.setWord(user.getPegs().getOnePeg(i).getWord());
