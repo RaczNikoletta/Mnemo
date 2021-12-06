@@ -84,16 +84,16 @@ public class MainMenu extends AppCompatActivity implements DuoMenuView.OnMenuCli
             if (ActivityCompat.shouldShowRequestPermissionRationale(MainMenu.this, Manifest.permission.ACCESS_NOTIFICATION_POLICY)) {
                 //Show Information about why you need the permission
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainMenu.this);
-                builder.setTitle("Need Notification Permission");
-                builder.setMessage("This app needs Notification permission.");
-                builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
+                builder.setTitle(getString(R.string.needPerm1));
+                builder.setMessage(getString(R.string.needPerm2));
+                builder.setPositiveButton(getString(R.string.grantBtn), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                         ActivityCompat.requestPermissions(MainMenu.this, new String[]{Manifest.permission.ACCESS_NOTIFICATION_POLICY}, NOTIFICATION_PERMISSION_CONSTANT);
                     }
                 });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(getString(R.string.Cancel), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();

@@ -34,9 +34,8 @@ public class SettingsFragment extends Fragment {
         View view =inflater.inflate(R.layout.fragment_settings, container, false);
         permissionStatus = getActivity().getSharedPreferences("permissionStatus", MODE_PRIVATE);
         notificationSwitch = view.findViewById(R.id.switch1);
-
-        notificationSwitch.setChecked(ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_NOTIFICATION_POLICY)
-                == PackageManager.PERMISSION_GRANTED);
+        notificationSwitch.setChecked(permissionStatus.getBoolean
+                (Manifest.permission.ACCESS_NOTIFICATION_POLICY, true));
 
         notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -51,7 +50,7 @@ public class SettingsFragment extends Fragment {
                         editor.putBoolean(Manifest.permission.ACCESS_NOTIFICATION_POLICY, true);
                     }
                 }
-                editor.commit();
+                editor.apply();
             }
         });
 

@@ -1,7 +1,9 @@
 package com.example.fogas;
 
 import static android.content.Context.ALARM_SERVICE;
+import static android.content.Context.MODE_PRIVATE;
 
+import android.Manifest;
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -69,6 +71,7 @@ public class letterUpdateFragment extends Fragment {
     private int belowten;
     private SharedPreferences prefs = null;
     private boolean isFirst;
+    private SharedPreferences permissionStatus;
 
     public letterUpdateFragment() {
         // Required empty public constructor
@@ -87,13 +90,15 @@ public class letterUpdateFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_letter_update, container, false);
         setRetainInstance(true);
         createNotificationChannel();
-        prefs = getActivity().getSharedPreferences("repeatDatas", Context.MODE_PRIVATE);
+        prefs = getActivity().getSharedPreferences("repeatDatas", MODE_PRIVATE);
         isFirst = prefs.getBoolean("first_not",true);
 
         ids = new int[]{R.id.pegletterTv0, R.id.pegletterTv1, R.id.pegletterTv2, R.id.pegletterTv3, R.id.pegletterTv4,
                 R.id.pegletterTv5, R.id.pegletterTv6, R.id.pegletterTv7, R.id.pegletterTv8,
                 R.id.pegletterTv9, R.id.pegwordTv0, R.id.pegwordTv1, R.id.pegwordTv2, R.id.pegwordTv3, R.id.pegwordTv4, R.id.pegwordTv5,
                 R.id.pegwordTv6, R.id.pegwordTv7, R.id.pegwordTv8, R.id.pegwordTv9};
+
+        permissionStatus = getActivity().getSharedPreferences("permissionStatus", MODE_PRIVATE);
 
         /*private ArrayList<String> pegAboveNine;
         private Spinner aboveNineSpinner;
@@ -318,7 +323,8 @@ public class letterUpdateFragment extends Fragment {
                                     PegDataModel checkpegs = user.getPegs();
                                     int[] counter = checkpegs.counter();
                                     //check pegs num -- set notification progress to null
-                                    if ((counter[0]+counter[1]) >= 10) {
+                                    if ((counter[0]+counter[1]) >= 10 && (permissionStatus.getBoolean
+                                            (Manifest.permission.ACCESS_NOTIFICATION_POLICY, true))) {
                                         if(user.getLastNotification().get(1)!=0.0){
                                             updaterRealm.executeTransaction(r-> {
                                                 user.getLastNotification().set(0, 0.0);
