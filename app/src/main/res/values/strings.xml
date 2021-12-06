@@ -164,4 +164,17 @@
     <string name="needPerm2">Az applikációnak szükésge van engedélyre az értesítések küldéséhez</string>
     <string name="grantBtn">Biztosít</string>
     <!--Permission-->
+    <!--Helps-->
+    <string name="aboutPegs">A fogasokról</string>
+    <string name="check">Megnéz</string>
+    <string name="aboutPegsText">A memóriafogas (peg system) segítségével hatékonyan memorizálhatunk olyan véletlenszerű listákat, mint a világ 10 legnépesebb országa vagy a 12 csillagjegy.
+
+A módszer lényege az, hogy megtanulunk egy sor állandó szót, amelyekhez később kapcsoljuk a megjegyzendő információt.\n
+        Elsőként a memóriafogasokat kell létrehozni.
+        Ezeknek különböző típusai vannak, ezek meghatározása teljesen absztrakt,
+        felhasználófüggő: a leggyakoribbak a rímelő és a betűrend szerinti fogasok.
+        Ha megjegyeztük ezeket akkor már csak annyi a feladatunk, hogy hozzárendeljük a szavakat a megjegyezendő számokhoz, ezáltal törénetet alkotva.
+        A történet segíteni fog abban hogy felidézzük az adott számsort.
+</string>
+    <!--Helps-->
 </resources>

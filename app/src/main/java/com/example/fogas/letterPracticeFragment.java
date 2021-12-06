@@ -192,7 +192,7 @@ public class letterPracticeFragment extends Fragment {
         helpImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext()," onclicked hint: "+index,Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext()," onclicked hint: "+index,Toast.LENGTH_LONG).show();
                 if(index!=0) {
                     if (bmp.get(index - 1) != null) {
                         imageViewHint.setVisibility(View.VISIBLE);

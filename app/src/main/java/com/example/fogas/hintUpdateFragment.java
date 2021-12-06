@@ -124,7 +124,7 @@ public class hintUpdateFragment extends Fragment {
                                 .commit();
 
                 }catch(Throwable e){
-                    Log.d("practicefragment","letterpractice click error "+ e.toString());
+                    Log.d("add hints","Add hints "+ e.toString());
                 }
             }
         });

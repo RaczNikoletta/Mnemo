@@ -159,4 +159,17 @@
     <string name="needPerm2">This app needs notification permission"</string>
     <string name="grantBtn">Grant</string>
     <!--Permission-->
+    <!--Helps-->
+    <string name="aboutPegs">About pegs</string>
+    <string name="check">Check</string>
+    <string name="aboutPegsText">The peg system can be used to efficiently memorize random lists such as the 10 most populous countries in the world or the 12 zodiac signs.
+
+The essence of this method is to learn a series of constant words to which we will later associate the information to be memorized.
+        The pegs must be created first.
+        There are different types of these, their definition is completely abstract,
+        user-dependent: rhyming and alphabetical pegs are the most common.
+        Once we have memorized these, all we have to do is assign the words to the numbers to be memorized, thus forming a story.
+        The story will help us recall that particular number sequence.
+</string>
+    <!--Helps-->
 </resources>

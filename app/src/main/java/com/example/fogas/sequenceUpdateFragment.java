@@ -201,9 +201,17 @@ public class sequenceUpdateFragment extends Fragment {
     public void dummyseq(){
         sequenceUpdateRealm.executeTransaction(r -> {
             user = sequenceUpdateRealm.where(UserDataModel.class).equalTo("loggedIn", true).findFirst();
+            RealmList<PegModel> dummyseq = new RealmList<>();
+            for(int i=3;i>=0;i--){
+                PegModel peg = new PegModel();
+                peg.setWord("dummy");
+                peg.setNum(i);
+                peg.setLetter("d");
+                dummyseq.add(peg);
+            }
             tempseq.setUser(user);
-            tempseq.setSequence(user.getPegs().getPegs());
-            tempseq.generateStory();
+            tempseq.setSequence(dummyseq);
+            tempseq.setStory(new RealmList<>());
             user.setOneSequence(tempseq);
             sequenceUpdateRealm.insertOrUpdate(user);
         });
