@@ -160,16 +160,13 @@ public class sequenceUpdateFragment extends Fragment {
                     String[] splited = clicked.split("");
 
                     try {
-                        splitedseq.setSequence(tempPegs);
                         for (int i = 0; i < user.getSequences().size(); i++) {
                             if (user.getSequences().get(i) != null) {
                                 if (user.getSequences().get(i).isEqual(seqToFind)) {
                                     foundSeq = user.getSequences().get(i);
-
                                 }
                             }
                         }
-
                         sequenceUpdateRealm.executeTransaction(r->{
                             if(foundSeq!=null){
                                 foundSeq.deleteFromRealm();
