@@ -177,9 +177,9 @@ public class chainFragment extends Fragment {
         String[] bunchOfNumbersString = bunchOfNumbers.split(regexToSplit);
         String splitLocalStrings[] = localString.split(regexToSplit);
         ArrayList<String> innerArray = new ArrayList<String>();
-
         int idx = 0;
         indexAdapter.clear();
+        /*
         //mapbe beleteszi a szó <-> szám párokat (összes)
         while (idx < user.getPegs().getPegs().stream().count())
         {
@@ -189,6 +189,16 @@ public class chainFragment extends Fragment {
         for (String s : splitLocalStrings){
             innerArray.add(indexAdapter.get(s));
         }
+        */
+        for (int i = 0; i < splitLocalStrings.length; i++){
+            for(int k = 0; k < user.getPegs().getPegs().size(); k++){
+                if (Integer.parseInt(splitLocalStrings[i]) == user.getPegs().getOnePeg(k).getNum()){
+                    innerArray.add(user.getPegs().getOnePeg(k).getWord());
+                    System.out.println("Putting in" + user.getPegs().getOnePeg(k).getWord());
+                }
+            }
+        }
+        System.out.println(innerArray.toString());
         return innerArray;
     };
 
