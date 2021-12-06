@@ -177,7 +177,6 @@ public class chainFragment extends Fragment {
         String[] bunchOfNumbersString = bunchOfNumbers.split(regexToSplit);
         String splitLocalStrings[] = localString.split(regexToSplit);
         ArrayList<String> innerArray = new ArrayList<String>();
-        int idx = 0;
         indexAdapter.clear();
         /*
         //mapbe beleteszi a szó <-> szám párokat (összes)
