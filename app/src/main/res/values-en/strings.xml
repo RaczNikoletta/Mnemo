@@ -20,13 +20,13 @@
     <string name="segitsegSzoveg1">Based on the letters you enter here, you can enter words in the next step.</string>
     <string name="betuKerdesekHiba">Ivalid format.</string>
     <string name = "betuKerdesekPontok">Number of right answers: </string>
-    <string name = "kerdesgeneralasBetu">Please enter the letter for the number: </string>
+    <string name = "kerdesgeneralasBetu">Please enter the number for the letter: </string>
     <string name="kerdesgeneralasSzo">Please enter the word for the number: </string>
     <string name="kerdesLeiras">Choose the right pair for each number/letter.</string>
     <string name="feladat">Exercise</string>
     <string name="betuHiba">Invalid format (a letter needed)</string>
     <string name="kihagyas">Skip</string>
-    <string name="kerdesgeleraloBetu">Please enter the letter for the number: </string>
+    <string name="kerdesgeleraloBetu">Please enter the number for the letter: </string>
     <!-- Pegs -->
     <!-- Menu -->
     <array name="menuOptions">

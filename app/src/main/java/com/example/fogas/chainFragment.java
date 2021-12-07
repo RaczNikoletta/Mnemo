@@ -192,7 +192,6 @@ public class chainFragment extends Fragment {
             for(int k = 0; k < user.getPegs().getPegs().size(); k++){
                 if (Integer.parseInt(splitLocalStrings[i]) == user.getPegs().getOnePeg(k).getNum()){
                     innerArray.add(user.getPegs().getOnePeg(k).getWord());
-                    System.out.println("Putting in" + user.getPegs().getOnePeg(k).getWord());
                 }
             }
         }
