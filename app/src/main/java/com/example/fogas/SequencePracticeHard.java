@@ -166,8 +166,8 @@ public class SequencePracticeHard extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
                 String[] splitedSeq = hardsequencePracEt.getText().toString().split("");
-                String[] newSplited = new String[splitedseq.getSequence().size()];
-                try {
+                String[] newSplited = new String[splitedseq.getSequence().size()-1];
+               /* try {
                     boolean biggerThanTen = false;
                     //check if index is in aboveNine arraylist
                     for (int i = 0; i < splitedSeq.length; i++) {
@@ -186,24 +186,26 @@ public class SequencePracticeHard extends Fragment {
                     }
                 }catch(Throwable e){
                     Toast.makeText(getContext(),"Spliting: "+e.toString(),Toast.LENGTH_LONG).show();
-                }
+                }*/
                 try {
                     //check if empty or above ten
                     PegModel model = new PegModel();
-                    int x = splitedSeq.length - 1;
-                    if (!TextUtils.isEmpty(hardsequencePracEt.getText())) {
-                        model = foundSeq.getSequence().get(x + 1);
-                    }
-                    if (TextUtils.isEmpty(hardsequencePracEt.getText())) {
-                        model = foundSeq.getSequence().get(0);
-                    }
-                    if (model != null) {
-                        HintModel currentHint = user.getHints().getOneHint(model.getNum());
-                        if (currentHint != null && currentHint.getImage() != null) {
-                            //set image
-                            Bitmap bmp = BitmapFactory.decodeByteArray(currentHint.getImage(), 0,
-                                    currentHint.getImage().length);
-                            imageViewHintHard.setImageBitmap(Bitmap.createBitmap(bmp));
+                    int x = splitedSeq.length-1;
+                    if(x<foundSeq.getSequence().size()) {
+                        if (!TextUtils.isEmpty(hardsequencePracEt.getText())) {
+                            model = foundSeq.getSequence().get(x + 1);
+                        }
+                        if (TextUtils.isEmpty(hardsequencePracEt.getText())) {
+                            model = foundSeq.getSequence().get(0);
+                        }
+                        if (model != null) {
+                            HintModel currentHint = user.getHints().getOneHint(model.getNum());
+                            if (currentHint != null && currentHint.getImage() != null) {
+                                //set image
+                                Bitmap bmp = BitmapFactory.decodeByteArray(currentHint.getImage(), 0,
+                                        currentHint.getImage().length);
+                                imageViewHintHard.setImageBitmap(Bitmap.createBitmap(bmp));
+                            }
                         }
                     }
                     imageViewHintHard.setVisibility(View.INVISIBLE);
@@ -213,7 +215,7 @@ public class SequencePracticeHard extends Fragment {
 
 
                 }catch(Throwable e){
-                    Toast.makeText(getContext(),"get hint error"+ e.toString(),Toast.LENGTH_LONG).show();
+                    Log.d("getHintError","get hint error"+ e.toString());
                 }
             }
         });
