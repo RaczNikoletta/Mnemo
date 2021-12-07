@@ -294,12 +294,13 @@ public class letterUpdateFragment extends Fragment {
                                     if (user.getPegs().getPegs().get(i).getNum() == tempAboveNine) {
                                         if (!(TextUtils.isEmpty(pegLetterAboveNineEt.getText().toString()))) {
                                             user.getPegs().getPegs().get(i).setLetter(pegLetterAboveNineEt.getText().toString());
+                                        }else{
+                                            user.getPegs().getPegs().get(i).setLetter("");
                                         }
                                         if (!(TextUtils.isEmpty(pegWordAboveNineEt.getText().toString()))) {
                                             user.getPegs().getPegs().get(i).setWord(pegWordAboveNineEt.getText().toString());
-                                        }
-                                        if (!(TextUtils.isEmpty(pegWordAboveNineEt.getText().toString()))) {
-                                            user.getPegs().getPegs().get(i).setWord(pegWordAboveNineEt.getText().toString());
+                                        }else{
+                                            user.getPegs().getPegs().get(i).setWord("");
                                         }
                                     }
                                 }}
