@@ -327,6 +327,8 @@ public class letterUpdateFragment extends Fragment {
                                     if ((counter[0]+counter[1]) >= 10 && (permissionStatus.getBoolean
                                             (Manifest.permission.ACCESS_NOTIFICATION_POLICY, true))) {
                                         if(user.getLastNotification().get(1)!=0.0){
+
+
                                             updaterRealm.executeTransaction(r-> {
                                                 user.getLastNotification().set(0, 0.0);
                                                 user.getLastNotification().set(1, 0.0);

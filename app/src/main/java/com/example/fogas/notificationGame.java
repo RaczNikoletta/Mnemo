@@ -100,7 +100,7 @@ public class notificationGame extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    if ((counter <= 5 && !wordBool) || letterBool) {
+                    if ((counter <= 4 && !wordBool) || letterBool) {
                         if (Integer.parseInt(answerNotEt.getText().toString()) == answerLetter.get(counter)) {
                             score++;
                             LayoutInflater inf = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -127,8 +127,8 @@ public class notificationGame extends AppCompatActivity {
 
                         }
                         counter++;
-                    } else if ((half && counter > 5)) {
-                        if (Integer.parseInt(answerNotEt.getText().toString()) == answerWord.get(counter - 5)) {
+                    } else if ((half && counter > 4)) {
+                        if (Integer.parseInt(answerNotEt.getText().toString()) == answerWord.get(counter - 4)) {
                             score++;
                             LayoutInflater inf = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                             View popupView = inf.inflate(R.layout.right_answer_layout, null);
@@ -149,7 +149,7 @@ public class notificationGame extends AppCompatActivity {
                             // show the popup window
                             // which view you pass in doesn't matter, it is only used for the window tolken
                             Toast toast = new Toast(context);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.setGravity(Gravity.CENTER, 0, 100);
                             toast.setView(popupView);
                             toast.show();
                             counter++;
@@ -165,7 +165,7 @@ public class notificationGame extends AppCompatActivity {
                             // show the popup window
                             // which view you pass in doesn't matter, it is only used for the window tolken
                             Toast toast = new Toast(context);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.setGravity(Gravity.CENTER, 0, 100);
                             toast.setView(popupView);
                             toast.show();
                             counter++;
@@ -177,7 +177,7 @@ public class notificationGame extends AppCompatActivity {
                             // show the popup window
                             // which view you pass in doesn't matter, it is only used for the window tolken
                             Toast toast = new Toast(context);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.setGravity(Gravity.CENTER, 0, 100);
                             toast.setView(popupView);
                             toast.show();
                             counter++;
@@ -241,6 +241,7 @@ public class notificationGame extends AppCompatActivity {
                         questionNot.setText(answerNotEt.getResources().getString(R.string.kerdes_szo) + " " + questionLetter.get(counter));
                     }
                     part_jelzo.setText(Integer.toString(counter+1) + "/10");
+                    answerNotEt.setText("");
                 }catch (Throwable e){
                     Toast.makeText(context,"SEndnotBtn: "+e.toString(),Toast.LENGTH_LONG).show();
                 }

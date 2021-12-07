@@ -161,7 +161,7 @@
     <!--Permission-->
     <string name="Cancel">Mégsem</string>
     <string name="needPerm1">Értesítés engedély</string>
-    <string name="needPerm2">Az applikációnak szükésge van engedélyre az értesítések küldéséhez</string>
+    <string name="needPerm2">Az applikációnak szüksége van engedélyre az értesítések küldéséhez</string>
     <string name="grantBtn">Biztosít</string>
     <!--Permission-->
     <!--Helps-->

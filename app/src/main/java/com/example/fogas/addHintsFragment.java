@@ -173,7 +173,7 @@ public class addHintsFragment extends Fragment {
                                             try {
                                                 FragmentManager fm = getFragmentManager();
                                                 FragmentTransaction ft = fm.beginTransaction();
-                                                ft.replace(R.id.container, new before_sequence_practice(), "beforeseqprac")
+                                                ft.replace(R.id.container, new hintUpdateFragment(), "hintUpdate")
                                                         .addToBackStack(null)
                                                         .commit();
                                             } catch (Throwable e) {
