@@ -46,12 +46,12 @@ public class statisticsFragment extends Fragment {
         StatisticsTitle.setText(R.string.statistics);
         try {
             if (user.getProgress().getProgressById(1) != null) {
-                letterStatTv.setText(getResources().getString(R.string.statisticsLetter) + " " + Double.toString(user.getProgress().getProgressById(1).getAvgRes()).toString());
+                letterStatTv.setText(getResources().getString(R.string.statisticsLetter) + " " + String.format("%.1f",user.getProgress().getProgressById(1).getAvgRes()).toString());
             } else {
                 letterStatTv.setText(getResources().getString(R.string.statisticsLetter) + " ");
             }
             if (user.getProgress().getProgressById(2) != null) {
-                wordStatTv.setText(getResources().getString(R.string.statisticsWord) + " " + Double.toString(user.getProgress().getProgressById(2).getAvgRes()).toString());
+                wordStatTv.setText(getResources().getString(R.string.statisticsWord) + " " + String.format("%.1f",user.getProgress().getProgressById(2).getAvgRes()).toString());
             } else {
                 wordStatTv.setText(getResources().getString(R.string.statisticsWord) + " ");
             }
