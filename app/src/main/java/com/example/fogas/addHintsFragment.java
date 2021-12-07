@@ -163,8 +163,8 @@ public class addHintsFragment extends Fragment {
                         });
                         try {
                             new AlertDialog.Builder(getContext())
-                                    .setTitle(R.string.righAnswer1)
-                                    .setMessage(R.string.righAnswer2)
+                                    .setTitle(R.string.databaseUpdated)
+                                    .setMessage(R.string.databaseUpdated2)
 
                                     // Specifying a listener allows you to take an action before dismissing the dialog.
                                     // The dialog is automatically dismissed when a dialog button is clicked.

@@ -110,7 +110,7 @@ public class notificationGame extends AppCompatActivity {
                             // show the popup window
                             // which view you pass in doesn't matter, it is only used for the window tolken
                             Toast toast = new Toast(context);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.setGravity(Gravity.CENTER, 0, +100);
                             toast.setView(popupView);
                             toast.show();
                         } else {
@@ -121,7 +121,7 @@ public class notificationGame extends AppCompatActivity {
                             // show the popup window
                             // which view you pass in doesn't matter, it is only used for the window tolken
                             Toast toast = new Toast(context);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.setGravity(Gravity.CENTER, 0, +100);
                             toast.setView(popupView);
                             toast.show();
 

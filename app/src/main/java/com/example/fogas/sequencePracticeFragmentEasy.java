@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -48,6 +49,7 @@ public class sequencePracticeFragmentEasy extends Fragment {
     private SequenceDataModel foundSeq = new SequenceDataModel();
     private RealmList<String> story = new RealmList<>();
     private ArrayList<Integer> aboveNineIndexes = new ArrayList<>();
+    private Button sendEasyBtn;
 
 
     public static sequencePracticeFragmentEasy newInstance(String sequence, ArrayList<Integer> aboveNine) {
@@ -76,6 +78,7 @@ public class sequencePracticeFragmentEasy extends Fragment {
         tStart = System.currentTimeMillis();
         easystoryPracticeEt = view.findViewById(R.id.easystoryPracticeEt);
         easysequencePracEt = view.findViewById(R.id.easyseqencePracEt);
+        sendEasyBtn = view.findViewById(R.id.sendEasyBtn);
         try {
             Bundle args = getArguments();
             sequence = args.getString("sequence", "");
@@ -245,11 +248,7 @@ public class sequencePracticeFragmentEasy extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.container, new before_sequence_practice(), "beforeseq")
-                .addToBackStack(null)
-                .commit();
+        sendEasyBtn.setEnabled(false);
 
     }
 }
