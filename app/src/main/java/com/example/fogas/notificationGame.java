@@ -128,7 +128,7 @@ public class notificationGame extends AppCompatActivity {
                         }
                         counter++;
                     } else if ((half && counter > 4)) {
-                        if (Integer.parseInt(answerNotEt.getText().toString()) == answerWord.get(counter - 4)) {
+                        if (Integer.parseInt(answerNotEt.getText().toString()) == answerWord.get(counter)) {
                             score++;
                             LayoutInflater inf = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                             View popupView = inf.inflate(R.layout.right_answer_layout, null);
@@ -223,12 +223,12 @@ public class notificationGame extends AppCompatActivity {
 
                     if (half && counter<10) {
                         //Toast.makeText(getBaseContext(),"half" , Toast.LENGTH_SHORT).show();
-                        if (counter <= 5) {
+                        if (counter < 5) {
 
                             questionNot.setText(answerNotEt.getResources().getString(R.string.kerdes_betu) + " " + questionLetter.get(counter));
                         } else {
                             try {
-                                questionNot.setText(answerNotEt.getResources().getString(R.string.kerdes_szo) + " " + questionWord.get(counter-5));
+                                questionNot.setText(answerNotEt.getResources().getString(R.string.kerdes_szo) + " " + questionWord.get(counter));
                             }catch (Throwable e){
                                 Toast.makeText(getBaseContext(),"Else ag"+e.toString(),Toast.LENGTH_LONG).show();
                             }
@@ -311,7 +311,7 @@ public class notificationGame extends AppCompatActivity {
     }
 
     private int checkResults(){
-        if(user.getLastNotification().get(1)==0.0) {
+        if(user.getLastNotification().get(0)==0.0) {
             superMemo2 = new SuperMemo2((score / 2), reps, 2.5, 0);
         }else{// resultrep .get(0),easyness .get(1),lastinterval get(2)
             superMemo2 = new SuperMemo2((score / 2), user.getLastNotification().get(0),
