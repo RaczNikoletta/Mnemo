@@ -176,5 +176,7 @@ The essence of this method is to learn a series of constant words to which we wi
         Once we have memorized these, all we have to do is assign the words to the numbers to be memorized, thus forming a story.
         The story will help us recall that particular number sequence.
 </string>
+    <string name="chooseAbout1">Please Choose</string>
+    <string name="chooseAbout2">Please choose one article</string>
     <!--Helps-->
 </resources>

@@ -1,11 +1,13 @@
 package com.example.fogas;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -28,7 +30,7 @@ public class HelpFragment extends Fragment {
     private ListView helpList;
     private ArrayAdapter<String> adapter;
     private ArrayList<String> helps;
-    private String clicked;
+    private String clicked="";
     private Button checkBtn;
 
     public HelpFragment() {
@@ -78,12 +80,29 @@ public class HelpFragment extends Fragment {
         checkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(clicked.equals(getString(R.string.aboutPegs))){
-                    FragmentManager fm = getFragmentManager();
-                    FragmentTransaction ft = fm.beginTransaction();
-                    ft.replace(R.id.container, new aboutPegsFragment(), "About pegs fragment")
-                            .addToBackStack(null)
-                            .commit();
+                if (!clicked.equals("")) {
+                    if (clicked.equals(getString(R.string.aboutPegs))) {
+                        FragmentManager fm = getFragmentManager();
+                        FragmentTransaction ft = fm.beginTransaction();
+                        ft.replace(R.id.container, new aboutPegsFragment(), "About pegs fragment")
+                                .addToBackStack(null)
+                                .commit();
+                    }
+                }else{
+                    new AlertDialog.Builder(getContext())
+                            .setTitle(R.string.chooseAbout1)
+                            .setMessage(R.string.chooseAbout2)
+
+                            // Specifying a listener allows you to take an action before dismissing the dialog.
+                            // The dialog is automatically dismissed when a dialog button is clicked.
+                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            })
+                            // A null listener allows the button to dismiss the dialog and take no further action.
+                            .setIcon(getResources().getDrawable(R.drawable.ic_baseline_error_24))
+                            .show();
                 }
             }
         });

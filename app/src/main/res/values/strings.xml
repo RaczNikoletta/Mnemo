@@ -181,5 +181,7 @@ A módszer lényege az, hogy megtanulunk egy sor állandó szót, amelyekhez ké
         Ha megjegyeztük ezeket akkor már csak annyi a feladatunk, hogy hozzárendeljük a szavakat a megjegyezendő számokhoz, ezáltal törénetet alkotva.
         A történet segíteni fog abban hogy felidézzük az adott számsort.
 </string>
+    <string name="chooseAbout1">Kérem válasszon</string>
+    <string name="chooseAbout2">Kérem válasszon egy témát!</string>
     <!--Helps-->
 </resources>
