@@ -116,7 +116,7 @@
     <string name="peg">Fogas száma</string>
     <string name="chooseHint1">Válassz egy segítséget</string>
     <string name="chooseHint2">Először választanod kell egy számot</string>
-    <string name="invalidFormatSeq">Nem megfelelő formátum, kérem ne használjon szóközt</string>
+    <string name="invalidFormatSeq">Nem megfelelő formátum, kérem ne használjon szóközt és betűket</string>
     <!--Fragment hint update -->
     <!--Fragment sequence update -->
     <string name="sequences">Számsoraid</string>

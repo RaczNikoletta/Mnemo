@@ -144,6 +144,7 @@ public class SequencePracticeMedium extends Fragment {
                     SequenceDataModel tempSeq = new SequenceDataModel();
                     SequenceDataModel answerfoundSeq = new SequenceDataModel();
                     String[] tosplited = medsequencePracEt.getText().toString().split("");
+                    boolean formatError = false;
                     try {
                         for (int i = 0; i < tosplited.length; i++) {
                             PegModel tempPeg = new PegModel();
@@ -151,6 +152,7 @@ public class SequencePracticeMedium extends Fragment {
                             tempPegs.add(tempPeg);
                         }
                     }catch (Throwable e){
+                        formatError = true;
                         Toast.makeText(getContext(),getResources().getString(R.string.invalidFormatSeq),Toast.LENGTH_LONG).show();
                     }
                     try {
@@ -166,7 +168,7 @@ public class SequencePracticeMedium extends Fragment {
                         Log.d("answerseq", e.toString());
                     }
                     if (answerfoundSeq.getSequence() != null) {
-                        if (foundSeq.isEqual(answerfoundSeq)) {
+                        if (foundSeq.isEqual(answerfoundSeq) && !formatError) {
                             try {
                                 score = 10;
                                 insertProgress();

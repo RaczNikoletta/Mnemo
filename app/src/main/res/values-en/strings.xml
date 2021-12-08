@@ -48,7 +48,7 @@
     <string name="passwordfelirat">Password</string>
     <string name="noaccount"><u>Don\'t have account yet? Click here to register.</u></string>
     <string name="notValidLogin">Incorrect username or password!</string>
-    <string name="invalidFormatSeq">Invalid format, no space needed</string>
+    <string name="invalidFormatSeq">Invalid format, no space or word needed</string>
     <!-- Login -->
     <!-- Register -->
     <string name="regisztraciofelirat">Registration</string>
