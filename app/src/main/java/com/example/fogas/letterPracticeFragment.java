@@ -253,7 +253,7 @@ public class letterPracticeFragment extends Fragment {
                             for (int i = 0; i < max; i++) {
                                 tempAboveNine = (PegModel) pegRealmListAboveNine.get(i);
                                 if(!tempAboveNine.getLetter().equals("")){
-                                    indexek.add(tempAboveNine.getNum());
+                                    indexek.add(i);
                                     helyes = helyes + 1;
 
                                 }
@@ -265,19 +265,23 @@ public class letterPracticeFragment extends Fragment {
                             if(helyes>=10){
                                 helyes = 10;
                             }
-                            for (int i = 0; i < helyes; i++) {
-                                tempAboveNine = (PegModel) pegRealmListAboveNine.get(indexek.get(i));
+                            try {
+                                for (int i = 0; i < helyes; i++) {
+                                    tempAboveNine = (PegModel) pegRealmListAboveNine.get(indexek.get(i));
 
-                                helyes_valaszok[i] = tempAboveNine.getLetter().toString();
-                                bekerultSzamok[i] =tempAboveNine.getNum();
+                                    helyes_valaszok[i] = tempAboveNine.getLetter().toString();
+                                    bekerultSzamok[i] = tempAboveNine.getNum();
 
-                                if(user.getHints().getOneHint(tempAboveNine.getNum())!=null)
-                                    bmp.put(i, BitmapFactory.decodeByteArray(user.getHints().getOneHint(tempAboveNine.getNum()).getImage(),0,
-                                            user.getHints().getOneHint(tempAboveNine.getNum()).getImage().length));
+                                    if (user.getHints().getOneHint(tempAboveNine.getNum()) != null)
+                                        bmp.put(i, BitmapFactory.decodeByteArray(user.getHints().getOneHint(tempAboveNine.getNum()).getImage(), 0,
+                                                user.getHints().getOneHint(tempAboveNine.getNum()).getImage().length));
 
 
+                                }
+                                kerdes.setText(kerdes.getResources().getString(R.string.kerdesgeleraloBetu) + " " + helyes_valaszok[index] + "?");
+                            }catch(Throwable e){
+                                Log.d("mistery",e.toString());
                             }
-                            kerdes.setText(kerdes.getResources().getString(R.string.kerdesgeleraloBetu) + " " + helyes_valaszok[index] + "?");
 
                         } else {
 
