@@ -247,6 +247,7 @@ public class game extends AppCompatActivity {
                         }
                         peg = new PegModel();
                         peg.setLetter(b);
+                        peg.setUserName("");
                         peg.setNum(num);
                         peg.setWord("");
                         pegs.setOnePeg(peg);

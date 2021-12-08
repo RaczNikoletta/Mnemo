@@ -29,6 +29,7 @@ import com.example.fogas.Models.ProgressDataModel;
 import com.example.fogas.Models.SequenceDataModel;
 import com.example.fogas.Models.UserDataModel;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import io.realm.Realm;
@@ -151,20 +152,33 @@ public class Register extends AppCompatActivity {
                     try {
                         UserDataModel newUser = new UserDataModel(usernameEt.getText().toString(), passwordregagEt.getText().toString());
                         PegDataModel firstPegs = registerRealm.where(PegDataModel.class).equalTo("userName","").findFirst();
+                        ArrayList<PegModel>pegsTodel = new ArrayList<>();
                         newUser.setTitle(getResources().getString(R.string.feledekeny));
                         if(firstPegs!=null){
                             for(int i=0;i<firstPegs.getPegs().size();i++){
                                 PegModel p = new PegModel();
+                                p.setUserName(usernameEt.getText().toString());
                                 p.setNum(i);
                                 p.setLetter(firstPegs.getPegs().get(i).getLetter());
                                 p.setWord("");
                                 registerRealm.insertOrUpdate(p);
                                 newUser.getPegs().setOnePeg(p);
+                                PegModel modelTodel =registerRealm.where(PegModel.class).
+                                        equalTo("userName","").equalTo("num",i).
+                                        findFirst();
+                                pegsTodel.add(modelTodel);
                             }
                             firstPegs.deleteFromRealm();
-                        }else {
+                            for(int i=0;i<pegsTodel.size();i++){
+                                pegsTodel.get(i).deleteFromRealm();
+                            }
+
+                        }
+
+                        else {
                             for (int i = 0; i < 10; i++) {
                                 PegModel p = new PegModel();
+                                p.setUserName(usernameEt.getText().toString());
                                 p.setNum(i);
                                 p.setLetter("");
                                 p.setWord("");

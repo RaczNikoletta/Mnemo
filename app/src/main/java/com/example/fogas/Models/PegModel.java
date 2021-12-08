@@ -6,7 +6,9 @@ import android.os.Parcelable;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class PegModel extends RealmObject implements Parcelable {
+public class PegModel extends RealmObject {
+
+    String userName;
     int num;
     String letter;
     String word;
@@ -42,14 +44,12 @@ public class PegModel extends RealmObject implements Parcelable {
         super();
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public String getUserName() {
+        return userName;
     }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
-    public void readFromParcel(Parcel in){}
+
 }

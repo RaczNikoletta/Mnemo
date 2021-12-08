@@ -255,7 +255,6 @@ public class notificationGame extends AppCompatActivity {
 
             memoRealm = Realm.getDefaultInstance();
             user = memoRealm.where(UserDataModel.class).equalTo("loggedIn", true).findFirst();
-            user.getNotifications();
         } catch(Throwable e){
             Toast.makeText(getBaseContext(),"phase one: "+e.toString(),Toast.LENGTH_LONG).show();
             }
@@ -320,7 +319,6 @@ public class notificationGame extends AppCompatActivity {
         memoRealm.executeTransaction(r -> {
             toInsert = superMemo2.getResult();
             user.setLastNotification(toInsert);
-            user.setNotifications(reps);
             memoRealm.insertOrUpdate(user);
         });
         //Toast.makeText(context,toInsert.get(0)+" "+toInsert.get(1)+" "+toInsert.get(2),Toast.LENGTH_LONG).show();
