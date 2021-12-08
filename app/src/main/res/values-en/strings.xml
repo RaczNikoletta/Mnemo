@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">fogas</string>
-    <string name="memoria_fogas">Peg memory</string>
+    <string name="app_name">Peg System</string>
+    <string name="memoria_fogas">Peg System</string>
     <string name="start">Start</string>
     <!-- Pegs -->
     <string name="nullas">Please enter the letter for number zero!</string>
