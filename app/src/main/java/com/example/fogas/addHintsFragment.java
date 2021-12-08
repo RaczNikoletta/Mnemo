@@ -108,9 +108,9 @@ public class addHintsFragment extends Fragment {
         pegSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                int valasztott =Integer.parseInt(pegSpinner.getSelectedItem().toString());
-               if(user.getPegs().getPegs().get(valasztott)!=null){
-                   pegWordTv.setText(user.getPegs().getPegs().get(valasztott).getWord());
+                //int valasztott =Integer.parseInt(pegSpinner.getSelectedItem().toString());
+               if(user.getPegs().getPegs().get(i)!=null){
+                   pegWordTv.setText(user.getPegs().getPegs().get(i).getWord());
                }
 
             }
