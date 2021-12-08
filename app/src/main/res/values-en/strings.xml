@@ -48,6 +48,7 @@
     <string name="passwordfelirat">Password</string>
     <string name="noaccount"><u>Don\'t have account yet? Click here to register.</u></string>
     <string name="notValidLogin">Incorrect username or password!</string>
+    <string name="invalidFormatSeq">Invalid format, no space needed</string>
     <!-- Login -->
     <!-- Register -->
     <string name="regisztraciofelirat">Registration</string>
@@ -109,10 +110,14 @@
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
     <string name="peg">Peg number</string>
+    <string name="chooseHint1">"Choose a hint"</string>
+    <string name="chooseHint2">"You should choose a hint first!"</string>
     <!--Fragment hint update -->
     <!--Fragment sequence update -->
     <string name="sequences">Your sequences</string>
     <string name="storyTv">Story</string>
+    <string name="chooseSeq1">"Choose a sequence"</string>
+    <string name="chooseSeq2">"You should choose a sequence first!"</string>
     <!--Fragment sequence update -->
     <!--Push notification-->
     <string name="timeToPractice">"It's time to practice!"</string>

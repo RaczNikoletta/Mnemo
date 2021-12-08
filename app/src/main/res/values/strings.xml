@@ -114,10 +114,15 @@
     <string name="edit">Szerkesztés</string>
     <string name="delete">Törlés</string>
     <string name="peg">Fogas száma</string>
+    <string name="chooseHint1">Válassz egy segítséget</string>
+    <string name="chooseHint2">Először választanod kell egy számot</string>
+    <string name="invalidFormatSeq">Nem megfelelő formátum, kérem ne használjon szóközt</string>
     <!--Fragment hint update -->
     <!--Fragment sequence update -->
     <string name="sequences">Számsoraid</string>
     <string name="storyTv">Történet</string>
+    <string name="chooseSeq1">"Válassz egy számsort"</string>
+    <string name="chooseSeq2">"Először választanod kell egy számsort"</string>
     <!--Fragment sequence update -->
     <!--Push notification-->
     <string name="timeToPractice">"ELjött az idő a gyakorlásra!"</string>

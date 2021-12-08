@@ -279,12 +279,9 @@ public class letterUpdateFragment extends Fragment {
                                     Log.v("letterupdate", i + " " + ids[i] + "ennyi");
                                     let = eLetter.getText().toString();
                                     word = eWord.getText().toString();
-                                    p.setUserName(user.getUserName());
                                     p.setLetter(let);
                                     p.setWord(word);
                                     p.setNum(i);
-                                    PegModel peToDelete = updaterRealm.where(PegModel.class).equalTo("userName",user.getUserName()).equalTo("num",i).findFirst();
-                                    peToDelete.deleteFromRealm();
                                 }catch(Throwable e){
                                         Toast.makeText(getContext(),"beforeDelete" + e.toString(),Toast.LENGTH_LONG).show();
                                     }

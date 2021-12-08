@@ -8,7 +8,6 @@ import io.realm.annotations.PrimaryKey;
 
 public class PegModel extends RealmObject {
 
-    String userName;
     int num;
     String letter;
     String word;
@@ -44,12 +43,5 @@ public class PegModel extends RealmObject {
         super();
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
 }

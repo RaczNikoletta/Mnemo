@@ -157,28 +157,19 @@ public class Register extends AppCompatActivity {
                         if(firstPegs!=null){
                             for(int i=0;i<firstPegs.getPegs().size();i++){
                                 PegModel p = new PegModel();
-                                p.setUserName(usernameEt.getText().toString());
                                 p.setNum(i);
                                 p.setLetter(firstPegs.getPegs().get(i).getLetter());
                                 p.setWord("");
                                 registerRealm.insertOrUpdate(p);
                                 newUser.getPegs().setOnePeg(p);
-                                PegModel modelTodel =registerRealm.where(PegModel.class).
-                                        equalTo("userName","").equalTo("num",i).
-                                        findFirst();
-                                pegsTodel.add(modelTodel);
                             }
                             firstPegs.deleteFromRealm();
-                            for(int i=0;i<pegsTodel.size();i++){
-                                pegsTodel.get(i).deleteFromRealm();
                             }
 
-                        }
 
                         else {
                             for (int i = 0; i < 10; i++) {
                                 PegModel p = new PegModel();
-                                p.setUserName(usernameEt.getText().toString());
                                 p.setNum(i);
                                 p.setLetter("");
                                 p.setWord("");

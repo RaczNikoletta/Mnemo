@@ -139,6 +139,31 @@ public class hintUpdateFragment extends Fragment {
                         ft.replace(R.id.container, editHintsFragment.newInstance(clicked), "Edit hints fragment")
                                 .addToBackStack(null)
                                 .commit();
+                    }else{
+                        new AlertDialog.Builder(getContext())
+                                .setTitle(R.string.chooseHint1)
+                                .setMessage(R.string.chooseHint2)
+
+                                // Specifying a listener allows you to take an action before dismissing the dialog.
+                                // The dialog is automatically dismissed when a dialog button is clicked.
+                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        try {
+                                            FragmentManager fm = getFragmentManager();
+                                            FragmentTransaction ft = fm.beginTransaction();
+                                            ft.replace(R.id.container, new hintUpdateFragment(), "hintUpdate")
+                                                    .addToBackStack(null)
+                                                    .commit();
+                                        } catch (Throwable e) {
+                                            Toast.makeText(getContext(), "Fragment change error " + e.toString(), Toast.LENGTH_LONG).show();
+                                        }
+
+                                    }
+                                })
+                                // A null listener allows the button to dismiss the dialog and take no further action.
+                                .setIcon(getResources().getDrawable(R.drawable.ic_baseline_error_24))
+                                .show();
+
                     }
                 }catch(Throwable e){
                     Log.d("editHintsFragment","editHintsFragment click error "+ e.toString());
@@ -187,6 +212,31 @@ public class hintUpdateFragment extends Fragment {
                     } catch (Throwable e) {
                         Toast.makeText(getContext(), "alertdialog" + " " + e.toString(), Toast.LENGTH_LONG).show();
                     }
+
+                }else{
+                    new AlertDialog.Builder(getContext())
+                            .setTitle(R.string.chooseHint1)
+                            .setMessage(R.string.chooseHint2)
+
+                            // Specifying a listener allows you to take an action before dismissing the dialog.
+                            // The dialog is automatically dismissed when a dialog button is clicked.
+                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    try {
+                                        FragmentManager fm = getFragmentManager();
+                                        FragmentTransaction ft = fm.beginTransaction();
+                                        ft.replace(R.id.container, new hintUpdateFragment(), "hintUpdate")
+                                                .addToBackStack(null)
+                                                .commit();
+                                    } catch (Throwable e) {
+                                        Toast.makeText(getContext(), "Fragment change error " + e.toString(), Toast.LENGTH_LONG).show();
+                                    }
+
+                                }
+                            })
+                            // A null listener allows the button to dismiss the dialog and take no further action.
+                            .setIcon(getResources().getDrawable(R.drawable.ic_baseline_error_24))
+                            .show();
 
                 }
             }

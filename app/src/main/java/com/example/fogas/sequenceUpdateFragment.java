@@ -1,11 +1,13 @@
 package com.example.fogas;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -147,6 +149,21 @@ public class sequenceUpdateFragment extends Fragment {
                                 aboveNine.get(seqPos)), "Edit sequences")
                                 .addToBackStack(null)
                                 .commit();
+                    }else{
+                        new AlertDialog.Builder(getContext())
+                                .setTitle(R.string.chooseSeq1)
+                                .setMessage(R.string.chooseSeq2)
+
+                                // Specifying a listener allows you to take an action before dismissing the dialog.
+                                // The dialog is automatically dismissed when a dialog button is clicked.
+                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                })
+                                // A null listener allows the button to dismiss the dialog and take no further action.
+                                .setIcon(getResources().getDrawable(R.drawable.ic_baseline_error_24))
+                                .show();
                     }
                 } catch (Throwable e) {
                     Log.d("editHintsFragment", "editHintsFragment click error " + e.toString());
@@ -189,6 +206,22 @@ public class sequenceUpdateFragment extends Fragment {
                     ft.replace(R.id.container, new sequenceUpdateFragment(), "Edit sequences")
                             .addToBackStack(null)
                             .commit();
+
+                }else{
+                    new AlertDialog.Builder(getContext())
+                            .setTitle(R.string.chooseSeq1)
+                            .setMessage(R.string.chooseSeq2)
+
+                            // Specifying a listener allows you to take an action before dismissing the dialog.
+                            // The dialog is automatically dismissed when a dialog button is clicked.
+                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            })
+                            // A null listener allows the button to dismiss the dialog and take no further action.
+                            .setIcon(getResources().getDrawable(R.drawable.ic_baseline_error_24))
+                            .show();
 
                 }
             }

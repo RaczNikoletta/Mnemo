@@ -18,11 +18,13 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fogas.Models.HintDataModel;
@@ -64,6 +66,7 @@ public class addHintsFragment extends Fragment {
     private File imageFile;
     private long fileSizeInMB;
     private HintDataModel userHints;
+    private TextView pegWordTv;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,6 +78,7 @@ public class addHintsFragment extends Fragment {
         imageView = view.findViewById(R.id.imageView);
         hintData = new HintDataModel();
         pegList = new ArrayList<String>();
+        pegWordTv = view.findViewById(R.id.pegWordTv);
         setRetainInstance(true);
 
         // Inflate the layout for this fragment
@@ -100,6 +104,22 @@ public class addHintsFragment extends Fragment {
         }
         adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1,pegList);
         pegSpinner.setAdapter(adapter);
+
+        pegSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                int valasztott =Integer.parseInt(pegSpinner.getSelectedItem().toString());
+               if(user.getPegs().getPegs().get(valasztott)!=null){
+                   pegWordTv.setText(user.getPegs().getPegs().get(valasztott).getWord());
+               }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                pegWordTv.setText("");
+            }
+        });
 
         //browse image
         view.findViewById(R.id.browseBtn).setOnClickListener(new View.OnClickListener() {

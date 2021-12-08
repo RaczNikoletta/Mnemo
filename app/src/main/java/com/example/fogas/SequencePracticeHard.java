@@ -231,10 +231,14 @@ public class SequencePracticeHard extends Fragment {
                     SequenceDataModel tempSeq = new SequenceDataModel();
                     SequenceDataModel answerfoundSeq = new SequenceDataModel();
                     String[] tosplited = hardsequencePracEt.getText().toString().split("");
+                    try{
                     for (int i = 0; i < tosplited.length; i++) {
                         PegModel tempPeg = new PegModel();
                         tempPeg.setNum(Integer.parseInt(tosplited[i]));
                         tempPegs.add(tempPeg);
+                    }
+                    }catch (Throwable e){
+                        Toast.makeText(getContext(),getResources().getString(R.string.invalidFormatSeq),Toast.LENGTH_LONG).show();
                     }
                     try {
                         tempSeq.setSequence(tempPegs);

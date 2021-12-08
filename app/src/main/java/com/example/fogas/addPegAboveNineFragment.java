@@ -100,7 +100,6 @@ public class addPegAboveNineFragment extends Fragment {
                 try{
                     aboveNineRealm.executeTransaction(r->{
                     peg = new PegModel();
-                    peg.setUserName(user.getUserName());
                     if (TextUtils.isEmpty(numberabovenEt.getText().toString())) {
                         /*new AlertDialog.Builder(getContext())
                                 .setTitle(R.string.numberMandatory)
