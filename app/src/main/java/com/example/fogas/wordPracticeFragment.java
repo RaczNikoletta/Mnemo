@@ -267,10 +267,11 @@ public class wordPracticeFragment extends Fragment {
                             gomb.setText(kerdes.getResources().getString(R.string.hozzaadGomb));
 
                             tempAboveNine = new PegModel();
-
+                            ArrayList<PegModel>kerdesFogasok = new ArrayList<>();
                             for (int i = 0; i < max; i++) {
                                 tempAboveNine = (PegModel) pegRealmListAboveNine.get(i);
                                 if(!tempAboveNine.getWord().equals("")){
+                                    kerdesFogasok.add(tempAboveNine);
                                     indexek.add(i);
                                     helyes = helyes + 1;
 
@@ -279,16 +280,16 @@ public class wordPracticeFragment extends Fragment {
                             }
 
 
-                            Collections.shuffle(indexek);
+                            Collections.shuffle(kerdesFogasok);
 
                             if(helyes>=10){
                                 helyes = 10;
                             }
 
                             for (int i = 0; i < helyes; i++) {
-                                tempAboveNine = (PegModel) pegRealmListAboveNine.get(indexek.get(i));
+                                tempAboveNine = (PegModel) kerdesFogasok.get(i);
 
-                                helyes_valaszok[i] = tempAboveNine.getWord().toString();
+                                helyes_valaszok[i] = tempAboveNine.getWord();
                                 bekerultSzamok[i] =tempAboveNine.getNum();
 
                                 if(user.getHints().getOneHint(tempAboveNine.getNum())!=null)
@@ -317,10 +318,11 @@ public class wordPracticeFragment extends Fragment {
 
 
                             valaszok[index - 1] = szoveg_bevitel.getText().toString();
-                            if (indexek.get(index - 1).equals(Integer.parseInt(valaszok[index - 1]))) {
+                            if (bekerultSzamok[index-1] == (Integer.parseInt(valaszok[index - 1]))) {
                                 LayoutInflater inf = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                                 View popupView = inf.inflate(R.layout.right_answer_layout, null);
                                 ImageView image = popupView.findViewById(R.id.rightIV);
+                                pontok = pontok + 1;
 
                                 // show the popup window
                                 // which view you pass in doesn't matter, it is only used for the window tolken
@@ -357,10 +359,6 @@ public class wordPracticeFragment extends Fragment {
                                     tEnd = System.currentTimeMillis();
                                     tDelta = tEnd - tStart;
                                     elapsedSeconds = tDelta / 1000.0;
-
-                                }
-                                if (indexek.get(i).equals(Integer.parseInt(valaszok[i]))) {
-                                    pontok = pontok + 1;
 
                                 }
                             }
