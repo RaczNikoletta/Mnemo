@@ -338,6 +338,9 @@ public class letterPracticeFragment extends Fragment {
                         } else {
 
                             valaszok[index - 1] = szoveg_bevitel.getText().toString();
+                            if (bekerultSzamok[index-1] == (Integer.parseInt(valaszok[index - 1]))){
+                                pontok++;
+                            }
                             for (int i = 0; i < helyes; i++) {
                                 if (i == helyes-1) {
                                     tEnd = System.currentTimeMillis();
